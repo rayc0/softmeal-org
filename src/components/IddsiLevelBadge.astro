@@ -1,0 +1,27 @@
+---
+interface Props {
+  level: number;
+}
+
+const { level } = Astro.props;
+
+const levelInfo: Record<number, { color: string; bg: string; label: string; labelEn: string }> = {
+  0: { color: '#555', bg: '#f5f5f5', label: 'Level 0 稀薄', labelEn: 'Level 0 Thin' },
+  1: { color: '#fff', bg: '#9B9B9B', label: 'Level 1 極微稠杰', labelEn: 'Level 1 Slightly Thick' },
+  2: { color: '#fff', bg: '#E91E8C', label: 'Level 2 低度稠杰', labelEn: 'Level 2 Mildly Thick' },
+  3: { color: '#333', bg: '#FFD700', label: 'Level 3 中度稠杰', labelEn: 'Level 3 Moderately Thick' },
+  4: { color: '#fff', bg: '#2E7D32', label: 'Level 4 糊狀', labelEn: 'Level 4 Puréed' },
+  5: { color: '#fff', bg: '#E65100', label: 'Level 5 細碎及濕軟', labelEn: 'Level 5 Minced & Moist' },
+  6: { color: '#fff', bg: '#1565C0', label: 'Level 6 軟質及一口量', labelEn: 'Level 6 Soft & Bite-Sized' },
+  7: { color: '#fff', bg: '#E65100', label: 'Level 7EC 容易咀嚼', labelEn: 'Level 7EC Easy to Chew' },
+};
+
+const info = levelInfo[level] || levelInfo[4];
+---
+
+<span
+  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+  style={`background-color: ${info.bg}; color: ${info.color};`}
+>
+  {info.label}
+</span>

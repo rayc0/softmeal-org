@@ -1,0 +1,42 @@
+name: Editorial Firewall Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  editorial-firewall:
+    name: Check editorial firewall
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run editorial firewall lint
+        run: bash scripts/lint-editorial-firewall.sh
+
+  astro-build:
+    name: Astro build check
+    runs-on: ubuntu-latest
+    needs: editorial-firewall
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Validate output structure
+        run: |
+          test -f dist/zh-hk/index.html || (echo "❌ zh-hk home missing" && exit 1)
+          test -f dist/en/index.html || (echo "❌ en home missing" && exit 1)
+          test -f dist/sitemap-index.xml || (echo "❌ sitemap missing" && exit 1)
+          test -f dist/robots.txt || (echo "❌ robots.txt missing" && exit 1)
+          test -f dist/llms.txt || (echo "❌ llms.txt missing" && exit 1)
+          echo "✅ All required output files present"

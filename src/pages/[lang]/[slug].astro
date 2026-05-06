@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', ({ id }) => !id.includes('/index'));
+  return pages.map((page) => {
+    const parts = page.id.split('/');
+    const lang = parts[0];
+    const slug = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return {
+      params: { lang, slug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+const { lang, title, description, hreflang_pair, schema_type, last_modified } = page.data;
+
+const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const siteUrl = 'https://softmeal.org';
+const currentUrl = Astro.url.href;
+
+const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ? {
+  "@context": "https://schema.org",
+  "@type": schema_type === 'AboutPage' ? 'AboutPage' : 'Article',
+  "@id": `${currentUrl}#article`,
+  "headline": title,
+  "description": description,
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "dateModified": last_modified,
+  "author": { "@id": `${siteUrl}/#org` },
+  "publisher": { "@id": `${siteUrl}/#org` },
+} : null;
+
+const schemas = articleSchema ? [articleSchema] : [];
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  lang={lang}
+  hreflangPair={hreflang_pair}
+  hreflangPairLang={hreflangPairLang}
+  schemaJson={schemas}
+>
+  <Content />
+</PageLayout>

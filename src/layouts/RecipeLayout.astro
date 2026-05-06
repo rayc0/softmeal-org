@@ -1,0 +1,76 @@
+---
+import PageLayout from './PageLayout.astro';
+import IddsiLevelBadge from '../components/IddsiLevelBadge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+  hreflangPair?: string;
+  hreflangPairLang?: string;
+  iddsiLevel: number;
+  prepTimeMinutes: number;
+  difficulty: string;
+  mainIngredient: string;
+  tags: string[];
+  schemaJson?: object[];
+}
+
+const {
+  title,
+  description,
+  lang,
+  hreflangPair,
+  hreflangPairLang,
+  iddsiLevel,
+  prepTimeMinutes,
+  difficulty,
+  mainIngredient,
+  tags,
+  schemaJson = [],
+} = Astro.props;
+
+const difficultyLabels: Record<string, Record<string, string>> = {
+  'zh-hk': { easy: '簡單', medium: '中等', hard: '困難' },
+  'en': { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
+};
+
+const isZh = lang === 'zh-hk';
+const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
+const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  lang={lang}
+  hreflangPair={hreflangPair}
+  hreflangPairLang={hreflangPairLang}
+  schemaJson={schemaJson}
+>
+  <div class="mb-4 flex flex-wrap gap-2 items-center">
+    <IddsiLevelBadge level={iddsiLevel} />
+    <span class="text-sm text-gray-600">
+      {isZh ? '準備時間' : 'Prep time'}: {timeLabel}
+    </span>
+    <span class="text-sm text-gray-600">
+      {isZh ? '難度' : 'Difficulty'}: {diffLabel}
+    </span>
+  </div>
+
+  <slot />
+
+  <div class="mt-6 flex flex-wrap gap-2">
+    {tags.map(tag => (
+      <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">#{tag}</span>
+    ))}
+  </div>
+
+  <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded">
+    <p class="text-sm text-yellow-800">
+      {isZh
+        ? '⚠️ 本食譜僅供參考。食物質感因廚師技術及食材而異。請由言語治療師評估後確認適合的 IDDSI 級別。'
+        : '⚠️ This recipe is for reference only. Texture varies by technique and ingredients. A speech therapist should confirm the appropriate IDDSI level for each individual.'}
+    </p>
+  </div>
+</PageLayout>

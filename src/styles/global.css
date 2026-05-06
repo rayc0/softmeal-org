@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply text-gray-800 bg-white;
+  }
+
+  h1 { @apply text-3xl font-bold mb-4; }
+  h2 { @apply text-2xl font-semibold mb-3 mt-8; }
+  h3 { @apply text-xl font-semibold mb-2 mt-6; }
+  p { @apply mb-4 leading-relaxed; }
+
+  table {
+    @apply w-full border-collapse mb-6;
+  }
+  th {
+    @apply bg-gray-100 text-left px-4 py-2 border border-gray-300 font-semibold;
+  }
+  td {
+    @apply px-4 py-2 border border-gray-300;
+  }
+
+  ul { @apply list-disc pl-6 mb-4; }
+  ol { @apply list-decimal pl-6 mb-4; }
+  li { @apply mb-1; }
+
+  blockquote {
+    @apply border-l-4 border-primary pl-4 my-4 bg-green-50 py-3 rounded-r;
+  }
+
+  a {
+    @apply text-primary hover:underline;
+  }
+
+  hr {
+    @apply my-8 border-gray-200;
+  }
+}

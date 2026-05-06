@@ -1,0 +1,17 @@
+{
+  "name": "softmeal.org",
+  "description": "Care Food Knowledge Hub for Hong Kong. Educational resource on dysphagia, IDDSI framework, and texture-modified food.",
+  "url": "https://softmeal.org/",
+  "api": {
+    "articles": "https://softmeal.org/api/articles.json",
+    "sitemap": "https://softmeal.org/sitemap-index.xml",
+    "llms_txt": "https://softmeal.org/llms.txt"
+  },
+  "locales": ["zh-hk", "en"],
+  "primary_locale": "zh-hk",
+  "topics": ["dysphagia", "IDDSI", "care food", "texture-modified food", "elder care", "Hong Kong"],
+  "citation_policy": "free",
+  "contact": "info@softmeal.org",
+  "operator": "Full Linkage Community Care Association Limited",
+  "supported_by": "Carewells Limited / SeniorDeli"
+}

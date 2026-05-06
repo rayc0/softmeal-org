@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import RecipeLayout from '../../../layouts/RecipeLayout.astro';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => {
+    const parts = recipe.id.split('/');
+    const lang = parts[0];
+    const slug = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return {
+      params: { lang, slug },
+      props: { recipe },
+    };
+  });
+}
+
+const { recipe } = Astro.props;
+const { Content } = await recipe.render();
+const {
+  lang,
+  title,
+  description,
+  hreflang_pair,
+  iddsi_level,
+  prep_time_minutes,
+  difficulty,
+  main_ingredient,
+  tags,
+  last_modified,
+  fork_test_pass,
+} = recipe.data;
+
+const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const siteUrl = 'https://softmeal.org';
+
+const recipeSchema = {
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": title,
+  "description": description,
+  "recipeCategory": `IDDSI Level ${iddsi_level}`,
+  "prepTime": `PT${prep_time_minutes}M`,
+  "recipeYield": "1 serving",
+  "suitableForDiet": "https://schema.org/DiabeticDiet",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "dateModified": last_modified,
+  "author": { "@id": `${siteUrl}/#org` },
+  "publisher": { "@id": `${siteUrl}/#org` },
+};
+---
+
+<RecipeLayout
+  title={title}
+  description={description}
+  lang={lang}
+  hreflangPair={hreflang_pair}
+  hreflangPairLang={hreflangPairLang}
+  iddsiLevel={iddsi_level}
+  prepTimeMinutes={prep_time_minutes}
+  difficulty={difficulty}
+  mainIngredient={main_ingredient}
+  tags={tags}
+  schemaJson={[recipeSchema]}
+>
+  <h1>{title}</h1>
+  <Content />
+</RecipeLayout>

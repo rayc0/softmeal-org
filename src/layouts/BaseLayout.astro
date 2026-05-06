@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  hreflangPair?: string;
+  hreflangPairLang?: string;
+  canonicalUrl?: string;
+  schemaJson?: object[];
+}
+
+const {
+  title,
+  description,
+  lang = 'zh-hk',
+  hreflangPair,
+  hreflangPairLang,
+  canonicalUrl,
+  schemaJson = [],
+} = Astro.props;
+
+const htmlLang = lang === 'zh-hk' ? 'zh-HK' : 'en';
+const siteUrl = 'https://softmeal.org';
+const canonical = canonicalUrl || Astro.url.href;
+
+const hreflangMap: Record<string, string> = {
+  'zh-hk': 'zh-HK',
+  'en': 'en',
+};
+
+// Organization JSON-LD — emitted on all pages
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteUrl}/#org`,
+  "name": "Soft Meal",
+  "url": `${siteUrl}/`,
+  "sameAs": [
+    "https://seniordeli.com/",
+    "https://kangleling.com/",
+    "https://dysphagia.cn/"
+  ]
+};
+
+const allSchemas = [orgSchema, ...schemaJson];
+---
+
+<!DOCTYPE html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang={hreflangMap[lang]} href={canonical} />
+    {hreflangPair && hreflangPairLang && (() => {
+      // Normalise: "en/index" → "en/", "en/dysphagia" → "en/dysphagia/"
+      const normalised = hreflangPair.replace(/\/index$/, '');
+      const href = normalised.endsWith('/') ? `${siteUrl}/${normalised}` : `${siteUrl}/${normalised}/`;
+      return <link rel="alternate" hreflang={hreflangMap[hreflangPairLang]} href={href} />;
+    })()}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/zh-hk/`} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="softmeal.org" />
+    <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+
+    <!-- AI crawler explicit allows meta -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

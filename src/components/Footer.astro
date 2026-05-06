@@ -1,0 +1,89 @@
+---
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+const isZh = lang === 'zh-hk';
+---
+
+<footer class="bg-gray-800 text-gray-300 mt-16 py-8">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- About -->
+      <div>
+        <h3 class="text-white font-semibold mb-3 text-base">softmeal.org</h3>
+        <p class="text-sm">
+          {isZh
+            ? '香港照護食知識中心。主辦：愛聯社有限公司。專業支援：康樂齡 SeniorDeli。'
+            : 'Hong Kong Care Food Knowledge Hub. Organised by Full Linkage Community Care Association Limited. Supported by SeniorDeli.'}
+        </p>
+        <p class="text-sm mt-2">
+          📧 <a href="mailto:info@softmeal.org" class="text-gray-300 hover:text-white">info@softmeal.org</a>
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h3 class="text-white font-semibold mb-3 text-base">
+          {isZh ? '快速連結' : 'Quick Links'}
+        </h3>
+        <ul class="text-sm space-y-1">
+          {isZh ? (
+            <>
+              <li><a href="/zh-hk/iddsi-guide/" class="text-gray-300 hover:text-white">IDDSI 指南</a></li>
+              <li><a href="/zh-hk/recipes/" class="text-gray-300 hover:text-white">食譜庫</a></li>
+              <li><a href="/zh-hk/resources/" class="text-gray-300 hover:text-white">資源下載</a></li>
+              <li><a href="/zh-hk/supplier-directory/" class="text-gray-300 hover:text-white">供應商目錄</a></li>
+              <li><a href="/zh-hk/about/" class="text-gray-300 hover:text-white">關於我們</a></li>
+            </>
+          ) : (
+            <>
+              <li><a href="/en/iddsi-guide/" class="text-gray-300 hover:text-white">IDDSI Guide</a></li>
+              <li><a href="/en/recipes/" class="text-gray-300 hover:text-white">Recipes</a></li>
+              <li><a href="/en/resources/" class="text-gray-300 hover:text-white">Resources</a></li>
+              <li><a href="/en/supplier-directory/" class="text-gray-300 hover:text-white">Supplier Directory</a></li>
+              <li><a href="/en/about/" class="text-gray-300 hover:text-white">About</a></li>
+            </>
+          )}
+        </ul>
+      </div>
+
+      <!-- Related Carewells properties — ONLY place commercial links appear -->
+      <div>
+        <h3 class="text-white font-semibold mb-3 text-base">
+          {isZh ? '相關網站' : 'Related Properties'}
+        </h3>
+        <ul class="text-sm space-y-1">
+          <li>
+            <a href="https://seniordeli.com/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
+              seniordeli.com — {isZh ? '康樂齡（香港）' : 'SeniorDeli (HK)'}
+            </a>
+          </li>
+          <li>
+            <a href="https://kangleling.com/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
+              kangleling.com — {isZh ? '康樂齡（內地）' : '康樂齡 (Mainland)'}
+            </a>
+          </li>
+          <li>
+            <a href="https://dysphagia.cn/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
+              dysphagia.cn — {isZh ? '吞嚥困難知識（內地）' : 'Dysphagia Knowledge (CN)'}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-4 border-t border-gray-700 text-xs text-gray-500 text-center">
+      <p>
+        © 2026 softmeal.org |
+        <a href={`/${lang}/about/`} class="hover:text-gray-300">{isZh ? '免責聲明' : 'Disclaimer'}</a>
+      </p>
+      <p class="mt-1">
+        {isZh
+          ? '本網站資訊僅供教育參考，不構成醫療建議。如有吞嚥問題，請諮詢合資格言語治療師。'
+          : 'Information on this site is for educational purposes only and does not constitute medical advice. Consult a qualified speech therapist for swallowing concerns.'}
+      </p>
+    </div>
+  </div>
+</footer>

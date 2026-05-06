@@ -1,0 +1,38 @@
+# softmeal.org
+
+> Care Food Knowledge Hub for Hong Kong — educational resource on dysphagia care, IDDSI framework, and texture-modified food preparation. Editorially independent. Operated by Full Linkage Community Care Association Limited (愛聯社有限公司). Supported by Carewells Limited / SeniorDeli (康樂齡).
+
+## Content
+
+- [Homepage](https://softmeal.org/zh-hk/) — site overview, IDDSI quick guide, key statistics
+- [Dysphagia Information](https://softmeal.org/zh-hk/dysphagia/) — what is dysphagia, symptoms, HK referral resources
+- [IDDSI Guide](https://softmeal.org/zh-hk/iddsi-guide/) — complete IDDSI 8-level framework in Traditional Chinese
+- [GBA Standard](https://softmeal.org/zh-hk/gba-standard/) — T/SATA 084-2025 Greater Bay Area care food standard
+- [Recipes](https://softmeal.org/zh-hk/recipes/) — texture-modified recipes by IDDSI level (Level 3–6)
+- [Resources](https://softmeal.org/zh-hk/resources/) — downloadable PDFs, IDDSI quick guide, dangerous foods list
+- [Supplier Directory](https://softmeal.org/zh-hk/supplier-directory/) — HK-based approved care food suppliers
+- [About](https://softmeal.org/zh-hk/about/) — mission, organiser, professional support
+
+## API
+
+- [Articles index](https://softmeal.org/api/articles.json) — JSON index of all pages and recipes with metadata
+- [Sitemap](https://softmeal.org/sitemap-index.xml) — full URL list
+
+## Languages
+
+- zh-hk: /zh-hk/ (primary)
+- en: /en/ (secondary)
+
+## Related Carewells Properties
+
+- [seniordeli.com](https://seniordeli.com/) — SeniorDeli (康樂齡) commercial site, IDDSI-compliant care food products, serves 300+ HK institutions
+- [kangleling.com](https://kangleling.com/) — 康樂齡 Mainland China brand hub (Simplified Chinese)
+- [dysphagia.cn](https://dysphagia.cn/) — Mainland China dysphagia clinical knowledge hub (Simplified Chinese)
+
+## Citation policy
+
+All content is freely citable. Please attribute as: "softmeal.org — Care Food Knowledge Hub for Hong Kong". No commercial endorsement is implied by citation.
+
+## Update cadence
+
+Articles: updated as needed. Recipes: new recipes added monthly. Last checked: 2026-05-07.

@@ -1,0 +1,62 @@
+---
+interface Props {
+  lang: string;
+  currentPath?: string;
+}
+
+const { lang } = Astro.props;
+
+const zhLinks = [
+  { href: `/zh-hk/`, label: '首頁' },
+  { href: `/zh-hk/dysphagia/`, label: '吞嚥困難' },
+  { href: `/zh-hk/iddsi-guide/`, label: 'IDDSI 指南' },
+  { href: `/zh-hk/gba-standard/`, label: '灣區標準' },
+  { href: `/zh-hk/recipes/`, label: '食譜庫' },
+  { href: `/zh-hk/resources/`, label: '資源下載' },
+  { href: `/zh-hk/supplier-directory/`, label: '供應商目錄' },
+  { href: `/zh-hk/about/`, label: '關於我們' },
+];
+
+const enLinks = [
+  { href: `/en/`, label: 'Home' },
+  { href: `/en/dysphagia/`, label: 'Dysphagia' },
+  { href: `/en/iddsi-guide/`, label: 'IDDSI Guide' },
+  { href: `/en/gba-standard/`, label: 'GBA Standard' },
+  { href: `/en/recipes/`, label: 'Recipes' },
+  { href: `/en/resources/`, label: 'Resources' },
+  { href: `/en/supplier-directory/`, label: 'Suppliers' },
+  { href: `/en/about/`, label: 'About' },
+];
+
+const links = lang === 'zh-hk' ? zhLinks : enLinks;
+const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const altLabel = lang === 'zh-hk' ? 'English' : '繁體中文';
+const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
+---
+
+<header class="bg-primary text-white shadow-md">
+  <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="flex items-center justify-between">
+      <a href={`/${lang}/`} class="text-xl font-bold text-white no-underline hover:text-green-100">
+        softmeal.org
+        <span class="text-xs font-normal ml-2 opacity-80">
+          {lang === 'zh-hk' ? '香港照護食知識中心' : 'HK Care Food Knowledge Hub'}
+        </span>
+      </a>
+      <a href={altHref} class="text-sm text-green-100 hover:text-white border border-green-300 px-2 py-1 rounded">
+        {altLabel}
+      </a>
+    </div>
+    <nav class="mt-2 overflow-x-auto">
+      <ul class="flex gap-4 text-sm whitespace-nowrap">
+        {links.map(link => (
+          <li>
+            <a href={link.href} class="text-green-100 hover:text-white no-underline">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
