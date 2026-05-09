@@ -101,6 +101,12 @@ Level 3 (Liquidised):
 - [蓮子百合粥 Lotus Seed Lily Congee L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lotus-seed-lily-congee-l3/)
 
 Level 4 (Pureed):
+- [豆腐花薑汁糖水 Tofu Pudding with Ginger Syrup L4](https://softmeal.org/zh-hk/recipes/tofu-pudding-ginger-syrup/)
+- [蜂蜜蒸蛋 Honey Steamed Egg Custard L4](https://softmeal.org/zh-hk/recipes/steamed-egg-custard-honey/)
+- [湯丸甜湯 Glutinous Rice Ball Soup L4-5](https://softmeal.org/zh-hk/recipes/glutinous-rice-ball-soup/)
+- [杏仁豆腐荔枝 Almond Jelly with Lychee L4](https://softmeal.org/zh-hk/recipes/almond-jelly-lychee/)
+- [番薯薑糖水 Sweet Potato Ginger Soup L4-5](https://softmeal.org/zh-hk/recipes/sweet-potato-ginger-soup/)
+- [芝麻糊湯丸 Black Sesame Paste with Mini Rice Balls L4](https://softmeal.org/zh-hk/recipes/sesame-paste-glutinous/)
 - [菠菜豬肝湯蓉 Spinach Pork Liver Puree L4](https://softmeal.org/zh-hk/recipes/bocai-zhugan-tang-rong/)
 - [合掌瓜紅蘿蔔雞蓉 Chayote Carrot Chicken Puree L4](https://softmeal.org/zh-hk/recipes/chayote-carrot-chicken-puree/)
 - [叉燒糊 Char Siu Pork Puree L4](https://softmeal.org/zh-hk/recipes/char-siu-pork-puree/)
@@ -131,6 +137,7 @@ Level 4 (Pureed):
 - [黑豆泥飯 Black Bean Puree Rice L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/black-bean-puree-rice-l4/)
 
 Level 5 (Minced & Moist):
+- [木瓜雪耳滋潤糖水 Papaya and Snow Fungus Soup L5](https://softmeal.org/zh-hk/recipes/papaya-snow-fungus-soup/)
 - [什菌軟炒 Mixed Mushroom Soft Stir L5 (vegetarian)](https://softmeal.org/zh-hk/recipes/mixed-mushroom-soft-stir-l5/)
 - [北菇蒸滑雞 Mushroom Steamed Chicken L5-6](https://softmeal.org/zh-hk/recipes/beigui-zheng-ji/)
 - [苦瓜免治牛肉 Bitter Melon Minced Beef L5](https://softmeal.org/zh-hk/recipes/bitter-melon-beef-minced/)
@@ -159,6 +166,7 @@ Level 5 (Minced & Moist):
 - [蒸水蛋拌蝦膠 Steamed Egg with Shrimp Paste L5](https://softmeal.org/zh-hk/recipes/zhengdan-xiajiao/)
 
 Level 6 (Soft & Bite-Sized):
+- [香蕉燕麥軟蛋糕 Banana Oat Soft Cake L6](https://softmeal.org/zh-hk/recipes/banana-oat-soft-cake/)
 - [腐乳炆豆腐 Fermented Tofu Braised L6](https://softmeal.org/zh-hk/recipes/furu-men-doufu/)
 - [薑蔥燜魚 Ginger Spring Onion Braised Fish L6](https://softmeal.org/zh-hk/recipes/jiang-cong-men-yu/)
 - [南乳豆腐獅子頭 Fermented Red Bean Curd Tofu Meatball L6](https://softmeal.org/zh-hk/recipes/nanru-toufu-shizitou/)
