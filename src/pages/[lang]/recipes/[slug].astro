@@ -33,20 +33,32 @@ const {
 
 const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
+const recipeSlug = Astro.params.slug;
 
 const recipeSchema = {
   "@context": "https://schema.org",
   "@type": "Recipe",
   "name": title,
-  "description": description,
+  "description": `${description} IDDSI Level ${iddsi_level} compliant.`,
   "recipeCategory": `IDDSI Level ${iddsi_level}`,
   "prepTime": `PT${prep_time_minutes}M`,
   "recipeYield": "1 serving",
-  "suitableForDiet": "https://schema.org/DiabeticDiet",
   "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },
+};
+
+// BreadcrumbList schema — 3-level: Home > Recipes > Recipe Title
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": lang === 'zh-hk' ? "主頁" : "Home", "item": `${siteUrl}/${lang}/`},
+    {"@type": "ListItem", "position": 2, "name": lang === 'zh-hk' ? "食譜" : "Recipes", "item": `${siteUrl}/${lang}/recipes/`},
+    {"@type": "ListItem", "position": 3, "name": title, "item": `${siteUrl}/${lang}/recipes/${recipeSlug}/`}
+  ]
 };
 ---
 
@@ -61,7 +73,7 @@ const recipeSchema = {
   difficulty={difficulty}
   mainIngredient={main_ingredient}
   tags={tags}
-  schemaJson={[recipeSchema]}
+  schemaJson={[recipeSchema, breadcrumbSchema]}
 >
   <h1>{title}</h1>
   <Content />

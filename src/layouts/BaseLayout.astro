@@ -9,6 +9,7 @@ interface Props {
   hreflangPairLang?: string;
   canonicalUrl?: string;
   schemaJson?: object[];
+  ogImage?: string;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   hreflangPairLang,
   canonicalUrl,
   schemaJson = [],
+  ogImage,
 } = Astro.props;
 
 const htmlLang = lang === 'zh-hk' ? 'zh-HK' : 'en';
@@ -35,7 +37,8 @@ const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${siteUrl}/#org`,
-  "name": "Soft Meal",
+  "name": "softmeal.org",
+  "alternateName": "愛聯社有限公司",
   "url": `${siteUrl}/`,
   "sameAs": [
     "https://seniordeli.com/",
@@ -44,7 +47,21 @@ const orgSchema = {
   ]
 };
 
-const allSchemas = [orgSchema, ...schemaJson];
+// WebSite JSON-LD — emitted on all pages
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  "name": "softmeal.org",
+  "url": siteUrl,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {"@type": "EntryPoint", "urlTemplate": `${siteUrl}/zh-hk/?q={search_term_string}`},
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const allSchemas = [orgSchema, websiteSchema, ...schemaJson];
 ---
 
 <!DOCTYPE html>
@@ -76,6 +93,27 @@ const allSchemas = [orgSchema, ...schemaJson];
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="softmeal.org" />
     <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+
+    <!-- og:image — default fallback (pages with custom ogImage prop override this) -->
+    {ogImage ? (
+      <>
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    ) : (
+      <>
+        <meta property="og:image" content={`${siteUrl}/og-default.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={title} />
+      </>
+    )}
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage || `${siteUrl}/og-default.png`} />
 
     <!-- AI crawler explicit allows meta -->
     <meta name="robots" content="index, follow" />

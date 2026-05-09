@@ -1,51 +1,40 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 
 export const GET: APIRoute = async () => {
   const siteUrl = 'https://softmeal.org';
-  const lastmod = '2026-05-07';
+  const lastmod = new Date().toISOString().split('T')[0];
+  const langs = ['zh-hk', 'en'];
 
-  const urls = [
-    // zh-hk pages
-    `${siteUrl}/zh-hk/`,
-    `${siteUrl}/zh-hk/dysphagia/`,
-    `${siteUrl}/zh-hk/iddsi-guide/`,
-    `${siteUrl}/zh-hk/gba-standard/`,
-    `${siteUrl}/zh-hk/about/`,
-    `${siteUrl}/zh-hk/supplier-directory/`,
-    `${siteUrl}/zh-hk/resources/`,
-    `${siteUrl}/zh-hk/recipes/`,
-    // zh-hk recipes
-    `${siteUrl}/zh-hk/recipes/zhengdan-toufu/`,
-    `${siteUrl}/zh-hk/recipes/nangua-cream/`,
-    `${siteUrl}/zh-hk/recipes/ji-rou-zhou/`,
-    `${siteUrl}/zh-hk/recipes/xilanhua-yu/`,
-    `${siteUrl}/zh-hk/recipes/xiangjiao-yanbai/`,
-    `${siteUrl}/zh-hk/recipes/fanqie-chaodan/`,
-    `${siteUrl}/zh-hk/recipes/jiangzhi-zhengyu/`,
-    `${siteUrl}/zh-hk/recipes/nanru-toufu-shizitou/`,
-    `${siteUrl}/zh-hk/recipes/zhima-hu/`,
-    `${siteUrl}/zh-hk/recipes/jiangcha-dongdong/`,
-    // en pages
-    `${siteUrl}/en/`,
-    `${siteUrl}/en/dysphagia/`,
-    `${siteUrl}/en/iddsi-guide/`,
-    `${siteUrl}/en/gba-standard/`,
-    `${siteUrl}/en/about/`,
-    `${siteUrl}/en/supplier-directory/`,
-    `${siteUrl}/en/resources/`,
-    `${siteUrl}/en/recipes/`,
-    // en recipes
-    `${siteUrl}/en/recipes/zhengdan-toufu/`,
-    `${siteUrl}/en/recipes/nangua-cream/`,
-    `${siteUrl}/en/recipes/ji-rou-zhou/`,
-    `${siteUrl}/en/recipes/xilanhua-yu/`,
-    `${siteUrl}/en/recipes/xiangjiao-yanbai/`,
-    `${siteUrl}/en/recipes/fanqie-chaodan/`,
-    `${siteUrl}/en/recipes/jiangzhi-zhengyu/`,
-    `${siteUrl}/en/recipes/nanru-toufu-shizitou/`,
-    `${siteUrl}/en/recipes/zhima-hu/`,
-    `${siteUrl}/en/recipes/jiangcha-dongdong/`,
-  ];
+  // Gather all page slugs (excluding index pages — they map to lang root)
+  const pages = await getCollection('pages');
+  const recipes = await getCollection('recipes');
+
+  const urls: string[] = [];
+
+  for (const lang of langs) {
+    // Language root (index pages)
+    urls.push(`${siteUrl}/${lang}/`);
+
+    // Non-index pages
+    const langPages = pages.filter(
+      (p) => p.id.startsWith(`${lang}/`) && !p.id.includes('/index')
+    );
+    for (const page of langPages) {
+      const slug = page.id.split('/').pop()!.replace(/\.mdx?$/, '');
+      urls.push(`${siteUrl}/${lang}/${slug}/`);
+    }
+
+    // Recipes index
+    urls.push(`${siteUrl}/${lang}/recipes/`);
+
+    // Individual recipes
+    const langRecipes = recipes.filter((r) => r.id.startsWith(`${lang}/`));
+    for (const recipe of langRecipes) {
+      const slug = recipe.id.split('/').pop()!.replace(/\.mdx?$/, '');
+      urls.push(`${siteUrl}/${lang}/recipes/${slug}/`);
+    }
+  }
 
   const urlEntries = urls.map(url => `  <url>
     <loc>${url}</loc>

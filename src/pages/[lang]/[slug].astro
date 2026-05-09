@@ -35,58 +35,132 @@ const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ?
   "publisher": { "@id": `${siteUrl}/#org` },
 } : null;
 
-// FAQPage schema — injected for iddsi-guide in any language
+// FAQPage schema — injected for iddsi-guide, locale-aware
 const slug = Astro.params.slug;
+
+const faqQuestionsZhHk = [
+  {
+    "@type": "Question",
+    "name": "什麼是 IDDSI？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "IDDSI（國際吞嚥困難飲食標準化行動）是全球通用的食物質感及飲品稠度分級框架，共 8 個等級（0–7），已在香港、澳洲、英國超過 50 個國家採用。"
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "IDDSI 有多少個等級？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "IDDSI 共有 8 個等級（0–7）。0–4 級描述飲品，3–7 級描述食物。3 級和 4 級同時涵蓋飲品和食物兩個類別。"
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "什麼食物對吞嚥困難人士有危險？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "高風險食物包括堅硬乾燥食物（堅果、餅乾）、纖維粗的蔬菜（西芹、通菜）、黏韌食物（糯米、麻糬）、圓形細小食物（整顆葡萄、豆子）及質感混雜的食物（西瓜、粥底湯麵）。"
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "如何在家進行 IDDSI 叉子壓力測試？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "取少量食物放在乾淨表面，用叉背以大約 140g 的力量壓下。Level 4（糊狀）會完全壓平且不回彈；Level 5（細碎濕潤）會壓縮但不完全壓平；Level 6（軟質切小塊）會抵抗壓力。"
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "吞嚥困難人士應喝什麼？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "應根據評估結果選擇適當稠度的飲品（IDDSI 0–4 級）。Level 0 為稀薄液體（普通水）；Level 1–2 為輕度至中度增稠；Level 3–4 為高度增稠至糊狀。所有液體均需通過流量筒測試確認等級。"
+    }
+  }
+];
+
+const faqQuestionsEn = [
+  {
+    "@type": "Question",
+    "name": "What is IDDSI?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "IDDSI (International Dysphagia Diet Standardisation Initiative) is a global framework for describing food textures and drink thicknesses for people with dysphagia. It defines 8 levels (0–7) with standardised testing methods, adopted in Hong Kong, Australia, the UK, Canada, and 50+ countries."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "How many IDDSI levels are there?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "IDDSI has 8 levels numbered 0 to 7. Levels 0–4 describe drinks (Thin to Extremely Thick / Puréed), while levels 3–7 describe foods (Liquidised to Regular). Levels 3 and 4 overlap between drinks and foods."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What is the fork pressure test for IDDSI Level 4?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The fork pressure test for IDDSI Level 4 (Puréed) requires applying approximately 140g of pressure with the back of a fork. Food should flatten completely and not spring back, indicating it requires no chewing and can be mashed with the tongue."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What IDDSI level should a care home's soft diet be?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Different institutions define 'soft diet' differently. Always ask care homes and hospitals to specify the IDDSI level clearly — typically Level 5 (Minced and Moist) or Level 6 (Soft and Bite-Sized). Do not assume a 'soft diet' label means a specific IDDSI level."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Which foods are dangerous for people with dysphagia?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "High-risk foods for dysphagia patients include hard or dry foods (nuts, biscuits), fibrous foods (celery, pineapple), chewy or sticky foods (mochi, glutinous rice), round foods (whole grapes, peas), mixed-texture foods (bubble tea, watermelon), and konjac products. In Hong Kong, xiao long bao, water spinach, and noodle soups are also high-risk."
+    }
+  }
+];
+
 const faqSchema = slug === 'iddsi-guide' ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is IDDSI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "IDDSI (International Dysphagia Diet Standardisation Initiative) is a global framework for describing food textures and drink thicknesses for people with dysphagia. It defines 8 levels (0–7) with standardised testing methods, adopted in Hong Kong, Australia, the UK, Canada, and 50+ countries."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How many IDDSI levels are there?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "IDDSI has 8 levels numbered 0 to 7. Levels 0–4 describe drinks (Thin to Extremely Thick / Puréed), while levels 3–7 describe foods (Liquidised to Regular). Levels 3 and 4 overlap between drinks and foods."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the fork pressure test for IDDSI Level 4?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The fork pressure test for IDDSI Level 4 (Puréed) requires applying approximately 140g of pressure with the back of a fork. Food should flatten completely and not spring back, indicating it requires no chewing and can be mashed with the tongue."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What IDDSI level should a care home's soft diet be?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Different institutions define 'soft diet' differently. Always ask care homes and hospitals to specify the IDDSI level clearly — typically Level 5 (Minced and Moist) or Level 6 (Soft and Bite-Sized). Do not assume a 'soft diet' label means a specific IDDSI level."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which foods are dangerous for people with dysphagia?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "High-risk foods for dysphagia patients include hard or dry foods (nuts, biscuits), fibrous foods (celery, pineapple), chewy or sticky foods (mochi, glutinous rice), round foods (whole grapes, peas), mixed-texture foods (bubble tea, watermelon), and konjac products. In Hong Kong, xiao long bao, water spinach, and noodle soups are also high-risk."
-      }
-    }
+  "mainEntity": lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn
+} : null;
+
+// HowTo schema — injected for iddsi-guide in any language
+const howToSchema = slug === 'iddsi-guide' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "如何使用叉子壓力測試驗證食物 IDDSI 等級" : "How to test food texture using the IDDSI Fork Pressure Test",
+  "description": lang === 'zh-hk' ? "用標準廚房叉子驗證食物達到指定 IDDSI 等級的步驟" : "Step-by-step guide to verifying IDDSI food texture levels using a fork",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "tool": [{"@type": "HowToTool", "name": lang === 'zh-hk' ? "叉子" : "Fork"}],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "準備食物樣本" : "Prepare food sample", "text": lang === 'zh-hk' ? "取一小份食物，確保已冷卻至室溫" : "Take a small portion of food, cooled to room temperature"},
+    {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "施加叉子壓力" : "Apply fork pressure", "text": lang === 'zh-hk' ? "用叉背以約 140g（約一個小蘋果重量）的力量壓在食物上" : "Press the back of a fork with approximately 140g of pressure"},
+    {"@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "觀察結果" : "Observe result", "text": lang === 'zh-hk' ? "Level 4：完全壓平不回彈。Level 5：壓縮但不壓平。Level 6：抵抗壓力。" : "Level 4: flattens completely. Level 5: compresses but not flat. Level 6: resists pressure."}
   ]
 } : null;
+
+// BreadcrumbList schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": lang === 'zh-hk' ? "主頁" : "Home", "item": `https://softmeal.org/${lang}/`},
+    {"@type": "ListItem", "position": 2, "name": title, "item": `https://softmeal.org/${lang}/${slug}/`}
+  ]
+};
 
 const schemas = [
   ...(articleSchema ? [articleSchema] : []),
   ...(faqSchema ? [faqSchema] : []),
+  ...(howToSchema ? [howToSchema] : []),
+  breadcrumbSchema,
 ];
 ---
 
