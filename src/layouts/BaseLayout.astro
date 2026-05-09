@@ -129,6 +129,24 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson];
     <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
   </head>
   <body>
+    <!-- App CTA banner — appears on all pages -->
+    <div style="background: #2563EB; color: white; text-align: center; padding: 8px 16px; font-size: 14px;">
+      {lang === 'zh-hk' ? (
+        <>
+          🧪 免費 EAT-10 吞嚥篩查工具 →
+          <a href="https://seniordeli.com/assessment" style="color: white; font-weight: bold; text-decoration: underline;">
+            seniordeli.com/assessment
+          </a>
+        </>
+      ) : (
+        <>
+          🧪 Try our free EAT-10 dysphagia screening tool →
+          <a href="https://seniordeli.com/assessment" style="color: white; font-weight: bold; text-decoration: underline;">
+            seniordeli.com/assessment
+          </a>
+        </>
+      )}
+    </div>
     <slot />
   </body>
 </html>
