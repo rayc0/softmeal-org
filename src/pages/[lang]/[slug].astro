@@ -868,6 +868,9 @@ const faqTravelDysphagiaEn = [
 
 const newGuideSlugs16 = ['dining-out-dysphagia-hk', 'yum-cha-safe-ordering-hk', 'travel-dysphagia-tips-hk'];
 
+// FAQPage schemas for batch 17: hospital-discharge-dysphagia-hk, home-kitchen-setup-dysphagia, community-resources-hk-caregivers, financial-support-dysphagia-hk
+const newGuideSlugs17 = ['hospital-discharge-dysphagia-hk', 'home-kitchen-setup-dysphagia', 'community-resources-hk-caregivers', 'financial-support-dysphagia-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -920,7 +923,7 @@ const getFaqMainEntity = () => {
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",

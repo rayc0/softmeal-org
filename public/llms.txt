@@ -76,6 +76,14 @@
 - [HK NGOs and Support (en)](https://softmeal.org/en/hk-ngos-and-support/) — English version
 - [Home Kitchen Setup (zh-HK)](https://softmeal.org/zh-hk/home-kitchen-setup-hk/) — essential equipment and purchasing guide for HK families
 - [Home Kitchen Setup (en)](https://softmeal.org/en/home-kitchen-setup-hk/) — English version
+- [Hospital Discharge with Dysphagia HK (zh-HK)](https://softmeal.org/zh-hk/hospital-discharge-dysphagia-hk/) — HA discharge workflow, CGAT referrals, MSW support, home preparation
+- [Hospital Discharge with Dysphagia HK (en)](https://softmeal.org/en/hospital-discharge-dysphagia-hk/) — English version
+- [Home Kitchen Setup for Dysphagia (zh-HK)](https://softmeal.org/zh-hk/home-kitchen-setup-dysphagia/) — blenders, thickeners, adaptive utensils, batch cooking for HK caregivers
+- [Home Kitchen Setup for Dysphagia (en)](https://softmeal.org/en/home-kitchen-setup-dysphagia/) — English version
+- [Community Resources for Dysphagia Caregivers HK (zh-HK)](https://softmeal.org/zh-hk/community-resources-hk-caregivers/) — DECC, home help, Caritas, HKRC, MSW referral guide
+- [Community Resources for Dysphagia Caregivers HK (en)](https://softmeal.org/en/community-resources-hk-caregivers/) — English version
+- [Financial Support for Dysphagia HK (zh-HK)](https://softmeal.org/zh-hk/financial-support-dysphagia-hk/) — Disability Allowance, CSSA, medical fee waivers, elderly health vouchers
+- [Financial Support for Dysphagia HK (en)](https://softmeal.org/en/financial-support-dysphagia-hk/) — English version
 - [For Professionals (zh-HK)](https://softmeal.org/zh-hk/for-professionals/) — resources for speech therapists, dietitians, social workers
 - [For Professionals (en)](https://softmeal.org/en/for-professionals/) — English version
 - [Resources (zh-HK)](https://softmeal.org/zh-hk/resources/) — free downloadable PDFs, IDDSI charts, recipe booklets
