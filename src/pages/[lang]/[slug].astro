@@ -35,7 +35,59 @@ const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ?
   "publisher": { "@id": `${siteUrl}/#org` },
 } : null;
 
-const schemas = articleSchema ? [articleSchema] : [];
+// FAQPage schema — injected for iddsi-guide in any language
+const slug = Astro.params.slug;
+const faqSchema = slug === 'iddsi-guide' ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is IDDSI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IDDSI (International Dysphagia Diet Standardisation Initiative) is a global framework for describing food textures and drink thicknesses for people with dysphagia. It defines 8 levels (0–7) with standardised testing methods, adopted in Hong Kong, Australia, the UK, Canada, and 50+ countries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many IDDSI levels are there?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IDDSI has 8 levels numbered 0 to 7. Levels 0–4 describe drinks (Thin to Extremely Thick / Puréed), while levels 3–7 describe foods (Liquidised to Regular). Levels 3 and 4 overlap between drinks and foods."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the fork pressure test for IDDSI Level 4?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The fork pressure test for IDDSI Level 4 (Puréed) requires applying approximately 140g of pressure with the back of a fork. Food should flatten completely and not spring back, indicating it requires no chewing and can be mashed with the tongue."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What IDDSI level should a care home's soft diet be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Different institutions define 'soft diet' differently. Always ask care homes and hospitals to specify the IDDSI level clearly — typically Level 5 (Minced and Moist) or Level 6 (Soft and Bite-Sized). Do not assume a 'soft diet' label means a specific IDDSI level."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which foods are dangerous for people with dysphagia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "High-risk foods for dysphagia patients include hard or dry foods (nuts, biscuits), fibrous foods (celery, pineapple), chewy or sticky foods (mochi, glutinous rice), round foods (whole grapes, peas), mixed-texture foods (bubble tea, watermelon), and konjac products. In Hong Kong, xiao long bao, water spinach, and noodle soups are also high-risk."
+      }
+    }
+  ]
+} : null;
+
+const schemas = [
+  ...(articleSchema ? [articleSchema] : []),
+  ...(faqSchema ? [faqSchema] : []),
+];
 ---
 
 <PageLayout
