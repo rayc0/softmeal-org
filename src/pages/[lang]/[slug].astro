@@ -305,8 +305,35 @@ const faqCantoneseEn = [
   { "@type": "Question", "name": "How can elderly dysphagia patients participate in the Lunar New Year reunion dinner?", "acceptedAnswer": { "@type": "Answer", "text": "Suggested adaptations: white-cut chicken as chicken purée (Level 4) or shredded chicken (Level 5), shaped in a mould; steamed fish modified to Level 5 with thorough de-boning; braised pork belly (Level 5–6) instead of bone-in roast meats; New Year cakes (nian gao, lo bak go) served steamed only (never pan-fried), cut into small pieces (Level 6). Seating the patient at the same reunion table with the same tableware is essential for dignity and family inclusion." } }
 ];
 
+// FAQPage schemas for hk-ngos-and-support
+const faqNgosZhHk = [
+  { "@type": "Question", "name": "香港有哪些非政府機構提供吞嚥困難照護支援？", "acceptedAnswer": { "@type": "Answer", "text": "主要機構包括：香港社會服務聯會（HKCSS）照護食認可計劃、香港老年痴呆症協會（照顧者培訓）、東華三院（安老服務）、香港明愛（家務助理及送餐）、聖雅各福群會（長者護理）及各區長者鄰里中心（送餐及社工服務）。可透過醫療社工或社署辦事處查詢及申請。" } },
+  { "@type": "Question", "name": "如何為吞嚥困難長者申請社署資助膳食服務？", "acceptedAnswer": { "@type": "Answer", "text": "可透過以下途徑申請：（1）在出院前請醫療社工（MSW）轉介至社署或相關機構；（2）直接前往社會福利署地區辦事處申請「綜合家居照顧服務乙類」；（3）聯絡所在地區的長者鄰里中心查詢送餐服務。社署熱線為 2343 2255。" } },
+  { "@type": "Question", "name": "HKCSS 照護食認可計劃對患者家屬有什麼用途？", "acceptedAnswer": { "@type": "Answer", "text": "HKCSS 照護食認可計劃列出符合 IDDSI 標準的認可照護食供應商及院舍，家屬在選擇院舍或購買照護食產品時可以此作為參考基準，了解相關機構是否達到基本的照護食質量標準。可在 hkcss.org.hk 查閱最新認可名單。" } }
+];
+const faqNgosEn = [
+  { "@type": "Question", "name": "Which Hong Kong NGOs provide support for dysphagia care?", "acceptedAnswer": { "@type": "Answer", "text": "Key organisations include: the HKCSS Care Food Endorsement Scheme, the Hong Kong Alzheimer's Disease Association (caregiver training), Tung Wah Group of Hospitals (elderly residential care), Caritas Hong Kong (home helpers and meals), St James' Settlement (elderly nursing care) and Neighbourhood Elderly Centres throughout Hong Kong (meal delivery and social work). Access through a medical social worker or SWD district office." } },
+  { "@type": "Question", "name": "How do I apply for SWD-subsidised meal delivery for an elderly person with dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "Apply through these routes: (1) ask the hospital medical social worker (MSW) to make a referral to the SWD or relevant agency before discharge; (2) apply directly at the Social Welfare Department district office for Integrated Home Care Services Type II; (3) contact the Neighbourhood Elderly Centre serving the patient's district to enquire about meal delivery. SWD hotline: 2343 2255." } },
+  { "@type": "Question", "name": "What is the HKCSS Care Food Endorsement Scheme and how is it useful?", "acceptedAnswer": { "@type": "Answer", "text": "The HKCSS Care Food Endorsement Scheme lists suppliers and care homes meeting IDDSI-compliant care food standards. It is a useful benchmark for families selecting care homes or purchasing care food products, as endorsement indicates the organisation meets a recognised quality baseline. The current endorsed list is available at hkcss.org.hk." } }
+];
+
+// FAQPage schemas for hospital-allied-health-hk
+const faqAlliedHealthZhHk = [
+  { "@type": "Question", "name": "香港公立醫院言語治療的一般等候時間是多長？", "acceptedAnswer": { "@type": "Answer", "text": "等候時間因聯網及優先類別而差異顯著。住院急性個案通常數日至一週內獲評估；出院後轉介的穩定門診個案，等候時間可由數週至 6 個月以上不等。老人科日間醫院的等候通常較一般專科門診短。有反覆誤吸或體重急跌等高風險症狀的患者會獲優先安排。" } },
+  { "@type": "Question", "name": "私家言語治療師在香港的收費大約是多少？", "acceptedAnswer": { "@type": "Answer", "text": "私家言語治療師首次評估（包括 IDDSI 等級評估及書面建議書）收費約 HKD 1,200–2,500；後續治療課堂（45–60 分鐘）約 HKD 800–1,800；到院（外展）服務約 HKD 1,500–3,000。可透過香港言語治療師公會（HKSLTA）名冊（hkslta.org.hk）尋找合資格私家言語治療師。" } },
+  { "@type": "Question", "name": "如何在香港申請 FEES 或 VFSS 吞嚥評估？", "acceptedAnswer": { "@type": "Answer", "text": "FEES（纖維喉鏡吞嚥評估）由言語治療師或耳鼻喉科醫生安排，通常由言語治療師在臨床評估後建議並協調；VFSS（吞鋇造影）需由主診醫生轉介至放射科，言語治療師會向主診醫生建議後由醫生開出轉介單。兩項評估均在公立醫院無須額外費用（醫管局標準收費）。" } },
+  { "@type": "Question", "name": "什麼情況下應選擇私家言語治療，而非等候公立服務？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況可考慮私家服務：出院後等候公立門診期間需要及時跟進評估；需要密集治療（每週多次）而公立資源有限；居於院舍需要外展服務（公立醫院不提供）；或等候時間過長影響患者安全及營養狀況。私家服務通常在數日至數週內可安排，費用可詢問是否接受保險或社區服務券。" } }
+];
+const faqAlliedHealthEn = [
+  { "@type": "Question", "name": "How long are the typical waiting times for public hospital speech therapy in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Waiting times vary significantly by cluster and priority category. Acute inpatient cases are typically seen within days to one week. Stable outpatient cases referred after discharge range from several weeks to six months or more. Geriatric Day Hospitals generally have shorter waits than general specialist outpatient clinics. Patients with high-risk indicators such as recurrent aspiration pneumonia or significant weight loss are prioritised." } },
+  { "@type": "Question", "name": "How much do private speech-language pathologists charge in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Initial assessment (including IDDSI level evaluation and written prescription) is approximately HKD 1,200–2,500. Follow-up therapy sessions (45–60 minutes) range from HKD 800–1,800. Outreach or care home visits cost approximately HKD 1,500–3,000 depending on location and session length. Find qualified registered practitioners through the HKSLTA directory at hkslta.org.hk." } },
+  { "@type": "Question", "name": "How do I arrange FEES or VFSS swallowing assessment at a Hong Kong public hospital?", "acceptedAnswer": { "@type": "Answer", "text": "FEES (fibreoptic endoscopic evaluation of swallowing) is arranged by the SLP or ENT doctor; the SLP typically recommends it and coordinates with the relevant department after clinical assessment. VFSS (videofluoroscopic swallowing study) requires a referral from the attending doctor — the SLP advises and asks the doctor to issue the referral to radiology. Both assessments are covered under standard HA fees for eligible public patients." } },
+  { "@type": "Question", "name": "When should a patient in Hong Kong consider going private rather than waiting for public speech therapy?", "acceptedAnswer": { "@type": "Answer", "text": "Consider private services when: urgent reassessment is needed after discharge while awaiting public outpatient; intensive therapy (multiple sessions per week) is required but public resources are limited; outreach to a care home is needed (public hospitals do not provide this); or the waiting period is compromising the patient's safety or nutritional status. Private appointments are typically available within days to weeks. Ask about insurance coverage or Community Care Service Voucher eligibility." } }
+];
+
 const newGuideSlugs = ['yum-cha-guide', 'hospital-discharge-planning', 'thickener-comparison-hk', 'elderly-nutrition-hk', 'for-professionals'];
 const newGuideSlugs2 = ['dementia-care-mealtimes', 'iddsi-for-care-homes', 'enteral-tube-oral-transition', 'modified-diet-cantonese-cuisine'];
+const newGuideSlugs3 = ['hk-ngos-and-support', 'hospital-allied-health-hk'];
 
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
@@ -318,10 +345,12 @@ const getFaqMainEntity = () => {
   if (slug === 'iddsi-for-care-homes') return lang === 'zh-hk' ? faqCareHomeIddsiZhHk : faqCareHomeIddsiEn;
   if (slug === 'enteral-tube-oral-transition') return lang === 'zh-hk' ? faqTubeTransitionZhHk : faqTubeTransitionEn;
   if (slug === 'modified-diet-cantonese-cuisine') return lang === 'zh-hk' ? faqCantoneseZhHk : faqCantoneseEn;
+  if (slug === 'hk-ngos-and-support') return lang === 'zh-hk' ? faqNgosZhHk : faqNgosEn;
+  if (slug === 'hospital-allied-health-hk') return lang === 'zh-hk' ? faqAlliedHealthZhHk : faqAlliedHealthEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -425,7 +454,22 @@ const howToSchemaCareHome = slug === 'iddsi-for-care-homes' ? {
   ]
 } : null;
 
-const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? howToSchemaTubeTransition ?? howToSchemaCareHome ?? null;
+const howToSchemaSpeechReferral = slug === 'hospital-allied-health-hk' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "如何在香港公立醫療系統獲得言語治療轉介" : "How to Get a Speech Therapy Referral in Hong Kong's Public Healthcare System",
+  "description": lang === 'zh-hk' ? "從首次察覺吞嚥困難到獲得言語治療師評估的完整步驟指引" : "Step-by-step guide from identifying dysphagia symptoms to obtaining a speech-language pathologist assessment",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "由家庭醫生或普通科門診初步評估" : "Initial assessment by GP or General Outpatient Clinic (GOPC)", "text": lang === 'zh-hk' ? "若察覺吞嚥困難症狀（進食時咳嗽、食物或液體嗆入鼻腔、體重下降），首先前往家庭醫生或普通科門診（GOPC）進行初步評估，並要求轉介至言語治療或相關專科。" : "If you notice dysphagia symptoms (coughing during meals, food or liquid entering the nose, unexplained weight loss), begin with your family doctor or a GOPC. Ask for a referral to speech therapy or to a relevant specialist clinic." },
+    { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "如為急性症狀，直接前往急症室" : "Go directly to A&E if symptoms are acute", "text": lang === 'zh-hk' ? "若吞嚥困難突然出現或迅速惡化（如中風後、誤吸後），應直接前往最近急症室。急症入院後可由住院醫生直接轉介病房言語治療師，通常在數日內可獲評估。" : "If dysphagia is sudden or rapidly worsening (e.g., after a stroke or aspiration event), go directly to the nearest Accident and Emergency department. An inpatient admission allows the attending doctor to refer directly to the ward SLP — typically assessed within days." },
+    { "@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "申請老人科日間醫院服務（如適用）" : "Request Geriatric Day Hospital referral if eligible", "text": lang === 'zh-hk' ? "65 歲以上長者患者可要求轉介至老人科日間醫院，提供包括言語治療在內的多專科評估，等候時間通常較一般專科門診短，且提供跨專科一站式服務。" : "Elderly patients aged 65+ can request referral to a Geriatric Day Hospital, which provides multidisciplinary assessment including speech therapy. Waiting times are typically shorter than general specialist outpatient clinics, with same-day cross-disciplinary review." },
+    { "@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "在等候公立服務期間考慮私家言語治療" : "Consider private speech therapy while awaiting public services", "text": lang === 'zh-hk' ? "如公立等候時間過長而影響患者安全，可參考香港言語治療師公會（HKSLTA）名冊（hkslta.org.hk）聯絡私家言語治療師。私家首次評估通常可在數日至數週內安排。" : "If the public waiting period is long and the patient's safety is at risk, use the HKSLTA directory at hkslta.org.hk to identify a qualified private SLP. Initial private assessments are typically available within days to weeks." },
+    { "@type": "HowToStep", "position": 5, "name": lang === 'zh-hk' ? "出院前確保獲得書面飲食建議書及後續預約" : "Secure a written Diet Prescription and follow-up appointment before discharge", "text": lang === 'zh-hk' ? "若患者曾住院接受言語治療評估，在出院前務必向言語治療師索取書面吞嚥困難飲食建議書，並確認已獲門診或老人科日間醫院的跟進預約。不應在無書面建議書的情況下離院。" : "If the patient was assessed by an inpatient SLP, do not leave hospital without a written Dysphagia Diet Prescription and a confirmed outpatient or Geriatric Day Hospital follow-up appointment. These two documents are essential for safe continuity of care at home." }
+  ]
+} : null;
+
+const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? howToSchemaTubeTransition ?? howToSchemaCareHome ?? howToSchemaSpeechReferral ?? null;
 
 // BreadcrumbList schema
 const breadcrumbSchema = {
