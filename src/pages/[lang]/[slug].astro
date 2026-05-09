@@ -784,6 +784,48 @@ const faqCancerEatingEn = [
 
 const newGuideSlugs14 = ['stroke-dysphagia-recovery-hk', 'parkinsons-dysphagia-guide-hk', 'cancer-treatment-eating-hk'];
 
+// FAQPage schemas for batch 15: dementia-mealtime-strategies-hk, cognitive-impairment-eating-safety, dysphagia-end-of-life-comfort-feeding
+const faqDementiaMealtimeStrategiesZhHk = [
+  { "@type": "Question", "name": "如何有效減少認知症患者在用餐時的分心行為？", "acceptedAnswer": { "@type": "Answer", "text": "最有效的措施：用餐前關掉電視及收音機；使用單一顏色桌布；移除桌面上的非必要物品；只讓一位照顧者跟患者說話。若患者被其他人吸引，輕聲呼喚其名字並重新引導注意力到食物上。嚴重認知症患者不建議在進食時開著電視。" } },
+  { "@type": "Question", "name": "什麼是「以人為本」的餵食方式？", "acceptedAnswer": { "@type": "Answer", "text": "以人為本的餵食是指了解並尊重患者的個人飲食歷史和偏好，保留其對進食的選擇權（每次提供 2–3 款選擇），以邀請而非命令的方式提供協助，並允許患者用手進食。這種方式能維護尊嚴，同時往往能提升患者的進食量。" } },
+  { "@type": "Question", "name": "香港有哪些醫管局精神科老人服務可以協助認知症患者的用餐照護？", "acceptedAnswer": { "@type": "Answer", "text": "醫管局各聯網均設有精神科老人科門診，可透過家庭醫生轉介。各區亦設有社署資助的認知症日間護理中心，部分中心有言語治療師或職業治療師定期到診。香港認知症協會（HKADA）提供照顧者培訓，熱線：2882 8615。" } },
+  { "@type": "Question", "name": "如何為認知症患者選擇適合的手指食物？", "acceptedAnswer": { "@type": "Answer", "text": "手指食物應符合患者的 IDDSI 等級，大小以患者拇指和食指能輕易夾住為準（約 2cm × 2cm）。適合香港認知症患者的 IDDSI L6 手指食物包括：蒸魚餅條（去骨）、蒸蛋切塊、熟香蕉段（去皮）、蒸南瓜塊及嫩豆腐切塊。每次只提供 2–3 款，並確保已取得言語治療師確認。" } }
+];
+const faqDementiaMealtimeStrategiesEn = [
+  { "@type": "Question", "name": "How can caregivers effectively reduce distraction during mealtimes for a person with dementia?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective measures: turn off the television and radio before the meal; use a plain tablecloth; clear all non-essential items from the table; limit conversation to one person at a time. If the patient is drawn away by others, gently call their name and redirect attention to the food. For patients with severe dementia, television during meals is not recommended." } },
+  { "@type": "Question", "name": "What does 'person-centred feeding' mean in dementia care?", "acceptedAnswer": { "@type": "Answer", "text": "Person-centred feeding means understanding and respecting the patient's individual food history and preferences, preserving their remaining choice (offering 2–3 options at a time), using invitation rather than instruction, and allowing hand-eating without insisting on cutlery. This approach preserves dignity and consistently improves food intake." } },
+  { "@type": "Question", "name": "What HA psychogeriatric resources in Hong Kong can support mealtime care for dementia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Each HA cluster has a psychogeriatric outpatient clinic, accessible via GP referral. SWD-funded dementia day care centres operate across all districts; some have visiting SLPs or OTs who can provide individual eating assessments. The Hong Kong Alzheimer's Disease Association (HKADA) offers caregiver training; caregiver hotline: 2882 8615." } },
+  { "@type": "Question", "name": "How should finger foods be selected for a person with dementia?", "acceptedAnswer": { "@type": "Answer", "text": "Finger foods should match the patient's prescribed IDDSI level and be sized so the patient can grip them easily (approximately 2 cm × 2 cm). Suitable IDDSI Level 6 options include: steamed fish cake strips (bone-free), steamed egg cubes, ripe banana segments (peeled), steamed pumpkin cubes and cubed silken tofu. Offer only 2–3 choices at a time to avoid decision fatigue, and confirm suitability with an SLP." } }
+];
+
+const faqCognitiveImpairmentEatingZhHk = [
+  { "@type": "Question", "name": "認知障礙患者有哪些行為跡象提示進食安全風險增加？", "acceptedAnswer": { "@type": "Answer", "text": "需要加強監察的行為跡象包括：一口未完全咽下已放入下一口（過速進食）、將大量食物塞入口中（食物囤積）、看電視或交談時繼續進食而不停頓（分心進食）、嘗試進食骨頭或明顯過硬的食物（判斷力下降），以及喝水時頻繁嗆咳卻不尋求協助。出現上述情況應安排言語治療師評估。" } },
+  { "@type": "Question", "name": "如何防止認知障礙患者過度進食（Overstuffing）？", "acceptedAnswer": { "@type": "Answer", "text": "有效策略包括：一次只給一口份量（一茶匙），等患者吞嚥後才給下一口；移除患者自行取食的可能；使用小碟盛放少量食物；使用手勢配合語言提示吞嚥（「吞落去先」）；若患者無回應，提供少量溫水刺激吞嚥反射。嚴重過度進食應轉介職業治療師評估。" } },
+  { "@type": "Question", "name": "進食結束後應如何確認認知障礙患者的口腔已清空？", "acceptedAnswer": { "@type": "Answer", "text": "部分認知障礙患者會將食物存放在口腔兩側（Pocketing），這些殘留食物在患者躺臥時可能造成誤吸。進食結束後，應使用手電筒檢查口腔兩側是否有殘留食物，使用濕紗布協助清除，或讓患者喝少量清水沖走殘留。進食後定期進行口腔護理尤其重要。" } },
+  { "@type": "Question", "name": "院舍如何在照顧多名居民的同時確保認知障礙居民的進食安全？", "acceptedAnswer": { "@type": "Answer", "text": "建議措施：識別高風險居民並在用餐安排中標記；安排高風險居民坐在員工容易觀察的位置；實施分批用餐；定期更新每位認知障礙居民的進食風險評估；設立專責的用餐協助員工，在用餐期間不兼顧其他任務。" } }
+];
+const faqCognitiveImpairmentEatingEn = [
+  { "@type": "Question", "name": "What behavioural signs indicate increased eating safety risk in a person with cognitive impairment?", "acceptedAnswer": { "@type": "Answer", "text": "Behavioural warning signs requiring increased supervision: eating too fast (placing the next mouthful before the previous one is fully swallowed); overstuffing (cramming large amounts of food into the mouth); distracted eating (continuing to eat during television viewing or conversation without pausing); attempting to eat bones or clearly hard items (impaired judgement); and frequent coughing when drinking without seeking help. Any of these warrants SLP assessment." } },
+  { "@type": "Question", "name": "How can overstuffing be prevented in a person with cognitive impairment?", "acceptedAnswer": { "@type": "Answer", "text": "Effective strategies: offer one mouthful at a time (one teaspoon) and wait for a full swallow before the next; remove the possibility of independent self-serving; use small plates with minimal food; use a swallow gesture paired with a verbal cue ('swallow first'); if there is no response, offer a small amount of warm water to trigger the swallowing reflex. Refer to an OT if overstuffing is severe." } },
+  { "@type": "Question", "name": "How should oral clearance be confirmed after a meal for a patient with cognitive impairment?", "acceptedAnswer": { "@type": "Answer", "text": "Some patients with cognitive impairment retain food in the sides of the mouth (pocketing), which can cause aspiration when lying down. After each meal, use a torch to check both sides of the mouth. Use a damp gauze square to gently clear any retained food, or offer a small sip of water to flush it away. Routine post-meal oral hygiene is especially important for this population." } },
+  { "@type": "Question", "name": "How can a care home ensure eating safety for residents with cognitive impairment while caring for multiple residents at once?", "acceptedAnswer": { "@type": "Answer", "text": "Recommended measures: identify and flag high-risk residents in mealtime arrangements; seat high-risk residents where staff can observe them easily; use staggered mealtimes to prioritise high-risk residents; regularly review each cognitive impairment resident's eating risk assessment; and designate mealtime assistance staff who are not pulled away for other tasks during the meal period." } }
+];
+
+const faqComfortFeedingZhHk = [
+  { "@type": "Question", "name": "什麼是舒適進食，它與一般口腔進食有什麼分別？", "acceptedAnswer": { "@type": "Answer", "text": "舒適進食是在末期照護中，在患者存在進食安全風險的情況下，以知情同意為前提，允許其進食少量喜愛的食物以帶來感官愉悅及尊嚴感，而非以攝取足夠營養為目標。與一般口腔進食的主要分別在於：舒適進食承認並接受一定程度的誤吸風險，但認為此風險是患者及家屬在充分了解後接受的，以換取進食帶來的生活質素。" } },
+  { "@type": "Question", "name": "香港的預設醫療指示是否具有法律效力？患者可以在指示中拒絕鼻胃管嗎？", "acceptedAnswer": { "@type": "Answer", "text": "是的。書面預設醫療指示在香港根據普通法及醫療倫理指引具有法律效力。患者可在醫管局標準化的預設醫療指示表格中拒絕人工輔助通氣、心肺復甦術及人工營養（包括鼻胃管或靜脈營養）。醫療人員有法律及倫理責任尊重有效的預設醫療指示，家屬不能推翻。" } },
+  { "@type": "Question", "name": "香港有哪些善終服務適合吞嚥困難的末期患者？", "acceptedAnswer": { "@type": "Answer", "text": "香港善終服務分為住院及居家兩類。住院善終由部分私家及非政府機構提供（如白普理寧養中心）。居家善終（居家紓緩照護）由醫管局及非政府機構提供，包括護士定期上門及 24 小時電話支援，允許患者在家中環境實踐舒適進食。轉介可透過主診醫生或病房社工安排。" } },
+  { "@type": "Question", "name": "選擇舒適進食後，言語治療師的角色是什麼？", "acceptedAnswer": { "@type": "Answer", "text": "進入舒適進食階段後，言語治療師的角色從「評估及治療吞嚥功能」轉為：提供舒適進食的實踐指導（食物選擇、份量、進食姿勢）；與患者及家屬商定「可接受的風險清單」；支持家屬面對患者不再進食的情緒歷程；以及在多學科討論中提供吞嚥功能的臨床意見。" } }
+];
+const faqComfortFeedingEn = [
+  { "@type": "Question", "name": "What is comfort feeding and how does it differ from regular oral feeding?", "acceptedAnswer": { "@type": "Answer", "text": "Comfort feeding is an end-of-life care approach that allows a person to eat small amounts of preferred food despite aspiration risk, with informed consent, to provide sensory pleasure and dignity — not to meet nutritional targets. The key difference from regular oral feeding is that comfort feeding acknowledges and accepts a degree of aspiration risk, recognising that the patient and family have agreed to this in exchange for the quality of life that eating provides." } },
+  { "@type": "Question", "name": "Are Advance Directives legally binding in Hong Kong, and can a patient use one to decline a nasogastric tube?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Written Advance Directives are legally binding in Hong Kong under common law and medical ethics guidance. Patients can use the standardised HA Advance Directive form to decline artificial ventilation, CPR and artificial nutrition including NGT or IV feeding. Clinicians have a legal and ethical duty to comply with a valid Advance Directive; family members cannot override it." } },
+  { "@type": "Question", "name": "What hospice services are available in Hong Kong for terminal dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Hong Kong hospice services include inpatient and home-based options. Inpatient hospice is provided by some private and NGO services including Bradbury Hospice. Home hospice (community palliative care) is provided by the HA and NGOs, including regular nursing visits and 24-hour telephone support, allowing patients to receive comfort feeding support at home. Referral is through the attending physician or ward social worker." } },
+  { "@type": "Question", "name": "What is the SLT's role once a patient has transitioned to comfort feeding?", "acceptedAnswer": { "@type": "Answer", "text": "After transition to comfort feeding, the SLT's role shifts from swallowing assessment and rehabilitation towards: providing practical comfort feeding guidance (food selection, portion size, posture); working with the patient and family to establish an acceptable risk list; supporting family members emotionally as the patient moves away from eating; and contributing swallowing function information to multidisciplinary discussions." } }
+];
+
+const newGuideSlugs15 = ['dementia-mealtime-strategies-hk', 'cognitive-impairment-eating-safety', 'dysphagia-end-of-life-comfort-feeding'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -827,10 +869,13 @@ const getFaqMainEntity = () => {
   if (slug === 'stroke-dysphagia-recovery-hk') return lang === 'zh-hk' ? faqStrokeDysphagiaRecoveryZhHk : faqStrokeDysphagiaRecoveryEn;
   if (slug === 'parkinsons-dysphagia-guide-hk') return lang === 'zh-hk' ? faqParkinsonsGuideZhHk : faqParkinsonsGuideEn;
   if (slug === 'cancer-treatment-eating-hk') return lang === 'zh-hk' ? faqCancerEatingZhHk : faqCancerEatingEn;
+  if (slug === 'dementia-mealtime-strategies-hk') return lang === 'zh-hk' ? faqDementiaMealtimeStrategiesZhHk : faqDementiaMealtimeStrategiesEn;
+  if (slug === 'cognitive-impairment-eating-safety') return lang === 'zh-hk' ? faqCognitiveImpairmentEatingZhHk : faqCognitiveImpairmentEatingEn;
+  if (slug === 'dysphagia-end-of-life-comfort-feeding') return lang === 'zh-hk' ? faqComfortFeedingZhHk : faqComfortFeedingEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
