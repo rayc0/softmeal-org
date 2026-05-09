@@ -106,6 +106,9 @@ Level 3 (Liquidised):
 - [扁豆蔬菜湯 Lentil Vegetable Soup L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lentil-vegetable-soup-l3/)
 - [菠菜豆腐泥 Spinach Tofu Smooth L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/spinach-tofu-smooth-l3/)
 - [蓮子百合粥 Lotus Seed Lily Congee L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lotus-seed-lily-congee-l3/)
+- [加強蛋白粥 Protein-Fortified Rice Congee L3](https://softmeal.org/zh-hk/recipes/fortified-rice-congee-l3/) — high-protein congee with egg white and chicken, ~16g protein per bowl
+- [藜麥粥 Quinoa Congee L3](https://softmeal.org/zh-hk/recipes/quinoa-congee-l3/) — complete plant protein congee, all essential amino acids, vegan
+- [加強燕麥奶糊 Fortified Milk Oatmeal L3](https://softmeal.org/zh-hk/recipes/fortified-milk-oatmeal-l3/) — oats in calcium-enriched milk, ~250mg calcium and ~10g protein per serving
 
 Level 4 (Pureed):
 - [豆腐花薑汁糖水 Tofu Pudding with Ginger Syrup L4](https://softmeal.org/zh-hk/recipes/tofu-pudding-ginger-syrup/)
@@ -142,6 +145,9 @@ Level 4 (Pureed):
 - [佛陀碗泥 Buddha Bowl Puree L4 (vegan)](https://softmeal.org/zh-hk/recipes/buddha-bowl-puree-l4/)
 - [番薯花生湯 Sweet Potato Peanut Soup L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/sweet-potato-peanut-soup-l4/)
 - [黑豆泥飯 Black Bean Puree Rice L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/black-bean-puree-rice-l4/)
+- [蒸魚豆腐糕 Steamed Fish Tofu Cake L4](https://softmeal.org/zh-hk/recipes/steamed-fish-tofu-cake-l4/) — blended fish and silken tofu steamed cake, ~18g protein and 180mg calcium per serving
+- [雞肝泥 Chicken Liver Puree L4](https://softmeal.org/zh-hk/recipes/chicken-liver-puree-l4/) — iron-rich and protein-dense puree, 55-70% of daily iron requirement per serving
+- [毛豆豆腐泥 Edamame and Tofu Puree L4](https://softmeal.org/zh-hk/recipes/edamame-tofu-puree-l4/) — plant-protein puree with complete amino acids, vegan-friendly
 
 Level 5 (Minced & Moist):
 - [木瓜雪耳滋潤糖水 Papaya and Snow Fungus Soup L5](https://softmeal.org/zh-hk/recipes/papaya-snow-fungus-soup/)
@@ -172,6 +178,8 @@ Level 5 (Minced & Moist):
 - [雪菜肉末蒸豆腐 Preserved Vegetable Pork Tofu L5](https://softmeal.org/zh-hk/recipes/xuecai-roumo-zhengdoufu/)
 - [蒸水蛋拌蝦膠 Steamed Egg with Shrimp Paste L5](https://softmeal.org/zh-hk/recipes/zhengdan-xiajiao/)
 - [腸粉軟食版 Rice Noodle Roll Soft L5](https://softmeal.org/zh-hk/recipes/rice-noodle-roll-soft-l5/)
+- [沙甸魚牛油果泥 Sardine and Avocado Mash L5](https://softmeal.org/zh-hk/recipes/sardine-avocado-mash-l5/) — Omega-3 rich mash with ~1.5g DHA+EPA, no cooking required
+- [芝士水果泥 Cottage Cheese and Fruit Mash L5](https://softmeal.org/zh-hk/recipes/cottage-cheese-fruit-l5/) — calcium and protein snack with ripe fruit, no cooking required
 
 Level 6 (Soft & Bite-Sized):
 - [香蕉燕麥軟蛋糕 Banana Oat Soft Cake L6](https://softmeal.org/zh-hk/recipes/banana-oat-soft-cake/)
