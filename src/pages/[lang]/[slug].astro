@@ -428,7 +428,6 @@ const newGuideSlugs3 = ['hk-ngos-and-support', 'hospital-allied-health-hk'];
 const newGuideSlugs4 = ['parkinsons-dysphagia-hk', 'post-stroke-dysphagia-hk', 'als-mnd-dysphagia-hk', 'cancer-treatment-dysphagia'];
 const newGuideSlugs5 = ['caregiver-self-care', 'understanding-slt-reports', 'food-texture-modification-basics'];
 const newGuideSlugs6 = ['home-kitchen-setup-hk', 'financial-support-hk', 'swallowing-exercises-hk'];
-const newGuideSlugs7 = ['protein-needs-elderly-dysphagia', 'hydration-thickened-fluids', 'weight-loss-prevention-dysphagia'];
 
 // FAQPage schemas for batch 6: home-kitchen-setup-hk, financial-support-hk, swallowing-exercises-hk
 const faqKitchenSetupZhHk = [
@@ -516,6 +515,54 @@ const faqChokingEn = [
 
 const newGuideSlugs7 = ['mealtime-environment-setup', 'medication-management-dysphagia', 'emergency-choking-response'];
 
+// FAQPage schemas for batch 8: protein-needs-elderly-dysphagia, hydration-thickened-fluids, weight-loss-prevention-dysphagia
+const faqProteinZhHk = [
+  { "@type": "Question", "name": "吞嚥困難長者每日需要多少蛋白質？", "acceptedAnswer": { "@type": "Answer", "text": "一般健康長者（65 歲以上）每日每公斤體重需約 1.0–1.2g 蛋白質。急性病或手術後恢復期增至 1.2–1.5g；有壓瘡或嚴重傷口的患者需 1.5–2.0g；確診肌少症的患者需 1.2–1.5g。以 50kg 長者為例，每日蛋白質目標約 50–75g。" } },
+  { "@type": "Question", "name": "哪些香港常見食物適合為吞嚥困難長者提供蛋白質？", "acceptedAnswer": { "@type": "Answer", "text": "適合的高蛋白質食物包括：蒸水蛋（每隻約 8g）、嫩豆腐（每 100g 約 5–6g）、蒸去骨魚柳（每 100g 約 18–20g）、豬絞肉蒸肉餅（每 100g 約 15–17g）及雞絞肉（每 100g 約 18g）。這些食物可達 IDDSI Level 4–6，適合質感改良飲食。" } },
+  { "@type": "Question", "name": "如何在不改變 IDDSI 等級的情況下強化蛋白質攝取？", "acceptedAnswer": { "@type": "Answer", "text": "可在糊狀食物中加入全脂奶粉（每 2 湯匙提供約 5–7g 蛋白質）、無味乳清或豌豆蛋白粉（每份提供 15–20g），或在營養師建議下使用醫療級蛋白質模組。這些添加物在適量使用下不會改變食物的 IDDSI 等級。" } },
+  { "@type": "Question", "name": "增加蛋白質攝取是否會對長者腎臟造成負擔？", "acceptedAnswer": { "@type": "Answer", "text": "腎功能正常的長者可安全攝取每公斤體重 1.0–1.5g 的蛋白質。患有慢性腎病（CKD）的患者需要限制蛋白質攝取，蛋白質目標應由腎科醫生及營養師共同制定。不應自行大幅增加蛋白質而不先諮詢醫療團隊。" } },
+  { "@type": "Question", "name": "何時應轉介吞嚥困難長者至營養師評估蛋白質需求？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況應盡快轉介：過去 3 個月體重下降超過 5%；食量持續明顯不足；有糖尿病、腎病或其他需特殊飲食管理的疾病；或照顧者不確定如何在 IDDSI 飲食中達到蛋白質目標。" } }
+];
+const faqProteinEn = [
+  { "@type": "Question", "name": "How much protein does an elderly person with dysphagia need daily?", "acceptedAnswer": { "@type": "Answer", "text": "Healthy elderly adults (65+) need approximately 1.0–1.2 g of protein per kilogram of body weight per day. This rises to 1.2–1.5 g/kg during recovery from acute illness or surgery, 1.5–2.0 g/kg for patients with active pressure injuries, and 1.2–1.5 g/kg for confirmed sarcopenia. For a 50 kg patient, the daily target is approximately 50–75 g." } },
+  { "@type": "Question", "name": "Which common Hong Kong foods can provide protein for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Suitable high-protein foods include: steamed egg custard (~8 g per egg), silken tofu (~5–6 g per 100 g), steamed deboned fish fillet (~18–20 g per 100 g), steamed minced pork patty (~15–17 g per 100 g) and minced chicken (~18 g per 100 g). These foods are achievable at IDDSI Levels 4–6." } },
+  { "@type": "Question", "name": "How can protein intake be boosted without changing the IDDSI level?", "acceptedAnswer": { "@type": "Answer", "text": "Add full-cream milk powder to purées (2 tablespoons provides ~5–7 g of protein), unflavoured whey or pea protein powder (each serving provides 15–20 g), or use a medical-grade protein module under dietitian guidance. These additions do not significantly alter the food's IDDSI texture level when used in appropriate amounts." } },
+  { "@type": "Question", "name": "Does increasing protein intake damage elderly kidneys?", "acceptedAnswer": { "@type": "Answer", "text": "For patients with normal kidney function, intakes of 1.0–1.5 g/kg body weight are considered safe. Patients with chronic kidney disease (CKD) require protein restriction — their targets must be jointly set by the nephrologist and dietitian. Never significantly increase protein intake without consulting the medical team first." } },
+  { "@type": "Question", "name": "When should an elderly dysphagia patient be referred to a dietitian for protein assessment?", "acceptedAnswer": { "@type": "Answer", "text": "Seek referral promptly if: the patient has lost more than 5% of body weight in 3 months; food intake is consistently inadequate; the patient has diabetes, kidney disease or another condition requiring specialised management; or the caregiver is unsure how to meet protein targets within IDDSI dietary constraints." } }
+];
+
+const faqHydrationZhHk = [
+  { "@type": "Question", "name": "使用增稠液體的長者每日應攝取多少液體？", "acceptedAnswer": { "@type": "Answer", "text": "成年人一般建議每日攝取 1,500–2,000ml 液體，估算方法為體重（kg）× 30ml。患有心衰竭或腎病的患者，液體目標應由主診醫生訂定，不可套用一般建議。香港夏季高溫環境下，液體需求可增加 200–500ml。" } },
+  { "@type": "Question", "name": "如何知道吞嚥困難長者是否出現脫水？", "acceptedAnswer": { "@type": "Answer", "text": "早期警示徵兆包括：口腔乾燥、尿液深黃色（目標為淡黃色）、每日排尿少於 4 次、疲倦及精神欠佳。嚴重脫水徵兆（需立即就醫）：意識混亂、皮膚彈性喪失、心跳加快、超過 8 小時無排尿。長者口渴感下降，應由照顧者主動定時提醒飲水。" } },
+  { "@type": "Question", "name": "如何令增稠飲品更容易被長者接受？", "acceptedAnswer": { "@type": "Answer", "text": "有效方法包括：選用甜味液體基底（果汁、花茶）而非白開水；冷藏飲品（低溫可輕微抑制增稠口感）；使用缺口杯維持安全飲水姿勢；採用分散式補水策略（每小時提供 60–100ml）而非要求患者一次大量飲用；嘗試不同增稠劑品牌（口感差異顯著）。" } },
+  { "@type": "Question", "name": "有哪些香港常見食物可以補充水分？", "acceptedAnswer": { "@type": "Answer", "text": "高水分 IDDSI 兼容食物包括：稀粥（Level 3–4，約 90ml/100g）、嫩豆腐（Level 4，約 85ml/100g）、蒸水蛋（Level 4，約 75ml/100g）、南瓜糊（Level 4，約 80ml/100g）及木瓜泥（Level 4，約 88ml/100g）。這些食物可作為液體攝取的補充，但不能替代增稠飲品。" } },
+  { "@type": "Question", "name": "長者完全拒絕增稠飲品應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "持續拒絕增稠飲品是嚴重的安全問題，應立即告知言語治療師。可嘗試更換增稠劑品牌或改變液體基底（不同品牌口感差異顯著）。切勿在未經言語治療師重新評估的情況下自行停止增稠，因為稀薄液體誤吸的風險是真實存在的。" } }
+];
+const faqHydrationEn = [
+  { "@type": "Question", "name": "How much fluid should an elderly person on thickened fluids consume daily?", "acceptedAnswer": { "@type": "Answer", "text": "The general recommendation for adults is 1,500–2,000 ml per day; a useful estimate is body weight (kg) × 30 ml. Patients with heart failure or kidney disease must have their fluid targets set by the attending physician. In Hong Kong's summer climate, daily requirements may increase by 200–500 ml." } },
+  { "@type": "Question", "name": "How can I tell whether an elderly dysphagia patient is becoming dehydrated?", "acceptedAnswer": { "@type": "Answer", "text": "Early warning signs: dry mouth, dark yellow urine (target is pale yellow), fewer than 4 urination episodes per day, increasing fatigue and reduced alertness. Severe dehydration (seek immediate medical attention): confusion, loss of skin turgor, rapid heart rate, no urination for over 8 hours. Because the thirst sensation diminishes with age, caregivers must proactively offer drinks at regular intervals." } },
+  { "@type": "Question", "name": "How can I make thickened drinks more acceptable to elderly patients?", "acceptedAnswer": { "@type": "Answer", "text": "Effective approaches include: using sweet liquid bases (fruit juice, flower tea) rather than plain water; serving drinks chilled (low temperature slightly suppresses the perception of texture); using a nosey cup to maintain safe swallowing posture; using a distributed sipping strategy (60–100 ml per hour) rather than asking for large volumes at once; and trying different thickener brands, as mouthfeel varies considerably." } },
+  { "@type": "Question", "name": "Which common Hong Kong foods can help contribute to daily fluid intake?", "acceptedAnswer": { "@type": "Answer", "text": "High water-content IDDSI-compatible foods include: thin congee (Level 3–4, ~90 ml/100 g), silken tofu (Level 4, ~85 ml/100 g), steamed egg custard (Level 4, ~75 ml/100 g), pumpkin purée (Level 4, ~80 ml/100 g) and papaya purée (Level 4, ~88 ml/100 g). These contribute to hydration but cannot replace thickened drinks as the primary fluid source." } },
+  { "@type": "Question", "name": "What should I do if the patient completely refuses thickened drinks?", "acceptedAnswer": { "@type": "Answer", "text": "Persistent refusal is a serious safety concern and should be reported to the SLP immediately. Try a different thickener brand or drink base — mouthfeel varies considerably between brands. Do not reduce or stop thickening without formal SLP reassessment, as the aspiration risk from thin liquids is real and potentially life-threatening." } }
+];
+
+const faqWeightLossZhHk = [
+  { "@type": "Question", "name": "非刻意體重下降多嚴重才需要立即介入？", "acceptedAnswer": { "@type": "Answer", "text": "警示閾值為：1 個月內體重下降 ≥5%（需立即評估）、3 個月內下降 ≥5%（需轉介營養師）、6 個月內下降 ≥10%（嚴重，需緊急介入）。建議院舍每週稱重一次，居家照顧每月一次，發現問題後每週一次。每次稱重應在相同時間進行以確保可比性。" } },
+  { "@type": "Question", "name": "哪些質感改良食物能量密度最高？", "acceptedAnswer": { "@type": "Answer", "text": "高能量 Level 4 食物包括：牛油果糊（約 160 千卡/100g）、無顆粒花生醬（增稠，約 170 千卡/100g）及全脂奶粉粥底（加橄欖油，約 100–110 千卡/100g）。高能量 Level 5 食物包括：豬絞肉蒸肉餅（約 220–250 千卡/100g）及三文魚蒸碎（約 150–180 千卡/100g）。" } },
+  { "@type": "Question", "name": "如何在不改變 IDDSI 等級的情況下強化餐食能量？", "acceptedAnswer": { "@type": "Answer", "text": "最有效的方法包括：加入橄欖油（每茶匙約 40–45 千卡）；加入全脂奶粉（每 2 湯匙約 140 千卡）；使用牛油果（天然 Level 4，約 160 千卡/100g）；加入即溶薯蓉粉增加澱粉質能量。少量添加下，這些食材不會顯著改變食物的 IDDSI 等級。" } },
+  { "@type": "Question", "name": "少食多餐策略如何幫助預防體重下降？", "acceptedAnswer": { "@type": "Answer", "text": "吞嚥困難患者每餐進食量有限，少食多餐（每日 5–6 次）可在總量不變的情況下分散攝取，減低每餐的疲勞感。關鍵是每次加餐應以高能量食物為主（如牛油果糊、燉蛋、增稠全脂奶）而非低能量零食，並在患者精神最好的時段安排最重要的一餐。" } },
+  { "@type": "Question", "name": "飲食介入多長時間後仍無效，應考慮管飼？", "acceptedAnswer": { "@type": "Answer", "text": "若積極的飲食強化介入持續 4–8 週後體重仍持續下降，且患者的吞嚥功能已無法安全攝入足夠能量，應與醫療團隊認真討論管飼（鼻胃管或胃造口）的選項。管飼是確保足夠營養的重要醫療手段，應早於患者體重嚴重惡化前考慮。" } }
+];
+const faqWeightLossEn = [
+  { "@type": "Question", "name": "How severe does unintentional weight loss need to be before immediate intervention?", "acceptedAnswer": { "@type": "Answer", "text": "Alert thresholds are: ≥5% weight loss within 1 month (requires immediate assessment), ≥5% within 3 months (requires dietitian referral), and ≥10% within 6 months (severe — urgent intervention needed). Weigh weekly in care homes, monthly at home when stable, and weekly if concerns are identified. Always weigh at the same time of day for comparable readings." } },
+  { "@type": "Question", "name": "Which texture-modified foods have the highest energy density?", "acceptedAnswer": { "@type": "Answer", "text": "High-energy Level 4 foods include: avocado purée (~160 kcal/100 g), smooth peanut paste (~170 kcal/100 g) and full-cream milk powder congee with olive oil (~100–110 kcal/100 g). High-energy Level 5 options include: steamed minced pork patty (~220–250 kcal/100 g) and steamed minced salmon (~150–180 kcal/100 g)." } },
+  { "@type": "Question", "name": "How can meal energy be increased without changing the IDDSI level?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective methods are: adding olive oil (approximately 40–45 kcal per teaspoon); adding full-cream milk powder (approximately 140 kcal per 2 tablespoons); using avocado (naturally Level 4, ~160 kcal/100 g); and stirring in instant mashed potato powder for starch-based energy. In moderate amounts, these additions do not significantly change the food's IDDSI level." } },
+  { "@type": "Question", "name": "How does a frequent small-meals strategy help prevent weight loss?", "acceptedAnswer": { "@type": "Answer", "text": "Dysphagia patients are limited in how much they can safely consume per sitting. Five to six eating occasions per day distributes the total intake across shorter, less tiring sessions. The key is to make each snack high-energy (avocado purée, steamed egg, thickened full-cream milk) rather than low-calorie filler, and to schedule the main meal during the patient's most alert period." } },
+  { "@type": "Question", "name": "After how long of ineffective dietary intervention should tube feeding be considered?", "acceptedAnswer": { "@type": "Answer", "text": "If active dietary fortification consistently fails to prevent weight loss over 4–8 weeks, and if swallowing function can no longer safely accommodate adequate caloric intake, tube feeding (nasogastric tube or gastrostomy) should be discussed with the medical team. This is appropriate clinical escalation, not a sign of failure — and it should be considered before the patient's condition deteriorates severely." } }
+];
+
+const newGuideSlugs8 = ['protein-needs-elderly-dysphagia', 'hydration-thickened-fluids', 'weight-loss-prevention-dysphagia'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -541,10 +588,13 @@ const getFaqMainEntity = () => {
   if (slug === 'mealtime-environment-setup') return lang === 'zh-hk' ? faqMealtimeEnvZhHk : faqMealtimeEnvEn;
   if (slug === 'medication-management-dysphagia') return lang === 'zh-hk' ? faqMedicationZhHk : faqMedicationEn;
   if (slug === 'emergency-choking-response') return lang === 'zh-hk' ? faqChokingZhHk : faqChokingEn;
+  if (slug === 'protein-needs-elderly-dysphagia') return lang === 'zh-hk' ? faqProteinZhHk : faqProteinEn;
+  if (slug === 'hydration-thickened-fluids') return lang === 'zh-hk' ? faqHydrationZhHk : faqHydrationEn;
+  if (slug === 'weight-loss-prevention-dysphagia') return lang === 'zh-hk' ? faqWeightLossZhHk : faqWeightLossEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
