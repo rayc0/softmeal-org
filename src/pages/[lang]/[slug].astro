@@ -740,6 +740,50 @@ const faqOralTubeTransitionEn = [
 ];
 const newGuideSlugs13 = ['nasogastric-tube-care-hk', 'peg-tube-home-care-hk', 'transitioning-oral-to-tube-feeding'];
 
+// FAQPage schemas for batch 14: stroke-dysphagia-recovery-hk, parkinsons-dysphagia-guide-hk, cancer-treatment-eating-hk
+const faqStrokeDysphagiaRecoveryZhHk = [
+  { "@type": "Question", "name": "中風後吞嚥困難通常需要多長時間才能見到改善？", "acceptedAnswer": { "@type": "Answer", "text": "大多數輕至中度患者在發病後首 2–3 個月可見最顯著的自然改善，尤其是大腦皮質受損的患者。發病後 6 個月通常接近最終恢復程度。腦幹中風（如 Wallenberg 綜合症）的患者恢復時間明顯更長，部分患者需要長期維持改良質感飲食。" } },
+  { "@type": "Question", "name": "中風後的 IDDSI 飲食等級何時可以升級？", "acceptedAnswer": { "@type": "Answer", "text": "IDDSI 等級升級必須由言語治療師在正式評估（臨床吞嚥評估或 VFSS/FEES 儀器評估）後決定。沉默式誤吸可在沒有明顯咳嗽的情況下發生，單憑外觀觀察患者吞嚥不可靠。不應自行升級飲食等級。" } },
+  { "@type": "Question", "name": "香港醫管局中風後的言語治療跟進如何安排？", "acceptedAnswer": { "@type": "Answer", "text": "急性期：急症中風單元護士篩查，言語治療師進行正式評估。穩定後轉往復康醫院繼續吞嚥治療。出院後：由復康醫院或急症醫院轉介門診言語治療（老人科日間醫院或專科門診）。穩定個案等候時間可達數個月，有高風險指標（反覆誤吸、體重急跌）者可申請優先安排。" } },
+  { "@type": "Question", "name": "中風後的吞嚥訓練運動應何時開始？", "acceptedAnswer": { "@type": "Answer", "text": "吞嚥訓練運動的類型及時機必須由言語治療師評估後決定。一般在急性期穩定後（通常發病後 2–4 週）即可開始。在黃金期（發病後 1–3 個月）進行密集訓練效果最佳。切勿自行決定訓練類型，不恰當的運動可能造成傷害。" } },
+  { "@type": "Question", "name": "如何在家中確認增稠飲品的稠度是否正確？", "acceptedAnswer": { "@type": "Answer", "text": "使用 IDDSI 針筒流量測試：抽取 10ml 飲品入 10ml 注射器，垂直持住針筒尖端向下 10 秒，觀察流出量。Level 0 全部流出；Level 1 剩 1–4ml；Level 2 剩 4–8ml；Level 3 剩 8ml 以上；Level 4 幾乎不流出。更換增稠劑品牌後必須重新驗證。" } }
+];
+const faqStrokeDysphagiaRecoveryEn = [
+  { "@type": "Question", "name": "How long does it take to see improvement in post-stroke dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "Most patients with mild-to-moderate dysphagia see the most significant natural improvement in the first 2–3 months post-onset, particularly with cortical strokes. The 6-month point typically represents near-final recovery. Brainstem stroke patients (such as Wallenberg syndrome) have a markedly longer trajectory, and some require long-term modified texture diets." } },
+  { "@type": "Question", "name": "When can the IDDSI diet level be upgraded after stroke?", "acceptedAnswer": { "@type": "Answer", "text": "IDDSI level upgrades must be determined by an SLP following formal assessment (clinical swallowing assessment or VFSS/FEES instrumental evaluation). Silent aspiration can occur without visible coughing — observational judgment alone is unreliable. Do not upgrade diet levels independently." } },
+  { "@type": "Question", "name": "How is post-stroke speech therapy follow-up arranged in Hong Kong's HA system?", "acceptedAnswer": { "@type": "Answer", "text": "Acute phase: nursing screen in the Acute Stroke Unit, followed by formal SLP assessment. After stabilisation, transfer to a rehabilitation hospital for continued swallowing therapy. Post-discharge: referral to outpatient speech therapy (Geriatric Day Hospital or specialist outpatient). Stable cases may wait several months; patients with high-risk indicators (recurrent aspiration, rapid weight loss) can be prioritised." } },
+  { "@type": "Question", "name": "When should swallowing rehabilitation exercises begin after stroke?", "acceptedAnswer": { "@type": "Answer", "text": "Exercise type and timing must be determined by SLP assessment. In general, exercises begin after acute stabilisation (typically 2–4 weeks post-onset). Intensive rehabilitation during the optimal window (months 1–3) produces the best functional gains. Never self-prescribe exercise type — inappropriate exercises can cause harm." } },
+  { "@type": "Question", "name": "How can I verify thickened drink consistency at home?", "acceptedAnswer": { "@type": "Answer", "text": "Use the IDDSI syringe flow test: draw 10 ml into a 10 ml syringe, hold vertically tip-down for 10 seconds, and check the remaining volume. Level 0: all flows out; Level 1: 1–4 ml remains; Level 2: 4–8 ml remains; Level 3: over 8 ml remains; Level 4: barely flows. Re-verify whenever switching thickener brands." } }
+];
+
+const faqParkinsonsGuideZhHk = [
+  { "@type": "Question", "name": "柏金遜症患者為什麼流口水？可以改善嗎？", "acceptedAnswer": { "@type": "Answer", "text": "柏金遜症流涎主要因為吞嚥頻率減少（而非唾液分泌增加）。患者在不進食時往往忘記吞嚥，導致唾液在口腔積聚。改善策略：每 30 秒有意識地吞嚥一次；保持良好坐姿。嚴重流涎可與主診神經科醫生討論肉毒桿菌素注射等藥物治療。" } },
+  { "@type": "Question", "name": "服用左旋多巴的柏金遜症患者，飲食上最重要的注意事項是什麼？", "acceptedAnswer": { "@type": "Answer", "text": "最關鍵是避免在服藥前後 30 分鐘內進食高蛋白質食物（肉、魚、蛋、豆類）。蛋白質中的大型中性氨基酸會與左旋多巴競爭腸道吸收，顯著降低藥效。波動明顯的患者可考慮蛋白質再分配策略——早午餐低蛋白，晚餐集中蛋白質攝取。調整前應先諮詢神經科醫生或營養師。" } },
+  { "@type": "Question", "name": "LSVT LOUD 治療對吞嚥困難有幫助嗎？", "acceptedAnswer": { "@type": "Answer", "text": "有。LSVT LOUD 雖然主要針對聲量及說話清晰度，但其密集的呼氣及聲門控制訓練對咽部肌肉力量有正面影響，多項研究顯示對部分柏金遜症患者的吞嚥功能有改善效果。LSVT LOUD 需由認證言語治療師執行，可在 HKSLTA 名冊（hkslta.org.hk）搜尋認證治療師。" } },
+  { "@type": "Question", "name": "Off 期吞嚥困難加重時，哪些食物較安全？", "acceptedAnswer": { "@type": "Answer", "text": "Off 期應選用更低 IDDSI 等級的食物（例如平時食 Level 6，Off 期改 Level 5 或 Level 4），延長進食時間，避免需要大量咀嚼的食物。蒸魚（去骨）、蒸水蛋、南瓜糊及嫩豆腐均是 Off 期較安全的高蛋白質選擇。切勿催促患者在 Off 期快速進食。" } }
+];
+const faqParkinsonsGuideEn = [
+  { "@type": "Question", "name": "Why do Parkinson's patients drool and can it be improved?", "acceptedAnswer": { "@type": "Answer", "text": "PD drooling is caused by reduced swallowing frequency (not increased saliva production). Patients often forget to swallow during non-eating activities, causing saliva to pool. Improvement strategies: consciously swallow every 30 seconds; maintain good upright posture. For persistent drooling, discuss botulinum toxin injection options with the attending neurologist." } },
+  { "@type": "Question", "name": "What is the most important dietary consideration for a PD patient taking levodopa?", "acceptedAnswer": { "@type": "Answer", "text": "Avoid high-protein foods (meat, fish, eggs, legumes) within 30 minutes before or after each levodopa dose. Dietary large neutral amino acids compete with levodopa for intestinal absorption and can significantly reduce medication effect. Patients with marked fluctuations may benefit from protein redistribution — low protein at breakfast and lunch, concentrated protein at dinner. Consult the neurologist or dietitian before adjusting." } },
+  { "@type": "Question", "name": "Does LSVT LOUD help with dysphagia in Parkinson's disease?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Although LSVT LOUD primarily targets voice volume and speech clarity, its intensive expiratory and glottal control exercises positively affect pharyngeal muscle strength. Multiple studies show measurable swallowing function improvements in some PD patients. LSVT LOUD must be delivered by a certified SLP — search the HKSLTA directory at hkslta.org.hk for certified practitioners." } },
+  { "@type": "Question", "name": "Which foods are safer during Off periods when swallowing worsens?", "acceptedAnswer": { "@type": "Answer", "text": "During Off periods, move to lower IDDSI texture levels (for example, if usual diet is Level 6, shift to Level 5 or Level 4), allow more time, and avoid foods requiring extensive chewing. Steamed fish (deboned), steamed egg custard, pumpkin puree and silken tofu are protein-rich, safe options. Never rush eating during an Off period." } }
+];
+
+const faqCancerEatingZhHk = [
+  { "@type": "Question", "name": "頭頸癌放射治療後口乾症可以改善嗎？", "acceptedAnswer": { "@type": "Answer", "text": "部分口乾在治療完成後數個月至一年內可有所改善，但若唾液腺（尤其腮腺）受高劑量照射，口乾可能長期或永久存在。現代 IMRT 技術設計上保護腮腺，但因鼻咽癌的解剖位置，完全保護並非總是可行。人工唾液、頻繁小口飲水及嚴格口腔護理可顯著改善生活質素。" } },
+  { "@type": "Question", "name": "化療引起的金屬味如何緩解？", "acceptedAnswer": { "@type": "Answer", "text": "有效方法包括：以塑膠餐具代替金屬餐具（可顯著減少金屬味感知）；選用酸性食物或飲料（檸檬水、醋）刺激味覺；食物冷卻至室溫後進食（熱食氣味更強，加重金屬味感知）；用少量薑或薄荷中和金屬味。大多數情況下，化療完成後數週至數月內金屬味會逐漸消退。" } },
+  { "@type": "Question", "name": "放射治療後的牙關緊閉可以預防嗎？", "acceptedAnswer": { "@type": "Answer", "text": "可以，且預防效果遠優於治療。在放射治療開始前或治療期間盡早開始規律張口訓練（每日多次，持續數分鐘，可用 TheraBite 等裝置或直接用手指輔助），可顯著減少纖維化的程度。一旦嚴重攣縮形成，改善難度大幅增加。應在腫瘤科言語治療師指導下開始預防性張口訓練。" } },
+  { "@type": "Question", "name": "香港公立醫院的腫瘤科言語治療如何轉介？", "acceptedAnswer": { "@type": "Answer", "text": "在公立醫療系統，腫瘤科言語治療轉介可透過三個途徑：（1）治療前：由腫瘤科醫生在放射治療前主動提出轉介，作基線評估及預防性吞嚥訓練；（2）治療期間：腫瘤科護士或醫生安排緊急評估；（3）治療後：在腫瘤科覆診時告知醫生吞嚥困難，要求轉介門診言語治療。" } }
+];
+const faqCancerEatingEn = [
+  { "@type": "Question", "name": "Can xerostomia (dry mouth) improve after head and neck radiotherapy?", "acceptedAnswer": { "@type": "Answer", "text": "Some recovery of saliva production can occur in the months to one year after treatment, but if the parotid glands received high radiation doses, xerostomia may be long-term or permanent. Modern IMRT techniques aim to spare the parotid glands, but complete sparing is not always achievable given head and neck cancer anatomy. Artificial saliva sprays, frequent small sips of water and rigorous oral hygiene substantially improve quality of life." } },
+  { "@type": "Question", "name": "How can metallic taste from chemotherapy be reduced?", "acceptedAnswer": { "@type": "Answer", "text": "Effective approaches include: using plastic utensils instead of metal (can noticeably reduce metallic taste perception); acidic foods or drinks (lemon water, vinegar) to stimulate taste sensation; eating food at room temperature rather than hot (hot food produces stronger aroma and worsens metallic perception); small amounts of ginger or mint to partially counteract metallic taste. In most cases metallic taste resolves gradually over weeks to months after chemotherapy ends." } },
+  { "@type": "Question", "name": "Can trismus after radiotherapy be prevented?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — prevention is far more effective than treatment once contracture develops. Starting regular jaw-stretching exercises at the beginning of radiotherapy (multiple times daily, using devices such as TheraBite or manual finger assistance) substantially reduces fibrosis. Once severe contracture develops, improvement is much harder to achieve. Begin prophylactic jaw exercises under oncology SLP guidance." } },
+  { "@type": "Question", "name": "How is oncology speech therapy referral arranged in Hong Kong public hospitals?", "acceptedAnswer": { "@type": "Answer", "text": "Referral is available through three pathways: (1) Before treatment: the oncologist proactively refers for baseline SLP assessment and prophylactic swallowing exercises before radiotherapy begins; (2) During treatment: the oncology nurse or doctor arranges urgent assessment if symptoms emerge; (3) After treatment: at a routine oncology follow-up, report swallowing difficulties and request outpatient SLP referral." } }
+];
+
+const newGuideSlugs14 = ['stroke-dysphagia-recovery-hk', 'parkinsons-dysphagia-guide-hk', 'cancer-treatment-eating-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -780,10 +824,13 @@ const getFaqMainEntity = () => {
   if (slug === 'nasogastric-tube-care-hk') return lang === 'zh-hk' ? faqNgTubeCareZhHk : faqNgTubeCareEn;
   if (slug === 'peg-tube-home-care-hk') return lang === 'zh-hk' ? faqPegTubeCareZhHk : faqPegTubeCareEn;
   if (slug === 'transitioning-oral-to-tube-feeding') return lang === 'zh-hk' ? faqOralTubeTransitionZhHk : faqOralTubeTransitionEn;
+  if (slug === 'stroke-dysphagia-recovery-hk') return lang === 'zh-hk' ? faqStrokeDysphagiaRecoveryZhHk : faqStrokeDysphagiaRecoveryEn;
+  if (slug === 'parkinsons-dysphagia-guide-hk') return lang === 'zh-hk' ? faqParkinsonsGuideZhHk : faqParkinsonsGuideEn;
+  if (slug === 'cancer-treatment-eating-hk') return lang === 'zh-hk' ? faqCancerEatingZhHk : faqCancerEatingEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
