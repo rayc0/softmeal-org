@@ -124,14 +124,78 @@ const faqQuestionsEn = [
   }
 ];
 
-const faqSchema = slug === 'iddsi-guide' ? {
+// FAQPage schemas for new guides
+const faqYumChaZhHk = [
+  { "@type": "Question", "name": "飲茶點心哪些對吞嚥困難患者最危險？", "acceptedAnswer": { "@type": "Answer", "text": "最危險的點心包括小籠包（湯汁加固體的雙重質地）、整條腸粉（滑溜難控制）、湯丸（黏韌糯米圓形）及雞腳（骨多質地不一）。這些食物不建議任何吞嚥困難患者食用。" } },
+  { "@type": "Question", "name": "吞嚥困難患者可以飲茶嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不需要完全禁止。關鍵是選擇適合的食物——清粥（過濾固體後）、蒸魚及改良版蒸點心是較安全的選擇。茶水須根據言語治療師的建議加入增稠劑調整稠度。每位患者情況不同，應以言語治療師的個別評估為準。" } },
+  { "@type": "Question", "name": "飲茶時如何處理茶水？", "acceptedAnswer": { "@type": "Answer", "text": "普通中國茶（普洱、鐵觀音等）均為稀薄液體（IDDSI Level 0），需要增稠液體的患者必須加入增稠劑。建議使用黃原膠基增稠劑，因為其在熱液體中穩定性優於澱粉基增稠劑。菊花茶需先過濾花瓣再增稠。" } },
+  { "@type": "Question", "name": "蘿蔔糕是否適合吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "煎蘿蔔糕因外皮較硬不建議；蒸蘿蔔糕（未煎）質地較軟，切成小塊後可能適合部分 IDDSI Level 5–6 的患者，但需確保無硬邊，並通過叉子壓力測試。具體適合性應由言語治療師評估。" } }
+];
+const faqYumChaEn = [
+  { "@type": "Question", "name": "Which dim sum items are most dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The highest-risk items are xiao long bao (soup dumplings — dual texture), whole cheong fun (slippery, hard to control), tang yuan (sticky glutinous rice, round shape) and chicken feet (bones, uneven texture). None of these are recommended for dysphagia patients at any IDDSI level." } },
+  { "@type": "Question", "name": "Can a dysphagia patient still go to yum cha?", "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily prohibited. Plain congee (filtered of solids), steamed fish and modified steamed dim sum are safer options. Drinks must be thickened per the SLP's prescription. Every patient is different — individual assessment from a speech-language pathologist is essential." } },
+  { "@type": "Question", "name": "How should tea be handled for dysphagia patients at yum cha?", "acceptedAnswer": { "@type": "Answer", "text": "Chinese teas (Pu-erh, Tieguanyin) are thin liquids (IDDSI Level 0). Patients prescribed thickened drinks must use their own thickener. Xanthan gum-based thickeners are preferred for hot tea as they maintain stable consistency in hot liquids. Chrysanthemum tea should be strained before thickening." } },
+  { "@type": "Question", "name": "Is steamed turnip cake (lo bak go) safe for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Pan-fried turnip cake is not recommended due to the hard outer crust. Steamed turnip cake (unfried) is softer and may be suitable for some IDDSI Level 5–6 patients when cut into small pieces, provided there are no hard edges and it passes the fork pressure test. Consult an SLP for individual suitability." } }
+];
+
+const faqDischargeZhHk = [
+  { "@type": "Question", "name": "出院前應問言語治療師哪些問題？", "acceptedAnswer": { "@type": "Answer", "text": "最重要的問題包括：患者目前的 IDDSI 食物及液體等級各是什麼？是否有沉默式誤吸風險？需要什麼進食姿勢？液體增稠用什麼增稠劑及份量？何時需要回診跟進？請要求言語治療師提供書面的吞嚥困難飲食建議書。" } },
+  { "@type": "Question", "name": "香港出院後如何獲得言語治療跟進？", "acceptedAnswer": { "@type": "Answer", "text": "應在出院前由主診醫生或病房言語治療師轉介至公立醫院門診言語治療。老人科日間醫院亦提供多專科復康服務。穩定新症等候時間可能較長，高風險患者通常獲優先安排。確保離院前拿到預約單。" } },
+  { "@type": "Question", "name": "吞嚥困難患者出院後的飲食等級可以自行調整嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不可以。飲食等級的調整必須由言語治療師評估後決定。沉默式誤吸可在沒有明顯咳嗽症狀的情況下發生，即使患者「看起來吞得更好」也不代表可以升級飲食等級。應定期接受言語治療師跟進評估。" } },
+  { "@type": "Question", "name": "出院後家居廚房需要準備哪些器具？", "acceptedAnswer": { "@type": "Answer", "text": "主要器具包括：功率 700W 以上的攪拌機（製作糊狀食物）、精確至 1g 的電子磅（量度增稠劑）、細目篩網（過濾糊狀食物）、小碗口湯匙（控制每口份量）及帶刻度量杯（量度液體增稠比例）。同時應儲備至少 2–4 週的增稠劑存量。" } }
+];
+const faqDischargeEn = [
+  { "@type": "Question", "name": "What questions should I ask the SLP before hospital discharge?", "acceptedAnswer": { "@type": "Answer", "text": "Key questions: What is the patient's current IDDSI food texture and drink thickness level? Is there risk of silent aspiration? What feeding posture is required? Which thickener and at what dose? When is the follow-up appointment? Always request a written Dysphagia Diet Prescription before leaving hospital." } },
+  { "@type": "Question", "name": "How do I access speech therapy after discharge in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Ask the ward doctor or SLP to refer to public hospital outpatient speech therapy before discharge. Geriatric Day Hospitals also offer multi-disciplinary rehabilitation including SLP review. Waiting times for stable cases can be several months; high-risk patients are generally prioritised. Confirm your appointment slip before leaving." } },
+  { "@type": "Question", "name": "Can the patient's diet level be upgraded at home without an SLP assessment?", "acceptedAnswer": { "@type": "Answer", "text": "No. Diet level changes must be determined by an SLP following formal reassessment. Silent aspiration can occur without visible choking or coughing, even when a patient appears to be swallowing better. Do not upgrade the diet level based on observation alone." } },
+  { "@type": "Question", "name": "What kitchen equipment is needed for home dysphagia care?", "acceptedAnswer": { "@type": "Answer", "text": "Essential equipment includes: a 700W+ blender for purées, a digital kitchen scale (1g precision) for thickener dosing, a fine-mesh sieve for straining, small-bowled spoons to control mouthful size, and a graduated measuring jug. Stock at least 2–4 weeks of thickener to avoid substitution emergencies." } }
+];
+
+const faqThickenerZhHk = [
+  { "@type": "Question", "name": "香港的增稠劑有哪幾類？", "acceptedAnswer": { "@type": "Answer", "text": "香港市場的增稠劑主要有三類：家用澱粉基（超市粟粉/生粉）、醫療級澱粉基商業增稠劑（藥房購買）及黃原膠基商業增稠劑（藥房及醫療用品店）。三類在溫度穩定性、口感、IDDSI 測試一致性及價格上均有顯著差異。" } },
+  { "@type": "Question", "name": "粟粉可以代替商業增稠劑嗎？", "acceptedAnswer": { "@type": "Answer", "text": "緊急或預算極有限時可臨時使用，但不建議長期依賴。家用粟粉在熱飲中稠度不穩定，靜置後繼續增稠，難以準確達到言語治療師指定的 IDDSI 等級，存在患者安全風險。" } },
+  { "@type": "Question", "name": "黃原膠基增稠劑和澱粉基增稠劑有什麼分別？", "acceptedAnswer": { "@type": "Answer", "text": "主要差異在於溫度穩定性和口感。黃原膠基在熱飲及冷飲中稠度均穩定，且具有剪切稀化特性（吞嚥時暫時變稀，較易通過咽部）；澱粉基在熱液體中稠度不均，冷卻後繼續稠化。IDDSI 流量測試的重複性，黃原膠基明顯優於澱粉基。" } },
+  { "@type": "Question", "name": "更換增稠劑品牌後需要重新驗證稠度嗎？", "acceptedAnswer": { "@type": "Answer", "text": "需要。不同品牌在相同用量下的稠度可能有差異。每次更換品牌後，應使用注射器流量測試（Syringe Flow Test）重新驗證，確認準備的飲品仍符合言語治療師指定的 IDDSI 等級。" } }
+];
+const faqThickenerEn = [
+  { "@type": "Question", "name": "What types of thickener are available in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Hong Kong offers three main categories: household cornstarch (supermarkets), medical-grade modified starch thickeners (pharmacies), and xanthan gum-based commercial thickeners (pharmacies and medical supply stores). They differ significantly in temperature stability, mouthfeel, IDDSI test consistency and cost." } },
+  { "@type": "Question", "name": "Can I use plain cornstarch instead of a commercial thickener?", "acceptedAnswer": { "@type": "Answer", "text": "It can serve as a very short-term substitute in emergencies, but is not recommended for regular use. Household cornstarch is unstable in hot drinks and continues to thicken after preparation, making it very difficult to consistently achieve the IDDSI level prescribed by the SLP — a genuine patient safety risk." } },
+  { "@type": "Question", "name": "What is the difference between xanthan gum and starch-based thickeners?", "acceptedAnswer": { "@type": "Answer", "text": "The key differences are temperature stability and mouthfeel. Xanthan gum maintains consistent thickness in both hot and cold liquids and has shear-thinning properties (viscosity reduces briefly under the force of swallowing, easing bolus movement). Starch-based thickeners are unreliable in hot liquids and continue to thicken as they cool. IDDSI flow-test repeatability is significantly better with xanthan gum." } },
+  { "@type": "Question", "name": "Do I need to re-verify consistency after switching thickener brands?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Different brands can produce different consistencies at the same dose. After any brand change, perform the IDDSI syringe flow test to confirm the prepared drink still meets the patient's prescribed IDDSI level before serving." } }
+];
+
+const faqNutritionZhHk = [
+  { "@type": "Question", "name": "吞嚥困難長者每日需要多少蛋白質？", "acceptedAnswer": { "@type": "Answer", "text": "一般健康長者（65 歲以上）每日每公斤體重需約 1.0–1.2g 蛋白質；急性病或手術後恢復期可增至 1.2–1.5g；有壓瘡或嚴重傷口的患者需 1.5–2.0g。以 50kg 的長者為例，每日蛋白質需求約為 50–75g。" } },
+  { "@type": "Question", "name": "如何在不改變 IDDSI 等級的情況下強化糊狀食物的能量？", "acceptedAnswer": { "@type": "Answer", "text": "可加入 1–2 茶匙橄欖油（每茶匙約 40 千卡）、全脂奶粉（同時提升蛋白質及能量）或麥芽精（高能量密度）。這些添加物在適量使用下不會顯著改變食物的稠度或 IDDSI 等級。" } },
+  { "@type": "Question", "name": "香港有哪些社署資助的膳食服務適合吞嚥困難長者？", "acceptedAnswer": { "@type": "Answer", "text": "主要包括：綜合家居照顧服務（IHCS）乙類、社區照顧服務券試驗計劃及長者鄰里支援計劃。部分供應商可提供軟質或改良質感膳食。申請可透過社會福利署辦事處或醫務社工進行，社署熱線為 2343 2255。" } },
+  { "@type": "Question", "name": "何時應轉介吞嚥困難長者至營養師？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況應盡快轉介：過去 3 個月體重下降超過 5%；食量明顯不足；需要考慮鼻胃管管飼；患有糖尿病、腎病等需要特殊飲食控制的疾病；或照顧者不確定如何製備符合 IDDSI 要求且足夠營養的餐食。" } }
+];
+const faqNutritionEn = [
+  { "@type": "Question", "name": "How much protein does an elderly dysphagia patient need daily?", "acceptedAnswer": { "@type": "Answer", "text": "Healthy elderly adults (65+) generally need 1.0–1.2 g protein per kilogram body weight per day. This increases to 1.2–1.5 g/kg during recovery from acute illness or surgery, and 1.5–2.0 g/kg for patients with active pressure injuries. A 50 kg patient needs approximately 50–75 g of protein daily." } },
+  { "@type": "Question", "name": "How can I fortify puréed food without changing its IDDSI level?", "acceptedAnswer": { "@type": "Answer", "text": "Add 1–2 teaspoons of olive oil (approximately 40 kcal per teaspoon), full-cream milk powder (boosts both protein and energy), or malt extract (high energy density). In appropriate amounts, these additions do not significantly change the food's consistency or IDDSI level." } },
+  { "@type": "Question", "name": "What SWD-funded meal services are available for dysphagia patients in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Key options include: Integrated Home Care Services (IHCS) Type II, the Community Care Service Voucher Pilot Scheme, and Neighbourhood Elderly Support programmes. Some providers offer soft or modified-texture meal options. Apply through the local SWD office or medical social worker; SWD hotline: 2343 2255." } },
+  { "@type": "Question", "name": "When should an elderly dysphagia patient be referred to a dietitian?", "acceptedAnswer": { "@type": "Answer", "text": "Seek referral promptly if the patient has lost more than 5% of body weight in 3 months; food intake is consistently inadequate; tube feeding is being considered; the patient has diabetes, kidney disease or other conditions requiring specialised dietary management; or the caregiver is unsure how to prepare nutritionally adequate IDDSI-compliant meals." } }
+];
+
+const newGuideSlugs = ['yum-cha-guide', 'hospital-discharge-planning', 'thickener-comparison-hk', 'elderly-nutrition-hk'];
+
+const getFaqMainEntity = () => {
+  if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
+  if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
+  if (slug === 'thickener-comparison-hk') return lang === 'zh-hk' ? faqThickenerZhHk : faqThickenerEn;
+  if (slug === 'elderly-nutrition-hk') return lang === 'zh-hk' ? faqNutritionZhHk : faqNutritionEn;
+  return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
+};
+
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs];
+const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn
+  "mainEntity": getFaqMainEntity()
 } : null;
 
-// HowTo schema — injected for iddsi-guide in any language
-const howToSchema = slug === 'iddsi-guide' ? {
+// HowTo schema — injected for iddsi-guide and hospital-discharge-planning
+const howToSchemaIddsi = slug === 'iddsi-guide' ? {
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何使用叉子壓力測試驗證食物 IDDSI 等級" : "How to test food texture using the IDDSI Fork Pressure Test",
@@ -144,6 +208,22 @@ const howToSchema = slug === 'iddsi-guide' ? {
     {"@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "觀察結果" : "Observe result", "text": lang === 'zh-hk' ? "Level 4：完全壓平不回彈。Level 5：壓縮但不壓平。Level 6：抵抗壓力。" : "Level 4: flattens completely. Level 5: compresses but not flat. Level 6: resists pressure."}
   ]
 } : null;
+
+const howToSchemaDischarge = slug === 'hospital-discharge-planning' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "吞嚥困難患者出院後的過渡步驟" : "Steps for Transitioning a Dysphagia Patient from Hospital to Home",
+  "description": lang === 'zh-hk' ? "從出院前準備、家居佈置到社區跟進的完整步驟指引" : "Complete step-by-step guide from pre-discharge preparation to community follow-up",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "出院前確認 IDDSI 等級及書面飲食建議書" : "Confirm IDDSI level and obtain written diet prescription before discharge", "text": lang === 'zh-hk' ? "向言語治療師確認食物及液體的 IDDSI 等級，並取得書面的吞嚥困難飲食建議書，包括增稠劑類型及份量指引。" : "Confirm food texture and drink thickness IDDSI levels with the SLP. Obtain a written Dysphagia Diet Prescription including thickener type and dosing instructions."},
+    {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "安排出院後言語治療跟進預約" : "Arrange post-discharge speech therapy follow-up appointment", "text": lang === 'zh-hk' ? "在出院前確保已獲得門診言語治療或老人科日間醫院的跟進預約單，並確認預約日期。" : "Before leaving hospital, confirm an outpatient speech therapy or Geriatric Day Hospital follow-up appointment and obtain the appointment slip."},
+    {"@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "準備家居廚房及器具" : "Prepare the home kitchen and equipment", "text": lang === 'zh-hk' ? "購置攪拌機、電子磅、細目篩網及小碗口湯匙，並儲備至少 2–4 週的增稠劑存量。" : "Acquire a blender, digital kitchen scale, fine-mesh sieve and small-bowled spoons. Stock at least 2–4 weeks of thickener supply."},
+    {"@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "建立每日餐食計劃並監察攝取量" : "Establish a daily meal plan and monitor intake", "text": lang === 'zh-hk' ? "採用少食多餐（每日 5–6 餐），記錄每日進食及液體攝取量，注意任何食量下降或咳嗽增加的跡象。" : "Plan 5–6 small meals per day. Keep a daily intake log and monitor for any reduction in food intake, increased coughing or signs of fatigue."}
+  ]
+} : null;
+
+const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? null;
 
 // BreadcrumbList schema
 const breadcrumbSchema = {
