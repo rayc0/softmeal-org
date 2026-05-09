@@ -98,6 +98,7 @@
 Level 2 (Mildly Thick):
 - [牛油果香蕉奶昔 Avocado Banana Smoothie L2](https://softmeal.org/zh-hk/recipes/avocado-banana-smoothie-l2/)
 - [茶餐廳奶茶（加稠版）HK Milk Tea Thickened L2](https://softmeal.org/zh-hk/recipes/cha-chaan-teng-milk-tea-l2/)
+- [芝麻米漿 Sesame Rice Water L2 (dairy-free)](https://softmeal.org/zh-hk/recipes/sesame-rice-water-l2/)
 
 Level 3 (Liquidised):
 - [皮蛋瘦肉粥 Century Egg Pork Congee L3](https://softmeal.org/zh-hk/recipes/congee-century-egg-pork-l3/)
@@ -117,6 +118,9 @@ Level 3 (Liquidised):
 - [加強蛋白粥 Protein-Fortified Rice Congee L3](https://softmeal.org/zh-hk/recipes/fortified-rice-congee-l3/) — high-protein congee with egg white and chicken, ~16g protein per bowl
 - [藜麥粥 Quinoa Congee L3](https://softmeal.org/zh-hk/recipes/quinoa-congee-l3/) — complete plant protein congee, all essential amino acids, vegan
 - [加強燕麥奶糊 Fortified Milk Oatmeal L3](https://softmeal.org/zh-hk/recipes/fortified-milk-oatmeal-l3/) — oats in calcium-enriched milk, ~250mg calcium and ~10g protein per serving
+- [燕麥奶粥 Oat Milk Congee L3 (dairy-free)](https://softmeal.org/zh-hk/recipes/oat-milk-congee-l3/)
+- [豆漿豆腐花 Soy Milk Soft Tofu L3 (dairy-free)](https://softmeal.org/zh-hk/recipes/soy-milk-soft-tofu-l3/)
+- [米漿番薯糊 Rice Milk Sweet Potato L3 (dairy-free)](https://softmeal.org/zh-hk/recipes/rice-milk-sweet-potato-l3/)
 
 Level 4 (Pureed):
 - [豆腐花薑汁糖水 Tofu Pudding with Ginger Syrup L4](https://softmeal.org/zh-hk/recipes/tofu-pudding-ginger-syrup/)
@@ -156,6 +160,7 @@ Level 4 (Pureed):
 - [蒸魚豆腐糕 Steamed Fish Tofu Cake L4](https://softmeal.org/zh-hk/recipes/steamed-fish-tofu-cake-l4/) — blended fish and silken tofu steamed cake, ~18g protein and 180mg calcium per serving
 - [雞肝泥 Chicken Liver Puree L4](https://softmeal.org/zh-hk/recipes/chicken-liver-puree-l4/) — iron-rich and protein-dense puree, 55-70% of daily iron requirement per serving
 - [毛豆豆腐泥 Edamame and Tofu Puree L4](https://softmeal.org/zh-hk/recipes/edamame-tofu-puree-l4/) — plant-protein puree with complete amino acids, vegan-friendly
+- [杏仁奶雪梨湯 Almond Milk Pear Soup L4 (dairy-free)](https://softmeal.org/zh-hk/recipes/almond-milk-pear-soup-l4/)
 
 Level 5 (Minced & Moist):
 - [木瓜雪耳滋潤糖水 Papaya and Snow Fungus Soup L5](https://softmeal.org/zh-hk/recipes/papaya-snow-fungus-soup/)
