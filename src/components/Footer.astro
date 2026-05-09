@@ -74,6 +74,52 @@ const isZh = lang === 'zh-hk';
       </div>
     </div>
 
+    <!-- SeniorDeli App CTA Banner -->
+    <div style="background: #1e40af; border-radius: 8px; padding: 20px 24px; margin: 24px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <div>
+        <p style="color: white; font-weight: 600; font-size: 15px; margin: 0 0 4px 0;">
+          {isZh ? '🍽️ 為院舍提供 IDDSI 臨床工具？' : '🍽️ Want IDDSI tools for your care home?'}
+        </p>
+        <p style="color: #bfdbfe; font-size: 13px; margin: 0;">
+          {isZh
+            ? 'EAT-10 篩查 · IDDSI 匹配 · 食物照片識別 — 免費臨床應用程式'
+            : 'EAT-10 screener · IDDSI Matcher · Snap-to-IDDSI classifier — free clinical app'}
+        </p>
+      </div>
+      <a href="https://www.seniordeli.com/app"
+         target="_blank" rel="noopener"
+         style="background: white; color: #1e40af; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
+        {isZh ? '免費下載應用程式 →' : 'Free App Download →'}
+      </a>
+    </div>
+
+    <!-- SeniorDeli Free Tools widget -->
+    <div style="border: 1px solid #374151; border-radius: 8px; padding: 16px 20px; margin-bottom: 8px;">
+      <p style="color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px 0;">
+        {isZh ? 'SeniorDeli 免費工具' : 'SeniorDeli Free Tools'}
+      </p>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px;">
+        <li>
+          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
+            {isZh ? '📋 EAT-10 吞嚥篩查' : '📋 EAT-10 Screener'}
+          </a>
+        </li>
+        <li>
+          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
+            {isZh ? '🔢 IDDSI 等級匹配' : '🔢 IDDSI Matcher'}
+          </a>
+        </li>
+        <li>
+          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
+            {isZh ? '📷 照片識別食物等級' : '📷 Snap-to-IDDSI'}
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <div class="mt-8 pt-4 border-t border-gray-700 text-xs text-gray-500 text-center">
       <p>
         © 2026 softmeal.org |

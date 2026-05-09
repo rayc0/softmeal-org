@@ -32,6 +32,8 @@ const enLinks = [
   { href: `/en/about/`, label: 'About' },
 ];
 
+const appLabel = lang === 'zh-hk' ? '免費應用程式 ↗' : 'Free App ↗';
+
 const links = lang === 'zh-hk' ? zhLinks : enLinks;
 const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const altLabel = lang === 'zh-hk' ? 'English' : '繁體中文';
@@ -52,7 +54,7 @@ const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
       </a>
     </div>
     <nav class="mt-2 overflow-x-auto">
-      <ul class="flex gap-4 text-sm whitespace-nowrap">
+      <ul class="flex gap-4 text-sm whitespace-nowrap items-center">
         {links.map(link => (
           <li>
             <a href={link.href} class="text-green-100 hover:text-white no-underline">
@@ -60,6 +62,12 @@ const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
             </a>
           </li>
         ))}
+        <li class="ml-2 pl-2 border-l border-green-700">
+          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+             class="text-green-300 hover:text-white no-underline text-xs opacity-80 hover:opacity-100">
+            {appLabel}
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
