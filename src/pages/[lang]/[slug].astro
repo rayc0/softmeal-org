@@ -563,6 +563,22 @@ const faqWeightLossEn = [
 
 const newGuideSlugs8 = ['protein-needs-elderly-dysphagia', 'hydration-thickened-fluids', 'weight-loss-prevention-dysphagia'];
 
+// FAQPage schemas for batch 9: product-guide-hk
+const faqProductGuideZhHk = [
+  { "@type": "Question", "name": "香港哪裡可以購買吞嚥困難增稠劑？", "acceptedAnswer": { "@type": "Answer", "text": "主要購買途徑包括：屈臣氏及萬寧連鎖藥房（部分分店可訂購）、HKTVmall（網購送貨）、深水埗桂林街及荔枝角道的醫療用品店，以及部分公立醫院出院時由醫院藥房配發（視乎個案）。商業黃原膠基增稠劑參考價格約 HKD $150–350 每 400–500g。" } },
+  { "@type": "Question", "name": "吞嚥困難患者購買攪拌機時最重要的規格是什麼？", "acceptedAnswer": { "@type": "Answer", "text": "最關鍵的規格是功率（最低 1000W 或以上）和可拆解的濕式刀頭設計。功率不足的攪拌機無法將肉類及纖維食物徹底打至 IDDSI Level 4 要求的無顆粒細滑質感。香港豐澤、蘇寧及 HKTVmall 均有售，家用款式參考價格 HKD $500–3,000。" } },
+  { "@type": "Question", "name": "香港缺口杯（防嗆飲水杯）在哪裡可以買到？", "acceptedAnswer": { "@type": "Answer", "text": "缺口杯可在深水埗桂林街及鴨寮街一帶的醫療用品店購買，亦可在 HKTVmall 搜尋「缺口杯」或「切口杯」。參考價格 HKD $30–80。缺口杯讓患者飲水時無需後仰頭部，維持安全吞嚥姿勢，是吞嚥困難照護的基本輔助器具。" } },
+  { "@type": "Question", "name": "如何透過職業治療師申請適應性餐具補貼？", "acceptedAnswer": { "@type": "Answer", "text": "住院期間可由主診醫生或言語治療師轉介至職業治療部進行評估，職業治療師可推薦適合的輔助器具並協助申請相關資助。門診患者可透過普通科門診轉介。部分非政府機構復康服務中心提供二手輔助器具借用。醫務社工亦可協助查詢適用的資助計劃。" } }
+];
+const faqProductGuideEn = [
+  { "@type": "Question", "name": "Where can I buy dysphagia thickener in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Main purchasing options include: Watsons and Mannings pharmacy chains (some branches stock or can order commercial thickeners), HKTVmall for online delivery, medical supply shops along Kweilin Street and Lai Chi Kok Road in Sham Shui Po, and some public hospitals dispensing thickeners at discharge (case-by-case). Commercial xanthan gum thickeners cost approximately HKD $150–350 per 400–500g tin." } },
+  { "@type": "Question", "name": "What is the most important specification when buying a blender for dysphagia care?", "acceptedAnswer": { "@type": "Answer", "text": "The two most critical specifications are power (minimum 1000W) and a fully detachable wet blade design. An underpowered blender cannot achieve the particle-free smoothness required for IDDSI Level 4 Puréed. Broadway (Fortress), Suning and HKTVmall all carry suitable models; home blenders range from approximately HKD $500–3,000." } },
+  { "@type": "Question", "name": "Where can I buy a nosey cup (cut-out cup) in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Nosey cups are available at medical supply shops in Sham Shui Po (Kweilin Street and Apliu Street area) and on HKTVmall (search 'cut-out cup' or '缺口杯'). Reference price: HKD $30–80. The cut-out design allows drinking without tilting the head back, maintaining the safe chin-tuck posture and reducing aspiration risk." } },
+  { "@type": "Question", "name": "How do I access occupational therapy to get an adaptive utensil assessment and possible subsidy?", "acceptedAnswer": { "@type": "Answer", "text": "Inpatients can be referred to the OT department by the attending doctor or SLP. Outpatients can access OT via general outpatient clinic referral. Some NGO rehabilitation centres offer second-hand adaptive equipment loans. Medical social workers can also identify applicable subsidy schemes. Ask the hospital OT for a recommended utensil list before purchasing to avoid unsuitable items." } }
+];
+
+const newGuideSlugs9 = ['product-guide-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -591,10 +607,11 @@ const getFaqMainEntity = () => {
   if (slug === 'protein-needs-elderly-dysphagia') return lang === 'zh-hk' ? faqProteinZhHk : faqProteinEn;
   if (slug === 'hydration-thickened-fluids') return lang === 'zh-hk' ? faqHydrationZhHk : faqHydrationEn;
   if (slug === 'weight-loss-prevention-dysphagia') return lang === 'zh-hk' ? faqWeightLossZhHk : faqWeightLossEn;
+  if (slug === 'product-guide-hk') return lang === 'zh-hk' ? faqProductGuideZhHk : faqProductGuideEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
