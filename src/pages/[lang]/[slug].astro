@@ -248,7 +248,65 @@ const faqProfessionalsEn = [
   }
 ];
 
+// FAQPage schemas for new guides (batch 2: dementia, care-home IDDSI, tube transition, Cantonese cuisine)
+const faqDementiaZhHk = [
+  { "@type": "Question", "name": "認知症患者含住食物不吞，照顧者應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "這是口腔滯留或吞嚥失用的表現。建議輕聲提示「吞落去」並配合手勢，或提供少量溫水刺激吞嚥反射。若持續出現，應轉介言語治療師評估是否需要調整 IDDSI 等級或採用其他策略。不建議用手指或器具強行清除口中食物。" } },
+  { "@type": "Question", "name": "認知症患者拒絕進食，是否代表真的不餓？", "acceptedAnswer": { "@type": "Answer", "text": "拒食通常有多種原因，未必代表不餓。常見原因包括：未能辨認食物、口腔不適（牙痛或假牙不合）、情緒狀態（抑鬱或焦慮）、藥物副作用及疲勞。應先排除身體不適及藥物因素，再嘗試調整食物外觀、選用熟悉餐具及在患者精神最佳的時段進食。" } },
+  { "@type": "Question", "name": "為認知症患者佈置進食環境有哪些重要原則？", "acceptedAnswer": { "@type": "Answer", "text": "關鍵原則包括：桌面保持簡潔（只放當餐所需餐具）、使用對比色碗碟（白色食物配深色碗）、確保充足燈光、用餐期間關掉電視以減少分心，以及使用患者熟悉的餐具。熟悉的廣東菜香氣亦有助觸發進食記憶。" } },
+  { "@type": "Question", "name": "認知症患者何時需要緊急轉介言語治療師？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況應立即轉介：每餐出現 3 次或以上嗆咳、進食後反覆發燒超過 38°C、一週內體重明顯下降、食物在口中超過 2 分鐘無法吞下、進食後聲音出現濕聲，或超過 48 小時幾乎無法攝入食物或液體。" } }
+];
+
+const faqDementiaEn = [
+  { "@type": "Question", "name": "What should a carer do when a dementia patient holds food in their mouth without swallowing?", "acceptedAnswer": { "@type": "Answer", "text": "This is pocketing or swallowing apraxia. Try a gentle verbal prompt ('now swallow') paired with a gesture, or offer a small amount of warm water to stimulate the swallowing reflex. If it persists, refer to an SLP to assess whether the IDDSI level or feeding strategy needs adjustment. Do not use fingers or implements to forcibly remove food from the mouth." } },
+  { "@type": "Question", "name": "Does meal refusal in dementia always mean the patient is not hungry?", "acceptedAnswer": { "@type": "Answer", "text": "Refusal rarely means 'not hungry' in isolation. Common causes include failure to recognise food, oral discomfort (toothache, ill-fitting dentures), emotional state (depression or agitation), medication side effects and fatigue. Rule out physical discomfort and medication causes first, then try adjusting food presentation, using familiar utensils and scheduling meals during the patient's most alert time of day." } },
+  { "@type": "Question", "name": "What are the key principles for setting up a mealtime environment for a dementia patient?", "acceptedAnswer": { "@type": "Answer", "text": "Key principles: keep the table surface uncluttered (only what is needed for the current meal); use contrasting tableware (light food on a dark plate); ensure adequate lighting; turn off the television during meals to minimise distraction; and use the patient's familiar utensils. Familiar Cantonese food aromas can also help trigger eating-related memories." } },
+  { "@type": "Question", "name": "When does a dementia patient need urgent referral to a speech-language pathologist?", "acceptedAnswer": { "@type": "Answer", "text": "Seek urgent SLP referral when: three or more coughing episodes occur per meal; the patient develops recurrent fever above 38°C after meals; noticeable weight loss occurs over one week; food remains in the mouth for more than two minutes without swallowing; the voice becomes wet or gurgling after eating; or the patient takes in virtually no food or fluid for 48 hours or more." } }
+];
+
+const faqCareHomeIddsiZhHk = [
+  { "@type": "Question", "name": "香港法例是否強制要求院舍採用 IDDSI 等級？", "acceptedAnswer": { "@type": "Answer", "text": "目前《安老院實務守則》並無明確列明強制採用 IDDSI 等級，但 HKCSS 照護食認可計劃已成為政府採購評分及業界基準的重要依據。未採用 IDDSI 框架的院舍在招標評分及聲譽風險上處於劣勢。建議將 IDDSI 推行視為風險管理策略，而非單純的合規要求。" } },
+  { "@type": "Question", "name": "沒有固定言語治療師服務的院舍，如何為居民進行 IDDSI 等級評估？", "acceptedAnswer": { "@type": "Answer", "text": "可透過以下途徑：確認公立醫院出院時的 IDDSI 建議書是否已轉交院舍；向 HKSLTA 查詢提供院舍外展服務的私家言語治療師；或聯絡提供院舍巡迴言語治療服務的非政府機構。護理員不應自行訂定居民的 IDDSI 等級。" } },
+  { "@type": "Question", "name": "推行 IDDSI 試點計劃應如何選取試點居民？", "acceptedAnswer": { "@type": "Answer", "text": "建議選取 10 名已有言語治療師評估的居民，優先選擇 IDDSI 等級差異較大的組合（例如同時包含 L3、L5 及 L6 居民），以測試不同質地食物的製備流程。試點期間每日記錄進食觀察，並在第 5–6 週邀請言語治療師回訪評估成效。" } },
+  { "@type": "Question", "name": "院舍推行 IDDSI 的主要廚房設備費用是多少？", "acceptedAnswer": { "@type": "Answer", "text": "主要一次性設備包括：商用攪拌機（HKD 2,000–8,000）、電子磅（HKD 200–500）及食物模具（HKD 500–2,000，選用）。針筒流量測試所需的 10ml 注射器每支約 HKD 5，可消毒後重複使用。增稠劑的持續成本視用量及品牌而異。" } }
+];
+
+const faqCareHomeIddsiEn = [
+  { "@type": "Question", "name": "Are Hong Kong care homes legally required to implement IDDSI levels?", "acceptedAnswer": { "@type": "Answer", "text": "The current Code of Practice for Residential Care Homes does not specifically mandate IDDSI levels. However, the HKCSS Care Food Endorsement Scheme has become the de facto industry benchmark and is increasingly linked to government procurement scoring. Care homes not using the IDDSI framework face competitive disadvantage and greater reputational risk. Treat IDDSI implementation as a risk management strategy, not merely a compliance exercise." } },
+  { "@type": "Question", "name": "How can a care home assess resident IDDSI levels without a resident SLP?", "acceptedAnswer": { "@type": "Answer", "text": "Options include: confirming that a discharge IDDSI prescription from the public hospital has been transferred to the care home; contacting HKSLTA to identify private SLPs offering outreach services to care homes; or engaging NGOs that provide peripatetic speech therapy. Care workers should not independently assign IDDSI levels to residents." } },
+  { "@type": "Question", "name": "How should a care home select residents for an IDDSI pilot programme?", "acceptedAnswer": { "@type": "Answer", "text": "Select 10 residents with existing SLP assessments, ideally spanning a range of IDDSI levels (e.g., including Level 3, Level 5 and Level 6 residents) to test different preparation workflows. Record mealtime observations daily during the pilot, and invite the SLP to review pilot residents' mealtime performance at weeks 5–6." } },
+  { "@type": "Question", "name": "What are the main kitchen equipment costs for IDDSI implementation?", "acceptedAnswer": { "@type": "Answer", "text": "Principal one-time costs: commercial blender (HKD 2,000–8,000), digital kitchen scale (HKD 200–500), and food moulds (HKD 500–2,000, optional). The 10ml syringes needed for flow testing cost approximately HKD 5 each and can be reused after cleaning. Ongoing thickener costs vary by usage volume and brand." } }
+];
+
+const faqTubeTransitionZhHk = [
+  { "@type": "Question", "name": "患者何時可以開始口腔進食試驗？", "acceptedAnswer": { "@type": "Answer", "text": "言語治療師評估以下條件後方可考慮：醫學狀況穩定（無急性感染或血壓不穩）、患者有足夠意識水平（能跟從簡單指令）、存在自主咳嗽能力、口腔衛生可接受，以及具備基本的唇部及舌部運動功能。具體時機必須由言語治療師評估決定，不應自行嘗試。" } },
+  { "@type": "Question", "name": "FEES 和 VFSS 有什麼分別？香港如何轉介？", "acceptedAnswer": { "@type": "Answer", "text": "FEES（纖維喉鏡吞嚥評估）在床邊進行，直接觀察咽部吞嚥，無輻射；VFSS（吞鋇造影）在放射科進行，可觀察完整吞嚥過程並量化誤吸，但涉及輻射。香港轉介途徑：FEES 由耳鼻喉科或言語治療師安排；VFSS 由言語治療師建議經主診醫生轉介至放射科。" } },
+  { "@type": "Question", "name": "口腔進食過渡期間，家人應避免哪些行為？", "acceptedAnswer": { "@type": "Answer", "text": "不應給予未獲言語治療師批准的食物質地；不應因患者要求而自行升級飲食等級；不應在患者疲倦或不適時強迫進食；不應使用吸管（難以控制流量，增加誤吸風險）。若進食時出現嗆咳，應立即停止進食，讓患者向前傾並鼓勵咳嗽，記錄事件並告知言語治療師。" } },
+  { "@type": "Question", "name": "香港私家言語治療師收費大約是多少？", "acceptedAnswer": { "@type": "Answer", "text": "私家言語治療師每次費用約 HKD 800–2,500，視乎言語治療師的經驗、診所地點及評估複雜程度而異。公立醫院門診言語治療收費為醫管局標準診療費（每次約 HKD 80），但等候時間較長。可透過香港言語治療師公會（HKSLTA）名冊（hkslta.org.hk）搜尋私家言語治療師。" } }
+];
+
+const faqTubeTransitionEn = [
+  { "@type": "Question", "name": "When can a patient begin an oral feeding trial?", "acceptedAnswer": { "@type": "Answer", "text": "The SLP assesses the following conditions before proceeding: medical stability (no acute infection or haemodynamic instability), sufficient consciousness to follow simple instructions, voluntary cough present, acceptable oral hygiene, and basic lip and tongue movement. The timing must be determined by SLP assessment — do not attempt oral feeding without SLP guidance." } },
+  { "@type": "Question", "name": "What is the difference between FEES and VFSS, and how are they arranged in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "FEES (fibreoptic endoscopic evaluation of swallowing) is performed at the bedside and directly observes the pharynx during swallowing, with no radiation. VFSS (videofluoroscopic swallowing study) is performed in radiology and can observe the complete swallowing sequence and quantify aspiration, but involves radiation. In Hong Kong: FEES is arranged through ENT or a trained SLP; VFSS requires SLP recommendation via the attending doctor to radiology." } },
+  { "@type": "Question", "name": "What should family members avoid during the oral feeding transition?", "acceptedAnswer": { "@type": "Answer", "text": "Do not offer food at a texture not approved by the SLP; do not upgrade the diet level on the patient's request without SLP consultation; do not insist on feeding when the patient is fatigued or unwell; do not use a straw (insufficient flow control, increased aspiration risk). If coughing occurs during a meal, stop immediately, lean the patient forward, encourage active coughing, and report the incident to the SLP." } },
+  { "@type": "Question", "name": "How much do private speech-language pathologists charge in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Private SLP fees are approximately HKD 800–2,500 per session, varying by the therapist's experience, location and assessment complexity. Public hospital outpatient speech therapy is charged at the HA standard fee (approximately HKD 80 per visit) but waiting times can be significantly longer. Search the HKSLTA directory at hkslta.org.hk for registered private practitioners." } }
+];
+
+const faqCantoneseZhHk = [
+  { "@type": "Question", "name": "廣東菜中哪些食物對吞嚥困難患者最危險？", "acceptedAnswer": { "@type": "Answer", "text": "最危險的廣東菜食物包括：燒味的酥脆外皮（雙重質感）、傳統魚蛋及魚球（彈牙 L7 質感）、帶骨肉類（排骨、整雞、鴨腿）、傳統蒸及煎點心（混合質感）、含有固體湯料的廣東靚湯（混合質感），以及整顆枸杞（圓形細小高危食物）。" } },
+  { "@type": "Question", "name": "白切雞可以如何改良給吞嚥困難患者食用？", "acceptedAnswer": { "@type": "Answer", "text": "使用去皮去骨的雞胸或雞腿肉，蒸熟後加入雞湯用攪拌機攪拌至細滑（IDDSI L4 糊狀），再過篩去除未打碎的纖維。可加入少量薑蓉及麻油保留廣東白切雞的香氣。L5 版本可用叉子手動撕碎（顆粒 ≤4mm）並加雞湯保濕。" } },
+  { "@type": "Question", "name": "廣東靚湯如何在吞嚥困難患者進食前處理？", "acceptedAnswer": { "@type": "Answer", "text": "用細目篩網將湯底過篩，去除所有固體湯料（蓮藕、栗子、枸杞等）。純湯底屬稀薄液體（IDDSI L0），按患者的液體 IDDSI 等級加入增稠劑。整顆枸杞屬圓形細小高危食物，必須去除。固體湯料可另外作為 L5–6 配菜，但需確認已充分軟化。" } },
+  { "@type": "Question", "name": "農曆新年團年飯如何讓吞嚥困難長者也能參與？", "acceptedAnswer": { "@type": "Answer", "text": "建議方案：白切雞改為雞蓉（L4）或雞肉碎（L5），可用模具塑形；清蒸魚改良至 L5 並徹底去骨；燉豬腩（L5–6）替代帶骨燒肉；年糕及蘿蔔糕只提供蒸版本（不煎），切成小塊（L6）。讓長者坐在同一餐桌、使用相同碗碟參與團年，對維護尊嚴及家庭融合感至關重要。" } }
+];
+
+const faqCantoneseEn = [
+  { "@type": "Question", "name": "Which Cantonese foods are most dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The highest-risk Cantonese foods include: crispy roast meat skin (dual texture hazard), traditional fish balls and fish cakes (springy Level 7 texture), bone-in cuts (spare ribs, whole chicken, duck legs), traditional steamed and pan-fried dim sum (mixed textures), Cantonese slow-cooked soups with solid ingredients (mixed texture), and whole wolfberries/goji berries (small, round — high choking risk)." } },
+  { "@type": "Question", "name": "How can white-cut chicken be modified for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Use skinless, boneless chicken breast or thigh. Steam until cooked, then blend with chicken stock until smooth (IDDSI Level 4 purée) and sieve to remove fibres. Add a small amount of minced ginger and a few drops of sesame oil to preserve the flavour of classic Cantonese white-cut chicken. For Level 5, hand-shred the chicken with a fork (particles ≤4mm) and moisten with stock." } },
+  { "@type": "Question", "name": "How should Cantonese slow-cooked soup be prepared for a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "Strain the soup through a fine-mesh sieve to remove all solid ingredients (lotus root, chestnuts, wolfberries etc.). The strained broth is a thin liquid (IDDSI Level 0); add thickener according to the patient's prescribed liquid IDDSI level. Whole wolfberries are small and round — a high choking risk — and must always be removed. Solid soup ingredients can be offered separately as Level 5–6 side dishes if sufficiently softened." } },
+  { "@type": "Question", "name": "How can elderly dysphagia patients participate in the Lunar New Year reunion dinner?", "acceptedAnswer": { "@type": "Answer", "text": "Suggested adaptations: white-cut chicken as chicken purée (Level 4) or shredded chicken (Level 5), shaped in a mould; steamed fish modified to Level 5 with thorough de-boning; braised pork belly (Level 5–6) instead of bone-in roast meats; New Year cakes (nian gao, lo bak go) served steamed only (never pan-fried), cut into small pieces (Level 6). Seating the patient at the same reunion table with the same tableware is essential for dignity and family inclusion." } }
+];
+
 const newGuideSlugs = ['yum-cha-guide', 'hospital-discharge-planning', 'thickener-comparison-hk', 'elderly-nutrition-hk', 'for-professionals'];
+const newGuideSlugs2 = ['dementia-care-mealtimes', 'iddsi-for-care-homes', 'enteral-tube-oral-transition', 'modified-diet-cantonese-cuisine'];
 
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
@@ -256,10 +314,14 @@ const getFaqMainEntity = () => {
   if (slug === 'thickener-comparison-hk') return lang === 'zh-hk' ? faqThickenerZhHk : faqThickenerEn;
   if (slug === 'elderly-nutrition-hk') return lang === 'zh-hk' ? faqNutritionZhHk : faqNutritionEn;
   if (slug === 'for-professionals') return lang === 'zh-hk' ? faqProfessionalsZhHk : faqProfessionalsEn;
+  if (slug === 'dementia-care-mealtimes') return lang === 'zh-hk' ? faqDementiaZhHk : faqDementiaEn;
+  if (slug === 'iddsi-for-care-homes') return lang === 'zh-hk' ? faqCareHomeIddsiZhHk : faqCareHomeIddsiEn;
+  if (slug === 'enteral-tube-oral-transition') return lang === 'zh-hk' ? faqTubeTransitionZhHk : faqTubeTransitionEn;
+  if (slug === 'modified-diet-cantonese-cuisine') return lang === 'zh-hk' ? faqCantoneseZhHk : faqCantoneseEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -335,7 +397,35 @@ const howToSchemaProfessionals = slug === 'for-professionals' ? {
   ]
 } : null;
 
-const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? null;
+const howToSchemaTubeTransition = slug === 'enteral-tube-oral-transition' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "由鼻胃喉過渡至口腔進食的分階段協議" : "Step-by-step Protocol for Transitioning from Nasogastric Tube to Oral Feeding",
+  "description": lang === 'zh-hk' ? "言語治療師指導下，從口腔刺激到全口腔進食的完整過渡步驟" : "Complete staged transition from oral stimulation to full oral feeding under SLP guidance",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "第一階段：口腔刺激（不涉及吞嚥）" : "Phase 1: Oral Stimulation (Without Swallowing)", "text": lang === 'zh-hk' ? "用棉棒或紗布蘸取少量涼水輕拭口腔黏膜，讓患者嗅聞食物香氣但不進食。鼻胃喉維持全量管飼。" : "Use a cotton swab or damp gauze to moisturise the oral mucosa; allow the patient to smell food without eating. Maintain full NG tube feeding." },
+    { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "第二階段：少量口腔試食（言語治療師在場）" : "Phase 2: Small Oral Trial (with SLP Present)", "text": lang === 'zh-hk' ? "言語治療師在場下，讓患者吞嚥少量（1–3ml）適合 IDDSI 質地的食物或液體，觀察嗆咳反應及進食後聲音質量。" : "With the SLP present, the patient swallows small amounts (1–3 ml) of IDDSI-appropriate food or liquid. Observe coughing response and voice quality after swallowing." },
+    { "@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "第三階段：有限度口腔進食" : "Phase 3: Limited Oral Intake", "text": lang === 'zh-hk' ? "在照顧者監察下，每餐提供少量適合 IDDSI 等級的食物（佔每日營養需求的 25–50%）。鼻胃喉部分管飼補足營養，每週向言語治療師匯報進食情況。" : "Under caregiver supervision, provide small amounts of IDDSI-appropriate food at each meal (25–50% of daily nutritional requirements). Supplement with partial NG tube feeding; report to the SLP weekly." },
+    { "@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "第四階段：全口腔進食及拔除鼻胃喉" : "Phase 4: Full Oral Feeding and NG Tube Removal", "text": lang === 'zh-hk' ? "當口腔進食攝取量穩定達到每日營養需求的 75% 以上，體重穩定，由醫生評估後拔除鼻胃喉。繼續定期言語治療覆診。" : "When oral intake consistently covers 75%+ of daily nutritional requirements and weight is stable, the attending doctor assesses and removes the NG tube. Continue regular SLP follow-up." }
+  ]
+} : null;
+
+const howToSchemaCareHome = slug === 'iddsi-for-care-homes' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "如何在香港院舍推行 IDDSI 標準：試點計劃步驟" : "How to Implement IDDSI Standards in a Hong Kong Care Home: Pilot Programme Steps",
+  "description": lang === 'zh-hk' ? "從員工培訓到試點執行的院舍 IDDSI 推行完整步驟指引" : "Complete step-by-step guide from staff training to pilot execution for care home IDDSI implementation",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "選取 10 名試點居民並採購設備" : "Select 10 pilot residents and procure equipment", "text": lang === 'zh-hk' ? "選取已有言語治療師評估的居民，涵蓋不同 IDDSI 等級。採購攪拌機、電子磅、針筒及所需增稠劑庫存，設計個人飲食記錄表格。" : "Select residents with existing SLP assessments spanning a range of IDDSI levels. Procure a blender, digital scale, syringes and thickener stock; design individual dietary record forms." },
+    { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "完成廚師及護理員基礎 IDDSI 培訓" : "Complete foundational IDDSI training for chefs and care workers", "text": lang === 'zh-hk' ? "培訓內容涵蓋 IDDSI 8 個等級定義、叉子壓力測試及針筒流量測試操作，以及各等級食物的製備標準和增稠劑量度方法。" : "Training covers the definitions of all 8 IDDSI levels, fork pressure test and syringe flow test procedures, preparation standards for each level, and thickener measurement." },
+    { "@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "執行 2 週試點：製備、測試及記錄" : "Run a 2-week pilot: preparation, testing and recording", "text": lang === 'zh-hk' ? "按試點居民的 IDDSI 等級分批製備餐食，每批次進行叉子壓力測試並記錄結果。護理員每餐後記錄進食觀察（攝取量、嗆咳次數）。" : "Prepare meals in batches by IDDSI level; perform and record fork pressure test results for each batch. Care workers record post-meal observations (intake percentage, coughing episodes) after every meal." },
+    { "@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "邀請言語治療師評估試點成效並擴大推行" : "Invite SLP to assess pilot outcomes and expand implementation", "text": lang === 'zh-hk' ? "匯總 2 週的試點數據，調整工作流程中的問題環節，邀請言語治療師回訪評估試點居民。評估後逐步將 IDDSI 標準推廣至全體有吞嚥困難的居民。" : "Collate 2-week pilot data, adjust any problematic workflow elements, and invite the SLP to assess pilot residents. After evaluation, progressively extend IDDSI standards to all residents with dysphagia." }
+  ]
+} : null;
+
+const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? howToSchemaTubeTransition ?? howToSchemaCareHome ?? null;
 
 // BreadcrumbList schema
 const breadcrumbSchema = {
