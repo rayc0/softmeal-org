@@ -618,6 +618,35 @@ const faqTextureTestingEn = [
 ];
 const newGuideSlugs10 = ['iddsi-training-for-care-homes', 'speech-therapy-referral-hk', 'texture-testing-at-home'];
 
+// FAQPage schemas for seasonal festive guides (batch 11: CNY + Mid-Autumn)
+const faqCnyZhHk = [
+  { "@type": "Question", "name": "農曆新年哪些食物對吞嚥困難患者最危險？", "acceptedAnswer": { "@type": "Answer", "text": "最危險的新年食物包括年糕（煎或炸）、湯圓、煎堆及糭——全部由黏韌糯米製成，不適合吞嚥困難患者任何形式食用。糖蓮子和整顆堅果因圓形及乾硬，同樣屬高危食物。盆菜的混合質感（豬皮、蘿蔔等）也需特別注意。" } },
+  { "@type": "Question", "name": "蒸年糕（未煎）是否比煎年糕安全？", "acceptedAnswer": { "@type": "Answer", "text": "蒸年糕比煎年糕較軟，但仍然具有黏韌性，一般不建議直接食用。若要讓患者品嚐年糕風味，可將少量蒸年糕壓碎並以糖水稀釋攪拌成均勻糊狀，確認達到 IDDSI Level 4 並通過叉子壓力測試後才可食用。任何形式的年糕改良均需言語治療師確認。" } },
+  { "@type": "Question", "name": "吞嚥困難長者可以參加農曆新年團年飯嗎？", "acceptedAnswer": { "@type": "Answer", "text": "可以——關鍵是提前準備。照顧者應在家中預先製備改良食物（如芋頭糊、蒸水蛋、去骨蒸魚碎），帶往聚餐地點加熱。安排患者使用與家人相同的碗碟，讓患者參與非進食的節日儀式（如分橙、說賀年語），保留歸屬感的同時確保安全。" } },
+  { "@type": "Question", "name": "農曆新年後患者出現咳嗽及發燒，應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "節日後的持續咳嗽及發燒可能是誤吸性肺炎的徵兆。應立即聯絡主診醫生或前往急症室，並告知患者有吞嚥困難病史。不應觀察等待超過 24 小時。" } }
+];
+const faqCnyEn = [
+  { "@type": "Question", "name": "Which Chinese New Year foods are most dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The most dangerous New Year foods are nian gao (pan-fried or steamed), tang yuan, sesame balls (jian dui) and glutinous rice dumplings (zong zi) — all made from sticky glutinous rice, unsuitable at any IDDSI level. Sugar lotus seeds and whole nuts are also high-risk due to their round, hard and dry texture. Poon choi's mixed textures (pork skin, turnip, etc.) require careful management." } },
+  { "@type": "Question", "name": "Is steamed nian gao safer than pan-fried for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Steamed nian gao is softer than the pan-fried version but retains significant stickiness and cohesion. It is generally unsuitable for direct consumption. If the patient wants to taste nian gao, a very small amount can be mashed and blended with sugar water to a smooth uniform paste, verified at IDDSI Level 4 with a fork pressure test. Any nian gao modification requires SLP confirmation for that specific patient." } },
+  { "@type": "Question", "name": "Can a dysphagia patient attend a Chinese New Year reunion dinner?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — with careful preparation. Prepare modified food at home in advance (taro purée, steamed egg custard, deboned steamed fish), transport in sealed containers and reheat at the venue. Serve the patient using the same tableware as the family. Involve the patient in non-food festive rituals such as distributing lai see and peeling mandarin oranges to preserve a sense of belonging." } },
+  { "@type": "Question", "name": "After a New Year dinner, the patient has a persistent cough and fever. What should I do?", "acceptedAnswer": { "@type": "Answer", "text": "Post-festive cough and fever are classic signs of aspiration pneumonia. Contact the patient's doctor immediately or attend A&E, and disclose the dysphagia history. Do not observe and wait for more than 24 hours if fever is present." } }
+];
+
+const faqMidAutumnZhHk = [
+  { "@type": "Question", "name": "月餅為何對吞嚥困難患者如此危險？", "acceptedAnswer": { "@type": "Answer", "text": "月餅的危險來自多個方面：外皮密實乾硬（難以形成均勻食團）、餡料水分低（蓮蓉、豆沙質地偏乾）、雙黃月餅含有圓形乾鬆的鹹蛋黃（雙重質感高危）。冰皮月餅的外皮由糯米粉製成，與年糕、湯圓同類危險。任何款式的月餅均不建議吞嚥困難患者食用。" } },
+  { "@type": "Question", "name": "中秋節有哪些安全的替代甜品給吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "較安全的替代選擇包括：芋頭椰漿糊（IDDSI Level 4，蒸熟攪拌至光滑後過篩）、南瓜椰漿糊（Level 4）、蒸水蛋（Level 4–5）及蒸芋頭糕（蒸版未煎，切細後 Level 5–6）。少量蓮蓉餡以熱牛奶稀釋攪拌成糊亦可考慮，但需先取得言語治療師確認。" } },
+  { "@type": "Question", "name": "冰皮月餅比傳統月餅安全嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不。冰皮月餅的外皮由糯米粉製成，質地黏韌，與湯圓及年糕屬同類危險食材。其外觀較軟可能給人安全的錯覺，但黏韌性對吞嚥困難患者同樣危險，不建議任何吞嚥困難患者食用。" } },
+  { "@type": "Question", "name": "如何讓吞嚥困難長者在中秋節感受節日氣氛而不冒進食風險？", "acceptedAnswer": { "@type": "Answer", "text": "可邀請患者參與切月餅的儀式並分給家人（自己不食用）、嗅聞月餅的香氣、賞月及提燈籠（安全前提下）。將芋頭椰漿糊或南瓜糊放入節日包裝容器，讓替代食品保留節日感。讓患者參與的重點是在場感和家人連繫，而非進食相同的食物。" } }
+];
+const faqMidAutumnEn = [
+  { "@type": "Question", "name": "Why are mooncakes so dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Mooncakes present multiple simultaneous risks: a dense, dry baked crust that is extremely difficult to form into a cohesive bolus; low-moisture fillings (lotus paste, red bean paste) that tend to crumble rather than bind; whole salted egg yolks in double-yolk versions that are round, dry and present a dual-texture hazard; and snow skin mooncakes made from glutinous rice flour — the same sticky, adhesive material as tang yuan and nian gao. No mooncake variant is suitable for dysphagia patients." } },
+  { "@type": "Question", "name": "What are safe Mid-Autumn dessert alternatives for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Safer alternatives include: taro and coconut milk purée (IDDSI Level 4 — steam taro, blend smooth, sieve); pumpkin and coconut milk purée (Level 4); steamed egg custard (Level 4–5); and steamed taro cake cut into small pieces (Level 5–6, steamed version only, not pan-fried). A small amount of lotus paste filling diluted with hot milk to a smooth paste may also be considered, with SLP confirmation." } },
+  { "@type": "Question", "name": "Are snow skin mooncakes safe because they appear softer?", "acceptedAnswer": { "@type": "Answer", "text": "No. Snow skin mooncakes have an outer layer made from glutinous rice flour — the same material as tang yuan and nian gao, which are among the most dangerous foods for dysphagia patients. The apparent softness gives a false sense of safety; the sticky, adhesive quality of glutinous rice makes it equally dangerous regardless of how soft it seems." } },
+  { "@type": "Question", "name": "How can a dysphagia patient participate in Mid-Autumn celebrations without eating mooncake?", "acceptedAnswer": { "@type": "Answer", "text": "Invite the patient to cut the mooncake and distribute pieces to family members without eating it themselves. Allow the patient to smell the mooncake's familiar aroma. Prepare a safe alternative (taro purée or pumpkin purée) in festive-looking packaging. Include the patient in non-food activities: viewing the moon, carrying lanterns (with appropriate support), and enjoying family conversation. The goal is presence and connection — not identical eating." } }
+];
+
+const newGuideSlugs11 = ['chinese-new-year-dysphagia-guide', 'mid-autumn-mooncake-dysphagia'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -650,10 +679,12 @@ const getFaqMainEntity = () => {
   if (slug === 'iddsi-training-for-care-homes') return lang === 'zh-hk' ? faqIddsiTrainingZhHk : faqIddsiTrainingEn;
   if (slug === 'speech-therapy-referral-hk') return lang === 'zh-hk' ? faqSltReferralZhHk : faqSltReferralEn;
   if (slug === 'texture-testing-at-home') return lang === 'zh-hk' ? faqTextureTestingZhHk : faqTextureTestingEn;
+  if (slug === 'chinese-new-year-dysphagia-guide') return lang === 'zh-hk' ? faqCnyZhHk : faqCnyEn;
+  if (slug === 'mid-autumn-mooncake-dysphagia') return lang === 'zh-hk' ? faqMidAutumnZhHk : faqMidAutumnEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
