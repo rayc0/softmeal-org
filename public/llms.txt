@@ -96,6 +96,9 @@ Level 3 (Liquidised):
 - [薑茶凝凍 Ginger Tea Jelly L3-4](https://softmeal.org/zh-hk/recipes/jiangcha-dongdong/)
 - [木瓜雪耳糖水 Papaya Snow Fungus Soup L3-4](https://softmeal.org/zh-hk/recipes/mugua-xuer-tangshui/)
 - [芝麻糊（流質/糊餐）Black Sesame Paste L3-4](https://softmeal.org/zh-hk/recipes/zhima-hu-l3l4/)
+- [扁豆蔬菜湯 Lentil Vegetable Soup L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lentil-vegetable-soup-l3/)
+- [菠菜豆腐泥 Spinach Tofu Smooth L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/spinach-tofu-smooth-l3/)
+- [蓮子百合粥 Lotus Seed Lily Congee L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lotus-seed-lily-congee-l3/)
 
 Level 4 (Pureed):
 - [菠菜豬肝湯蓉 Spinach Pork Liver Puree L4](https://softmeal.org/zh-hk/recipes/bocai-zhugan-tang-rong/)
@@ -122,8 +125,13 @@ Level 4 (Pureed):
 - [蒸水蛋配蒸魚 Steamed Egg with Fish L4](https://softmeal.org/zh-hk/recipes/zhengshui-dan-zhengyu/)
 - [黑芝麻糊 Black Sesame Paste L4](https://softmeal.org/zh-hk/recipes/zhima-hu/)
 - [豬肉粥 Pork Congee L4](https://softmeal.org/zh-hk/recipes/zhurou-zhou/)
+- [冬菇味噌泥 Mushroom Miso Puree L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/mushroom-miso-puree-l4/)
+- [佛陀碗泥 Buddha Bowl Puree L4 (vegan)](https://softmeal.org/zh-hk/recipes/buddha-bowl-puree-l4/)
+- [番薯花生湯 Sweet Potato Peanut Soup L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/sweet-potato-peanut-soup-l4/)
+- [黑豆泥飯 Black Bean Puree Rice L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/black-bean-puree-rice-l4/)
 
 Level 5 (Minced & Moist):
+- [什菌軟炒 Mixed Mushroom Soft Stir L5 (vegetarian)](https://softmeal.org/zh-hk/recipes/mixed-mushroom-soft-stir-l5/)
 - [北菇蒸滑雞 Mushroom Steamed Chicken L5-6](https://softmeal.org/zh-hk/recipes/beigui-zheng-ji/)
 - [苦瓜免治牛肉 Bitter Melon Minced Beef L5](https://softmeal.org/zh-hk/recipes/bitter-melon-beef-minced/)
 - [炆牛腱蓉 Braised Beef Shank Puree L4-5](https://softmeal.org/zh-hk/recipes/braised-beef-shank-puree/)
