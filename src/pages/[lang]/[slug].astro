@@ -826,6 +826,48 @@ const faqComfortFeedingEn = [
 
 const newGuideSlugs15 = ['dementia-mealtime-strategies-hk', 'cognitive-impairment-eating-safety', 'dysphagia-end-of-life-comfort-feeding'];
 
+// FAQPage schemas for batch 16: dining-out-dysphagia-hk, yum-cha-safe-ordering-hk, travel-dysphagia-tips-hk
+const faqDiningOutZhHk = [
+  { "@type": "Question", "name": "吞嚥困難患者在香港餐廳應如何點餐？", "acceptedAnswer": { "@type": "Answer", "text": "建議主動告知服務員患者有吞嚥困難，要求食物「切碎」或「磨糊」。詢問食物是蒸還是炸、能否去骨切碎、粥底能否過濾固體。自備隨身增稠劑小包，用於調整飲品稠度。攜帶 IDDSI 等級說明卡，讓廚師更清楚了解要求。" } },
+  { "@type": "Question", "name": "外出用餐時應帶哪些物品？", "acceptedAnswer": { "@type": "Answer", "text": "必備物品包括：黃原膠基增稠劑單次份量裝、量匙或小磅、缺口杯（讓患者飲水時無需後仰）、小剪刀（剪碎食物用）及 IDDSI 等級說明卡。若需要驗證飲品稠度，可攜帶 10ml 注射針筒。" } },
+  { "@type": "Question", "name": "香港哪類餐廳對吞嚥困難患者最友善？", "acceptedAnswer": { "@type": "Answer", "text": "提供豐富粥品的中式粥品專門店，及有蒸煮類食物的中餐廳，對吞嚥困難患者較為友善。茶餐廳可選水蒸蛋、白粥（過濾固體）或燉蛋。避免以煎炸食物為主的快餐店及強調彈牙口感的日式餐廳。" } },
+  { "@type": "Question", "name": "外出用餐時患者突然嗆咳應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "立即停止進食，讓患者身體前傾，鼓勵自行咳嗽。若嗆咳可自行緩解，讓患者休息後再以較慢節奏繼續。若出現持續咳嗽、聲音沙啞或呼吸困難，應立即就醫。所有嚴重嗆咳事件均應於下次言語治療覆診時告知治療師。" } }
+];
+const faqDiningOutEn = [
+  { "@type": "Question", "name": "How should a dysphagia patient order food at a Hong Kong restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "Proactively inform the server that the patient has swallowing difficulties and request food to be minced or puréed. Ask whether dishes are steamed or fried, whether fish or meat can be deboned and chopped, and whether congee can be served without solid toppings. Bring single-serve thickener sachets for drinks, and carry an IDDSI level card so kitchen staff understand the requirements." } },
+  { "@type": "Question", "name": "What items should I bring when eating out with a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "Essential items: xanthan gum thickener single-serve sachets, a measuring spoon or small scale, a nosey or cut-out cup (allows drinking without tilting the head back), small scissors to cut food at the table, and a bilingual IDDSI level card. For drink consistency verification, carry a 10 ml syringe." } },
+  { "@type": "Question", "name": "Which types of Hong Kong restaurant are most dysphagia-friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Chinese congee specialists and restaurants with a good selection of steamed dishes are generally most suitable. Cha chaan tengs can work with careful ordering: steamed egg, plain congee (strained) and steamed egg desserts are viable. Avoid fast food outlets dominated by fried foods and Japanese restaurants emphasising chewy textures." } },
+  { "@type": "Question", "name": "What should I do if the patient chokes at a restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "Stop feeding immediately. Encourage the patient to lean forward and cough actively. If the cough resolves on its own, allow a brief rest before continuing at a slower pace. If coughing persists, the voice becomes wet or hoarse, or the patient shows signs of respiratory distress, seek emergency care. Report all significant choking events to the SLP at the next appointment." } }
+];
+
+const faqYumChaSafeZhHk = [
+  { "@type": "Question", "name": "吞嚥困難患者飲茶時哪些點心最危險？", "acceptedAnswer": { "@type": "Answer", "text": "最危險的點心包括小籠包（湯汁加固體的雙重質地）、整條腸粉（滑溜難控制）、湯丸（黏韌糯米圓形）及雞腳（骨多質地不一）。這些食物不建議任何吞嚥困難患者食用，無論其 IDDSI 等級如何。" } },
+  { "@type": "Question", "name": "腸粉如何改良才適合吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "Level 5 版本：用小剪刀將腸粉剪成約 1cm 小段，去除醬汁，加入少量湯汁保濕，以叉子壓力測試確認。Level 4 版本：整件腸粉（去醬汁）用攪拌機加少量水磨成均勻糊狀，過細目篩確認無顆粒。腸粉的滑溜質感使其成為最難直接食用的點心之一。" } },
+  { "@type": "Question", "name": "吞嚥困難患者飲茶時如何處理茶水？", "acceptedAnswer": { "@type": "Answer", "text": "所有中國茶均為稀薄液體（IDDSI Level 0），需要增稠液體的患者必須加入增稠劑。建議使用黃原膠基增稠劑，因為其在熱液體中比澱粉基增稠劑更穩定。菊花茶需先過濾花瓣再增稠。隨身攜帶單次份量裝增稠劑，在餐廳現場調製。" } },
+  { "@type": "Question", "name": "蝦餃如何改良才適合吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "去除整個外皮（黏韌皮是主要風險），將蝦仁切碎至最大顆粒 4mm 以內（Level 5 標準），加入少量蝦湯或白粥保濕，以叉子壓力測試確認質地。Level 4 版本：去皮後將蝦仁連同少量湯汁用攪拌機打成均勻糊狀，過篩確認無顆粒。" } }
+];
+const faqYumChaSafeEn = [
+  { "@type": "Question", "name": "Which dim sum items are most dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The highest-risk items are xiao long bao soup dumplings (dual texture: soup plus solid filling), whole cheong fun (slippery and difficult to control), tang yuan glutinous rice balls (sticky, round shape) and chicken feet (multiple bones, uneven texture). None of these are appropriate for any dysphagia patient regardless of IDDSI level." } },
+  { "@type": "Question", "name": "How should cheong fun (rice rolls) be modified for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Level 5 version: use small scissors to cut cheong fun into approximately 1 cm pieces, remove sauce, add a small amount of broth to ensure moisture, and verify with the fork pressure test. Level 4 version: blend the whole piece (no sauce) with a small amount of water until smooth; pass through a fine sieve to confirm no lumps. The slippery texture of whole cheong fun makes it one of the most hazardous items without modification." } },
+  { "@type": "Question", "name": "How should tea be handled at yum cha for a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "All Chinese teas are thin liquids at IDDSI Level 0. Patients prescribed thickened drinks must bring their own thickener. Use xanthan gum-based thickener for hot tea, as it maintains stable consistency in hot liquids. Strain chrysanthemum tea petals before thickening. Carry single-serve sachets for convenience at the restaurant." } },
+  { "@type": "Question", "name": "How should har gow (shrimp dumplings) be modified for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Remove the entire wrapper — the chewy skin is the primary hazard. Mince the shrimp to a maximum particle size of 4 mm or less (IDDSI Level 5 standard). Add a small amount of shrimp broth or congee for moisture and verify texture with the fork pressure test. For Level 4, blend the shrimp without wrapper with a small amount of soup until smooth and sieve to confirm no particles." } }
+];
+
+const faqTravelDysphagiaZhHk = [
+  { "@type": "Question", "name": "增稠劑可以帶上飛機嗎？", "acceptedAnswer": { "@type": "Answer", "text": "增稠劑粉末通常可以放在手提行李，不受 100ml 液體限制，但部分機場安檢可能要求查驗。建議攜帶言語治療師的英語版飲食建議書作為醫療用途證明，並將增稠劑置於透明密封袋方便查驗。大量增稠劑建議放托運，並保留原裝包裝。" } },
+  { "@type": "Question", "name": "旅行時增稠劑耗盡應如何應急？", "acceptedAnswer": { "@type": "Answer", "text": "先評估目的地藥房是否有相似商業增稠劑。英國、澳洲、加拿大可在藥房購買到 Thick-It 或 Nutilis 等品牌；日本藥妝店可找到增稠劑產品系列。緊急情況可使用玉米澱粉（超市可購）臨時替代，但稠度不穩定，需頻繁驗證，不應長期依賴。" } },
+  { "@type": "Question", "name": "酒店自助早餐有哪些適合吞嚥困難患者的選擇？", "acceptedAnswer": { "@type": "Answer", "text": "較安全的選擇包括：煮軟的燕麥粥（確認無硬顆粒）、柔軟炒蛋、希臘優格（去除固體配料）、成熟壓碎的香蕉、成熟牛油果（Level 4–5）及奶油濃湯（需增稠）。避免烤麵包（脆皮）、整顆水果、培根及什果麥片（混合質感）。" } },
+  { "@type": "Question", "name": "旅行時如何在餐廳確認食物是否達到所需的 IDDSI 等級？", "acceptedAnswer": { "@type": "Answer", "text": "攜帶金屬叉子（旅行時可放托運），隨時進行叉子壓力測試：Level 4 完全壓平不回彈，Level 5 壓縮但仍可見顆粒，Level 6 可用叉側切開。飲品稠度驗證可使用隨身攜帶的 10ml 注射針筒進行針筒流量測試。兩個工具體積小，不佔行李空間。" } }
+];
+const faqTravelDysphagiaEn = [
+  { "@type": "Question", "name": "Can I carry thickener powder on a plane?", "acceptedAnswer": { "@type": "Answer", "text": "Thickener powder is generally permitted in carry-on baggage and is not subject to the 100 ml liquid rule, though some airport security stations may flag powder for additional checks. Carry the SLP's English-language diet prescription as proof of medical necessity, and place the powder in a clear sealed bag to facilitate inspection. For large quantities, pack in checked baggage in the original packaging." } },
+  { "@type": "Question", "name": "What should I do if I run out of thickener while travelling?", "acceptedAnswer": { "@type": "Answer", "text": "First, check whether a local pharmacy stocks a similar commercial thickener. In the UK, Australia and Canada, brands such as Thick-It and Nutilis are available at pharmacies. In Japan, thickener products are sold at pharmacy chains. In an emergency, cornstarch from a supermarket can serve as a temporary substitute, but consistency is unstable and requires frequent re-verification." } },
+  { "@type": "Question", "name": "What safe choices are available at a hotel buffet breakfast for a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "Safer choices include: softly cooked oatmeal or porridge (confirm no hard oat grains), softly scrambled eggs, plain Greek yogurt (remove any solid toppings), ripe mashed banana, ripe avocado at Level 4–5, and cream soup with thickener added. Avoid crusty toast, whole fruit, bacon, granola and muesli which have mixed chewy textures." } },
+  { "@type": "Question", "name": "How do I verify food and drink IDDSI levels while travelling?", "acceptedAnswer": { "@type": "Answer", "text": "Pack a metal fork in checked baggage to perform the fork pressure test on solid foods: Level 4 flattens completely and does not spring back; Level 5 compresses but particles remain visible; Level 6 resists but can be cut with the fork edge. For drinks, carry 10 ml syringes for the IDDSI syringe flow test. Both tools are compact and add negligible weight to luggage." } }
+];
+
+const newGuideSlugs16 = ['dining-out-dysphagia-hk', 'yum-cha-safe-ordering-hk', 'travel-dysphagia-tips-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -872,10 +914,13 @@ const getFaqMainEntity = () => {
   if (slug === 'dementia-mealtime-strategies-hk') return lang === 'zh-hk' ? faqDementiaMealtimeStrategiesZhHk : faqDementiaMealtimeStrategiesEn;
   if (slug === 'cognitive-impairment-eating-safety') return lang === 'zh-hk' ? faqCognitiveImpairmentEatingZhHk : faqCognitiveImpairmentEatingEn;
   if (slug === 'dysphagia-end-of-life-comfort-feeding') return lang === 'zh-hk' ? faqComfortFeedingZhHk : faqComfortFeedingEn;
+  if (slug === 'dining-out-dysphagia-hk') return lang === 'zh-hk' ? faqDiningOutZhHk : faqDiningOutEn;
+  if (slug === 'yum-cha-safe-ordering-hk') return lang === 'zh-hk' ? faqYumChaSafeZhHk : faqYumChaSafeEn;
+  if (slug === 'travel-dysphagia-tips-hk') return lang === 'zh-hk' ? faqTravelDysphagiaZhHk : faqTravelDysphagiaEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
