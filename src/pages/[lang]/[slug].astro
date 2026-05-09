@@ -871,6 +871,64 @@ const newGuideSlugs16 = ['dining-out-dysphagia-hk', 'yum-cha-safe-ordering-hk', 
 // FAQPage schemas for batch 17: hospital-discharge-dysphagia-hk, home-kitchen-setup-dysphagia, community-resources-hk-caregivers, financial-support-dysphagia-hk
 const newGuideSlugs17 = ['hospital-discharge-dysphagia-hk', 'home-kitchen-setup-dysphagia', 'community-resources-hk-caregivers', 'financial-support-dysphagia-hk'];
 
+// FAQPage schemas for batch 18: adaptive-cups-straws-hk, weighted-utensils-spoons-hk, dysphagia-cup-types-guide, thickener-dispenser-tools-hk, food-blender-comparison-hk
+const faqAdaptiveCupsZhHk = [
+  { "@type": "Question", "name": "吞嚥困難患者應選用哪類飲水杯？", "acceptedAnswer": { "@type": "Answer", "text": "最常用的輔助杯包括缺口杯（Nosey Cup）、Flexicup 及單向閥飲管杯。缺口杯最適合照顧者輔助餵食，避免患者仰頭飲水，適用所有稠度液體。Flexicup 讓照顧者精確控制每口份量。選擇應根據言語治療師或職業治療師的個別評估建議。" } },
+  { "@type": "Question", "name": "單向閥飲管適合所有增稠飲品嗎？", "acceptedAnswer": { "@type": "Answer", "text": "單向閥飲管不適合 IDDSI Level 3–4 的厚稠飲品，因為閥門設計可能無法讓稠液順暢通過。此類飲管最適合稀薄至中稠飲品（IDDSI Level 0–2）。增稠飲品建議使用缺口杯配合照顧者控制進量。" } },
+  { "@type": "Question", "name": "香港哪裡可以購買吞嚥困難輔助杯？", "acceptedAnswer": { "@type": "Answer", "text": "旺角彌敦道及通菜街附近的復康用品店、香港復康會（HKRC）石硤尾門市、觀塘復康資源中心均有售輔助杯，價格由 HKD $30 至 $200 不等。部分非政府組織亦提供二手輔具借用服務。" } }
+];
+const faqAdaptiveCupsEn = [
+  { "@type": "Question", "name": "Which type of cup should a dysphagia patient use?", "acceptedAnswer": { "@type": "Answer", "text": "The most commonly used adaptive cups are the nosey cup (cut-out cup), Flexicup, and one-way valve straw cup. Nosey cups are best for carer-assisted drinking, eliminating neck extension and working with all fluid thicknesses. Flexicups allow the carer to control each mouthful precisely. The choice should be guided by an SLT or OT assessment." } },
+  { "@type": "Question", "name": "Are one-way valve straws suitable for all thickened drinks?", "acceptedAnswer": { "@type": "Answer", "text": "No. One-way valve straws are not recommended for IDDSI Level 3–4 thickened drinks, as the valve mechanism may not allow thick fluid to pass freely. They work best with thin to mildly thickened fluids (IDDSI Level 0–2). For thickened drinks, a nosey cup with carer-controlled tilt is preferable." } },
+  { "@type": "Question", "name": "Where can I buy adaptive cups in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Rehabilitation equipment shops along Nathan Road and Tung Choi Street in Mong Kok, HKRC outlet in Shek Kip Mei, and Kwun Tong rehabilitation resource centres all stock adaptive cups, ranging from approximately HKD $30 to $200. Some NGOs also offer second-hand equipment loan programmes." } }
+];
+
+const faqWeightedUtensilsZhHk = [
+  { "@type": "Question", "name": "加重湯匙對帕金遜症顫抖有效嗎？", "acceptedAnswer": { "@type": "Answer", "text": "加重湯匙對輕度至中度靜止性顫抖最有效，通過增加阻力減少顫抖幅度，讓患者更準確地將食物送入口中。效果因個人顫抖程度而異，嚴重顫抖效果有限。建議先諮詢職業治療師，部分門診提供試用服務，避免不適合的款式。" } },
+  { "@type": "Question", "name": "吞嚥困難患者應使用多大的湯匙？", "acceptedAnswer": { "@type": "Answer", "text": "言語治療師通常建議使用匙頭容量約 5–8ml 的小碗口湯匙，以控制每口食物份量，確保安全吞嚥。普通成人湯匙匙頭容量可達 15–20ml，對吞嚥困難患者而言每口份量過多，增加吸入風險。" } },
+  { "@type": "Question", "name": "香港哪裡可以購買加重餐具？", "acceptedAnswer": { "@type": "Answer", "text": "旺角通菜街一帶的復康用品店、香港復康會（HKRC）石硤尾門市及鮑偉思傷健協進會均有售加重餐具，價格由 HKD $80 至 $400 不等。購買前建議先諮詢職業治療師，確保選擇的重量及款式符合個人需要。" } }
+];
+const faqWeightedUtensilsEn = [
+  { "@type": "Question", "name": "Do weighted spoons actually help with Parkinson's tremor?", "acceptedAnswer": { "@type": "Answer", "text": "Weighted spoons are most effective for mild to moderate resting tremor, using resistance to dampen tremor amplitude and improve accuracy from bowl to mouth. Effectiveness varies by individual — they have limited impact on severe tremor. Consult an occupational therapist first; some OT clinics offer trial items before purchase." } },
+  { "@type": "Question", "name": "What spoon size is recommended for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "SLTs typically recommend small-bowl spoons with approximately 5–8ml capacity to control mouthful size and ensure safe swallowing. Standard adult tablespoons can hold 15–20ml — too large for most dysphagia patients and a risk factor for aspiration." } },
+  { "@type": "Question", "name": "Where can I buy weighted utensils in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Rehabilitation equipment shops in Mong Kok (Tung Choi Street area), HKRC outlet in Shek Kip Mei, and Bauhinia Foundation resource centres stock weighted utensils ranging from approximately HKD $80 to $400. Consult an occupational therapist before purchasing to ensure the weight and design suit the patient's needs." } }
+];
+
+const faqCupTypesZhHk = [
+  { "@type": "Question", "name": "缺口杯與 Flexicup 有何分別？", "acceptedAnswer": { "@type": "Answer", "text": "缺口杯在杯口前端開有半圓缺口，讓患者飲水時無須仰頭，適合所有稠度液體，由照顧者控制傾斜速度，成本約 HKD $30–$80。Flexicup 為軟身可擠壓設計，照顧者通過擠壓杯身精確控制每口液體量，適合口腔肌力極弱的患者，成本約 HKD $80–$200。" } },
+  { "@type": "Question", "name": "傾斜杯是否適合所有吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "傾斜杯設計令患者飲水時毋須過度仰頭，外觀接近普通杯，適合對輔具外觀有顧慮、具備一定自理能力的患者。但傾斜杯缺乏流量控制機制，不適合需要精確控制每口份量的患者。選擇杯具應由言語治療師或職業治療師根據個別吞嚥評估建議。" } },
+  { "@type": "Question", "name": "增稠飲品應配合哪類杯具使用？", "acceptedAnswer": { "@type": "Answer", "text": "增稠飲品最適合搭配缺口杯使用，照顧者可透過控制杯子傾斜角度及速度，調節每口液體量。飲管杯（包括單向閥飲管）不適合 IDDSI Level 3–4 的厚稠飲品，因閥門設計可能限制稠液流通。" } }
+];
+const faqCupTypesEn = [
+  { "@type": "Question", "name": "What is the difference between a nosey cup and a Flexicup?", "acceptedAnswer": { "@type": "Answer", "text": "A nosey cup has a semicircular cutout at the rim so patients can drink without neck extension; it works with all fluid thicknesses and is carer-controlled, costing approximately HKD $30–$80. A Flexicup is made of squeezable material — the carer compresses the cup body to deliver a precise volume of liquid per mouthful, best for patients with severely reduced oral muscle function, costing approximately HKD $80–$200." } },
+  { "@type": "Question", "name": "Is a tilted cup suitable for all dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "A tilted cup reduces the need for neck extension during drinking and looks similar to a regular cup — useful for patients who are self-conscious about using adaptive equipment and retain reasonable hand control. However, tilted cups have no intrinsic flow control, so they are not suitable for patients who need precise per-mouthful volume management. Cup selection should always be guided by an SLT or OT assessment." } },
+  { "@type": "Question", "name": "Which cup type works best with thickened drinks?", "acceptedAnswer": { "@type": "Answer", "text": "A nosey cup is generally best for thickened drinks — the carer controls the tilt angle and speed, managing how much thickened fluid enters the mouth per sip. Straw cups including one-way valve straws are not recommended for IDDSI Level 3–4 thickened drinks, as the valve design may restrict thick fluid flow." } }
+];
+
+const faqThickenerDispenserZhHk = [
+  { "@type": "Question", "name": "為何要用電子磅量度增稠劑而非量匙？", "acceptedAnswer": { "@type": "Answer", "text": "量匙的實際容量受盛放方式影響極大——堆尖與平匙的差異可達 30–50%，導致每次配製的稠度不一致。電子磅（精確至 0.1g）量度重量不受操作手法影響，是確保 IDDSI 稠度一致性的最可靠方法，言語治療師通常以克數而非量匙為劑量單位。" } },
+  { "@type": "Question", "name": "如何在家進行 IDDSI 注射器流量測試？", "acceptedAnswer": { "@type": "Answer", "text": "用 10ml 無針注射器裝滿被測液體，遮蓋出口 10 秒確保液體靜止，然後鬆開手指讓液體自由流動 10 秒，量度剩餘液體量。Level 2 剩餘 4–8ml，Level 3 剩餘 8–10ml，Level 4 幾乎不流動。10ml 注射器可於藥房購買，每支約 HKD $3–$8。" } },
+  { "@type": "Question", "name": "熱飲加增稠劑後多久才可以測試稠度？", "acceptedAnswer": { "@type": "Answer", "text": "建議等待至少 1–3 分鐘讓增稠劑充分溶解後再測試。澱粉基增稠劑在熱液體中持續稠化，需稍冷卻後測試；黃原膠基增稠劑溫度穩定性較高，但仍建議溶解穩定後再測試。若使用澱粉基增稠劑於熱飲，稠度會隨時間繼續增加，難以預測最終結果。" } }
+];
+const faqThickenerDispenserEn = [
+  { "@type": "Question", "name": "Why should I weigh thickener with a scale rather than use the measuring scoop?", "acceptedAnswer": { "@type": "Answer", "text": "Scoop volume varies significantly with how it is held — the difference between heaped and level can be 30–50%, causing inconsistent consistency every preparation. A digital scale accurate to 0.1g measures weight independent of technique, which is the most reliable way to ensure consistent IDDSI compliance. SLTs typically prescribe doses in grams, not scoops." } },
+  { "@type": "Question", "name": "How do I perform the IDDSI Syringe Flow Test at home?", "acceptedAnswer": { "@type": "Answer", "text": "Fill a 10ml needleless syringe with the drink, cover the outlet for 10 seconds to allow the liquid to settle, then release and allow free flow for 10 seconds. Measure the remaining volume: Level 2 leaves 4–8ml, Level 3 leaves 8–10ml, Level 4 barely flows. 10ml syringes are available at pharmacies in HK for approximately HKD $3–$8 each." } },
+  { "@type": "Question", "name": "How long should I wait before testing thickened hot drinks?", "acceptedAnswer": { "@type": "Answer", "text": "Wait at least 1–3 minutes for the thickener to fully dissolve and stabilise before testing. Starch-based thickeners continue thickening in hot liquids — let the drink cool slightly before testing. Xanthan gum thickeners are more temperature-stable but should still be tested after the dissolution period. Starch thickeners in hot drinks are difficult to verify accurately as consistency continues to change." } }
+];
+
+const faqBlenderZhHk = [
+  { "@type": "Question", "name": "為吞嚥困難患者製作糊餐需要多少瓦數的攪拌機？", "acceptedAnswer": { "@type": "Answer", "text": "製作 IDDSI Level 4 糊餐，建議選用 700W 或以上的攪拌機。1000W 以上的機種效果更穩定，尤其適合纖維含量較高的食材（如蔬菜莖部）。功率低於 500W 的攪拌機通常只能處理預先充分煮軟的食材，難以達到完全滑順的要求。" } },
+  { "@type": "Question", "name": "手持攪拌棒可以製作 IDDSI Level 4 糊餐嗎？", "acceptedAnswer": { "@type": "Answer", "text": "手持攪拌棒（功率通常 200–600W）可以製作部分較軟食材的 Level 4 糊餐，但難以達到纖維含量高的食材所需的完全滑順質感。對於需要嚴格 Level 4 合規性的患者，建議使用 700W 以上的直立攪拌機，配合過篩步驟確保達標。" } },
+  { "@type": "Question", "name": "香港哪裡可以購買適合的攪拌機？", "acceptedAnswer": { "@type": "Answer", "text": "豐澤及百老匯電器有售多個品牌的直立攪拌機，家用款由 HKD $300 起，半專業款（如 Vitamix）由 HKD $3,500 起。旺角西洋菜南街一帶的小型家電店偶有平行進口機種，價格較連鎖店低約 20–30%。購買時確認功率及刀片設計，並留意是否可拆洗刀片組件。" } }
+];
+const faqBlenderEn = [
+  { "@type": "Question", "name": "What wattage blender do I need for dysphagia purées?", "acceptedAnswer": { "@type": "Answer", "text": "For IDDSI Level 4 (Pureed), a minimum of 700W is recommended. 1000W or above gives more consistent results, especially for fibrous ingredients like vegetable stems and greens. Blenders under 500W can only reliably handle pre-cooked, already very soft ingredients and are unlikely to achieve completely smooth results." } },
+  { "@type": "Question", "name": "Can an immersion blender make IDDSI Level 4 purées?", "acceptedAnswer": { "@type": "Answer", "text": "An immersion blender (typically 200–600W) can produce Level 4 results with soft, low-fibre cooked ingredients. For fibrous vegetables, it is unlikely to achieve the complete smoothness required. For patients who need strict Level 4 compliance, a countertop blender of 700W or above, followed by fine-mesh straining, is more reliable." } },
+  { "@type": "Question", "name": "Where can I buy a suitable blender in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Fortress and Broadway carry multiple brands: home models start from approximately HKD $300 and semi-professional models (e.g. Vitamix) from HKD $3,500. Small appliance shops along Sai Yeung Choi Street South in Mong Kok sometimes stock grey-import models 20–30% cheaper than chain stores. Check wattage, blade configuration, and whether the blade assembly is removable for cleaning." } }
+];
+
+const newGuideSlugs18 = ['adaptive-cups-straws-hk', 'weighted-utensils-spoons-hk', 'dysphagia-cup-types-guide', 'thickener-dispenser-tools-hk', 'food-blender-comparison-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -920,10 +978,15 @@ const getFaqMainEntity = () => {
   if (slug === 'dining-out-dysphagia-hk') return lang === 'zh-hk' ? faqDiningOutZhHk : faqDiningOutEn;
   if (slug === 'yum-cha-safe-ordering-hk') return lang === 'zh-hk' ? faqYumChaSafeZhHk : faqYumChaSafeEn;
   if (slug === 'travel-dysphagia-tips-hk') return lang === 'zh-hk' ? faqTravelDysphagiaZhHk : faqTravelDysphagiaEn;
+  if (slug === 'adaptive-cups-straws-hk') return lang === 'zh-hk' ? faqAdaptiveCupsZhHk : faqAdaptiveCupsEn;
+  if (slug === 'weighted-utensils-spoons-hk') return lang === 'zh-hk' ? faqWeightedUtensilsZhHk : faqWeightedUtensilsEn;
+  if (slug === 'dysphagia-cup-types-guide') return lang === 'zh-hk' ? faqCupTypesZhHk : faqCupTypesEn;
+  if (slug === 'thickener-dispenser-tools-hk') return lang === 'zh-hk' ? faqThickenerDispenserZhHk : faqThickenerDispenserEn;
+  if (slug === 'food-blender-comparison-hk') return lang === 'zh-hk' ? faqBlenderZhHk : faqBlenderEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17, ...newGuideSlugs18];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
