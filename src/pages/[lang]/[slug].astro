@@ -579,6 +579,45 @@ const faqProductGuideEn = [
 
 const newGuideSlugs9 = ['product-guide-hk'];
 
+// FAQPage schemas for batch 10: iddsi-training-for-care-homes, speech-therapy-referral-hk, texture-testing-at-home
+const faqIddsiTrainingZhHk = [
+  { "@type": "Question", "name": "院舍 IDDSI 培訓需要多長時間？", "acceptedAnswer": { "@type": "Answer", "text": "基礎知識培訓建議 1.5–2 小時，可分拆為兩個 45 分鐘節次以配合輪班員工。廚師另需半天的實操工作坊（叉子壓力測試及增稠劑量度練習）。新員工應在上崗後 2 週內完成初次培訓，建議每 12 個月進行一次全體更新培訓。" } },
+  { "@type": "Question", "name": "叉子壓力測試如何在院舍廚房正確執行？", "acceptedAnswer": { "@type": "Answer", "text": "取一小份食物置於清潔平面，用叉背以約 140g（可用廚房磅預先校準）緩慢穩定施壓 1–2 秒。Level 4 完全攤平不回彈；Level 5 壓縮但顆粒仍可辨識；Level 6 抵抗壓力但可用叉側切開。每批次食物在供膳前均應進行測試並記錄結果。" } },
+  { "@type": "Question", "name": "針筒流量測試適合哪些 IDDSI 等級？", "acceptedAnswer": { "@type": "Answer", "text": "針筒流量測試適用於確認飲品的 IDDSI 等級（Level 0–4）。使用 10ml 注射器抽取 10ml 飲品，垂直持住 10 秒後觀察剩餘量：Level 0 全部流出；Level 1 剩餘 1–4ml；Level 2 剩餘 4–8ml；Level 3 剩餘 8ml 以上；Level 4 幾乎完全不流出。注射器每次使用後應消毒。" } },
+  { "@type": "Question", "name": "院舍員工培訓記錄需要保存多長時間？", "acceptedAnswer": { "@type": "Answer", "text": "建議至少保存每位員工的培訓記錄至其離職後 3 年，以備社署或 HKCSS 稽查之需。記錄應包括員工姓名、崗位、培訓日期、培訓內容清單、培訓員簽名及能力核實結果。電子記錄或紙本均可接受，但須保持可隨時調取。" } }
+];
+const faqIddsiTrainingEn = [
+  { "@type": "Question", "name": "How long does IDDSI training take for a care home?", "acceptedAnswer": { "@type": "Answer", "text": "Foundation training is recommended at 1.5–2 hours, split into two 45-minute sessions for shift workers. Chefs additionally need a half-day practical workshop covering the Fork Pressure Test and thickener measurement. New staff should complete initial training within two weeks of starting. Annual renewal training for all relevant staff is recommended." } },
+  { "@type": "Question", "name": "How is the Fork Pressure Test correctly performed in a care home kitchen?", "acceptedAnswer": { "@type": "Answer", "text": "Place a small amount of food on a clean flat surface. Press the flat back of a fork with approximately 140 g of steady pressure (calibrate using a kitchen scale) for 1–2 seconds. Level 4 flattens completely and does not spring back; Level 5 compresses but particles remain visible; Level 6 resists pressure but can be cut with the fork edge. Test each batch before service and record the result." } },
+  { "@type": "Question", "name": "Which IDDSI levels does the Syringe Flow Test apply to?", "acceptedAnswer": { "@type": "Answer", "text": "The Syringe Flow Test confirms the IDDSI level of drinks (Levels 0–4). Draw 10 ml into a 10 ml syringe, hold vertically tip-down for 10 seconds and check remaining volume: Level 0 all flows out; Level 1 leaves 1–4 ml; Level 2 leaves 4–8 ml; Level 3 leaves over 8 ml; Level 4 barely flows. Clean and disinfect syringes after each use." } },
+  { "@type": "Question", "name": "How long should staff training records be retained?", "acceptedAnswer": { "@type": "Answer", "text": "It is recommended to retain each staff member's training records for at least three years after they leave, so records are available for SWD or HKCSS audits. Records should include name, role, training date, content checklist, trainer signature and competency verification outcome. Electronic or paper formats are both acceptable, provided records can be retrieved promptly." } }
+];
+const faqSltReferralZhHk = [
+  { "@type": "Question", "name": "哪些症狀應立即轉介言語治療師而非觀察等候？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況需即時轉介：急性中風或腦幹損傷後的任何吞嚥症狀、頭頸部腫瘤治療前或治療期間、ALS 或柏金遜症出現新的吞嚥困難。常規轉介指標包括每週超過 3 次進食後咳嗽、一餐超過 45 分鐘、3 個月內體重下降超過 5%、反覆發生吸入性肺炎（每年 2 次以上），以及進食後聲音嘶啞或出現「濕聲」。" } },
+  { "@type": "Question", "name": "EAT-10 篩查問卷的合格界限是多少？", "acceptedAnswer": { "@type": "Answer", "text": "EAT-10 共 10 題，每題 0–4 分，總分最高 40 分。總分 ≥ 3 分提示可能存在吞嚥困難，應轉介言語治療師進行正式臨床評估。EAT-10 繁體中文版已有驗證研究，可從 Nestlé Nutrition Institute 網站免費下載。" } },
+  { "@type": "Question", "name": "香港公立醫院言語治療門診的典型等候時間是多長？", "acceptedAnswer": { "@type": "Answer", "text": "等候時間因服務類型差異顯著：急性住院中風患者通常 1–3 個工作日獲評估；老人科日間醫院數週至 3 個月；專科門診言語治療穩定個案可達 3–12 個月，視乎醫院聯網及需求。如患者有反覆誤吸或急速體重下降等高風險指標，應在轉介時清楚標明以申請優先跟進。" } },
+  { "@type": "Question", "name": "非政府機構社工可以直接轉介客戶至言語治療師嗎？", "acceptedAnswer": { "@type": "Answer", "text": "可以。非政府機構社工可直接轉介客戶至私家言語治療師。如需轉介至公立服務，通常需透過家庭醫生或普通科門診取得轉介單，社工可協助安排此步驟。部分非政府機構已與特定私家言語治療師或大學語言治療診所建立合作轉介機制。" } }
+];
+const faqSltReferralEn = [
+  { "@type": "Question", "name": "Which symptoms warrant immediate SLP referral rather than watchful waiting?", "acceptedAnswer": { "@type": "Answer", "text": "Immediate referral is needed for: any swallowing symptom after acute stroke or brainstem injury; head and neck cancer before or during treatment; new swallowing difficulty in ALS or Parkinson's disease. Routine referral criteria include coughing during meals more than three times per week, mealtimes over 45 minutes, more than 5% weight loss in three months, recurrent aspiration pneumonia twice or more per year, and wet or hoarse voice quality after eating." } },
+  { "@type": "Question", "name": "What is the EAT-10 cut-off score for dysphagia screening?", "acceptedAnswer": { "@type": "Answer", "text": "The EAT-10 is a 10-item questionnaire scored 0–4 per item (maximum 40). A total score of ≥3 indicates possible dysphagia and warrants formal SLP clinical assessment. A validated traditional Chinese version is available as a free download from the Nestlé Nutrition Institute website." } },
+  { "@type": "Question", "name": "How long are typical waiting times for public hospital speech therapy in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Waiting times vary significantly: acute inpatient stroke patients are typically assessed within 1–3 working days; Geriatric Day Hospitals range from several weeks to three months; stable SOPC speech therapy cases can wait 3–12 months depending on the hospital cluster and demand. If the patient has high-risk indicators such as recurrent aspiration or rapid weight loss, state this clearly in the referral to support a priority request." } },
+  { "@type": "Question", "name": "Can an NGO social worker refer a client directly to a speech-language therapist?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. An NGO social worker can refer directly to a private SLP by direct contact. For public HA services, a referral through a GP or General Outpatient Clinic is generally required — the social worker can assist the client to arrange this. Some NGOs have established referral arrangements with specific private SLPs or university speech-language pathology clinics." } }
+];
+const faqTextureTestingZhHk = [
+  { "@type": "Question", "name": "在家進行叉子壓力測試需要什麼工具？", "acceptedAnswer": { "@type": "Answer", "text": "只需標準家用餐叉、清潔平面及廚房磅（首次用於校準 140g 壓力感覺）。不需要購買特殊設備。將叉背以約 140g（相當於一個小蘋果重量）緩慢穩定施壓於食物上：Level 4 完全攤平不回彈；Level 5 壓縮但顆粒仍可辨識；Level 6 抵抗壓力但叉側可切開。" } },
+  { "@type": "Question", "name": "匙傾斜測試如何區分 Level 3 和 Level 4 食物？", "acceptedAnswer": { "@type": "Answer", "text": "用餐匙盛取一茶匙食物，緩慢傾斜至 90°。Level 3（流質）食物快速流出，匙上只留薄薄一層；Level 4（糊狀）食物緩慢移動或需輕震才脫落，以整塊滑落，落在碟上後保持堆積形狀不擴散。此測試特別適用於稀粥、攪拌湯等難以目測判斷等級的食物。" } },
+  { "@type": "Question", "name": "Level 4 糊狀食物有細小顆粒，還算合格嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不合格。Level 4（糊狀）的標準要求完全光滑均一，不允許任何顆粒存在。若發現細小顆粒，需以細目篩網重新過篩後再測試。常見顆粒來源包括未完全攪打的澱粉粒、纖維碎片或食材表皮，這些都會增加 Level 4 患者的誤吸風險。" } },
+  { "@type": "Question", "name": "每次製備食物都需要進行質感測試嗎？", "acceptedAnswer": { "@type": "Answer", "text": "建議每次製備新一批食物時進行一次測試。一旦建立穩定食譜（固定食材、煮法、時間）且多次測試均通過，可根據判斷調整頻率。但在以下情況必須重新測試：更換食材品種或品牌、更換增稠劑、改變製備方式（例如換攪拌機），以及有一段時間未作測試。" } }
+];
+const faqTextureTestingEn = [
+  { "@type": "Question", "name": "What equipment is needed for the Fork Pressure Test at home?", "acceptedAnswer": { "@type": "Answer", "text": "You only need a standard household dinner fork, a clean flat surface and optionally a kitchen scale (to calibrate your sense of 140 g for the first test). No specialist equipment is required. Place the flat fork back on the food and press slowly with approximately 140 g: Level 4 flattens completely; Level 5 compresses but particles remain visible; Level 6 resists but can be cut with the fork edge." } },
+  { "@type": "Question", "name": "How does the Spoon Tilt Test distinguish Level 3 from Level 4 food?", "acceptedAnswer": { "@type": "Answer", "text": "Load a teaspoon of food and slowly tilt to 90 degrees. Level 3 (Liquidised) food flows off quickly, leaving only a thin film on the spoon. Level 4 (Puréed) food moves slowly or needs a gentle shake to fall, drops as a single soft mass, and holds a mounded shape on the plate rather than spreading. This test is particularly useful for congee, blended soups and other preparations that are difficult to assess visually." } },
+  { "@type": "Question", "name": "My Level 4 purée passed the fork test but has tiny particles — does it pass?", "acceptedAnswer": { "@type": "Answer", "text": "No. Level 4 (Puréed) requires completely smooth, particle-free texture — any visible particle is a fail. Re-sieve through a fine-mesh sieve and re-test. Common sources of particles include incompletely blended starch, fibrous fragments and food skins. Any particles in a Level 4 food significantly increase aspiration risk for patients at this level." } },
+  { "@type": "Question", "name": "How often must I test food texture at home?", "acceptedAnswer": { "@type": "Answer", "text": "Test each time you prepare a fresh batch of food. Once you have established stable recipes — fixed ingredients, cooking method and timing — that have passed multiple times, you can use your judgement about frequency. Always re-test when: changing ingredient brand or variety, changing thickener, changing preparation method such as using a new blender, or after not testing for a period of time." } }
+];
+const newGuideSlugs10 = ['iddsi-training-for-care-homes', 'speech-therapy-referral-hk', 'texture-testing-at-home'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -608,10 +647,13 @@ const getFaqMainEntity = () => {
   if (slug === 'hydration-thickened-fluids') return lang === 'zh-hk' ? faqHydrationZhHk : faqHydrationEn;
   if (slug === 'weight-loss-prevention-dysphagia') return lang === 'zh-hk' ? faqWeightLossZhHk : faqWeightLossEn;
   if (slug === 'product-guide-hk') return lang === 'zh-hk' ? faqProductGuideZhHk : faqProductGuideEn;
+  if (slug === 'iddsi-training-for-care-homes') return lang === 'zh-hk' ? faqIddsiTrainingZhHk : faqIddsiTrainingEn;
+  if (slug === 'speech-therapy-referral-hk') return lang === 'zh-hk' ? faqSltReferralZhHk : faqSltReferralEn;
+  if (slug === 'texture-testing-at-home') return lang === 'zh-hk' ? faqTextureTestingZhHk : faqTextureTestingEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
