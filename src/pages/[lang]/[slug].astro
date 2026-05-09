@@ -428,6 +428,7 @@ const newGuideSlugs3 = ['hk-ngos-and-support', 'hospital-allied-health-hk'];
 const newGuideSlugs4 = ['parkinsons-dysphagia-hk', 'post-stroke-dysphagia-hk', 'als-mnd-dysphagia-hk', 'cancer-treatment-dysphagia'];
 const newGuideSlugs5 = ['caregiver-self-care', 'understanding-slt-reports', 'food-texture-modification-basics'];
 const newGuideSlugs6 = ['home-kitchen-setup-hk', 'financial-support-hk', 'swallowing-exercises-hk'];
+const newGuideSlugs7 = ['protein-needs-elderly-dysphagia', 'hydration-thickened-fluids', 'weight-loss-prevention-dysphagia'];
 
 // FAQPage schemas for batch 6: home-kitchen-setup-hk, financial-support-hk, swallowing-exercises-hk
 const faqKitchenSetupZhHk = [
@@ -467,6 +468,54 @@ const faqSwallowingExercisesEn = [
   { "@type": "Question", "name": "How long do swallowing rehabilitation exercises need to continue before producing results?", "acceptedAnswer": { "@type": "Answer", "text": "Response varies by exercise type, patient condition and adherence. The original Shaker exercise research protocol involved 3 sessions daily for 6 weeks. Duration for other exercises is determined by the SLP based on regular reassessment. Do not stop independently — reduce frequency only after the SLP confirms that functional goals have been achieved and swallowing has stabilised." } }
 ];
 
+// FAQPage schemas for batch 7: mealtime-environment-setup, medication-management-dysphagia, emergency-choking-response
+const faqMealtimeEnvZhHk = [
+  { "@type": "Question", "name": "進食環境的燈光應如何設置才能幫助吞嚥困難長者？", "acceptedAnswer": { "@type": "Answer", "text": "確保桌面有均勻充足的照明（約 300–500 lux），避免患者背對強光造成逆光，影響照顧者觀察嗆咳徵兆。使用對比色碗碟（如深色碗盛放淺色食物）可幫助患者辨認食物位置。認知症患者對強光對比敏感，建議使用柔和燈光。" } },
+  { "@type": "Question", "name": "吞嚥困難患者進食時應保持什麼坐姿？", "acceptedAnswer": { "@type": "Answer", "text": "軀幹應直立至少 90°，臀部靠後坐入椅背，避免身體後傾。頭部保持中線位置或略向前（下巴輕微內收）。雙腳平放地面以維持坐姿穩定。輪椅患者需確認腳踏板高度合適，床上進食需抬床頭至 60–80° 以上，進食後維持同一姿勢至少 30 分鐘。" } },
+  { "@type": "Question", "name": "哪些餐具最適合吞嚥困難長者使用？", "acceptedAnswer": { "@type": "Answer", "text": "建議使用小碗口湯匙（如茶匙）控制每口份量；對比色碗碟幫助患者辨認食物；附防滑底部的碗碟避免滑動；免嗆飲水杯（缺口杯）可讓患者飲水時無需後仰頭部。握力不足或手部顫抖的患者（如柏金遜症）可使用加粗手柄餐具。" } },
+  { "@type": "Question", "name": "吞嚥困難患者最佳的進食時間應如何安排？", "acceptedAnswer": { "@type": "Answer", "text": "選擇患者一日中精神最佳的時段進食主餐。大部分長者早上或午前精神較好；認知症患者下午可能出現黃昏躁動，應在此之前完成主餐；柏金遜症患者應在藥效高峰期（On 期）進食。進食前確認患者已充分清醒，進食前進行口腔護理可刺激吞嚥反射。" } },
+  { "@type": "Question", "name": "進食時電視和噪音對吞嚥困難患者有何影響？", "acceptedAnswer": { "@type": "Answer", "text": "電視和背景噪音分散患者注意力，增加誤吸風險，因為吞嚥本身需要高度專注。進食期間應關掉電視，避免多人同時交談。若患者強烈抗拒關掉電視，可採取折衷方案：在「送餐入口→咀嚼→吞嚥」過程中要求患者專注，吞下後再讓視線回到電視。" } }
+];
+const faqMealtimeEnvEn = [
+  { "@type": "Question", "name": "How should lighting be set up to help an elderly dysphagia patient eat safely?", "acceptedAnswer": { "@type": "Answer", "text": "Ensure even, adequate lighting across the table surface (approximately 300–500 lux). Avoid seating the patient with their back to a bright window, which creates backlighting making it difficult to observe choking signs. High-contrast tableware (dark bowl for light-coloured food) helps patients identify food. Dementia patients are sensitive to harsh light contrast — use soft, diffused lighting." } },
+  { "@type": "Question", "name": "What sitting posture should a dysphagia patient maintain during meals?", "acceptedAnswer": { "@type": "Answer", "text": "The trunk should be upright at minimum 90°, with hips pushed back into the seat and no posterior lean. The head should remain in midline or slightly forward (gentle chin tuck). Both feet should be flat on the floor. Wheelchair users need footrests at the correct height. Patients eating in bed need the head raised to at least 60–80°; maintain this position for at least 30 minutes after eating." } },
+  { "@type": "Question", "name": "Which utensils are most suitable for elderly dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Use small-bowled spoons (teaspoon size) to control mouthful size. High-contrast tableware helps patients locate food. Non-slip based bowls prevent sliding. Nosey or cutout cups allow drinking without extending the head back. Patients with reduced grip strength or hand tremor (e.g., Parkinson's disease) benefit from built-up handle cutlery." } },
+  { "@type": "Question", "name": "When is the best time of day for a dysphagia patient to eat?", "acceptedAnswer": { "@type": "Answer", "text": "Schedule the main meal during the patient's most alert period. Most elderly patients are most alert in the morning or early afternoon. Dementia patients may experience sundowning in the late afternoon — schedule the main meal before this. Parkinson's disease patients should eat during the On period. Ensure the patient is fully awake before meals, and perform oral care beforehand to stimulate the swallowing reflex." } },
+  { "@type": "Question", "name": "How does television noise affect swallowing safety for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Television and background noise divert attention from the complex task of swallowing, directly increasing aspiration risk. Turn off the television during meals. If the patient strongly resists, allow television between mouthfuls but redirect attention to food during the sequence of food-to-mouth, chewing and swallowing. Background music at low volume is less distracting than television." } }
+];
+
+const faqMedicationZhHk = [
+  { "@type": "Question", "name": "哪些藥物絕對不可研碎？", "acceptedAnswer": { "@type": "Answer", "text": "緩釋 / 控釋製劑（藥名含 SR、XR、XL、ER、CR、LA）絕對不可研碎，否則可能導致全日藥量一次釋放，引發嚴重毒性反應。腸溶衣片劑研碎後破壞保護層，影響藥效或刺激胃部。舌下含服製劑（如硝酸甘油）不可混入食物。每種藥物均應在研碎前向醫生或藥劑師確認。" } },
+  { "@type": "Question", "name": "如何為吞嚥困難患者申請液態替代藥物？", "acceptedAnswer": { "@type": "Answer", "text": "在公立醫院覆診時告知主診醫生患者有吞嚥困難，要求轉換液態或可分散配方；或攜帶藥物前往社區藥房諮詢藥劑師。常見藥物類型（如撲熱息痛、抗生素）通常有液態配方。液態配方的濃度和劑量可能與片劑不同，換藥時需由醫生重新計算劑量。" } },
+  { "@type": "Question", "name": "增稠劑與藥物混合會有什麼問題？", "acceptedAnswer": { "@type": "Answer", "text": "部分液態藥物（含高濃度電解質、酒精或酸性物質）加入增稠劑後稠度可能變得不穩定，應在混合後重新用針筒流量測試確認稠度。黃原膠基增稠劑對大多數藥物的影響比澱粉基增稠劑更小。換用不同增稠劑品牌或更換藥物配方後，均需重新驗證稠度。" } },
+  { "@type": "Question", "name": "柏金遜症患者服用左旋多巴應如何配合進食時間？", "acceptedAnswer": { "@type": "Answer", "text": "左旋多巴應在進食高蛋白食物（肉、魚、蛋、豆類）前後至少 30 分鐘服用，以避免蛋白質競爭影響藥物吸收。藥效波動明顯的患者可考慮「蛋白質再分配」策略，早午餐維持低蛋白，晚餐集中攝取全日蛋白質。應盡量在 On 期（藥效高峰）進食最重要的一餐。" } },
+  { "@type": "Question", "name": "患者服藥時每次都會嗆咳，應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "服藥嗆咳的風險與進食時相同，不應輕視。處理方向包括：向醫生申請液態配方；在藥劑師確認可行後，將藥物研碎混入少量糊狀食物（如蘋果泥或布丁）服用；請言語治療師評估最安全的服藥方式及適合的食物或液體質地。不應持續讓患者以引發嗆咳的方式服藥。" } }
+];
+const faqMedicationEn = [
+  { "@type": "Question", "name": "Which medications must never be crushed?", "acceptedAnswer": { "@type": "Answer", "text": "Modified-release and controlled-release formulations (names containing SR, XR, XL, ER, CR, or LA) must never be crushed — crushing delivers the full daily dose at once and can cause serious toxicity such as severe hypotension or arrhythmia. Enteric-coated tablets lose their protective coating when crushed, destroying drug efficacy or causing gastric irritation. Sublingual formulations (e.g., GTN) cannot be mixed into food. Always confirm with a doctor or pharmacist before crushing any tablet." } },
+  { "@type": "Question", "name": "How do I request a liquid alternative medication for a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "At a public hospital appointment, inform the prescribing doctor that the patient has dysphagia and request a liquid or dispersible alternative. You can also consult a community pharmacist with the medication packaging. Common drug classes (paracetamol, antibiotics) typically have liquid formulations. Note that liquid formulation concentrations may differ from the tablet form — the prescribing doctor must recalculate the dose when switching." } },
+  { "@type": "Question", "name": "What issues can arise when mixing medications with thickened liquid?", "acceptedAnswer": { "@type": "Answer", "text": "Some liquid medications (those high in electrolytes, alcohol or acid) can alter thickened liquid consistency — re-verify with the IDDSI syringe flow test after adding medication. Xanthan gum-based thickeners are generally more stable with medications than starch-based thickeners. Re-verify consistency whenever you switch thickener brands or change medication formulations." } },
+  { "@type": "Question", "name": "How should levodopa timing be coordinated with meals in Parkinson's disease?", "acceptedAnswer": { "@type": "Answer", "text": "Levodopa (Madopar, Sinemet) should be taken at least 30 minutes before or after high-protein foods (meat, fish, eggs, pulses) to prevent protein competing with drug absorption. Patients with marked On-Off fluctuations may benefit from protein redistribution — keeping breakfast and lunch low-protein and concentrating protein at dinner. Schedule the main meal during the On period for safest swallowing." } },
+  { "@type": "Question", "name": "The patient chokes every time they take medication. What should we do?", "acceptedAnswer": { "@type": "Answer", "text": "Medication choking carries the same aspiration risk as food choking and must not be ignored. The approach: (1) ask the doctor to prescribe a liquid alternative; (2) with pharmacist confirmation that it is safe to do so, crush the tablet and mix into a small amount of puréed food such as apple purée or pudding; (3) ask the SLP to assess the safest medication administration method and the most appropriate food or liquid texture to use as a vehicle." } }
+];
+
+const faqChokingZhHk = [
+  { "@type": "Question", "name": "如何區分嗆咳和真正哽噎？", "acceptedAnswer": { "@type": "Answer", "text": "嗆咳：患者能夠發聲或說話，咳嗽聲音響亮有力，氣道未完全阻塞——應鼓勵繼續主動咳嗽，不要拍背。真正哽噎：患者無法說話或發聲，無法咳嗽或咳嗽極為微弱，可能出現雙手抓喉、面色發青、呼吸極困難或停止——必須立即施行急救（背部拍擊及腹部推壓）並致電 999。" } },
+  { "@type": "Question", "name": "長者哽噎時如何施行改良版海姆立克急救法？", "acceptedAnswer": { "@type": "Answer", "text": "確認真正哽噎後：施行 5 下背部拍擊（站在側後方，手掌根部在兩肩胛骨之間向下向前拍擊）；再施行 5 下腹部推壓（雙手環抱腰部，握拳放於肚臍與劍突之間，向內向上快速推壓）。交替重複直至異物排出。長者骨骼較脆，力道應足夠但避免蠻力。坐輪椅患者可從前方施行向上向內的腹部推壓或改用胸骨推壓。" } },
+  { "@type": "Question", "name": "哽噎事件後，何時必須致電 999？", "acceptedAnswer": { "@type": "Answer", "text": "以下情況必須立即致電 999：患者無法呼吸且急救無效；患者失去意識；面色持續發青（發紺）；哽噎後呼吸出現喘鳴聲（異物可能仍在氣道）；或患者年齡較大、體質虛弱，狀況令人擔憂。致電時告知：患者年齡、地址，以及「吞嚥困難患者哽噎，已施行急救，需要急救員到場」。" } },
+  { "@type": "Question", "name": "哽噎事件後如何監察誤吸性肺炎的出現？", "acceptedAnswer": { "@type": "Answer", "text": "誤吸性肺炎通常在誤吸後 24–72 小時出現症狀，包括：發燒超過 38°C、呼吸急促或困難、咳嗽增加（可能帶痰）、精神狀況明顯變差。出現上述症狀應立即前往急症室，並告知醫生曾發生誤吸事件。任何嚴重嗆咳或哽噎事件均應在下次言語治療覆診時告知治療師。" } },
+  { "@type": "Question", "name": "如何降低吞嚥困難長者日常哽噎的風險？", "acceptedAnswer": { "@type": "Answer", "text": "最有效的預防措施包括：嚴格按照言語治療師指定的 IDDSI 飲食等級製備食物和液體；確保患者每次進食時保持直立坐姿（至少 90°）；每口份量控制在一茶匙以內；等患者完全吞下後才給下一口；避免在患者疲勞或精神不振時進食；定期接受言語治療師覆診。" } }
+];
+const faqChokingEn = [
+  { "@type": "Question", "name": "How do I tell the difference between a choking cough and true choking?", "acceptedAnswer": { "@type": "Answer", "text": "Choking cough: the patient can vocalise or speak, coughing is audible and forceful, and the airway is not completely blocked — encourage continued active coughing; do not pat the back. True choking: the patient cannot speak or vocalise, cannot cough or cough is extremely weak, and may show hands gripping throat, blue lips or fingertips, severe respiratory distress or no breathing — begin first aid immediately (back blows and abdominal thrusts) and call 999." } },
+  { "@type": "Question", "name": "How do you perform the modified Heimlich manoeuvre on an elderly person?", "acceptedAnswer": { "@type": "Answer", "text": "After confirming true choking: deliver 5 back blows (stand to the side and behind the patient, use the heel of the hand to deliver firm downward-forward blows between the shoulder blades); then 5 abdominal thrusts (wrap arms around the waist, make a fist between the navel and xiphoid process, thrust sharply inward and upward). Alternate until the obstruction is cleared. Apply sufficient force but avoid excessive force given elderly patients' fragility. For wheelchair users, abdominal thrusts can be delivered from the front, or chest thrusts used if abdominal access is limited." } },
+  { "@type": "Question", "name": "After a choking incident, when must I call 999?", "acceptedAnswer": { "@type": "Answer", "text": "Call 999 immediately if: the patient cannot breathe and first aid is not resolving the obstruction; the patient loses consciousness; the patient's lips or fingertips remain blue after the obstruction appears cleared; breathing is noisy or laboured after apparent resolution; or the patient is elderly and frail and the incident is causing significant concern. Tell the operator the patient's age, address and that a dysphagia patient is choking and first aid has been applied." } },
+  { "@type": "Question", "name": "How do I monitor for aspiration pneumonia after a choking incident?", "acceptedAnswer": { "@type": "Answer", "text": "Aspiration pneumonia typically develops 24–72 hours after the event. Watch for: fever above 38°C, rapid or laboured breathing, increased coughing (possibly with sputum), and noticeable deterioration in alertness or overall condition. If any of these appear, go to A&E immediately and inform the doctor that an aspiration event occurred. Report all significant choking or aspiration events to the SLP at the next appointment." } },
+  { "@type": "Question", "name": "How can I reduce the daily risk of choking in an elderly person with dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective preventive measures are: strictly adhering to the IDDSI food and drink levels prescribed by the SLP; ensuring the patient sits upright at minimum 90° at every meal; limiting each mouthful to approximately one teaspoon; waiting for complete swallowing before the next mouthful; avoiding meals when the patient is tired or drowsy; and maintaining regular SLP follow-up to detect changes in swallowing function early." } }
+];
+
+const newGuideSlugs7 = ['mealtime-environment-setup', 'medication-management-dysphagia', 'emergency-choking-response'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;
@@ -489,10 +538,13 @@ const getFaqMainEntity = () => {
   if (slug === 'home-kitchen-setup-hk') return lang === 'zh-hk' ? faqKitchenSetupZhHk : faqKitchenSetupEn;
   if (slug === 'financial-support-hk') return lang === 'zh-hk' ? faqFinancialZhHk : faqFinancialEn;
   if (slug === 'swallowing-exercises-hk') return lang === 'zh-hk' ? faqSwallowingExercisesZhHk : faqSwallowingExercisesEn;
+  if (slug === 'mealtime-environment-setup') return lang === 'zh-hk' ? faqMealtimeEnvZhHk : faqMealtimeEnvEn;
+  if (slug === 'medication-management-dysphagia') return lang === 'zh-hk' ? faqMedicationZhHk : faqMedicationEn;
+  if (slug === 'emergency-choking-response') return lang === 'zh-hk' ? faqChokingZhHk : faqChokingEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
