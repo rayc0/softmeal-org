@@ -197,6 +197,16 @@ Level 6 (Soft & Bite-Sized):
 - [軟炒蛋吐司 Soft Scrambled Egg Toast L6](https://softmeal.org/zh-hk/recipes/soft-scrambled-egg-toast-l6/)
 - [雲吞湯改良版 Wonton Soup Minced L5-6](https://softmeal.org/zh-hk/recipes/wonton-soup-minced/)
 
+Autumn / Cold-Weather Recipes (added 2026-05-09):
+- [板栗番薯湯 Chestnut Sweet Potato Soup L5-6](https://softmeal.org/zh-hk/recipes/chestnut-sweet-potato-soup/) | [EN](https://softmeal.org/en/recipes/chestnut-sweet-potato-soup/)
+- [雪梨杏仁奶湯 Pear Almond Milk Soup L4-5](https://softmeal.org/zh-hk/recipes/pear-almond-milk-soup/) | [EN](https://softmeal.org/en/recipes/pear-almond-milk-soup/)
+- [秋季蘿蔔牛肉粥 Autumn Carrot Beef Congee L3-4](https://softmeal.org/zh-hk/recipes/autumn-carrot-beef-congee/) | [EN](https://softmeal.org/en/recipes/autumn-carrot-beef-congee/)
+- [南瓜綠豆湯 Pumpkin Mung Bean Soup L4-5](https://softmeal.org/zh-hk/recipes/pumpkin-mung-bean-soup/) | [EN](https://softmeal.org/en/recipes/pumpkin-mung-bean-soup/)
+- [蓮藕豬骨湯 Lotus Root Pork Bone Soup L5](https://softmeal.org/zh-hk/recipes/lotus-root-pork-soup-l5/) | [EN](https://softmeal.org/en/recipes/lotus-root-pork-soup-l5/) — pre-existing
+- [無花果香蕉奶凍 Fig Banana Custard L4](https://softmeal.org/zh-hk/recipes/fig-banana-custard/) | [EN](https://softmeal.org/en/recipes/fig-banana-custard/)
+- [燉雪梨薑蜜 Steamed Pear Honey Ginger L4-5](https://softmeal.org/zh-hk/recipes/steamed-pear-honey-ginger/) | [EN](https://softmeal.org/en/recipes/steamed-pear-honey-ginger/)
+- [菠菜豆腐湯 Spinach Tofu Soup L3-4](https://softmeal.org/zh-hk/recipes/autumn-spinach-tofu-soup/) | [EN](https://softmeal.org/en/recipes/autumn-spinach-tofu-soup/)
+
 ## Resources
 
 - [Resources page (zh-HK)](https://softmeal.org/zh-hk/resources/) — free IDDSI charts, recipe PDFs, caregiver quick guides
