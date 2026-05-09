@@ -427,6 +427,45 @@ const newGuideSlugs2 = ['dementia-care-mealtimes', 'iddsi-for-care-homes', 'ente
 const newGuideSlugs3 = ['hk-ngos-and-support', 'hospital-allied-health-hk'];
 const newGuideSlugs4 = ['parkinsons-dysphagia-hk', 'post-stroke-dysphagia-hk', 'als-mnd-dysphagia-hk', 'cancer-treatment-dysphagia'];
 const newGuideSlugs5 = ['caregiver-self-care', 'understanding-slt-reports', 'food-texture-modification-basics'];
+const newGuideSlugs6 = ['home-kitchen-setup-hk', 'financial-support-hk', 'swallowing-exercises-hk'];
+
+// FAQPage schemas for batch 6: home-kitchen-setup-hk, financial-support-hk, swallowing-exercises-hk
+const faqKitchenSetupZhHk = [
+  { "@type": "Question", "name": "吞嚥困難照護廚房必備的攪拌機功率是多少？", "acceptedAnswer": { "@type": "Answer", "text": "最低建議 1000W 或以上，並選用濕式刀頭設計。功率不足的攪拌機無法將肉類及纖維食物徹底攪打至 IDDSI Level 4 所要求的無顆粒細滑質感，存在患者安全風險。香港豐澤、蘇寧及 HKTVmall 均有選擇，家用機參考價格 HKD $500–$3,000。" } },
+  { "@type": "Question", "name": "缺口杯在香港哪裡可以購買？", "acceptedAnswer": { "@type": "Answer", "text": "缺口杯可在深水埗桂林街及鴨寮街一帶的醫療用品店購買，亦可在 HKTVmall 搜尋「缺口杯」或「切口杯」。參考價格 HKD $30–80 一隻。缺口杯讓患者飲水時無需仰頭，維持下巴微收的安全吞嚥姿勢，減少誤吸風險。" } },
+  { "@type": "Question", "name": "攪拌機應如何消毒以防止交叉污染？", "acceptedAnswer": { "@type": "Answer", "text": "每次使用後立即拆開刀頭，用熱水及洗潔精清洗所有部件，完全風乾後再組裝。每週以煮沸水或稀釋漂白水浸泡消毒一次。切勿只沖洗外杯而不拆開刀頭——食物殘留在刀頭縫隙中會滋生細菌，對免疫力較低的患者構成感染風險。" } },
+  { "@type": "Question", "name": "食物模具如何提升吞嚥困難患者的進食意願？", "acceptedAnswer": { "@type": "Answer", "text": "IDDSI 食物模具可將糊狀食物壓製成原食物的外形（魚形、雞腿形等），恢復視覺吸引力。臨床觀察顯示視覺呈現對患者進食意願有顯著正面影響，尤其對認知症患者。矽膠食物模具可在 HKTVmall 搜尋，參考價格 HKD $80–250。" } }
+];
+const faqKitchenSetupEn = [
+  { "@type": "Question", "name": "What blender power is recommended for a dysphagia care kitchen?", "acceptedAnswer": { "@type": "Answer", "text": "Minimum 1000W or above, with a wet blade design. An underpowered blender cannot process meat and fibrous vegetables to the particle-free smoothness required for IDDSI Level 4 Puréed — a genuine patient safety risk. Broadway, Suning and HKTVmall in Hong Kong carry suitable options; home blenders range from approximately HKD $500–$3,000." } },
+  { "@type": "Question", "name": "Where can I buy a cut-out cup in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Cut-out cups are available at medical supply shops along Kweilin Street and Apliu Street in Sham Shui Po, and on HKTVmall (search 'cut-out cup' or '缺口杯'). Approximate price: HKD $30–80. The cut-out allows the patient to drink without tilting the head back, maintaining the chin-tuck position that reduces aspiration risk." } },
+  { "@type": "Question", "name": "How should a blender be sterilised to prevent cross-contamination?", "acceptedAnswer": { "@type": "Answer", "text": "After every use, fully disassemble the blade unit, wash all components with hot water and dish soap, and air-dry completely before reassembling. Weekly: soak in boiled water or diluted bleach. Never rinse only the outer jar without disassembling the blade — food residue in the crevices creates an infection risk for patients with compromised immunity." } },
+  { "@type": "Question", "name": "How do food moulds improve willingness to eat for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "IDDSI food moulds press puréed food into the shape of the original dish (fish, chicken leg, etc.), restoring visual appeal. Clinical observation consistently shows visual presentation significantly improves a patient's willingness to eat, particularly in patients with dementia. Silicone food moulds are available on HKTVmall; approximate price: HKD $80–250." } }
+];
+
+const faqFinancialZhHk = [
+  { "@type": "Question", "name": "增稠劑費用可以透過哪些香港政府計劃補貼？", "acceptedAnswer": { "@type": "Answer", "text": "主要途徑包括：CSSA 特別飲食津貼（需主診醫生或言語治療師醫療證明）、社區照顧基金（視乎當期計劃範圍）及部分非政府機構援助。公立醫院在出院後的跟進期間，部分增稠劑可由醫院配發（視乎個案及醫院政策）。建議向醫務社工（MSW）查詢最新可申請途徑。" } },
+  { "@type": "Question", "name": "傷殘津貼和長者生活津貼可以同時領取嗎？", "acceptedAnswer": { "@type": "Answer", "text": "一般而言，傷殘津貼與長者生活津貼不可同時領取。65 歲以上且符合殘疾資格的長者可選擇申請金額較高的一種。醫務社工可協助比較哪種補貼對個別患者更有利。查詢可致電社署熱線 2343 2255。" } },
+  { "@type": "Question", "name": "吞嚥困難患者的住院費用是否受香港保險保障？", "acceptedAnswer": { "@type": "Answer", "text": "因中風、癌症治療或術後康復而住院期間出現吞嚥困難的相關費用，通常可以向住院保險索償。危疾保險若因中風、ALS 等涵蓋疾病觸發賠償，賠償金可用於支付長期吞嚥照護費用。吞嚥困難本身不是危疾保險的獨立受保病種。" } },
+  { "@type": "Question", "name": "醫務社工如何協助吞嚥困難照顧者獲取財務支援？", "acceptedAnswer": { "@type": "Answer", "text": "醫管局公立醫院的醫務社工（MSW）可評估患者及家庭的財務狀況，推薦最適合的資助計劃，協助填寫申請文件，以及協調跨部門轉介（社署、非政府機構、醫院）。出院時、覆診時或直接致電醫院醫務社工部均可要求轉介，是獲取財務支援的最重要第一步。" } }
+];
+const faqFinancialEn = [
+  { "@type": "Question", "name": "Which Hong Kong government schemes can subsidise thickener costs?", "acceptedAnswer": { "@type": "Answer", "text": "Main options: CSSA Special Diet Allowance (requires medical certificate from doctor or SLP), Community Care Fund (subject to current programme scope) and some NGO assistance schemes. Some public hospitals supply thickeners during post-discharge follow-up (policy varies). Ask your Medical Social Worker (MSW) for the latest available options. SWD hotline: 2343 2255." } },
+  { "@type": "Question", "name": "Can Disability Allowance and Old Age Living Allowance be claimed at the same time in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Generally, the two allowances cannot be claimed simultaneously. Elderly patients aged 65 or above who qualify for both may choose whichever provides the higher amount. A medical social worker can compare which benefit is more advantageous for the individual. Contact the SWD hotline at 2343 2255 for enquiries." } },
+  { "@type": "Question", "name": "Does Hong Kong insurance cover hospitalisation costs related to dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "Hospitalisation costs where dysphagia arises from acute stroke, cancer treatment or post-surgical recovery are typically covered under hospitalisation insurance policies. Critical illness payouts triggered by covered conditions (stroke, ALS, etc.) can fund ongoing dysphagia care including thickeners and private SLP. Dysphagia itself is not a standalone covered condition under critical illness policies." } },
+  { "@type": "Question", "name": "How can a medical social worker help dysphagia caregivers access financial support?", "acceptedAnswer": { "@type": "Answer", "text": "MSWs at all HA public hospitals can assess financial circumstances, recommend the most appropriate support schemes, assist with application forms and documentation, and coordinate multi-agency referrals (SWD, NGOs, hospital departments). Request a referral at discharge, at a follow-up appointment, or by calling the hospital's Medical Social Services department. This is the most efficient first step into Hong Kong's support system." } }
+];
+
+const faqSwallowingExercisesZhHk = [
+  { "@type": "Question", "name": "在沒有言語治療師指導下自行進行吞嚥訓練運動安全嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不安全。不恰當的吞嚥訓練（例如頸椎問題患者進行 Shaker 運動）可造成傷害。吞嚥訓練必須在言語治療師評估後，根據個別患者情況選擇合適的運動類型、頻率及強度。患者可在 HKSLTA 名冊（hkslta.org.hk）搜尋香港認證言語治療師。" } },
+  { "@type": "Question", "name": "Masako 策略可以在進食時使用嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不可以。Masako 策略（舌持吞嚥）只是訓練運動，不應在實際進食時使用。進食時採用此策略會因舌頭活動受限而增加誤吸風險。是否適合在進食時採用任何代償策略，必須由言語治療師個別評估決定。" } },
+  { "@type": "Question", "name": "吞嚥訓練運動需要進行多長時間才有效？", "acceptedAnswer": { "@type": "Answer", "text": "訓練效果因運動類型、患者病情及依從性而異。原始 Shaker 運動研究方案為每日 3 次、持續 6 週。其他運動的時間長度由言語治療師根據定期評估結果決定。不應自行停止訓練——應在言語治療師確認功能已穩定達到治療目標後才減少頻率。" } }
+];
+const faqSwallowingExercisesEn = [
+  { "@type": "Question", "name": "Is it safe to perform swallowing exercises without speech therapist guidance?", "acceptedAnswer": { "@type": "Answer", "text": "No. Inappropriate swallowing exercises — such as Shaker exercises in a patient with cervical spine problems — can cause harm. Swallowing exercises must be selected, prescribed and supervised by a speech-language pathologist based on individual assessment. Search the HKSLTA directory at hkslta.org.hk to find a certified SLP in Hong Kong." } },
+  { "@type": "Question", "name": "Can the Masako Manoeuvre be used during actual meals?", "acceptedAnswer": { "@type": "Answer", "text": "No. The Masako Manoeuvre (tongue-hold swallow) is a training exercise only and should not be used at mealtimes. Applying it during eating restricts tongue mobility, impairing its normal role in propelling the food bolus and increasing aspiration risk. Whether any compensatory strategy is appropriate during meals must be determined by individual SLP assessment." } },
+  { "@type": "Question", "name": "How long do swallowing rehabilitation exercises need to continue before producing results?", "acceptedAnswer": { "@type": "Answer", "text": "Response varies by exercise type, patient condition and adherence. The original Shaker exercise research protocol involved 3 sessions daily for 6 weeks. Duration for other exercises is determined by the SLP based on regular reassessment. Do not stop independently — reduce frequency only after the SLP confirms that functional goals have been achieved and swallowing has stabilised." } }
+];
 
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
@@ -447,10 +486,13 @@ const getFaqMainEntity = () => {
   if (slug === 'caregiver-self-care') return lang === 'zh-hk' ? faqCaregiverSelfCareZhHk : faqCaregiverSelfCareEn;
   if (slug === 'understanding-slt-reports') return lang === 'zh-hk' ? faqSltReportsZhHk : faqSltReportsEn;
   if (slug === 'food-texture-modification-basics') return lang === 'zh-hk' ? faqTextureModZhHk : faqTextureModEn;
+  if (slug === 'home-kitchen-setup-hk') return lang === 'zh-hk' ? faqKitchenSetupZhHk : faqKitchenSetupEn;
+  if (slug === 'financial-support-hk') return lang === 'zh-hk' ? faqFinancialZhHk : faqFinancialEn;
+  if (slug === 'swallowing-exercises-hk') return lang === 'zh-hk' ? faqSwallowingExercisesZhHk : faqSwallowingExercisesEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -628,7 +670,41 @@ const howToSchemaTextureMod = slug === 'food-texture-modification-basics' ? {
   ]
 } : null;
 
-const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? howToSchemaTubeTransition ?? howToSchemaCareHome ?? howToSchemaSpeechReferral ?? howToSchemaPostStroke ?? howToSchemaCancerDysphagia ?? howToSchemaSltReports ?? howToSchemaTextureMod ?? null;
+const howToSchemaKitchenSetup = slug === 'home-kitchen-setup-hk' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "如何為吞嚥困難患者設置家居廚房" : "How to Set Up a Dysphagia-Friendly Kitchen at Home",
+  "description": lang === 'zh-hk' ? "從選購攪拌機到適應性餐具及廚房安全的完整設置步驟" : "Complete steps from blender selection to adaptive utensils and kitchen safety",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "tool": [
+    {"@type": "HowToTool", "name": lang === 'zh-hk' ? "攪拌機（1000W+，濕式刀頭）" : "Blender (1000W+, wet blade)"},
+    {"@type": "HowToTool", "name": lang === 'zh-hk' ? "電子磅（精確至 1g）" : "Digital kitchen scale (1g precision)"},
+    {"@type": "HowToTool", "name": lang === 'zh-hk' ? "細目不鏽鋼篩網" : "Fine-mesh stainless steel sieve"}
+  ],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "選購攪拌機" : "Select a blender", "text": lang === 'zh-hk' ? "選購 1000W 或以上功率、濕式刀頭的攪拌機，確保刀頭可完全拆解清洗。香港豐澤、蘇寧或 HKTVmall 均有選購，參考價格 HKD $500–$3,000。" : "Choose a blender with 1000W or above and a wet blade design, ensuring the blade assembly is fully detachable for cleaning. Available at Broadway, Suning or HKTVmall in Hong Kong; approximate price HKD $500–$3,000."},
+    {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "準備基本輔助器材" : "Acquire basic assistive utensils", "text": lang === 'zh-hk' ? "購置缺口杯（深水埗醫療用品店，HKD $30–80）、角度匙（HKD $50–150）、碗碟護邊（HKD $30–60）及防滑餐墊（超市，HKD $20–50）。" : "Purchase a cut-out cup (Sham Shui Po medical shops, HKD $30–80), angled spoon (HKD $50–150), plate guard (HKD $30–60) and non-slip dining mat (supermarkets, HKD $20–50)."},
+    {"@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "備置增稠劑存量" : "Stock an adequate thickener supply", "text": lang === 'zh-hk' ? "確保儲備至少 2–4 週的增稠劑。切勿中途更換增稠劑品牌，以免稠度不一致影響患者安全。每次使用前以電子磅準確量度份量。" : "Stock at least 2–4 weeks of thickener. Avoid switching brands mid-use to prevent inconsistent consistency levels. Always measure with a digital scale rather than estimating by volume."},
+    {"@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "建立廚房安全及清潔制度" : "Establish kitchen safety and cleaning routines", "text": lang === 'zh-hk' ? "每次使用後立即拆開攪拌機刀頭清洗，每週消毒一次。所有食物上桌前確認溫度（40–55°C），並重新進行 IDDSI 質感測試。" : "After every use, fully disassemble and clean the blender blade assembly; sterilise weekly. Before serving, confirm food temperature (40–55°C) and re-test IDDSI texture after any heating or refrigeration."}
+  ]
+} : null;
+
+const howToSchemaSwallowingExercises = slug === 'swallowing-exercises-hk' ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'zh-hk' ? "如何進行 Shaker 頭部提升運動（吞嚥訓練）" : "How to Perform the Shaker Head Lift Exercise for Swallowing Rehabilitation",
+  "description": lang === 'zh-hk' ? "在言語治療師指導下進行 Shaker 運動的分步指引" : "Step-by-step guide to the Shaker head lift exercise under speech therapist guidance",
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "確認適合性（必須先諮詢言語治療師）" : "Confirm suitability (SLP assessment required first)", "text": lang === 'zh-hk' ? "Shaker 運動並非適合所有患者。頸椎問題患者禁止進行。必須先由言語治療師評估確認適合後才開始。" : "The Shaker exercise is not appropriate for all patients. Patients with cervical spine problems must not perform this exercise. Suitability must be confirmed by an SLP assessment before starting."},
+    {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "採取正確起始姿勢" : "Adopt the correct starting position", "text": lang === 'zh-hk' ? "患者平躺在床上或地板上（仰臥位），雙肩平放，不離開床面。頸部放鬆，不緊繃。" : "Lie flat on a bed or floor (supine position), both shoulders flat and not raised. Neck should be relaxed, not tense."},
+    {"@type": "HowToStep", "position": 3, "name": lang === 'zh-hk' ? "進行等長收縮（靜態保持）" : "Perform isometric holds (static)", "text": lang === 'zh-hk' ? "緩緩抬起頭部，嘗試用眼睛望向自己的腳趾，保持肩膀不離開床面。保持頭部抬起位置 60 秒，重複 3 次，每次中間休息。" : "Slowly raise the head as if trying to see your toes, keeping the shoulders flat. Hold the raised position for 60 seconds, repeat 3 times with rest between each hold."},
+    {"@type": "HowToStep", "position": 4, "name": lang === 'zh-hk' ? "進行等張收縮（動態重複）" : "Perform isotonic repetitions (dynamic)", "text": lang === 'zh-hk' ? "完成靜態保持後，快速抬頭及放頭，連續重複 30 次。整個過程保持肩膀不離開床面。" : "Following the static holds, raise and lower the head in rapid succession, 30 repetitions. Keep shoulders flat throughout."},
+    {"@type": "HowToStep", "position": 5, "name": lang === 'zh-hk' ? "記錄完成情況並告知言語治療師" : "Record completion and report to SLP", "text": lang === 'zh-hk' ? "每日進行 3 組（靜態 + 動態），持續 6 週。若出現頸痛、頭痛或任何不適，立即停止並告知言語治療師。定期複診讓言語治療師評估進展。" : "Complete 3 sets daily (static + dynamic) for 6 weeks. Stop immediately and inform the SLP if neck pain, headache or any discomfort occurs. Regular SLP reviews are essential to assess progress."}
+  ]
+} : null;
+
+const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfessionals ?? howToSchemaTubeTransition ?? howToSchemaCareHome ?? howToSchemaSpeechReferral ?? howToSchemaPostStroke ?? howToSchemaCancerDysphagia ?? howToSchemaSltReports ?? howToSchemaTextureMod ?? howToSchemaKitchenSetup ?? howToSchemaSwallowingExercises ?? null;
 
 // BreadcrumbList schema
 const breadcrumbSchema = {
