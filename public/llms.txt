@@ -92,9 +92,19 @@ The IDDSI (International Dysphagia Diet Standardisation Initiative) framework ha
 
 ## Recipes
 
-60+ IDDSI-compliant recipes in the Cantonese culinary tradition, IDDSI Levels 3–6:
+70+ IDDSI-compliant recipes in the Cantonese culinary tradition, IDDSI Levels 2–6:
 - [Recipes index (zh-HK)](https://softmeal.org/zh-hk/recipes/)
 - [Recipes index (en)](https://softmeal.org/en/recipes/)
+
+New recipes added 2026-05-13 (8 bilingual soup pairs, IDDSI L2-L3):
+- [南瓜忌廉湯 Pumpkin Cream Soup L2](https://softmeal.org/zh-hk/recipes/pumpkin-cream-soup-l2/)
+- [粟米雞肉羹 Corn Chicken Thick Soup L3](https://softmeal.org/zh-hk/recipes/corn-chicken-thick-soup-l3/)
+- [豆腐魚湯 Tofu Fish Soup L3](https://softmeal.org/zh-hk/recipes/tofu-fish-soup-l3/)
+- [馬蹄粟米湯 Water Chestnut Corn Soup L3](https://softmeal.org/zh-hk/recipes/water-chestnut-corn-soup-l3/)
+- [海帶豬骨湯 Seaweed Pork Bone Soup L3](https://softmeal.org/zh-hk/recipes/seaweed-pork-bone-soup-l3/)
+- [勝瓜魚片湯 Silk Gourd Fish Soup L3](https://softmeal.org/zh-hk/recipes/silk-gourd-fish-soup-l3/)
+- [雞蓉粟米湯 Creamed Corn Chicken Soup L3](https://softmeal.org/zh-hk/recipes/creamed-corn-chicken-soup-l3/)
+- [冬瓜綠豆湯 Winter Melon Mung Bean Soup L3](https://softmeal.org/zh-hk/recipes/winter-melon-mung-bean-soup-l3/)
 
 ## Machine-Readable Data
 
