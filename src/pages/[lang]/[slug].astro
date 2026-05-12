@@ -19,10 +19,7 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 const { lang, title, description, hreflang_pair, schema_type, last_modified } = page.data;
 
-const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
-const hreflangPairLangMap: Record<string, string> = { 'zh-hk': 'en', 'zh-cn': 'zh-hk', 'ja': 'zh-hk', 'en': 'zh-hk' };
-const hreflangPairLang = hreflangPairLangMap[lang] ?? 'zh-hk';
-const schemaLang = htmlLangMap[lang] ?? 'zh-HK';
+const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
 const currentUrl = Astro.url.href;
 
@@ -32,7 +29,7 @@ const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ?
   "@id": `${currentUrl}#article`,
   "headline": title,
   "description": description,
-  "inLanguage": schemaLang,
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },
@@ -871,66 +868,60 @@ const faqTravelDysphagiaEn = [
 
 const newGuideSlugs16 = ['dining-out-dysphagia-hk', 'yum-cha-safe-ordering-hk', 'travel-dysphagia-tips-hk'];
 
-// FAQPage schemas for batch 17: hospital-discharge-dysphagia-hk, home-kitchen-setup-dysphagia, community-resources-hk-caregivers, financial-support-dysphagia-hk
-const newGuideSlugs17 = ['hospital-discharge-dysphagia-hk', 'home-kitchen-setup-dysphagia', 'community-resources-hk-caregivers', 'financial-support-dysphagia-hk'];
-
-// FAQPage schemas for batch 18: adaptive-cups-straws-hk, weighted-utensils-spoons-hk, dysphagia-cup-types-guide, thickener-dispenser-tools-hk, food-blender-comparison-hk
-const faqAdaptiveCupsZhHk = [
-  { "@type": "Question", "name": "吞嚥困難患者應選用哪類飲水杯？", "acceptedAnswer": { "@type": "Answer", "text": "最常用的輔助杯包括缺口杯（Nosey Cup）、Flexicup 及單向閥飲管杯。缺口杯最適合照顧者輔助餵食，避免患者仰頭飲水，適用所有稠度液體。Flexicup 讓照顧者精確控制每口份量。選擇應根據言語治療師或職業治療師的個別評估建議。" } },
-  { "@type": "Question", "name": "單向閥飲管適合所有增稠飲品嗎？", "acceptedAnswer": { "@type": "Answer", "text": "單向閥飲管不適合 IDDSI Level 3–4 的厚稠飲品，因為閥門設計可能無法讓稠液順暢通過。此類飲管最適合稀薄至中稠飲品（IDDSI Level 0–2）。增稠飲品建議使用缺口杯配合照顧者控制進量。" } },
-  { "@type": "Question", "name": "香港哪裡可以購買吞嚥困難輔助杯？", "acceptedAnswer": { "@type": "Answer", "text": "旺角彌敦道及通菜街附近的復康用品店、香港復康會（HKRC）石硤尾門市、觀塘復康資源中心均有售輔助杯，價格由 HKD $30 至 $200 不等。部分非政府組織亦提供二手輔具借用服務。" } }
+// FAQPage schemas for batch 17: medication-swallowing-guide-hk, swallowing-exercises-home-hk, tongue-strengthening-exercises-hk, jaw-facial-exercises-dysphagia-hk
+const faqMedicationSwallowingGuideZhHk = [
+  { "@type": "Question", "name": "吞嚥困難患者哪些藥物不能壓碎？", "acceptedAnswer": { "@type": "Answer", "text": "腸衣片（如腸溶阿士匹靈）、緩釋或控釋片（如 Nifedipine MR、Metformin XR）及舌下含服片（如 GTN 硝化甘油）絕對不能壓碎。壓碎這些藥物會破壞其釋放機制，可能導致劑量驟增、胃腸道損傷或藥效喪失。每種藥物是否可以壓碎，必須先向藥劑師確認。" } },
+  { "@type": "Question", "name": "香港醫院管理局藥房如何協助吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "醫院管理局藥房可提供以下協助：（1）配製部分藥物的液態替代劑型（Extemporaneous compounding）；（2）提供有官方液態版本的藥物；（3）藥劑師評估整份藥物清單，確認哪些藥物可以壓碎。患者需持有主診醫生處方，並告知醫生患者有吞嚥困難，要求在處方上註明需液態劑型。" } },
+  { "@type": "Question", "name": "增稠劑會影響藥物吸收嗎？", "acceptedAnswer": { "@type": "Answer", "text": "黃原膠基增稠劑（如 Nutilis Clear）對大多數藥物的吸收影響最小。澱粉基增稠劑可能影響部分時效性藥物的吸收。帕金森症患者使用的左旋多巴（Levodopa）對吸收環境最敏感，應向主診醫生及言語治療師討論最合適的服藥方式。" } },
+  { "@type": "Question", "name": "服藥時應採取什麼體位？", "acceptedAnswer": { "@type": "Answer", "text": "服任何口服藥物前，患者應坐直或上身傾斜至少 45 度。每次只給一種藥物，確認完全吞下後再給下一種。服藥後觀察患者是否出現嗆咳、聲音沙啞（濕聲）或呼吸困難，如有上述症狀立即聯絡主診醫生。" } }
 ];
-const faqAdaptiveCupsEn = [
-  { "@type": "Question", "name": "Which type of cup should a dysphagia patient use?", "acceptedAnswer": { "@type": "Answer", "text": "The most commonly used adaptive cups are the nosey cup (cut-out cup), Flexicup, and one-way valve straw cup. Nosey cups are best for carer-assisted drinking, eliminating neck extension and working with all fluid thicknesses. Flexicups allow the carer to control each mouthful precisely. The choice should be guided by an SLT or OT assessment." } },
-  { "@type": "Question", "name": "Are one-way valve straws suitable for all thickened drinks?", "acceptedAnswer": { "@type": "Answer", "text": "No. One-way valve straws are not recommended for IDDSI Level 3–4 thickened drinks, as the valve mechanism may not allow thick fluid to pass freely. They work best with thin to mildly thickened fluids (IDDSI Level 0–2). For thickened drinks, a nosey cup with carer-controlled tilt is preferable." } },
-  { "@type": "Question", "name": "Where can I buy adaptive cups in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Rehabilitation equipment shops along Nathan Road and Tung Choi Street in Mong Kok, HKRC outlet in Shek Kip Mei, and Kwun Tong rehabilitation resource centres all stock adaptive cups, ranging from approximately HKD $30 to $200. Some NGOs also offer second-hand equipment loan programmes." } }
-];
-
-const faqWeightedUtensilsZhHk = [
-  { "@type": "Question", "name": "加重湯匙對帕金遜症顫抖有效嗎？", "acceptedAnswer": { "@type": "Answer", "text": "加重湯匙對輕度至中度靜止性顫抖最有效，通過增加阻力減少顫抖幅度，讓患者更準確地將食物送入口中。效果因個人顫抖程度而異，嚴重顫抖效果有限。建議先諮詢職業治療師，部分門診提供試用服務，避免不適合的款式。" } },
-  { "@type": "Question", "name": "吞嚥困難患者應使用多大的湯匙？", "acceptedAnswer": { "@type": "Answer", "text": "言語治療師通常建議使用匙頭容量約 5–8ml 的小碗口湯匙，以控制每口食物份量，確保安全吞嚥。普通成人湯匙匙頭容量可達 15–20ml，對吞嚥困難患者而言每口份量過多，增加吸入風險。" } },
-  { "@type": "Question", "name": "香港哪裡可以購買加重餐具？", "acceptedAnswer": { "@type": "Answer", "text": "旺角通菜街一帶的復康用品店、香港復康會（HKRC）石硤尾門市及鮑偉思傷健協進會均有售加重餐具，價格由 HKD $80 至 $400 不等。購買前建議先諮詢職業治療師，確保選擇的重量及款式符合個人需要。" } }
-];
-const faqWeightedUtensilsEn = [
-  { "@type": "Question", "name": "Do weighted spoons actually help with Parkinson's tremor?", "acceptedAnswer": { "@type": "Answer", "text": "Weighted spoons are most effective for mild to moderate resting tremor, using resistance to dampen tremor amplitude and improve accuracy from bowl to mouth. Effectiveness varies by individual — they have limited impact on severe tremor. Consult an occupational therapist first; some OT clinics offer trial items before purchase." } },
-  { "@type": "Question", "name": "What spoon size is recommended for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "SLTs typically recommend small-bowl spoons with approximately 5–8ml capacity to control mouthful size and ensure safe swallowing. Standard adult tablespoons can hold 15–20ml — too large for most dysphagia patients and a risk factor for aspiration." } },
-  { "@type": "Question", "name": "Where can I buy weighted utensils in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Rehabilitation equipment shops in Mong Kok (Tung Choi Street area), HKRC outlet in Shek Kip Mei, and Bauhinia Foundation resource centres stock weighted utensils ranging from approximately HKD $80 to $400. Consult an occupational therapist before purchasing to ensure the weight and design suit the patient's needs." } }
+const faqMedicationSwallowingGuideEn = [
+  { "@type": "Question", "name": "Which medications must never be crushed for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Enteric-coated tablets (e.g., Aspirin EC), modified-release or controlled-release tablets (e.g., Nifedipine MR, Metformin XR), and sublingual tablets (e.g., GTN) must never be crushed. Crushing these formulations destroys the release mechanism, potentially causing dose dumping, gastrointestinal injury or loss of therapeutic effect. Always confirm with a pharmacist before crushing any medication." } },
+  { "@type": "Question", "name": "How can Hospital Authority pharmacy services help dysphagia patients with medication?", "acceptedAnswer": { "@type": "Answer", "text": "HA pharmacy departments can: (1) extemporaneously compound liquid formulations for drugs without a commercial liquid form; (2) dispense commercially available oral solutions; (3) conduct a medication review to identify which drugs can safely be crushed. Patients need a valid prescription from the prescribing doctor who should annotate the prescription with 'dysphagia — liquid formulation required'." } },
+  { "@type": "Question", "name": "Do thickeners affect drug absorption?", "acceptedAnswer": { "@type": "Answer", "text": "Xanthan gum-based thickeners (e.g., Nutilis Clear) have minimal effect on most drug absorption. Starch-based thickeners may slow the absorption of some time-sensitive drugs. Levodopa for Parkinson's disease is particularly sensitive — discuss the optimal administration method with the prescribing neurologist and SLT." } },
+  { "@type": "Question", "name": "What is the correct positioning for taking oral medication with dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "The patient should be sitting fully upright or at minimum 45 degrees before any oral medication is given. Administer one drug at a time and confirm swallowing before proceeding to the next. Monitor for coughing, wet or gurgly voice, or respiratory distress after each dose and contact the doctor immediately if these occur." } }
 ];
 
-const faqCupTypesZhHk = [
-  { "@type": "Question", "name": "缺口杯與 Flexicup 有何分別？", "acceptedAnswer": { "@type": "Answer", "text": "缺口杯在杯口前端開有半圓缺口，讓患者飲水時無須仰頭，適合所有稠度液體，由照顧者控制傾斜速度，成本約 HKD $30–$80。Flexicup 為軟身可擠壓設計，照顧者通過擠壓杯身精確控制每口液體量，適合口腔肌力極弱的患者，成本約 HKD $80–$200。" } },
-  { "@type": "Question", "name": "傾斜杯是否適合所有吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": "傾斜杯設計令患者飲水時毋須過度仰頭，外觀接近普通杯，適合對輔具外觀有顧慮、具備一定自理能力的患者。但傾斜杯缺乏流量控制機制，不適合需要精確控制每口份量的患者。選擇杯具應由言語治療師或職業治療師根據個別吞嚥評估建議。" } },
-  { "@type": "Question", "name": "增稠飲品應配合哪類杯具使用？", "acceptedAnswer": { "@type": "Answer", "text": "增稠飲品最適合搭配缺口杯使用，照顧者可透過控制杯子傾斜角度及速度，調節每口液體量。飲管杯（包括單向閥飲管）不適合 IDDSI Level 3–4 的厚稠飲品，因閥門設計可能限制稠液流通。" } }
+const faqSwallowingExercisesHomeZhHk = [
+  { "@type": "Question", "name": "Shaker 運動（仰臥抬頭運動）對吞嚥困難有什麼效果？", "acceptedAnswer": { "@type": "Answer", "text": "Shaker 運動針對性加強舌骨上肌群，改善食道上括約肌（UOS）的開放幅度及時間。研究顯示，持續 6 週的 Shaker 訓練計劃能減少食物及液體在咽喉的殘留，降低誤嗆風險。訓練要求患者平躺、只抬起頭部，頸椎有問題者須先諮詢醫生。" } },
+  { "@type": "Question", "name": "居家吞嚥訓練多久才能見效？", "acceptedAnswer": { "@type": "Answer", "text": "大多數研究的訓練週期為 6–8 週，每天 2–3 次。客觀改善（如食物殘留減少、嗆咳頻率降低）通常在第 3–4 週開始出現。主觀感受（如吞嚥費力程度降低）可能更早出現。建議持續記錄訓練日誌，於 6 週後由言語治療師進行正式評估。" } },
+  { "@type": "Question", "name": "在香港如何獲得言語治療師的家居訓練指引？", "acceptedAnswer": { "@type": "Answer", "text": "可透過三種途徑：（1）醫院管理局普通科門診（GOPC）轉介至聯網言語治療部門；（2）住院期間由主診醫生轉介院內言語治療師；（3）私家言語治療診所（可參考香港言語治療師協會 HKSTA 名冊）。言語治療師評估後會提供個人化家居訓練計劃，並在每次覆診時調整。" } },
+  { "@type": "Question", "name": "Mendelsohn 手法適合所有吞嚥困難患者嗎？", "acceptedAnswer": { "@type": "Answer", "text": "Mendelsohn 手法並非適合所有患者。它要求患者能夠感知吞嚥時喉部的移動，並有足夠的認知能力理解及執行指令。嚴重認知障礙、喉部感覺缺失或肌力極度下降的患者可能無法正確執行。由言語治療師在診所評估及示範是否適合，是開始訓練前的必要步驟。" } }
 ];
-const faqCupTypesEn = [
-  { "@type": "Question", "name": "What is the difference between a nosey cup and a Flexicup?", "acceptedAnswer": { "@type": "Answer", "text": "A nosey cup has a semicircular cutout at the rim so patients can drink without neck extension; it works with all fluid thicknesses and is carer-controlled, costing approximately HKD $30–$80. A Flexicup is made of squeezable material — the carer compresses the cup body to deliver a precise volume of liquid per mouthful, best for patients with severely reduced oral muscle function, costing approximately HKD $80–$200." } },
-  { "@type": "Question", "name": "Is a tilted cup suitable for all dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "A tilted cup reduces the need for neck extension during drinking and looks similar to a regular cup — useful for patients who are self-conscious about using adaptive equipment and retain reasonable hand control. However, tilted cups have no intrinsic flow control, so they are not suitable for patients who need precise per-mouthful volume management. Cup selection should always be guided by an SLT or OT assessment." } },
-  { "@type": "Question", "name": "Which cup type works best with thickened drinks?", "acceptedAnswer": { "@type": "Answer", "text": "A nosey cup is generally best for thickened drinks — the carer controls the tilt angle and speed, managing how much thickened fluid enters the mouth per sip. Straw cups including one-way valve straws are not recommended for IDDSI Level 3–4 thickened drinks, as the valve design may restrict thick fluid flow." } }
-];
-
-const faqThickenerDispenserZhHk = [
-  { "@type": "Question", "name": "為何要用電子磅量度增稠劑而非量匙？", "acceptedAnswer": { "@type": "Answer", "text": "量匙的實際容量受盛放方式影響極大——堆尖與平匙的差異可達 30–50%，導致每次配製的稠度不一致。電子磅（精確至 0.1g）量度重量不受操作手法影響，是確保 IDDSI 稠度一致性的最可靠方法，言語治療師通常以克數而非量匙為劑量單位。" } },
-  { "@type": "Question", "name": "如何在家進行 IDDSI 注射器流量測試？", "acceptedAnswer": { "@type": "Answer", "text": "用 10ml 無針注射器裝滿被測液體，遮蓋出口 10 秒確保液體靜止，然後鬆開手指讓液體自由流動 10 秒，量度剩餘液體量。Level 2 剩餘 4–8ml，Level 3 剩餘 8–10ml，Level 4 幾乎不流動。10ml 注射器可於藥房購買，每支約 HKD $3–$8。" } },
-  { "@type": "Question", "name": "熱飲加增稠劑後多久才可以測試稠度？", "acceptedAnswer": { "@type": "Answer", "text": "建議等待至少 1–3 分鐘讓增稠劑充分溶解後再測試。澱粉基增稠劑在熱液體中持續稠化，需稍冷卻後測試；黃原膠基增稠劑溫度穩定性較高，但仍建議溶解穩定後再測試。若使用澱粉基增稠劑於熱飲，稠度會隨時間繼續增加，難以預測最終結果。" } }
-];
-const faqThickenerDispenserEn = [
-  { "@type": "Question", "name": "Why should I weigh thickener with a scale rather than use the measuring scoop?", "acceptedAnswer": { "@type": "Answer", "text": "Scoop volume varies significantly with how it is held — the difference between heaped and level can be 30–50%, causing inconsistent consistency every preparation. A digital scale accurate to 0.1g measures weight independent of technique, which is the most reliable way to ensure consistent IDDSI compliance. SLTs typically prescribe doses in grams, not scoops." } },
-  { "@type": "Question", "name": "How do I perform the IDDSI Syringe Flow Test at home?", "acceptedAnswer": { "@type": "Answer", "text": "Fill a 10ml needleless syringe with the drink, cover the outlet for 10 seconds to allow the liquid to settle, then release and allow free flow for 10 seconds. Measure the remaining volume: Level 2 leaves 4–8ml, Level 3 leaves 8–10ml, Level 4 barely flows. 10ml syringes are available at pharmacies in HK for approximately HKD $3–$8 each." } },
-  { "@type": "Question", "name": "How long should I wait before testing thickened hot drinks?", "acceptedAnswer": { "@type": "Answer", "text": "Wait at least 1–3 minutes for the thickener to fully dissolve and stabilise before testing. Starch-based thickeners continue thickening in hot liquids — let the drink cool slightly before testing. Xanthan gum thickeners are more temperature-stable but should still be tested after the dissolution period. Starch thickeners in hot drinks are difficult to verify accurately as consistency continues to change." } }
+const faqSwallowingExercisesHomeEn = [
+  { "@type": "Question", "name": "What does the Shaker exercise do for dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "The Shaker exercise (head-raise exercise) specifically strengthens the suprahyoid muscles, which are responsible for elevating the larynx and opening the upper oesophageal sphincter (UOS) during swallowing. Evidence from clinical trials shows that a 6-week Shaker programme reduces pharyngeal residue and aspiration. It requires lying flat and raising only the head; patients with cervical spine conditions require medical clearance first." } },
+  { "@type": "Question", "name": "How long does a home swallowing exercise programme take to show results?", "acceptedAnswer": { "@type": "Answer", "text": "Most evidence-based programmes run for 6–8 weeks at 2–3 sessions per day. Objective improvements — such as reduced pharyngeal residue and coughing frequency — typically emerge by weeks 3–4. Subjective improvements in effort may be noticed earlier. Keep a daily exercise log and present it at the 6-week SLT formal re-assessment appointment." } },
+  { "@type": "Question", "name": "How can Hong Kong patients access a home swallowing exercise programme?", "acceptedAnswer": { "@type": "Answer", "text": "Three pathways: (1) General Outpatient Clinic (GOPC) doctor referral to the HA cluster SLT department; (2) Ward physician referral for inpatients; (3) Private SLT practice (HKSTA directory lists registered practitioners). The SLT will assess swallowing function, prescribe an appropriate exercise programme and adjust it at each follow-up." } },
+  { "@type": "Question", "name": "Is the Mendelsohn manoeuvre suitable for all dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The Mendelsohn manoeuvre requires the patient to perceive laryngeal movement during swallowing and voluntarily sustain the elevated position — a technically demanding task. Patients with significant cognitive impairment, reduced laryngeal sensation or severely reduced muscle strength may not be able to execute it correctly. SLT assessment and in-clinic demonstration are essential before home practice begins." } }
 ];
 
-const faqBlenderZhHk = [
-  { "@type": "Question", "name": "為吞嚥困難患者製作糊餐需要多少瓦數的攪拌機？", "acceptedAnswer": { "@type": "Answer", "text": "製作 IDDSI Level 4 糊餐，建議選用 700W 或以上的攪拌機。1000W 以上的機種效果更穩定，尤其適合纖維含量較高的食材（如蔬菜莖部）。功率低於 500W 的攪拌機通常只能處理預先充分煮軟的食材，難以達到完全滑順的要求。" } },
-  { "@type": "Question", "name": "手持攪拌棒可以製作 IDDSI Level 4 糊餐嗎？", "acceptedAnswer": { "@type": "Answer", "text": "手持攪拌棒（功率通常 200–600W）可以製作部分較軟食材的 Level 4 糊餐，但難以達到纖維含量高的食材所需的完全滑順質感。對於需要嚴格 Level 4 合規性的患者，建議使用 700W 以上的直立攪拌機，配合過篩步驟確保達標。" } },
-  { "@type": "Question", "name": "香港哪裡可以購買適合的攪拌機？", "acceptedAnswer": { "@type": "Answer", "text": "豐澤及百老匯電器有售多個品牌的直立攪拌機，家用款由 HKD $300 起，半專業款（如 Vitamix）由 HKD $3,500 起。旺角西洋菜南街一帶的小型家電店偶有平行進口機種，價格較連鎖店低約 20–30%。購買時確認功率及刀片設計，並留意是否可拆洗刀片組件。" } }
+const faqTongueStrengtheningZhHk = [
+  { "@type": "Question", "name": "舌頭力量不足如何影響吞嚥安全？", "acceptedAnswer": { "@type": "Answer", "text": "舌頭是口腔期吞嚥的主要驅動力。舌頭力量不足會導致：食糰形成不完整、食物在口腔內推進緩慢或不完全、食物殘留在口腔及咽喉、吞嚥後殘留物滴入氣道（遲發性誤嗆）。舌頭力量可通過 IOPI 等儀器量化，並透過針對性訓練提升。" } },
+  { "@type": "Question", "name": "IOPI（Iowa 口腔功能測量儀）是什麼？香港有嗎？", "acceptedAnswer": { "@type": "Answer", "text": "IOPI 是一種小型手持儀器，透過壓力傳感器精確量化舌頭對上顎施加的最大壓力，以客觀數值追蹤訓練進展。香港部分公立醫院言語治療部門及私家診所設有 IOPI，可向主診言語治療師查詢是否可進行儀器化評估。" } },
+  { "@type": "Question", "name": "舌頭強化訓練多久做一次？", "acceptedAnswer": { "@type": "Answer", "text": "一般建議每天 3 組，每組 10 次，維持 6–8 週。訓練強度應以「用力但不痛」為原則。若舌頭在訓練後持續酸痛超過 24 小時，可能是訓練強度過高，應告知言語治療師調整計劃。" } },
+  { "@type": "Question", "name": "舌頭訓練後飲食等級可以提升嗎？", "acceptedAnswer": { "@type": "Answer", "text": "舌頭功能改善後，在言語治療師正式評估確認後，部分患者可逐步將 IDDSI 飲食等級從 Level 4（糊狀）提升至 Level 5（細碎濕潤）或 Level 6（軟質切小塊）。飲食等級的調整必須基於客觀評估結果，不應由患者或家屬自行決定。" } }
 ];
-const faqBlenderEn = [
-  { "@type": "Question", "name": "What wattage blender do I need for dysphagia purées?", "acceptedAnswer": { "@type": "Answer", "text": "For IDDSI Level 4 (Pureed), a minimum of 700W is recommended. 1000W or above gives more consistent results, especially for fibrous ingredients like vegetable stems and greens. Blenders under 500W can only reliably handle pre-cooked, already very soft ingredients and are unlikely to achieve completely smooth results." } },
-  { "@type": "Question", "name": "Can an immersion blender make IDDSI Level 4 purées?", "acceptedAnswer": { "@type": "Answer", "text": "An immersion blender (typically 200–600W) can produce Level 4 results with soft, low-fibre cooked ingredients. For fibrous vegetables, it is unlikely to achieve the complete smoothness required. For patients who need strict Level 4 compliance, a countertop blender of 700W or above, followed by fine-mesh straining, is more reliable." } },
-  { "@type": "Question", "name": "Where can I buy a suitable blender in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "Fortress and Broadway carry multiple brands: home models start from approximately HKD $300 and semi-professional models (e.g. Vitamix) from HKD $3,500. Small appliance shops along Sai Yeung Choi Street South in Mong Kok sometimes stock grey-import models 20–30% cheaper than chain stores. Check wattage, blade configuration, and whether the blade assembly is removable for cleaning." } }
+const faqTongueStrengtheningEn = [
+  { "@type": "Question", "name": "How does reduced tongue strength affect swallowing safety?", "acceptedAnswer": { "@type": "Answer", "text": "The tongue provides the primary propulsive force during the oral stage of swallowing. Reduced tongue strength causes: incomplete bolus formation, slow or incomplete posterior bolus movement, oral and pharyngeal residue, and post-swallow aspiration of retained food. Tongue pressure can be quantified using instruments such as the IOPI and improved through targeted resistance training." } },
+  { "@type": "Question", "name": "What is the IOPI and is it available in Hong Kong?", "acceptedAnswer": { "@type": "Answer", "text": "The Iowa Oral Performance Instrument (IOPI) is a hand-held device that uses a pressure transducer to objectively measure maximum tongue pressure against the palate in kilopascals (kPa). It provides a baseline measurement and tracks training progress quantitatively. Some HA hospitals and private SLT clinics in Hong Kong have the IOPI — ask your SLT whether an instrumental assessment is available in your cluster." } },
+  { "@type": "Question", "name": "How often should tongue strengthening exercises be performed?", "acceptedAnswer": { "@type": "Answer", "text": "The typical prescription is 3 sets of 10 repetitions per day for 6–8 weeks. Intensity should follow the principle of 'effortful but not painful'. If tongue soreness persists for more than 24 hours after training, the intensity is likely too high — inform your SLT to adjust the programme. Rest days (once per week) are generally appropriate." } },
+  { "@type": "Question", "name": "Can improving tongue strength lead to a higher IDDSI diet level?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — as tongue strength improves, formal SLT re-assessment may confirm that the patient can safely manage a higher IDDSI food texture level, progressing from Level 4 (Pureed) to Level 5 (Minced & Moist) or Level 6 (Soft & Bite-Sized). Diet level changes must be based on formal SLT assessment, not self-directed decisions by the patient or family." } }
 ];
 
-const newGuideSlugs18 = ['adaptive-cups-straws-hk', 'weighted-utensils-spoons-hk', 'dysphagia-cup-types-guide', 'thickener-dispenser-tools-hk', 'food-blender-comparison-hk'];
+const faqJawFacialExercisesZhHk = [
+  { "@type": "Question", "name": "下顎訓練如何改善吞嚥困難？", "acceptedAnswer": { "@type": "Answer", "text": "下顎肌肉控制咀嚼功能及口腔開合幅度。下顎力量不足時，固體食物無法被充分研磨，形成不均勻的食糰，增加窒息及誤嗆風險。透過下顎活動範圍及抵阻訓練，可改善咀嚼效率，讓患者能較安全地進食更高 IDDSI 等級的食物。" } },
+  { "@type": "Question", "name": "頭頸癌放療後出現張口困難（Trismus）應怎辦？", "acceptedAnswer": { "@type": "Answer", "text": "放射治療引起的 Trismus（張口困難）是香港鼻咽癌患者常見的後遺症。應及早轉介言語治療師進行評估，部分患者需使用專業張口訓練器械（如 TheraBite 或 Dynasplint）。不應自行強行拉開下顎，可能導致軟組織或顳顎關節損傷。向主診醫生或放腫科醫生要求轉介頭頸癌多專科治療團隊。" } },
+  { "@type": "Question", "name": "唇部閉合不全如何影響進食？", "acceptedAnswer": { "@type": "Answer", "text": "唇部閉合不全（常見於中風後）會導致：進食時食物及飲品從嘴角漏出、無法使用吸管（無法產生足夠負壓）、進食時出現流涎。唇部力量訓練（包括唇部用力閉合及壓舌板抵阻訓練）可在數週內顯著改善唇部密封能力。" } },
+  { "@type": "Question", "name": "什麼是食物積存袋（Food Pocketing）問題？如何改善？", "acceptedAnswer": { "@type": "Answer", "text": "食物積存袋是指食物在咀嚼後積存在面頰內側（面頰與牙齒之間的間隙），而非被舌頭推至正確位置準備吞嚥。常見於中風後面頰肌力下降的患者。改善方法包括面頰肌肉強化訓練（吹氣轉移、面頰收縮），以及進食後用鏡子或照顧者協助檢查是否有食物殘留。" } }
+];
+const faqJawFacialExercisesEn = [
+  { "@type": "Question", "name": "How does jaw training improve swallowing in dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The jaw controls mastication and oral aperture. Reduced jaw strength means solid food cannot be adequately chewed into a safe bolus, increasing choking and aspiration risk. Jaw range of motion and resistance exercises improve chewing efficiency, enabling patients to more safely manage higher IDDSI food texture levels over time, following formal SLT re-assessment." } },
+  { "@type": "Question", "name": "What should I do if I develop trismus (restricted jaw opening) after head and neck cancer radiotherapy?", "acceptedAnswer": { "@type": "Answer", "text": "Trismus is a common long-term complication of radiotherapy for nasopharyngeal carcinoma (NPC) and other head and neck cancers — particularly relevant in Hong Kong given the high NPC prevalence in the Cantonese-speaking population. Early SLT referral is essential. Specialist jaw mobilisation devices such as TheraBite or Dynasplint may be prescribed. Do not attempt forceful jaw stretching without professional supervision, as it risks TMJ or soft tissue injury." } },
+  { "@type": "Question", "name": "How does poor lip closure affect eating and drinking?", "acceptedAnswer": { "@type": "Answer", "text": "Incomplete lip seal — common after stroke — causes food and liquid to leak from the corners of the mouth, inability to use a straw due to insufficient negative pressure, and drooling during meals. Lip strengthening exercises including sustained lip closure and tongue depressor resistance training typically produce visible improvement within 3–4 weeks of consistent practice." } },
+  { "@type": "Question", "name": "What is food pocketing and how can it be managed?", "acceptedAnswer": { "@type": "Answer", "text": "Food pocketing occurs when chewed food accumulates in the lateral sulci — the space between the cheeks and the teeth — rather than being moved to the correct position for swallowing. It is common after stroke affecting cheek (buccinator) muscle function. Management includes buccinator strengthening exercises (cheek puffing transfer, cheek retraction) and post-meal oral checks using a mirror or caregiver inspection to identify and clear retained food." } }
+];
+
+const newGuideSlugs17 = ['medication-swallowing-guide-hk', 'swallowing-exercises-home-hk', 'tongue-strengthening-exercises-hk', 'jaw-facial-exercises-dysphagia-hk'];
 
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
@@ -981,15 +972,10 @@ const getFaqMainEntity = () => {
   if (slug === 'dining-out-dysphagia-hk') return lang === 'zh-hk' ? faqDiningOutZhHk : faqDiningOutEn;
   if (slug === 'yum-cha-safe-ordering-hk') return lang === 'zh-hk' ? faqYumChaSafeZhHk : faqYumChaSafeEn;
   if (slug === 'travel-dysphagia-tips-hk') return lang === 'zh-hk' ? faqTravelDysphagiaZhHk : faqTravelDysphagiaEn;
-  if (slug === 'adaptive-cups-straws-hk') return lang === 'zh-hk' ? faqAdaptiveCupsZhHk : faqAdaptiveCupsEn;
-  if (slug === 'weighted-utensils-spoons-hk') return lang === 'zh-hk' ? faqWeightedUtensilsZhHk : faqWeightedUtensilsEn;
-  if (slug === 'dysphagia-cup-types-guide') return lang === 'zh-hk' ? faqCupTypesZhHk : faqCupTypesEn;
-  if (slug === 'thickener-dispenser-tools-hk') return lang === 'zh-hk' ? faqThickenerDispenserZhHk : faqThickenerDispenserEn;
-  if (slug === 'food-blender-comparison-hk') return lang === 'zh-hk' ? faqBlenderZhHk : faqBlenderEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17, ...newGuideSlugs18];
+const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
