@@ -10,6 +10,7 @@ interface Props {
   canonicalUrl?: string;
   schemaJson?: object[];
   ogImage?: string;
+  speakable?: boolean;
 }
 
 const {
@@ -21,14 +22,18 @@ const {
   canonicalUrl,
   schemaJson = [],
   ogImage,
+  speakable = false,
 } = Astro.props;
 
-const htmlLang = lang === 'zh-hk' ? 'zh-HK' : 'en';
+const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const htmlLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 const canonical = canonicalUrl || Astro.url.href;
 
 const hreflangMap: Record<string, string> = {
   'zh-hk': 'zh-HK',
+  'zh-cn': 'zh-CN',
+  'ja': 'ja',
   'en': 'en',
 };
 
@@ -38,7 +43,7 @@ const orgSchema = {
   "@type": "Organization",
   "@id": `${siteUrl}/#org`,
   "name": "softmeal.org",
-  "alternateName": "愛聯社有限公司",
+  "alternateName": "香港照護食知識中心",
   "url": `${siteUrl}/`,
   "sameAs": [
     "https://seniordeli.com/",
@@ -61,7 +66,19 @@ const websiteSchema = {
   }
 };
 
-const allSchemas = [orgSchema, websiteSchema, ...schemaJson];
+// Speakable schema — emitted on article pages when speakable=true
+const speakableSchema = speakable ? {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": canonical,
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", "h2", ".article-summary", "article p:first-of-type"]
+  },
+  "url": canonical
+} : null;
+
+const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema ? [speakableSchema] : [])];
 ---
 
 <!DOCTYPE html>
@@ -73,11 +90,15 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson];
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="language" content={htmlLang} />
 
     <link rel="canonical" href={canonical} />
 
-    <!-- hreflang -->
-    <link rel="alternate" hreflang={hreflangMap[lang]} href={canonical} />
+    <!-- hreflang — all 4 locales + x-default -->
+    <link rel="alternate" hreflang="zh-HK" href={lang === 'zh-hk' ? canonical : `${siteUrl}/zh-hk/`} />
+    <link rel="alternate" hreflang="zh-CN" href={lang === 'zh-cn' ? canonical : `${siteUrl}/zh-cn/`} />
+    <link rel="alternate" hreflang="ja" href={lang === 'ja' ? canonical : `${siteUrl}/ja/`} />
+    <link rel="alternate" hreflang="en" href={lang === 'en' ? canonical : `${siteUrl}/en/`} />
     {hreflangPair && hreflangPairLang && (() => {
       // Normalise: "en/index" → "en/", "en/dysphagia" → "en/dysphagia/"
       const normalised = hreflangPair.replace(/\/index$/, '');
@@ -121,6 +142,13 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson];
     <!-- AI crawler explicit allows meta -->
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
+    <meta name="googlebot-extended" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+
+    <!-- AI discovery links -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="text/plain" title="LLM-readable summary" href="/llms.txt" />
+    <link rel="alternate" type="application/json" title="AI agent manifest" href="/.well-known/agent.json" />
 
     <!-- Favicon placeholder -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

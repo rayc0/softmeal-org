@@ -5,7 +5,7 @@ const pageCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().max(200),
-    lang: z.enum(['zh-hk', 'en']),
+    lang: z.enum(['zh-hk', 'zh-cn', 'ja', 'en']),
     last_modified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     related_articles: z.array(z.string()).optional(),
     schema_type: z.enum(['WebPage', 'AboutPage', 'ContactPage']).default('WebPage'),
@@ -19,7 +19,7 @@ const recipeCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().max(200),
-    lang: z.enum(['zh-hk', 'en']),
+    lang: z.enum(['zh-hk', 'zh-cn', 'ja', 'en']),
     last_modified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     iddsi_level: z.number().int().min(0).max(7),
     prep_time_minutes: z.number().int().positive(),

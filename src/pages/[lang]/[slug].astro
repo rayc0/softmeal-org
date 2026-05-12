@@ -868,6 +868,61 @@ const faqTravelDysphagiaEn = [
 
 const newGuideSlugs16 = ['dining-out-dysphagia-hk', 'yum-cha-safe-ordering-hk', 'travel-dysphagia-tips-hk'];
 
+// FAQPage schemas for batch 17: festive seasonal guides (mid-autumn-safety, lunar-new-year, winter-solstice, dragon-boat)
+const faqMidAutumnSafetyZhHk = [
+  { "@type": "Question", "name": "中秋節哪些食物對吞嚥困難患者最危險？", "acceptedAnswer": { "@type": "Answer", "text": "所有種類的月餅（烤皮、冰皮、迷你月餅）及湯圓均屬極高危。月餅外皮乾硬密實，冰皮由糯米粉製成，湯圓則是黏韌圓形的糯米食品。柚子的粗纖維亦屬高危。芋頭是節日中最安全且最容易改良的食物，適合 IDDSI Level 4–6。" } },
+  { "@type": "Question", "name": "冰皮月餅是否比傳統月餅安全？", "acceptedAnswer": { "@type": "Answer", "text": "不。冰皮月餅的外皮由糯米粉製成，與湯圓及年糕同屬黏韌食物，不建議任何吞嚥困難患者食用。外觀較軟只是錯覺，糯米的黏韌性對吞嚥困難患者同樣危險。" } },
+  { "@type": "Question", "name": "如何在中秋節為吞嚥困難長者準備安全的替代甜品？", "acceptedAnswer": { "@type": "Answer", "text": "最佳替代品是芋頭椰漿糊（Level 4，蒸熟攪打過篩）或南瓜椰漿糊。可用月餅模具壓製定型，保留節日外觀。柚子可過篩取純果汁，按患者液體等級增稠後飲用。" } },
+  { "@type": "Question", "name": "中秋節後患者出現發燒應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "節日後 24–48 小時內出現發燒，可能是誤吸性肺炎的早期徵兆。應立即聯絡主診醫生或前往急症室，並告知患者有吞嚥困難病史。不應觀察等待超過 24 小時。" } }
+];
+const faqMidAutumnSafetyEn = [
+  { "@type": "Question", "name": "Which Mid-Autumn Festival foods are most dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "All mooncakes (baked, snow skin, mini) and tang yuan are extremely high risk. Baked mooncake pastry is dense and dry; snow skin uses glutinous rice flour; tang yuan are sticky glutinous rice balls. Pomelo flesh presents a mixed-texture hazard. Taro is the safest and most adaptable festival food, suitable at IDDSI Levels 4–6." } },
+  { "@type": "Question", "name": "Is snow skin mooncake safe because it appears softer?", "acceptedAnswer": { "@type": "Answer", "text": "No. Snow skin mooncakes are made from glutinous rice flour — the same sticky material as tang yuan and nian gao. The apparent softness is misleading; the adhesive, chewy quality remains and is equally dangerous for dysphagia patients." } },
+  { "@type": "Question", "name": "What are the best safe alternatives for dysphagia patients at Mid-Autumn Festival?", "acceptedAnswer": { "@type": "Answer", "text": "Taro and coconut milk purée (IDDSI Level 4, steamed, blended and sieved) or pumpkin purée are ideal alternatives. Press into mooncake moulds to preserve the visual festival experience. Pomelo juice, strained of all fibre, can be thickened to the patient's prescribed liquid level." } },
+  { "@type": "Question", "name": "What should I do if a dysphagia patient develops a fever after the Mid-Autumn Festival?", "acceptedAnswer": { "@type": "Answer", "text": "Fever developing within 24–48 hours of the festival is a classic early sign of aspiration pneumonia. Contact the patient's doctor immediately or attend A&E, disclosing the dysphagia history. Do not observe and wait if fever is present." } }
+];
+
+const faqLunarNewYearZhHk = [
+  { "@type": "Question", "name": "農曆新年哪些食物對吞嚥困難患者風險最高？", "acceptedAnswer": { "@type": "Answer", "text": "最高危的食物包括：年糕（糯米製品，不論蒸或煎）、湯圓、盆菜（混合質感）、燒味酥脆外皮（雙重質感）、瓜子及糖果零食（細小硬實）。糯米類食品對所有 IDDSI 等級的吞嚥困難患者均屬禁忌。" } },
+  { "@type": "Question", "name": "吞嚥困難患者可以參加農曆新年團年飯嗎？", "acceptedAnswer": { "@type": "Answer", "text": "可以，但需提前準備改良食物，並通知所有家人患者的飲食限制。建議提前一至兩天製作安全替代品（如芋頭糕、雞蓉、炆煮蔬菜），當天加熱後食用。確保患者使用相同碗碟，融入家庭圓桌。" } },
+  { "@type": "Question", "name": "盆菜如何為吞嚥困難患者安全改良？", "acceptedAnswer": { "@type": "Answer", "text": "按食材分別處理：炆蘿蔔切 ≤15mm（Level 6）；冬菇充分炆軟後切碎（Level 5）；去骨豬腩肉充分炆至軟爛（Level 5–6）。必須完全移除豬皮、花膠、蝦（整條）。改良後各食材需分別通過叉子壓力測試。" } },
+  { "@type": "Question", "name": "白切雞如何改良給吞嚥困難患者食用？", "acceptedAnswer": { "@type": "Answer", "text": "Level 4：去骨去皮雞胸蒸熟後加雞湯攪打至細滑，過細目篩，加少量薑蔥油保留風味，用模具定型。Level 5：同樣蒸熟後沿肌理手撕成 ≤4mm 細絲，加足量雞湯保濕。" } }
+];
+const faqLunarNewYearEn = [
+  { "@type": "Question", "name": "Which Lunar New Year foods are highest risk for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "The highest-risk foods are: nian gao (glutinous rice cake — any form, steamed or pan-fried), tang yuan, poon choi (extreme mixed textures), roast meats with crispy skin (dual-texture hazard), melon seeds and hard sweets. Glutinous rice products are contraindicated at all IDDSI levels." } },
+  { "@type": "Question", "name": "Can a dysphagia patient attend the Lunar New Year reunion dinner?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, with advance preparation. Prepare safe modified alternatives one to two days ahead (taro cake, chicken purée, braised vegetables) and reheat at the venue. Brief all family members on the patient's restrictions. Use the same tableware as the family — inclusion at the table is as important as safe eating." } },
+  { "@type": "Question", "name": "How can poon choi be adapted for a dysphagia patient?", "acceptedAnswer": { "@type": "Answer", "text": "Select and modify individual ingredients: fully braised radish cut to ≤15 mm (Level 6); shiitake fully braised and minced to ≤4 mm (Level 5); boneless pork belly braised until very tender, cut to ≤15 mm (Level 6). Remove pig skin, fish maw and whole prawns entirely. Each component must pass the fork pressure test before serving." } },
+  { "@type": "Question", "name": "How is white-cut chicken adapted for dysphagia patients at Lunar New Year?", "acceptedAnswer": { "@type": "Answer", "text": "Level 4: steam boneless, skinless chicken breast, blend with stock until smooth, sieve, season with ginger-spring onion oil, press into a mould. Level 5: steam the same chicken and shred by hand to strands no wider than 4 mm, moisten generously with stock, confirm the fork pressure test passes." } }
+];
+
+const faqWinterSolsticeZhHk = [
+  { "@type": "Question", "name": "湯圓為何是吞嚥困難患者最危險的冬至食品？", "acceptedAnswer": { "@type": "Answer", "text": "湯圓集合了多種高危特性：糯米粉製成的黏韌外皮、圓形外形（難以控制，整粒誤吸風險）、甜湯底與固體湯圓的混合質感，以及有餡湯圓咬破後瞬間釋出的餡料。所有 IDDSI 等級的吞嚥困難患者均不建議食用任何形式的湯圓。" } },
+  { "@type": "Question", "name": "有沒有適合吞嚥困難患者的冬至替代食品？", "acceptedAnswer": { "@type": "Answer", "text": "Level 4：過篩細滑的芝麻糊或花生糊是最具冬至風味的替代品，亦可製作芋頭椰汁糊或紫薯椰汁糊。Level 5：蒸熟芋頭壓碎成粒（≤4mm），搓成小球形，以增稠薑汁糖水盛放。Level 6：以澄麵製作的蒸糕仔，切成 ≤15mm 小塊。" } },
+  { "@type": "Question", "name": "冬至薑汁糖水如何安全處理給吞嚥困難患者飲用？", "acceptedAnswer": { "@type": "Answer", "text": "薑汁糖水煮好後用細目篩過濾去除所有薑渣，待稍涼（60°C 以下）後加入增稠劑（建議用黃原膠基，在熱飲中較穩定），以 IDDSI 流量測試確認稠度後方可飲用。" } },
+  { "@type": "Question", "name": "冬至聚會中如何維持吞嚥困難患者的安全進食姿勢？", "acceptedAnswer": { "@type": "Answer", "text": "確保患者坐在有椅背支撐的正式餐椅（非沙發或低矮椅），保持坐直至少 90°，進食期間避免分心（如關掉電視）。節日氣氛中的興奮感可能令患者加快進食速度，應刻意放慢節奏。" } }
+];
+const faqWinterSolsticeEn = [
+  { "@type": "Question", "name": "Why are tang yuan the most dangerous Winter Solstice food for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Tang yuan combine multiple simultaneous hazards: glutinous rice flour creates an extremely sticky, cohesive product; the round shape makes mouth control difficult and whole-piece aspiration likely; they are served in thin broth creating a classic mixed-texture situation; and filled tang yuan release filling suddenly when bitten. No form of tang yuan is safe for any dysphagia patient." } },
+  { "@type": "Question", "name": "What are safe Winter Solstice alternatives for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Level 4: sieved smooth sesame paste or peanut paste (the classic flavours), or purple sweet potato and coconut purée. Level 5: steamed taro mashed to particles ≤4 mm, shaped into small balls, served in thickened ginger sweet soup. Level 6: steamed wheat starch cake (no glutinous rice), cut to ≤15 mm." } },
+  { "@type": "Question", "name": "How should ginger sweet soup be prepared safely for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Strain the soup through a fine-mesh sieve to remove all ginger solids. Allow to cool to approximately 60°C before adding thickener. Use a xanthan gum-based thickener for hot liquids (more stable than starch-based). Confirm the IDDSI level with the syringe flow test before serving." } },
+  { "@type": "Question", "name": "How can a dysphagia patient be included in Winter Solstice celebrations without eating tang yuan?", "acceptedAnswer": { "@type": "Answer", "text": "Serve the safe alternative (taro balls or sesame paste) in the same style of bowl as the family's tang yuan. Use a round serving mould if available to echo the spherical shape. Include the patient in the act of gathering, storytelling and warm family conversation — the communal experience matters more than the specific food." } }
+];
+
+const faqDragonBoatZhHk = [
+  { "@type": "Question", "name": "為何粽子對吞嚥困難患者如此危險？", "acceptedAnswer": { "@type": "Answer", "text": "粽子以糯米為主體，加上豬皮、花生、冬菇等多種質感截然不同的食材，構成極度複雜的混合質感食品。糯米的黏韌性令食物在口腔和咽喉中難以分解，是吞嚥困難照護中最具代表性的高危食物。任何種類的粽子（鹹或甜）均不建議吞嚥困難患者食用。" } },
+  { "@type": "Question", "name": "端午節有沒有安全的粽子替代品？", "acceptedAnswer": { "@type": "Answer", "text": "Level 4：將芋頭蒸熟攪打至糊狀，加入豬骨湯及麻油調成鹹香口味，用三角形模具定型，以粽葉墊底呈上（患者不食粽葉）。Level 5：以普通大米（非糯米）煮至軟爛，加入豬肉碎（≤4mm）及冬菇碎（≤4mm），確認通過叉子壓力測試。" } },
+  { "@type": "Question", "name": "端午節聚會中如何預防吞嚥困難患者誤食粽子？", "acceptedAnswer": { "@type": "Answer", "text": "提前向所有家人說明患者的飲食限制，強調「一口也不行」。提前準備替代食品，確保當天有安全選擇。聚會環境嘈雜分心，應確保患者坐在正式餐椅並保持正確進食姿勢，並指定一位家人在旁留意。" } },
+  { "@type": "Question", "name": "若吞嚥困難患者誤食粽子應如何處理？", "acceptedAnswer": { "@type": "Answer", "text": "立即停止進食，讓患者坐直或前傾，鼓勵主動咳嗽。若出現窒息跡象（無法說話或呼吸、臉色發紫），立即施行海姆立克急救法並致電 999。事後 24–48 小時留意發燒及咳嗽，如出現應立即就醫。" } }
+];
+const faqDragonBoatEn = [
+  { "@type": "Question", "name": "Why are zongzi so dangerous for dysphagia patients?", "acceptedAnswer": { "@type": "Answer", "text": "Zongzi are built around glutinous rice — one of the highest-risk foods in dysphagia care — combined with a complex medley of ingredients with highly variable textures (fatty pork, salted egg yolk, chestnuts, peanuts, mushrooms). The glutinous rice adheres to the pharynx and cannot be safely managed in any impaired swallowing system. All types of zongzi — savoury or sweet — are contraindicated for dysphagia patients." } },
+  { "@type": "Question", "name": "What are safe Dragon Boat Festival alternatives to zongzi?", "acceptedAnswer": { "@type": "Answer", "text": "Level 4: steam taro until soft, blend with pork or chicken stock and season with sesame oil and white pepper; press into a triangular mould and serve on a lotus leaf for aroma. Level 5: cook regular (not glutinous) rice until very soft, mix with minced braised pork (≤4 mm) and minced shiitake (≤4 mm); confirm the fork pressure test passes." } },
+  { "@type": "Question", "name": "How can caregivers prevent a dysphagia patient from accidentally eating zongzi at a festival gathering?", "acceptedAnswer": { "@type": "Answer", "text": "Brief all family members in advance that not even one bite of zongzi is safe. Prepare an alternative food for the patient to eat during the gathering. The festive atmosphere and distractions increase risk — seat the patient in a proper chair, designate a family member to monitor, and minimise distractions during the patient's meal." } },
+  { "@type": "Question", "name": "What should I do if a dysphagia patient accidentally eats part of a zongzi?", "acceptedAnswer": { "@type": "Answer", "text": "Stop feeding immediately. Keep the patient upright or leaning slightly forward. Encourage active coughing if conscious and able. If the patient is choking — unable to speak or breathe, turning blue — apply the Heimlich manoeuvre and call 999. Monitor for fever or increased cough over the following 48 hours and contact the doctor promptly if either appears." } }
+];
+
+const newGuideSlugs17 = ['mid-autumn-mooncake-safety-hk', 'lunar-new-year-food-guide-hk', 'winter-solstice-tangyuan-hk', 'dragon-boat-festival-food-hk'];
+
 const getFaqMainEntity = () => {
   if (slug === 'yum-cha-guide') return lang === 'zh-hk' ? faqYumChaZhHk : faqYumChaEn;
   if (slug === 'hospital-discharge-planning') return lang === 'zh-hk' ? faqDischargeZhHk : faqDischargeEn;

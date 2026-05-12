@@ -1,27 +1,83 @@
 ---
 interface Props {
   level: number;
+  lang?: string;
 }
 
-const { level } = Astro.props;
+const { level, lang = 'zh-hk' } = Astro.props;
 
-const levelInfo: Record<number, { color: string; bg: string; label: string; labelEn: string }> = {
-  0: { color: '#555', bg: '#f5f5f5', label: 'Level 0 稀薄', labelEn: 'Level 0 Thin' },
-  1: { color: '#fff', bg: '#9B9B9B', label: 'Level 1 極微稠杰', labelEn: 'Level 1 Slightly Thick' },
-  2: { color: '#fff', bg: '#E91E8C', label: 'Level 2 低度稠杰', labelEn: 'Level 2 Mildly Thick' },
-  3: { color: '#333', bg: '#FFD700', label: 'Level 3 中度稠杰', labelEn: 'Level 3 Moderately Thick' },
-  4: { color: '#fff', bg: '#2E7D32', label: 'Level 4 糊狀', labelEn: 'Level 4 Puréed' },
-  5: { color: '#fff', bg: '#E65100', label: 'Level 5 細碎及濕軟', labelEn: 'Level 5 Minced & Moist' },
-  6: { color: '#fff', bg: '#1565C0', label: 'Level 6 軟質及一口量', labelEn: 'Level 6 Soft & Bite-Sized' },
-  7: { color: '#fff', bg: '#E65100', label: 'Level 7EC 容易咀嚼', labelEn: 'Level 7EC Easy to Chew' },
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
+const l: LangKey = validLangs.has(lang) ? lang as LangKey : 'zh-hk';
+
+const labels: Record<LangKey, Record<number, string>> = {
+  'zh-hk': {
+    0: 'Level 0 稀薄',
+    1: 'Level 1 極微稠杰',
+    2: 'Level 2 低度稠杰',
+    3: 'Level 3 中度稠杰',
+    4: 'Level 4 糊狀',
+    5: 'Level 5 細碎及濕軟',
+    6: 'Level 6 軟質及一口量',
+    7: 'Level 7EC 容易咀嚼',
+  },
+  'zh-cn': {
+    0: 'Level 0 稀薄液体',
+    1: 'Level 1 微稠',
+    2: 'Level 2 低稠',
+    3: 'Level 3 中稠',
+    4: 'Level 4 糊状',
+    5: 'Level 5 细碎湿软',
+    6: 'Level 6 软质一口量',
+    7: 'Level 7EC 易咀嚼',
+  },
+  'ja': {
+    0: 'Level 0 薄い液体',
+    1: 'Level 1 やや濃い',
+    2: 'Level 2 濃い',
+    3: 'Level 3 とろみ状',
+    4: 'Level 4 ペースト状',
+    5: 'Level 5 ミンチ状',
+    6: 'Level 6 軟らか一口',
+    7: 'Level 7EC 噛みやすい',
+  },
+  'en': {
+    0: 'Level 0 Thin',
+    1: 'Level 1 Slightly Thick',
+    2: 'Level 2 Mildly Thick',
+    3: 'Level 3 Moderately Thick',
+    4: 'Level 4 Puréed',
+    5: 'Level 5 Minced & Moist',
+    6: 'Level 6 Soft & Bite-Sized',
+    7: 'Level 7EC Easy to Chew',
+  },
 };
 
-const info = levelInfo[level] || levelInfo[4];
+// Official IDDSI Pantone-derived palette
+const palette: Record<number, { bg: string; color: string; dot: string }> = {
+  0: { bg: '#f5f5f5', color: '#555',  dot: '#d1d5db' },
+  1: { bg: '#9B9B9B', color: '#fff',  dot: '#6b7280' },
+  2: { bg: '#E91E8C', color: '#fff',  dot: '#be185d' },
+  3: { bg: '#FFD700', color: '#333',  dot: '#b45309' },
+  4: { bg: '#2E7D32', color: '#fff',  dot: '#14532d' },
+  5: { bg: '#E65100', color: '#fff',  dot: '#9a3412' },
+  6: { bg: '#1565C0', color: '#fff',  dot: '#1e3a8a' },
+  7: { bg: '#E65100', color: '#fff',  dot: '#9a3412' },
+};
+
+const info  = palette[level]  ?? palette[4];
+const label = labels[l]?.[level] ?? `Level ${level}`;
 ---
 
 <span
-  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold"
   style={`background-color: ${info.bg}; color: ${info.color};`}
 >
-  {info.label}
+  <!-- Color dot indicator -->
+  <span
+    class="inline-block w-2 h-2 rounded-full flex-shrink-0"
+    style={`background-color: ${info.dot};`}
+    aria-hidden="true"
+  ></span>
+  {label}
 </span>

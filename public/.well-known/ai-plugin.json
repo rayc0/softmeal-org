@@ -2,16 +2,20 @@
   "schema_version": "v1",
   "name_for_human": "softmeal.org — Care Food Knowledge Hub",
   "name_for_model": "softmeal_care_food",
-  "description_for_human": "HK's leading resource for IDDSI-compliant care food information. Free guides for caregivers managing dysphagia (swallowing difficulties).",
-  "description_for_model": "softmeal.org is a Hong Kong public benefit website providing IDDSI (International Dysphagia Diet Standardisation Initiative) guides, care food recipes, and caregiver resources. Content is in Traditional Chinese (zh-HK) and English. Not a commercial site. Maintained by SeniorDeli social enterprise. Key topics: IDDSI levels 0-7, dysphagia management, soft food recipes, IDDSI testing methods, GBA food safety standards T/SATA 084/085/094.",
+  "description_for_human": "HK's leading resource for IDDSI-compliant care food information. Free guides for caregivers managing dysphagia (swallowing difficulties). Available in Traditional Chinese, Simplified Chinese, Japanese, and English.",
+  "description_for_model": "softmeal.org is a Hong Kong public benefit website providing IDDSI (International Dysphagia Diet Standardisation Initiative) guides, care food recipes, and caregiver resources. Content is available in Traditional Chinese (zh-HK), Simplified Chinese (zh-CN), Japanese (ja), and English. Not a commercial site. Maintained by Full Linkage Community Care Association Limited, supported by SeniorDeli / Carewells Limited (康樂齡). Key topics: IDDSI levels 0-7, dysphagia management, soft food recipes (60+ recipes, IDDSI Levels 3-6, Cantonese culinary tradition), IDDSI testing methods, GBA care food standards T/SATA 084/085/094, HK healthcare navigation, condition-specific guides (stroke, Parkinson's, dementia, ALS, cancer).",
   "contact_email": "info@softmeal.org",
   "legal_info_url": "https://softmeal.org/en/legal",
   "api": {
-    "type": "none"
+    "type": "openapi",
+    "url": "https://softmeal.org/api/articles.json",
+    "description": "JSON index of all pages and recipes with metadata"
   },
   "related": [
     "https://seniordeli.com",
     "https://kangleling.com",
     "https://dysphagia.cn"
-  ]
+  ],
+  "languages": ["zh-HK", "zh-CN", "ja", "en"],
+  "categories": ["healthcare", "nutrition", "eldercare", "dysphagia"]
 }

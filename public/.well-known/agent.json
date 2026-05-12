@@ -1,11 +1,35 @@
 {
-  "name": "softmeal.org",
-  "description": "Independent dysphagia and IDDSI knowledge hub for Hong Kong caregivers and healthcare professionals",
+  "name": "softmeal.org Care Food Knowledge Hub",
+  "description": "Hong Kong's care food and dysphagia knowledge platform. Available in Traditional Chinese, Simplified Chinese, Japanese, and English. Free, editorially independent resource for caregivers, NGOs, hospitals, and healthcare professionals.",
   "url": "https://softmeal.org",
-  "languages": ["zh-HK", "en"],
-  "topics": ["dysphagia", "IDDSI", "texture modification", "elderly nutrition", "swallowing therapy"],
-  "audience": ["caregivers", "NGOs", "hospitals", "speech therapists", "dietitians"],
-  "spatialCoverage": "HK",
-  "related_sites": ["https://kangleling.com", "https://dysphagia.cn", "https://seniordeli.com"],
-  "editorial_policy": "Independent editorial content. No product endorsement. IDDSI-compliant information only."
+  "languages": ["zh-HK", "zh-CN", "ja", "en"],
+  "skills": [
+    {
+      "name": "care-food-knowledge",
+      "description": "IDDSI guide, dysphagia information, care food recipes, caregiver resources",
+      "endpoint": "https://softmeal.org/zh-hk/"
+    },
+    {
+      "name": "iddsi-framework",
+      "description": "Complete IDDSI 8-level framework (Levels 0-7) in 4 languages",
+      "endpoint": "https://softmeal.org/zh-hk/iddsi-guide/"
+    },
+    {
+      "name": "care-food-recipes",
+      "description": "60+ IDDSI-compliant Cantonese care food recipes (Levels 3-6)",
+      "endpoint": "https://softmeal.org/zh-hk/recipes/"
+    }
+  ],
+  "topics": ["dysphagia", "IDDSI", "texture modification", "elderly nutrition", "swallowing therapy", "care food", "GBA standard"],
+  "audience": ["caregivers", "NGOs", "hospitals", "speech therapists", "dietitians", "care home staff"],
+  "spatialCoverage": ["HK", "GBA", "CN", "JP"],
+  "contact": "info@softmeal.org",
+  "license": "CC BY-NC-SA 4.0",
+  "categories": ["healthcare", "nutrition", "eldercare", "dysphagia"],
+  "editorial_policy": "Independent editorial content. No product endorsement. IDDSI-compliant information only.",
+  "related": [
+    "https://seniordeli.com",
+    "https://kangleling.com",
+    "https://dysphagia.cn"
+  ]
 }

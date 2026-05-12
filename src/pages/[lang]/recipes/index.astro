@@ -4,40 +4,64 @@ import PageLayout from '../../../layouts/PageLayout.astro';
 import IddsiLevelBadge from '../../../components/IddsiLevelBadge.astro';
 
 export async function getStaticPaths() {
-  return [
-    { params: { lang: 'zh-hk' } },
-    { params: { lang: 'en' } },
-  ];
+  const allRecipes = await getCollection('recipes');
+  const langs = [...new Set(allRecipes.map(r => r.data.lang))];
+  return langs.map(lang => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;
-const isZh = lang === 'zh-hk';
 
-const allRecipes = await getCollection('recipes', ({ data }) => data.lang === lang);
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+const l = lang as LangKey;
+
+const titles: Record<LangKey, string> = {
+  'zh-hk': '照護食食譜庫 | IDDSI Level 4-6 食譜 — softmeal.org',
+  'zh-cn': '照护食食谱库 | IDDSI Level 4-6 食谱 — softmeal.org',
+  'ja':    '介護食レシピ集 | IDDSI レベル別レシピ — softmeal.org',
+  'en':    'Care Food Recipe Library | IDDSI Level 4-6 Recipes — softmeal.org',
+};
+const descriptions: Record<LangKey, string> = {
+  'zh-hk': '超過10個按 IDDSI 級別分類的照護食食譜，用香港常見食材，適合吞嚥困難長者。免費閱覽。',
+  'zh-cn': '超过10个按 IDDSI 级别分类的照护食食谱，使用常见食材，适合吞咽困难老人。免费阅览。',
+  'ja':    'IDDSI レベル別に分類した介護食レシピ集。嚥下困難の方に適したレシピを無料公開。',
+  'en':    'Over 10 care food recipes categorised by IDDSI level, using common ingredients. Free to read.',
+};
+const headings: Record<LangKey, string> = {
+  'zh-hk': '食譜庫',
+  'zh-cn': '食谱库',
+  'ja':    'レシピ集',
+  'en':    'Recipe Library',
+};
+const subtexts: Record<LangKey, string> = {
+  'zh-hk': '以下食譜均按 IDDSI 級別分類，由低至高排列。每個食譜均包含材料、做法及叉子壓力測試結果。',
+  'zh-cn': '以下食谱均按 IDDSI 级别分类，由低至高排列。每个食谱包含食材、做法及叉子压力测试结果。',
+  'ja':    '以下のレシピは IDDSI レベル順に並んでいます。各レシピには材料、作り方、フォークテスト結果を含みます。',
+  'en':    'Recipes below are categorised by IDDSI level, sorted lowest to highest. Each includes ingredients, method, and fork pressure test results.',
+};
+const minLabels: Record<LangKey, string> = { 'zh-hk': '分鐘', 'zh-cn': '分钟', 'ja': '分', 'en': 'min' };
+const warningTexts: Record<LangKey, string> = {
+  'zh-hk': '⚠️ 所有食譜均需由言語治療師評估後確認適合的 IDDSI 級別。食物質感因廚師技術及食材而異。',
+  'zh-cn': '⚠️ 所有食谱均需由言语治疗师评估后确认适合的 IDDSI 级别。食物质感因厨师技术及食材而异。',
+  'ja':    '⚠️ 全てのレシピは言語聴覚士による評価で適切な IDDSI レベルを確認してください。食感は調理技術や食材により異なります。',
+  'en':    '⚠️ All recipes require a speech therapist to confirm the appropriate IDDSI level for each individual. Texture varies by technique and ingredients.',
+};
+
+const hreflangPartnerMap: Record<LangKey, LangKey> = { 'zh-hk': 'en', 'zh-cn': 'zh-hk', 'ja': 'zh-hk', 'en': 'zh-hk' };
+const altLang = hreflangPartnerMap[l];
+
+const allRecipes = await getCollection('recipes', ({ data }) => data.lang === l);
 allRecipes.sort((a, b) => a.data.iddsi_level - b.data.iddsi_level);
-
-const title = isZh
-  ? '照護食食譜庫 | IDDSI Level 4-6 食譜 — softmeal.org'
-  : 'Care Food Recipe Library | IDDSI Level 4-6 Recipes — softmeal.org';
-const description = isZh
-  ? '超過10個按 IDDSI 級別分類的照護食食譜，用香港常見食材，適合吞嚥困難長者。免費閱覽。'
-  : 'Over 10 care food recipes categorised by IDDSI level, using common ingredients. Free to read. Suitable for elderly with dysphagia.';
-
-const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 ---
 
 <PageLayout
-  title={title}
-  description={description}
+  title={titles[l]}
+  description={descriptions[l]}
   lang={lang}
   hreflangPair={`${altLang}/recipes`}
   hreflangPairLang={altLang}
 >
-  <h1>{isZh ? '食譜庫' : 'Recipe Library'}</h1>
-  <p>{isZh
-    ? '以下食譜均按 IDDSI 級別分類，由低至高排列。每個食譜均包含材料、做法及叉子壓力測試結果。'
-    : 'Recipes below are categorised by IDDSI level, sorted from lowest to highest. Each recipe includes ingredients, method, and fork pressure test results.'
-  }</p>
+  <h1>{headings[l]}</h1>
+  <p>{subtexts[l]}</p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
     {allRecipes.map(recipe => {
@@ -51,7 +75,7 @@ const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
           <div class="flex items-start justify-between mb-2">
             <IddsiLevelBadge level={recipe.data.iddsi_level} />
             <span class="text-xs text-gray-500">
-              {recipe.data.prep_time_minutes}{isZh ? '分鐘' : 'min'}
+              {recipe.data.prep_time_minutes}{minLabels[l]}
             </span>
           </div>
           <h2 class="text-base font-semibold text-gray-800 mt-2 mb-1">{recipe.data.title}</h2>
@@ -62,8 +86,6 @@ const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
   </div>
 
   <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
-    {isZh
-      ? '⚠️ 所有食譜均需由言語治療師評估後確認適合的 IDDSI 級別。食物質感因廚師技術及食材而異。'
-      : '⚠️ All recipes require a speech therapist to confirm the appropriate IDDSI level for each individual. Texture varies by technique and ingredients.'}
+    {warningTexts[l]}
   </div>
 </PageLayout>
