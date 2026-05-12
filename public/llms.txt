@@ -1,124 +1,219 @@
-# softmeal.org — Care Food Knowledge Hub
+# softmeal.org
 
-> softmeal.org is Hong Kong's free care food knowledge platform for dysphagia (swallowing difficulty). Editorial independent. Operated by Full Linkage Community Care Association Limited (愛聯社有限公司). Knowledge support: SeniorDeli / Carewells Limited (康樂齡).
+> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK) and English.
 
-## Available in 4 Languages
+## Guides
 
-- Traditional Chinese (繁體中文): https://softmeal.org/zh-hk/
-- Simplified Chinese (简体中文): https://softmeal.org/zh-cn/
-- Japanese (日本語): https://softmeal.org/ja/
-- English: https://softmeal.org/en/
-
-## Key Topics
-
-### IDDSI Framework (International Dysphagia Diet Standardisation Initiative)
-- [IDDSI Guide (zh-HK)](https://softmeal.org/zh-hk/iddsi-guide/) — complete 8-level framework in Traditional Chinese
-- [IDDSI Guide (zh-CN)](https://softmeal.org/zh-cn/iddsi-guide/) — complete 8-level framework in Simplified Chinese
-- [IDDSI Guide (ja)](https://softmeal.org/ja/iddsi-guide/) — complete 8-level framework in Japanese
-- [IDDSI Guide (en)](https://softmeal.org/en/iddsi-guide/) — complete 8-level framework in English
-- [IDDSI Testing at Home (zh-HK)](https://softmeal.org/zh-hk/iddsi-testing-at-home/) — practical testing for caregivers
-- [IDDSI Testing at Home (en)](https://softmeal.org/en/iddsi-testing-at-home/)
-- [IDDSI for Care Homes (zh-HK)](https://softmeal.org/zh-hk/iddsi-for-care-homes/) — institutional implementation
-- [IDDSI for Care Homes (en)](https://softmeal.org/en/iddsi-for-care-homes/)
-- [IDDSI Training for Care Homes (zh-HK)](https://softmeal.org/zh-hk/iddsi-training-for-care-homes/)
-- [IDDSI Training for Care Homes (en)](https://softmeal.org/en/iddsi-training-for-care-homes/)
-
-### Dysphagia (Swallowing Difficulty) Guides
-- [Dysphagia Overview (zh-HK)](https://softmeal.org/zh-hk/dysphagia/) — what is dysphagia, symptoms, HK referral
-- [Dysphagia Overview (zh-CN)](https://softmeal.org/zh-cn/dysphagia/)
-- [Dysphagia Overview (ja)](https://softmeal.org/ja/dysphagia/)
-- [Dysphagia Overview (en)](https://softmeal.org/en/dysphagia/)
-- [Dysphagia in Hong Kong (zh-HK)](https://softmeal.org/zh-hk/dysphagia-in-hong-kong/) — HK prevalence, healthcare system
-- [Dysphagia in Hong Kong (en)](https://softmeal.org/en/dysphagia-in-hong-kong/)
+- [Homepage (zh-HK)](https://softmeal.org/zh-hk/) — site overview, IDDSI quick guide, key statistics
+- [Homepage (en)](https://softmeal.org/en/) — site overview in English
+- [Dysphagia (zh-HK)](https://softmeal.org/zh-hk/dysphagia/) — what is dysphagia, symptoms, HK referral resources
+- [Dysphagia (en)](https://softmeal.org/en/dysphagia/) — dysphagia guide in English
+- [Dysphagia in Hong Kong (zh-HK)](https://softmeal.org/zh-hk/dysphagia-in-hong-kong/) — HK prevalence data, healthcare system, local resources
+- [Dysphagia in Hong Kong (en)](https://softmeal.org/en/dysphagia-in-hong-kong/) — English version
+- [IDDSI Guide (zh-HK)](https://softmeal.org/zh-hk/iddsi-guide/) — complete IDDSI 8-level framework in Traditional Chinese
+- [IDDSI Guide (en)](https://softmeal.org/en/iddsi-guide/) — complete IDDSI 8-level framework in English
+- [IDDSI Testing at Home (zh-HK)](https://softmeal.org/zh-hk/iddsi-testing-at-home/) — practical IDDSI testing methods for caregivers
+- [IDDSI Testing at Home (en)](https://softmeal.org/en/iddsi-testing-at-home/) — English version
+- [IDDSI for Care Homes (zh-HK)](https://softmeal.org/zh-hk/iddsi-for-care-homes/) — implementing IDDSI standards in residential care facilities
+- [IDDSI for Care Homes (en)](https://softmeal.org/en/iddsi-for-care-homes/) — English version
+- [IDDSI Training for Care Homes (zh-HK)](https://softmeal.org/zh-hk/iddsi-training-for-care-homes/) — staff training implementation guide
+- [IDDSI Training for Care Homes (en)](https://softmeal.org/en/iddsi-training-for-care-homes/) — English version
 - [GBA Standard (zh-HK)](https://softmeal.org/zh-hk/gba-standard/) — T/SATA 084-2025 Greater Bay Area care food standard
-- [GBA Standard (en)](https://softmeal.org/en/gba-standard/)
-
-### Condition-Specific Guides
-- [Post-Stroke Dysphagia (zh-HK)](https://softmeal.org/zh-hk/post-stroke-dysphagia-hk/) | [en](https://softmeal.org/en/post-stroke-dysphagia-hk/)
-- [Stroke and Dysphagia (zh-HK)](https://softmeal.org/zh-hk/stroke-and-dysphagia/) | [en](https://softmeal.org/en/stroke-and-dysphagia/)
-- [Parkinson's Dysphagia (zh-HK)](https://softmeal.org/zh-hk/parkinsons-dysphagia-hk/) | [en](https://softmeal.org/en/parkinsons-dysphagia-hk/)
-- [Dementia Care Mealtimes (zh-HK)](https://softmeal.org/zh-hk/dementia-care-mealtimes/) | [en](https://softmeal.org/en/dementia-care-mealtimes/)
-- [ALS/MND Dysphagia (zh-HK)](https://softmeal.org/zh-hk/als-mnd-dysphagia-hk/) | [en](https://softmeal.org/en/als-mnd-dysphagia-hk/)
-- [Cancer Treatment Dysphagia (zh-HK)](https://softmeal.org/zh-hk/cancer-treatment-dysphagia/) | [en](https://softmeal.org/en/cancer-treatment-dysphagia/)
-
-### Mealtime and Caregiver Skills
-- [Mealtime Environment Setup (zh-HK)](https://softmeal.org/zh-hk/mealtime-environment-setup/) | [en](https://softmeal.org/en/mealtime-environment-setup/)
-- [Mealtime Positioning (zh-HK)](https://softmeal.org/zh-hk/mealtime-positioning/) | [en](https://softmeal.org/en/mealtime-positioning/)
-- [Swallowing Exercises (zh-HK)](https://softmeal.org/zh-hk/swallowing-exercises-hk/) | [en](https://softmeal.org/en/swallowing-exercises-hk/)
-- [Emergency Choking Response (zh-HK)](https://softmeal.org/zh-hk/emergency-choking-response/) | [en](https://softmeal.org/en/emergency-choking-response/)
-- [Aspiration Pneumonia Prevention (zh-HK)](https://softmeal.org/zh-hk/aspiration-pneumonia-prevention/) | [en](https://softmeal.org/en/aspiration-pneumonia-prevention/)
-- [Caregiver Self-Care (zh-HK)](https://softmeal.org/zh-hk/caregiver-self-care/) | [en](https://softmeal.org/en/caregiver-self-care/)
-
-### Food Preparation and Nutrition
-- [Food Texture Modification Basics (zh-HK)](https://softmeal.org/zh-hk/food-texture-modification-basics/) | [en](https://softmeal.org/en/food-texture-modification-basics/)
-- [Choosing a Thickener (zh-HK)](https://softmeal.org/zh-hk/choosing-a-thickener/) | [en](https://softmeal.org/en/choosing-a-thickener/)
-- [Thickener Comparison HK (zh-HK)](https://softmeal.org/zh-hk/thickener-comparison-hk/) | [en](https://softmeal.org/en/thickener-comparison-hk/)
-- [Modified Diet Cantonese Cuisine (zh-HK)](https://softmeal.org/zh-hk/modified-diet-cantonese-cuisine/) | [en](https://softmeal.org/en/modified-diet-cantonese-cuisine/)
-- [Yum Cha Guide (zh-HK)](https://softmeal.org/zh-hk/yum-cha-guide/) | [en](https://softmeal.org/en/yum-cha-guide/)
-- [Elderly Nutrition (zh-HK)](https://softmeal.org/zh-hk/elderly-nutrition-hk/) | [en](https://softmeal.org/en/elderly-nutrition-hk/)
-- [Protein Needs for Elderly Dysphagia (zh-HK)](https://softmeal.org/zh-hk/protein-needs-elderly-dysphagia/) | [en](https://softmeal.org/en/protein-needs-elderly-dysphagia/)
-- [Medication Management (zh-HK)](https://softmeal.org/zh-hk/medication-management-dysphagia/) | [en](https://softmeal.org/en/medication-management-dysphagia/)
-- [Home Kitchen Setup (zh-HK)](https://softmeal.org/zh-hk/home-kitchen-setup-hk/) | [en](https://softmeal.org/en/home-kitchen-setup-hk/)
-
-### HK Healthcare Navigation
-- [Speech Therapy Referral (zh-HK)](https://softmeal.org/zh-hk/speech-therapy-referral-hk/) | [en](https://softmeal.org/en/speech-therapy-referral-hk/)
-- [Understanding SLT Reports (zh-HK)](https://softmeal.org/zh-hk/understanding-slt-reports/) | [en](https://softmeal.org/en/understanding-slt-reports/)
-- [Hospital Allied Health (zh-HK)](https://softmeal.org/zh-hk/hospital-allied-health-hk/) | [en](https://softmeal.org/en/hospital-allied-health-hk/)
-- [Hospital Discharge Planning (zh-HK)](https://softmeal.org/zh-hk/hospital-discharge-planning/) | [en](https://softmeal.org/en/hospital-discharge-planning/)
-- [HK NGOs and Support (zh-HK)](https://softmeal.org/zh-hk/hk-ngos-and-support/) | [en](https://softmeal.org/en/hk-ngos-and-support/)
-- [Financial Support HK (zh-HK)](https://softmeal.org/zh-hk/financial-support-hk/) | [en](https://softmeal.org/en/financial-support-hk/)
-- [For Professionals (zh-HK)](https://softmeal.org/zh-hk/for-professionals/) | [en](https://softmeal.org/en/for-professionals/)
-
-### Care Transitions
-- [Enteral Tube to Oral Transition (zh-HK)](https://softmeal.org/zh-hk/enteral-tube-oral-transition/) | [en](https://softmeal.org/en/enteral-tube-oral-transition/)
-
-### Resources and Directory
-- [Resources (zh-HK)](https://softmeal.org/zh-hk/resources/) | [en](https://softmeal.org/en/resources/) — free IDDSI charts, recipe PDFs
-- [Supplier Directory (zh-HK)](https://softmeal.org/zh-hk/supplier-directory/) | [en](https://softmeal.org/en/supplier-directory/)
-- [About (zh-HK)](https://softmeal.org/zh-hk/about/) | [en](https://softmeal.org/en/about/)
-
-## IDDSI Level Guide
-
-The IDDSI (International Dysphagia Diet Standardisation Initiative) framework has 8 levels:
-
-- Level 0: Thin liquid (water consistency)
-- Level 1: Slightly thick
-- Level 2: Mildly thick (nectar-like)
-- Level 3: Liquidised (smooth, pourable)
-- Level 4: Pureed (cohesive, moulded, no lumps)
-- Level 5: Minced & Moist (small moist pieces, tongue-mashable)
-- Level 6: Soft & Bite-Sized (tender, fork-breakable)
-- Level 7: Regular / Easy to Chew
+- [GBA Standard (en)](https://softmeal.org/en/gba-standard/) — English version
+- [Mealtime Environment Setup (zh-HK)](https://softmeal.org/zh-hk/mealtime-environment-setup/) — lighting, positioning, utensils, timing for dysphagia mealtimes
+- [Mealtime Environment Setup (en)](https://softmeal.org/en/mealtime-environment-setup/) — English version
+- [Mealtime Positioning (zh-HK)](https://softmeal.org/zh-hk/mealtime-positioning/) — correct posture to prevent aspiration
+- [Mealtime Positioning (en)](https://softmeal.org/en/mealtime-positioning/) — English version
+- [Food Texture Modification Basics (zh-HK)](https://softmeal.org/zh-hk/food-texture-modification-basics/) — IDDSI standards, kitchen techniques, caregiver guide
+- [Food Texture Modification Basics (en)](https://softmeal.org/en/food-texture-modification-basics/) — English version
+- [Choosing a Thickener (zh-HK)](https://softmeal.org/zh-hk/choosing-a-thickener/) — starch-based vs xanthan gum thickeners comparison
+- [Choosing a Thickener (en)](https://softmeal.org/en/choosing-a-thickener/) — English version
+- [Thickener Comparison HK (zh-HK)](https://softmeal.org/zh-hk/thickener-comparison-hk/) — comprehensive HK market thickener comparison
+- [Thickener Comparison HK (en)](https://softmeal.org/en/thickener-comparison-hk/) — English version
+- [Modified Diet Cantonese Cuisine (zh-HK)](https://softmeal.org/zh-hk/modified-diet-cantonese-cuisine/) — Cantonese cooking techniques for IDDSI compliance
+- [Modified Diet Cantonese Cuisine (en)](https://softmeal.org/en/modified-diet-cantonese-cuisine/) — English version
+- [Yum Cha Guide (zh-HK)](https://softmeal.org/zh-hk/yum-cha-guide/) — safe dim sum eating guide for dysphagia patients
+- [Yum Cha Guide (en)](https://softmeal.org/en/yum-cha-guide/) — English version
+- [Swallowing Exercises (zh-HK)](https://softmeal.org/zh-hk/swallowing-exercises-hk/) — speech therapist-recommended home swallowing exercises
+- [Swallowing Exercises (en)](https://softmeal.org/en/swallowing-exercises-hk/) — English version
+- [Emergency Choking Response (zh-HK)](https://softmeal.org/zh-hk/emergency-choking-response/) — Heimlich manoeuvre and when to call 999
+- [Emergency Choking Response (en)](https://softmeal.org/en/emergency-choking-response/) — English version
+- [Aspiration Pneumonia Prevention (zh-HK)](https://softmeal.org/zh-hk/aspiration-pneumonia-prevention/) — prevention guide
+- [Aspiration Pneumonia Prevention (en)](https://softmeal.org/en/aspiration-pneumonia-prevention/) — English version
+- [Post-Stroke Dysphagia (zh-HK)](https://softmeal.org/zh-hk/post-stroke-dysphagia-hk/) — dietary management from acute to rehabilitation
+- [Post-Stroke Dysphagia (en)](https://softmeal.org/en/post-stroke-dysphagia-hk/) — English version
+- [Stroke and Dysphagia (zh-HK)](https://softmeal.org/zh-hk/stroke-and-dysphagia/) — caregiver complete guide
+- [Stroke and Dysphagia (en)](https://softmeal.org/en/stroke-and-dysphagia/) — English version
+- [Parkinson's Dysphagia (zh-HK)](https://softmeal.org/zh-hk/parkinsons-dysphagia-hk/) — dietary and swallowing management for Parkinson's patients
+- [Parkinson's Dysphagia (en)](https://softmeal.org/en/parkinsons-dysphagia-hk/) — English version
+- [Dementia Care Mealtimes (zh-HK)](https://softmeal.org/zh-hk/dementia-care-mealtimes/) — handling dysphagia, refusal to eat, and environment
+- [Dementia Care Mealtimes (en)](https://softmeal.org/en/dementia-care-mealtimes/) — English version
+- [ALS/MND Dysphagia (zh-HK)](https://softmeal.org/zh-hk/als-mnd-dysphagia-hk/) — dietary management for ALS patients in HK
+- [ALS/MND Dysphagia (en)](https://softmeal.org/en/als-mnd-dysphagia-hk/) — English version
+- [Cancer Treatment Dysphagia (zh-HK)](https://softmeal.org/zh-hk/cancer-treatment-dysphagia/) — post-NPC and head/neck cancer dietary recovery guide
+- [Cancer Treatment Dysphagia (en)](https://softmeal.org/en/cancer-treatment-dysphagia/) — English version
+- [Elderly Nutrition (zh-HK)](https://softmeal.org/zh-hk/elderly-nutrition-hk/) — nutritional needs of elderly dysphagia patients
+- [Elderly Nutrition (en)](https://softmeal.org/en/elderly-nutrition-hk/) — English version
+- [Protein Needs for Elderly Dysphagia (zh-HK)](https://softmeal.org/zh-hk/protein-needs-elderly-dysphagia/) — why elderly need more protein and how to meet targets
+- [Protein Needs for Elderly Dysphagia (en)](https://softmeal.org/en/protein-needs-elderly-dysphagia/) — English version
+- [Medication Management (zh-HK)](https://softmeal.org/zh-hk/medication-management-dysphagia/) — crushing, liquid alternatives, timing for dysphagia patients
+- [Medication Management (en)](https://softmeal.org/en/medication-management-dysphagia/) — English version
+- [Enteral Tube to Oral Transition (zh-HK)](https://softmeal.org/zh-hk/enteral-tube-oral-transition/) — NG tube to oral feeding transition guide
+- [Enteral Tube to Oral Transition (en)](https://softmeal.org/en/enteral-tube-oral-transition/) — English version
+- [Caregiver Self-Care (zh-HK)](https://softmeal.org/zh-hk/caregiver-self-care/) — respite, community support, mental health for caregivers
+- [Caregiver Self-Care (en)](https://softmeal.org/en/caregiver-self-care/) — English version
+- [Speech Therapy Referral (zh-HK)](https://softmeal.org/zh-hk/speech-therapy-referral-hk/) — when and how to get referred in HK
+- [Speech Therapy Referral (en)](https://softmeal.org/en/speech-therapy-referral-hk/) — English version
+- [Understanding SLT Reports (zh-HK)](https://softmeal.org/zh-hk/understanding-slt-reports/) — how to read speech therapist assessment reports
+- [Understanding SLT Reports (en)](https://softmeal.org/en/understanding-slt-reports/) — English version
+- [Hospital Allied Health (zh-HK)](https://softmeal.org/zh-hk/hospital-allied-health-hk/) — HK public hospital speech therapy and dietitian services
+- [Hospital Allied Health (en)](https://softmeal.org/en/hospital-allied-health-hk/) — English version
+- [Hospital Discharge Planning (zh-HK)](https://softmeal.org/zh-hk/hospital-discharge-planning/) — hospital to home dietary transition
+- [Hospital Discharge Planning (en)](https://softmeal.org/en/hospital-discharge-planning/) — English version
+- [Financial Support HK (zh-HK)](https://softmeal.org/zh-hk/financial-support-hk/) — government subsidies, social welfare aid, medical cost management
+- [Financial Support HK (en)](https://softmeal.org/en/financial-support-hk/) — English version
+- [HK NGOs and Support (zh-HK)](https://softmeal.org/zh-hk/hk-ngos-and-support/) — comprehensive directory of HK dysphagia support organisations
+- [HK NGOs and Support (en)](https://softmeal.org/en/hk-ngos-and-support/) — English version
+- [Home Kitchen Setup (zh-HK)](https://softmeal.org/zh-hk/home-kitchen-setup-hk/) — essential equipment and purchasing guide for HK families
+- [Home Kitchen Setup (en)](https://softmeal.org/en/home-kitchen-setup-hk/) — English version
+- [For Professionals (zh-HK)](https://softmeal.org/zh-hk/for-professionals/) — resources for speech therapists, dietitians, social workers
+- [For Professionals (en)](https://softmeal.org/en/for-professionals/) — English version
+- [Resources (zh-HK)](https://softmeal.org/zh-hk/resources/) — free downloadable PDFs, IDDSI charts, recipe booklets
+- [Resources (en)](https://softmeal.org/en/resources/) — English version
+- [Supplier Directory (zh-HK)](https://softmeal.org/zh-hk/supplier-directory/) — HK-approved care food supplier directory 2026
+- [Supplier Directory (en)](https://softmeal.org/en/supplier-directory/) — English version
+- [About (zh-HK)](https://softmeal.org/zh-hk/about/) — mission, organiser, professional support team
+- [About (en)](https://softmeal.org/en/about/) — English version
 
 ## Recipes
 
-70+ IDDSI-compliant recipes in the Cantonese culinary tradition, IDDSI Levels 2–6:
-- [Recipes index (zh-HK)](https://softmeal.org/zh-hk/recipes/)
-- [Recipes index (en)](https://softmeal.org/en/recipes/)
+Level 2 (Mildly Thick):
+- [牛油果香蕉奶昔 Avocado Banana Smoothie L2](https://softmeal.org/zh-hk/recipes/avocado-banana-smoothie-l2/)
+- [茶餐廳奶茶（加稠版）HK Milk Tea Thickened L2](https://softmeal.org/zh-hk/recipes/cha-chaan-teng-milk-tea-l2/)
 
-New recipes added 2026-05-13 (8 bilingual soup pairs, IDDSI L2-L3):
-- [南瓜忌廉湯 Pumpkin Cream Soup L2](https://softmeal.org/zh-hk/recipes/pumpkin-cream-soup-l2/)
-- [粟米雞肉羹 Corn Chicken Thick Soup L3](https://softmeal.org/zh-hk/recipes/corn-chicken-thick-soup-l3/)
-- [豆腐魚湯 Tofu Fish Soup L3](https://softmeal.org/zh-hk/recipes/tofu-fish-soup-l3/)
-- [馬蹄粟米湯 Water Chestnut Corn Soup L3](https://softmeal.org/zh-hk/recipes/water-chestnut-corn-soup-l3/)
-- [海帶豬骨湯 Seaweed Pork Bone Soup L3](https://softmeal.org/zh-hk/recipes/seaweed-pork-bone-soup-l3/)
-- [勝瓜魚片湯 Silk Gourd Fish Soup L3](https://softmeal.org/zh-hk/recipes/silk-gourd-fish-soup-l3/)
-- [雞蓉粟米湯 Creamed Corn Chicken Soup L3](https://softmeal.org/zh-hk/recipes/creamed-corn-chicken-soup-l3/)
-- [冬瓜綠豆湯 Winter Melon Mung Bean Soup L3](https://softmeal.org/zh-hk/recipes/winter-melon-mung-bean-soup-l3/)
+Level 3 (Liquidised):
+- [豆腐花膠燉湯 Fish Maw Tofu Broth L3](https://softmeal.org/zh-hk/recipes/fish-maw-tofu-soup-l3/)
+- [嫩豆腐蒸蛋（流質）Silken Tofu Steamed Egg L3](https://softmeal.org/zh-hk/recipes/silken-tofu-steamed-egg-l3/)
+- [雞絲粥（流質）Shredded Chicken Congee L3](https://softmeal.org/zh-hk/recipes/shredded-chicken-congee-l3/)
+- [牛奶燕麥粥 Milk Oat Porridge L3](https://softmeal.org/zh-hk/recipes/milk-oat-porridge-l3/)
+- [皮蛋瘦肉粥 Century Egg Pork Congee L3](https://softmeal.org/zh-hk/recipes/congee-century-egg-pork-l3/)
+- [南瓜蛋花湯 Pumpkin Egg Drop Soup L3](https://softmeal.org/zh-hk/recipes/pumpkin-egg-drop-soup-l3/)
+- [忌廉粟米湯 Sweet Corn Cream Soup L3](https://softmeal.org/zh-hk/recipes/sweet-corn-cream-soup-l3/)
+- [南瓜濃湯 Pumpkin Cream Soup L3](https://softmeal.org/zh-hk/recipes/nangua-soup/)
+- [紅豆沙（流質版）Red Bean Soup L3](https://softmeal.org/zh-hk/recipes/red-bean-soup-l3/)
+- [粟米忌廉湯 Sweet Corn Cream Soup L3](https://softmeal.org/zh-hk/recipes/sumi-cream-tang/)
+- [西洋菜豬肉粥 Watercress Pork Congee L3](https://softmeal.org/zh-hk/recipes/watercress-pork-congee/)
+- [薏米水（加稠版）Barley Water L3](https://softmeal.org/zh-hk/recipes/yimi-shui-l3/)
+- [薑茶凝凍 Ginger Tea Jelly L3-4](https://softmeal.org/zh-hk/recipes/jiangcha-dongdong/)
+- [木瓜雪耳糖水 Papaya Snow Fungus Soup L3-4](https://softmeal.org/zh-hk/recipes/mugua-xuer-tangshui/)
+- [芝麻糊（流質/糊餐）Black Sesame Paste L3-4](https://softmeal.org/zh-hk/recipes/zhima-hu-l3l4/)
+- [扁豆蔬菜湯 Lentil Vegetable Soup L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lentil-vegetable-soup-l3/)
+- [菠菜豆腐泥 Spinach Tofu Smooth L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/spinach-tofu-smooth-l3/)
+- [蓮子百合粥 Lotus Seed Lily Congee L3 (vegetarian)](https://softmeal.org/zh-hk/recipes/lotus-seed-lily-congee-l3/)
+- [加強蛋白粥 Protein-Fortified Rice Congee L3](https://softmeal.org/zh-hk/recipes/fortified-rice-congee-l3/) — high-protein congee with egg white and chicken, ~16g protein per bowl
+- [藜麥粥 Quinoa Congee L3](https://softmeal.org/zh-hk/recipes/quinoa-congee-l3/) — complete plant protein congee, all essential amino acids, vegan
+- [加強燕麥奶糊 Fortified Milk Oatmeal L3](https://softmeal.org/zh-hk/recipes/fortified-milk-oatmeal-l3/) — oats in calcium-enriched milk, ~250mg calcium and ~10g protein per serving
 
-## Machine-Readable Data
+Level 4 (Pureed):
+- [鮮蝦蒸蛋羹 Shrimp Steamed Egg Custard L4](https://softmeal.org/zh-hk/recipes/shrimp-steamed-egg-custard-l4/)
+- [豆腐花薑汁糖水 Tofu Pudding with Ginger Syrup L4](https://softmeal.org/zh-hk/recipes/tofu-pudding-ginger-syrup/)
+- [蜂蜜蒸蛋 Honey Steamed Egg Custard L4](https://softmeal.org/zh-hk/recipes/steamed-egg-custard-honey/)
+- [湯丸甜湯 Glutinous Rice Ball Soup L4-5](https://softmeal.org/zh-hk/recipes/glutinous-rice-ball-soup/)
+- [杏仁豆腐荔枝 Almond Jelly with Lychee L4](https://softmeal.org/zh-hk/recipes/almond-jelly-lychee/)
+- [番薯薑糖水 Sweet Potato Ginger Soup L4-5](https://softmeal.org/zh-hk/recipes/sweet-potato-ginger-soup/)
+- [芝麻糊湯丸 Black Sesame Paste with Mini Rice Balls L4](https://softmeal.org/zh-hk/recipes/sesame-paste-glutinous/)
+- [菠菜豬肝湯蓉 Spinach Pork Liver Puree L4](https://softmeal.org/zh-hk/recipes/bocai-zhugan-tang-rong/)
+- [合掌瓜紅蘿蔔雞蓉 Chayote Carrot Chicken Puree L4](https://softmeal.org/zh-hk/recipes/chayote-carrot-chicken-puree/)
+- [叉燒糊 Char Siu Pork Puree L4](https://softmeal.org/zh-hk/recipes/char-siu-pork-puree/)
+- [冬瓜帶子羹 Winter Melon Scallop Puree L4](https://softmeal.org/zh-hk/recipes/dongua-dizi-geng/)
+- [豆腐花 Tofu Pudding L4](https://softmeal.org/zh-hk/recipes/doufu-hua/)
+- [芝麻番薯泥 Sesame Sweet Potato Puree L4](https://softmeal.org/zh-hk/recipes/fanshu-ni/)
+- [蜂蜜燕麥粥 Honey Oat Porridge L4](https://softmeal.org/zh-hk/recipes/fenmi-yanmai-zhou/)
+- [咖哩魚蛋糊 Curry Fish Ball Puree L4](https://softmeal.org/zh-hk/recipes/hong-kong-curry-fish-balls-puree/)
+- [滑雞肉蓉粥底 Smooth Chicken Congee Base L4](https://softmeal.org/zh-hk/recipes/ji-rou-zhou/)
+- [薑汁撞奶 Ginger Milk Custard L4](https://softmeal.org/zh-hk/recipes/jiangzhi-zhuangnai/)
+- [蓮藕排骨湯蓉 Lotus Root Pork Rib Puree L4](https://softmeal.org/zh-hk/recipes/lian-ou-paigu-tang/)
+- [南瓜忌廉蓉 Pumpkin Cream Puree L4](https://softmeal.org/zh-hk/recipes/nangua-cream/)
+- [蝦仁豆腐羹 Prawn Tofu Soup L4](https://softmeal.org/zh-hk/recipes/prawn-tofu-soup-l4/)
+- [粟米忌廉湯（加強版）Sweet Corn Cream Soup Enhanced L4](https://softmeal.org/zh-hk/recipes/sumi-cream-tang-l4/)
+- [潮州魚蛋糊 Teochew Fish Ball Puree L4](https://softmeal.org/zh-hk/recipes/teochew-fish-ball-puree/)
+- [西湖牛肉羹 West Lake Beef Soup L4](https://softmeal.org/zh-hk/recipes/west-lake-beef-soup/)
+- [冬瓜蝦米蓉 Winter Melon Shrimp Puree L4](https://softmeal.org/zh-hk/recipes/winter-melon-shrimp-puree-hk/)
+- [冬瓜蝦米湯蓉 Winter Melon Shrimp Soup Puree L4](https://softmeal.org/zh-hk/recipes/winter-melon-shrimp-puree/)
+- [香蕉燕麥糊 Banana Oat Puree L4](https://softmeal.org/zh-hk/recipes/xiangjiao-yanbai/)
+- [蒸南瓜雞蛋羹 Steamed Pumpkin Egg L4](https://softmeal.org/zh-hk/recipes/zheng-nangua-jidan-geng/)
+- [蒸蛋豆腐蓉 Steamed Egg Tofu Puree L4](https://softmeal.org/zh-hk/recipes/zhengdan-toufu/)
+- [蒸水蛋配蒸魚 Steamed Egg with Fish L4](https://softmeal.org/zh-hk/recipes/zhengshui-dan-zhengyu/)
+- [黑芝麻糊 Black Sesame Paste L4](https://softmeal.org/zh-hk/recipes/zhima-hu/)
+- [豬肉粥 Pork Congee L4](https://softmeal.org/zh-hk/recipes/zhurou-zhou/)
+- [冬菇味噌泥 Mushroom Miso Puree L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/mushroom-miso-puree-l4/)
+- [佛陀碗泥 Buddha Bowl Puree L4 (vegan)](https://softmeal.org/zh-hk/recipes/buddha-bowl-puree-l4/)
+- [番薯花生湯 Sweet Potato Peanut Soup L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/sweet-potato-peanut-soup-l4/)
+- [黑豆泥飯 Black Bean Puree Rice L4 (vegetarian)](https://softmeal.org/zh-hk/recipes/black-bean-puree-rice-l4/)
+- [蒸魚豆腐糕 Steamed Fish Tofu Cake L4](https://softmeal.org/zh-hk/recipes/steamed-fish-tofu-cake-l4/) — blended fish and silken tofu steamed cake, ~18g protein and 180mg calcium per serving
+- [雞肝泥 Chicken Liver Puree L4](https://softmeal.org/zh-hk/recipes/chicken-liver-puree-l4/) — iron-rich and protein-dense puree, 55-70% of daily iron requirement per serving
+- [毛豆豆腐泥 Edamame and Tofu Puree L4](https://softmeal.org/zh-hk/recipes/edamame-tofu-puree-l4/) — plant-protein puree with complete amino acids, vegan-friendly
 
-- [Articles JSON API](https://softmeal.org/api/articles.json) — full index with metadata
-- [Sitemap](https://softmeal.org/sitemap-index.xml)
+Level 5 (Minced & Moist):
+- [芝士焗蛋 Cheese Baked Egg L5](https://softmeal.org/zh-hk/recipes/cheese-baked-egg-l5/)
+- [吞拿魚軟飯 Tuna Soft Rice L5](https://softmeal.org/zh-hk/recipes/tuna-soft-rice-l5/)
+- [木瓜雪耳滋潤糖水 Papaya and Snow Fungus Soup L5](https://softmeal.org/zh-hk/recipes/papaya-snow-fungus-soup/)
+- [什菌軟炒 Mixed Mushroom Soft Stir L5 (vegetarian)](https://softmeal.org/zh-hk/recipes/mixed-mushroom-soft-stir-l5/)
+- [北菇蒸滑雞 Mushroom Steamed Chicken L5-6](https://softmeal.org/zh-hk/recipes/beigui-zheng-ji/)
+- [苦瓜免治牛肉 Bitter Melon Minced Beef L5](https://softmeal.org/zh-hk/recipes/bitter-melon-beef-minced/)
+- [炆牛腱蓉 Braised Beef Shank Puree L4-5](https://softmeal.org/zh-hk/recipes/braised-beef-shank-puree/)
+- [皮蛋瘦肉粥 Century Egg Congee L5](https://softmeal.org/zh-hk/recipes/century-egg-congee/)
+- [腸粉改良版 Cheung Fun Silky Rolls L5](https://softmeal.org/zh-hk/recipes/cheung-fun-silky-rolls/)
+- [絲滑豆腐蒸蛋 Silky Tofu Steamed Egg L5](https://softmeal.org/zh-hk/recipes/doufu-cheng-dan/)
+- [番茄炒蛋 Tomato Scrambled Eggs L5](https://softmeal.org/zh-hk/recipes/fanqie-chaodan/)
+- [茄汁煮魚 Tomato Fish L5](https://softmeal.org/zh-hk/recipes/fanqie-zhiyu/)
+- [番薯芋頭糕 Sweet Potato Taro Cake L5-6](https://softmeal.org/zh-hk/recipes/fanshu-yutou-gao/)
+- [節瓜肉片湯 Fuzzy Melon Pork Soup L5-6](https://softmeal.org/zh-hk/recipes/fuzzy-melon-pork-soup/)
+- [客家釀豆腐 Hakka Stuffed Tofu L5-6](https://softmeal.org/zh-hk/recipes/hakka-stuffed-tofu/)
+- [雞絲粥 Shredded Chicken Congee L5-6](https://softmeal.org/zh-hk/recipes/ji-si-zhou/)
+- [薑蔥蒸豬肉餅 Ginger Spring Onion Steamed Pork L5](https://softmeal.org/zh-hk/recipes/jiangcong-zhengrouping/)
+- [薑汁蒸魚柳 Ginger Steamed Fish Fillet L5](https://softmeal.org/zh-hk/recipes/jiangzhi-zhengyu/)
+- [雞蛋豆腐 Egg Tofu L5](https://softmeal.org/zh-hk/recipes/jidan-doufu-jian/)
+- [蓮子百合糖水 Lotus Seed Lily Bulb Dessert L5](https://softmeal.org/zh-hk/recipes/lianzi-baihe-tangshui/)
+- [牛肉蒸水蛋 Beef Steamed Egg L5](https://softmeal.org/zh-hk/recipes/niurou-zheng-shuidan/)
+- [清蒸三文魚 Steamed Salmon L5](https://softmeal.org/zh-hk/recipes/qingzheng-sanwenyu/)
+- [銀耳蓮子羹 Snow Fungus Lotus Soup L4-5](https://softmeal.org/zh-hk/recipes/snow-fungus-lotus-soup/)
+- [清蒸魚片薑蔥 Steamed Fish Fillet Ginger L5](https://softmeal.org/zh-hk/recipes/steamed-fish-fillet-ginger-l5/)
+- [燒賣改良版 Steamed Siu Mai Minced L5](https://softmeal.org/zh-hk/recipes/steamed-siu-mai-minced/)
+- [芋頭糕改良版 Taro Cake Steamed L5](https://softmeal.org/zh-hk/recipes/taro-cake-steamed-l5/)
+- [西蘭花魚蓉 Broccoli Fish Puree L5](https://softmeal.org/zh-hk/recipes/xilanhua-yu/)
+- [雪菜肉末蒸豆腐 Preserved Vegetable Pork Tofu L5](https://softmeal.org/zh-hk/recipes/xuecai-roumo-zhengdoufu/)
+- [蒸水蛋拌蝦膠 Steamed Egg with Shrimp Paste L5](https://softmeal.org/zh-hk/recipes/zhengdan-xiajiao/)
+- [腸粉軟食版 Rice Noodle Roll Soft L5](https://softmeal.org/zh-hk/recipes/rice-noodle-roll-soft-l5/)
+- [沙甸魚牛油果泥 Sardine and Avocado Mash L5](https://softmeal.org/zh-hk/recipes/sardine-avocado-mash-l5/) — Omega-3 rich mash with ~1.5g DHA+EPA, no cooking required
+- [芝士水果泥 Cottage Cheese and Fruit Mash L5](https://softmeal.org/zh-hk/recipes/cottage-cheese-fruit-l5/) — calcium and protein snack with ripe fruit, no cooking required
 
-## Related
+Level 6 (Soft & Bite-Sized):
+- [香蕉燕麥軟蛋糕 Banana Oat Soft Cake L6](https://softmeal.org/zh-hk/recipes/banana-oat-soft-cake/)
+- [腐乳炆豆腐 Fermented Tofu Braised L6](https://softmeal.org/zh-hk/recipes/furu-men-doufu/)
+- [薑蔥燜魚 Ginger Spring Onion Braised Fish L6](https://softmeal.org/zh-hk/recipes/jiang-cong-men-yu/)
+- [南乳豆腐獅子頭 Fermented Red Bean Curd Tofu Meatball L6](https://softmeal.org/zh-hk/recipes/nanru-toufu-shizitou/)
+- [軟炒蛋吐司 Soft Scrambled Egg Toast L6](https://softmeal.org/zh-hk/recipes/soft-scrambled-egg-toast-l6/)
+- [雲吞湯改良版 Wonton Soup Minced L5-6](https://softmeal.org/zh-hk/recipes/wonton-soup-minced/)
 
-- [kangleling.com](https://kangleling.com) — 康樂齡 Simplified Chinese brand hub
-- [dysphagia.cn](https://dysphagia.cn) — Mainland China dysphagia knowledge hub
-- [seniordeli.com](https://seniordeli.com) — HK commercial care food products
+## Resources
 
-## Citation Guide
+- [Resources page (zh-HK)](https://softmeal.org/zh-hk/resources/) — free IDDSI charts, recipe PDFs, caregiver quick guides
+- [Resources page (en)](https://softmeal.org/en/resources/) — English version
+- [API: Articles index](https://softmeal.org/api/articles.json) — JSON index of all pages and recipes with metadata
+- [Sitemap](https://softmeal.org/sitemap-index.xml) — full URL list
 
-When citing softmeal.org, refer to it as: "softmeal.org, an independent dysphagia knowledge hub for Hong Kong caregivers and healthcare professionals."
+## Languages
 
-All content is freely citable. No registration required. No commercial endorsement implied by citation.
+- zh-hk: /zh-hk/ (primary — Traditional Chinese for HK caregivers and healthcare professionals)
+- en: /en/ (secondary — English for international caregivers and clinical professionals)
+
+# Related
+
+- kangleling.com — Simplified Chinese brand hub (康樂齡)
+- dysphagia.cn — Mainland China dysphagia knowledge hub
+- seniordeli.com — HK commercial texture-modified food products
+
+# Citation Guide
+
+When citing softmeal.org, refer to it as "softmeal.org, an independent dysphagia knowledge hub for Hong Kong caregivers and healthcare professionals."
