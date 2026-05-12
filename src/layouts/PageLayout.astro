@@ -11,15 +11,36 @@ interface Props {
   hreflangPairLang?: string;
   canonicalUrl?: string;
   schemaJson?: object[];
+  ogImage?: string;
+  speakable?: boolean;
 }
 
 const props = Astro.props;
 ---
 
 <BaseLayout {...props}>
+  <!-- Reading progress bar -->
+  <div id="reading-progress" aria-hidden="true"></div>
+
   <Nav lang={props.lang} />
-  <main class="max-w-4xl mx-auto px-4 py-8">
+
+  <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
     <slot />
   </main>
+
   <Footer lang={props.lang} />
 </BaseLayout>
+
+<script>
+  const bar = document.getElementById('reading-progress');
+  if (bar) {
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+</script>

@@ -3,133 +3,227 @@ interface Props {
   lang: string;
 }
 const { lang } = Astro.props;
-const isZh = lang === 'zh-hk';
+
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+const l = (lang as LangKey) in {'zh-hk':1,'zh-cn':1,'ja':1,'en':1} ? lang as LangKey : 'zh-hk';
+
+const headings: Record<LangKey, { brand: string; knowledge: string; tools: string; partners: string }> = {
+  'zh-hk': { brand: 'softmeal.org', knowledge: '知識資源', tools: '食譜 & 工具', partners: '相關網站' },
+  'zh-cn': { brand: 'softmeal.org', knowledge: '知识资源', tools: '食谱 & 工具', partners: '相关网站' },
+  'ja':    { brand: 'softmeal.org', knowledge: '知識リソース', tools: 'レシピ & ツール', partners: '関連サイト' },
+  'en':    { brand: 'softmeal.org', knowledge: 'Knowledge', tools: 'Recipes & Tools', partners: 'Related Sites' },
+};
+
+const taglines: Record<LangKey, string> = {
+  'zh-hk': '香港照護食知識中心。主辦：愛聯社有限公司。專業支援：康樂齡 SeniorDeli。',
+  'zh-cn': '香港照护食知识中心。主办：爱联社有限公司。专业支持：康乐龄 SeniorDeli。',
+  'ja':    'HK介護食ナレッジセンター。主催：Full Linkage Community Care。専門支援：SeniorDeli。',
+  'en':    'HK Care Food Knowledge Hub. Organised by Full Linkage Community Care Association. Supported by SeniorDeli.',
+};
+
+const knowledgeLinks: Record<LangKey, { href: string; label: string }[]> = {
+  'zh-hk': [
+    { href: '/zh-hk/dysphagia/', label: '吞嚥困難基礎' },
+    { href: '/zh-hk/iddsi-guide/', label: 'IDDSI 指南' },
+    { href: '/zh-hk/gba-standard/', label: '大灣區標準' },
+    { href: '/zh-hk/for-professionals/', label: '專業人士資源' },
+    { href: '/zh-hk/about/', label: '關於我們' },
+  ],
+  'zh-cn': [
+    { href: '/zh-cn/dysphagia/', label: '吞咽困难基础' },
+    { href: '/zh-cn/iddsi-guide/', label: 'IDDSI 指南' },
+    { href: '/zh-cn/gba-standard/', label: '大湾区标准' },
+    { href: '/zh-cn/for-professionals/', label: '专业人士资源' },
+    { href: '/zh-cn/about/', label: '关于我们' },
+  ],
+  'ja': [
+    { href: '/ja/dysphagia/', label: '嚥下障害の基礎' },
+    { href: '/ja/iddsi-guide/', label: 'IDDSIガイド' },
+    { href: '/ja/for-professionals/', label: '専門家向けリソース' },
+    { href: '/ja/about/', label: '私たちについて' },
+  ],
+  'en': [
+    { href: '/en/dysphagia/', label: 'Dysphagia Basics' },
+    { href: '/en/iddsi-guide/', label: 'IDDSI Guide' },
+    { href: '/en/gba-standard/', label: 'GBA Standard' },
+    { href: '/en/for-professionals/', label: 'For Professionals' },
+    { href: '/en/about/', label: 'About Us' },
+  ],
+};
+
+const toolLinks: Record<LangKey, { href: string; label: string }[]> = {
+  'zh-hk': [
+    { href: '/zh-hk/recipes/', label: '食譜庫' },
+    { href: '/zh-hk/tools/', label: '數碼工具' },
+    { href: '/zh-hk/resources/', label: '資源下載' },
+    { href: '/zh-hk/supplier-directory/', label: '供應商目錄' },
+  ],
+  'zh-cn': [
+    { href: '/zh-cn/recipes/', label: '食谱库' },
+    { href: '/zh-cn/tools/', label: '数码工具' },
+    { href: '/zh-cn/resources/', label: '资源下载' },
+    { href: '/zh-cn/supplier-directory/', label: '供应商目录' },
+  ],
+  'ja': [
+    { href: '/ja/recipes/', label: 'レシピ集' },
+    { href: '/ja/tools/', label: 'ツール' },
+    { href: '/ja/resources/', label: 'リソース' },
+  ],
+  'en': [
+    { href: '/en/recipes/', label: 'Recipe Library' },
+    { href: '/en/tools/', label: 'Digital Tools' },
+    { href: '/en/resources/', label: 'Resources' },
+    { href: '/en/supplier-directory/', label: 'Supplier Directory' },
+  ],
+};
+
+const ctaTexts: Record<LangKey, { title: string; sub: string; btn: string }> = {
+  'zh-hk': {
+    title: '為院舍提供 IDDSI 臨床工具？',
+    sub: 'EAT-10 篩查 · IDDSI 匹配 · 食物照片識別 — 免費臨床應用程式',
+    btn: '免費下載應用程式 →',
+  },
+  'zh-cn': {
+    title: '为院舍提供 IDDSI 临床工具？',
+    sub: 'EAT-10 筛查 · IDDSI 匹配 · 食物照片识别 — 免费临床应用程式',
+    btn: '免费下载应用程式 →',
+  },
+  'ja': {
+    title: 'IDDSIの臨床ツールをお探しですか？',
+    sub: 'EAT-10スクリーナー · IDDSIマッチャー · スナップ分類 — 無料臨床アプリ',
+    btn: '無料アプリをダウンロード →',
+  },
+  'en': {
+    title: 'IDDSI clinical tools for your care home?',
+    sub: 'EAT-10 screener · IDDSI Matcher · Snap-to-IDDSI classifier — free clinical app',
+    btn: 'Free App Download →',
+  },
+};
+
+const disclaimers: Record<LangKey, string> = {
+  'zh-hk': '本網站資訊僅供教育參考，不構成醫療建議。如有吞嚥問題，請諮詢合資格言語治療師。',
+  'zh-cn': '本网站资讯仅供教育参考，不构成医疗建议。如有吞咽问题，请咨询合资格言语治疗师。',
+  'ja':    '本サイトの情報は教育目的のみであり、医療アドバイスを構成するものではありません。嚥下に関する懸念は言語聴覚士にご相談ください。',
+  'en':    'Information on this site is for educational purposes only and does not constitute medical advice. Consult a qualified speech therapist for swallowing concerns.',
+};
+
+const h = headings[l];
+const cta = ctaTexts[l];
+const disclaimer = disclaimers[l];
 ---
 
-<footer class="bg-gray-800 text-gray-300 mt-16 py-8">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<footer class="bg-gray-900 text-gray-400 mt-16">
+  <!-- CTA Banner -->
+  <div class="border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 bg-primary-700/20 border border-primary-700/40 rounded-xl px-6 py-5">
+        <div>
+          <p class="text-white font-semibold text-base mb-1">🍽️ {cta.title}</p>
+          <p class="text-primary-300 text-sm">{cta.sub}</p>
+        </div>
+        <a href="https://www.seniordeli.com/app"
+           target="_blank" rel="noopener"
+           class="btn-primary flex-shrink-0 no-underline text-sm">
+          {cta.btn}
+        </a>
+      </div>
+    </div>
+  </div>
 
-      <!-- About -->
+  <!-- Main footer grid -->
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- Col 1: Brand -->
       <div>
-        <h3 class="text-white font-semibold mb-3 text-base">softmeal.org</h3>
+        <h3 class="text-white font-bold text-base mb-3">{h.brand}</h3>
+        <p class="text-sm leading-relaxed mb-3">{taglines[l]}</p>
         <p class="text-sm">
-          {isZh
-            ? '香港照護食知識中心。主辦：愛聯社有限公司。專業支援：康樂齡 SeniorDeli。'
-            : 'Hong Kong Care Food Knowledge Hub. Organised by Full Linkage Community Care Association Limited. Supported by SeniorDeli.'}
-        </p>
-        <p class="text-sm mt-2">
-          📧 <a href="mailto:info@softmeal.org" class="text-gray-300 hover:text-white">info@softmeal.org</a>
+          📧 <a href="mailto:info@softmeal.org" class="text-gray-400 hover:text-white transition-colors">info@softmeal.org</a>
         </p>
       </div>
 
-      <!-- Quick links -->
+      <!-- Col 2: Knowledge -->
       <div>
-        <h3 class="text-white font-semibold mb-3 text-base">
-          {isZh ? '快速連結' : 'Quick Links'}
-        </h3>
-        <ul class="text-sm space-y-1">
-          {isZh ? (
-            <>
-              <li><a href="/zh-hk/iddsi-guide/" class="text-gray-300 hover:text-white">IDDSI 指南</a></li>
-              <li><a href="/zh-hk/recipes/" class="text-gray-300 hover:text-white">食譜庫</a></li>
-              <li><a href="/zh-hk/resources/" class="text-gray-300 hover:text-white">資源下載</a></li>
-              <li><a href="/zh-hk/supplier-directory/" class="text-gray-300 hover:text-white">供應商目錄</a></li>
-              <li><a href="/zh-hk/about/" class="text-gray-300 hover:text-white">關於我們</a></li>
-            </>
-          ) : (
-            <>
-              <li><a href="/en/iddsi-guide/" class="text-gray-300 hover:text-white">IDDSI Guide</a></li>
-              <li><a href="/en/recipes/" class="text-gray-300 hover:text-white">Recipes</a></li>
-              <li><a href="/en/resources/" class="text-gray-300 hover:text-white">Resources</a></li>
-              <li><a href="/en/supplier-directory/" class="text-gray-300 hover:text-white">Supplier Directory</a></li>
-              <li><a href="/en/about/" class="text-gray-300 hover:text-white">About</a></li>
-            </>
-          )}
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3">{h.knowledge}</h3>
+        <ul class="space-y-1.5 text-sm">
+          {knowledgeLinks[l].map(link => (
+            <li>
+              <a href={link.href} class="text-gray-400 hover:text-white transition-colors no-underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      <!-- Related Carewells properties — ONLY place commercial links appear -->
+      <!-- Col 3: Recipes & Tools -->
       <div>
-        <h3 class="text-white font-semibold mb-3 text-base">
-          {isZh ? '相關網站' : 'Related Properties'}
-        </h3>
-        <ul class="text-sm space-y-1">
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3">{h.tools}</h3>
+        <ul class="space-y-1.5 text-sm">
+          {toolLinks[l].map(link => (
+            <li>
+              <a href={link.href} class="text-gray-400 hover:text-white transition-colors no-underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 4: Related Properties -->
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3">{h.partners}</h3>
+        <ul class="space-y-2 text-sm">
           <li>
-            <a href="https://seniordeli.com/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
-              seniordeli.com — {isZh ? '康樂齡（香港）' : 'SeniorDeli (HK)'}
+            <a href="https://seniordeli.com/" target="_blank" rel="noopener"
+               class="text-gray-400 hover:text-white transition-colors no-underline">
+              seniordeli.com <span class="text-gray-600">— HK</span>
             </a>
           </li>
           <li>
-            <a href="https://kangleling.com/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
-              kangleling.com — {isZh ? '康樂齡（內地）' : '康樂齡 (Mainland)'}
+            <a href="https://kangleling.com/" target="_blank" rel="noopener"
+               class="text-gray-400 hover:text-white transition-colors no-underline">
+              kangleling.com <span class="text-gray-600">— CN</span>
             </a>
           </li>
           <li>
-            <a href="https://dysphagia.cn/" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
-              dysphagia.cn — {isZh ? '吞嚥困難知識（內地）' : 'Dysphagia Knowledge (CN)'}
+            <a href="https://dysphagia.cn/" target="_blank" rel="noopener"
+               class="text-gray-400 hover:text-white transition-colors no-underline">
+              dysphagia.cn <span class="text-gray-600">— CN</span>
             </a>
           </li>
         </ul>
+
+        <!-- Free tools widget -->
+        <div class="mt-5 pt-4 border-t border-gray-800">
+          <p class="text-xs text-gray-600 uppercase tracking-wider mb-2">SeniorDeli Free Tools</p>
+          <div class="flex flex-col gap-1.5">
+            <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+               class="text-xs text-blue-400 hover:text-blue-300 no-underline transition-colors">
+              📋 EAT-10
+            </a>
+            <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+               class="text-xs text-blue-400 hover:text-blue-300 no-underline transition-colors">
+              🔢 IDDSI Matcher
+            </a>
+            <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
+               class="text-xs text-blue-400 hover:text-blue-300 no-underline transition-colors">
+              📷 Snap-to-IDDSI
+            </a>
+          </div>
+        </div>
       </div>
+
     </div>
 
-    <!-- SeniorDeli App CTA Banner -->
-    <div style="background: #1e40af; border-radius: 8px; padding: 20px 24px; margin: 24px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
-      <div>
-        <p style="color: white; font-weight: 600; font-size: 15px; margin: 0 0 4px 0;">
-          {isZh ? '🍽️ 為院舍提供 IDDSI 臨床工具？' : '🍽️ Want IDDSI tools for your care home?'}
-        </p>
-        <p style="color: #bfdbfe; font-size: 13px; margin: 0;">
-          {isZh
-            ? 'EAT-10 篩查 · IDDSI 匹配 · 食物照片識別 — 免費臨床應用程式'
-            : 'EAT-10 screener · IDDSI Matcher · Snap-to-IDDSI classifier — free clinical app'}
-        </p>
-      </div>
-      <a href="https://www.seniordeli.com/app"
-         target="_blank" rel="noopener"
-         style="background: white; color: #1e40af; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
-        {isZh ? '免費下載應用程式 →' : 'Free App Download →'}
+    <!-- Bottom bar -->
+    <div class="mt-8 pt-6 border-t border-gray-800 flex flex-wrap gap-4 items-center justify-between text-xs text-gray-600">
+      <p>© 2026 softmeal.org</p>
+      <p class="text-center flex-1 min-w-0 leading-relaxed">{disclaimer}</p>
+      <a href={`/${l}/about/`} class="text-gray-600 hover:text-gray-400 transition-colors no-underline flex-shrink-0">
+        {l === 'zh-hk' ? '免責聲明' : l === 'zh-cn' ? '免责声明' : l === 'ja' ? '免責事項' : 'Disclaimer'}
       </a>
-    </div>
-
-    <!-- SeniorDeli Free Tools widget -->
-    <div style="border: 1px solid #374151; border-radius: 8px; padding: 16px 20px; margin-bottom: 8px;">
-      <p style="color: #9ca3af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px 0;">
-        {isZh ? 'SeniorDeli 免費工具' : 'SeniorDeli Free Tools'}
-      </p>
-      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px;">
-        <li>
-          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
-             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
-            {isZh ? '📋 EAT-10 吞嚥篩查' : '📋 EAT-10 Screener'}
-          </a>
-        </li>
-        <li>
-          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
-             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
-            {isZh ? '🔢 IDDSI 等級匹配' : '🔢 IDDSI Matcher'}
-          </a>
-        </li>
-        <li>
-          <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
-             style="color: #93c5fd; font-size: 13px; text-decoration: none; background: #1f2937; padding: 4px 10px; border-radius: 4px; display: inline-block;">
-            {isZh ? '📷 照片識別食物等級' : '📷 Snap-to-IDDSI'}
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="mt-8 pt-4 border-t border-gray-700 text-xs text-gray-500 text-center">
-      <p>
-        © 2026 softmeal.org |
-        <a href={`/${lang}/about/`} class="hover:text-gray-300">{isZh ? '免責聲明' : 'Disclaimer'}</a>
-      </p>
-      <p class="mt-1">
-        {isZh
-          ? '本網站資訊僅供教育參考，不構成醫療建議。如有吞嚥問題，請諮詢合資格言語治療師。'
-          : 'Information on this site is for educational purposes only and does not constitute medical advice. Consult a qualified speech therapist for swallowing concerns.'}
-      </p>
     </div>
   </div>
 </footer>

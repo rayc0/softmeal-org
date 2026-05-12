@@ -7,7 +7,8 @@ interface Props {
 const { level, lang = 'zh-hk' } = Astro.props;
 
 type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
-const l = (lang as LangKey) in labels ? (lang as LangKey) : 'zh-hk';
+const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
+const l: LangKey = validLangs.has(lang) ? lang as LangKey : 'zh-hk';
 
 const labels: Record<LangKey, Record<number, string>> = {
   'zh-hk': {
@@ -52,24 +53,31 @@ const labels: Record<LangKey, Record<number, string>> = {
   },
 };
 
-const colors: Record<number, { bg: string; color: string }> = {
-  0: { bg: '#f5f5f5', color: '#555' },
-  1: { bg: '#9B9B9B', color: '#fff' },
-  2: { bg: '#E91E8C', color: '#fff' },
-  3: { bg: '#FFD700', color: '#333' },
-  4: { bg: '#2E7D32', color: '#fff' },
-  5: { bg: '#E65100', color: '#fff' },
-  6: { bg: '#1565C0', color: '#fff' },
-  7: { bg: '#E65100', color: '#fff' },
+// Official IDDSI Pantone-derived palette
+const palette: Record<number, { bg: string; color: string; dot: string }> = {
+  0: { bg: '#f5f5f5', color: '#555',  dot: '#d1d5db' },
+  1: { bg: '#9B9B9B', color: '#fff',  dot: '#6b7280' },
+  2: { bg: '#E91E8C', color: '#fff',  dot: '#be185d' },
+  3: { bg: '#FFD700', color: '#333',  dot: '#b45309' },
+  4: { bg: '#2E7D32', color: '#fff',  dot: '#14532d' },
+  5: { bg: '#E65100', color: '#fff',  dot: '#9a3412' },
+  6: { bg: '#1565C0', color: '#fff',  dot: '#1e3a8a' },
+  7: { bg: '#E65100', color: '#fff',  dot: '#9a3412' },
 };
 
-const info = colors[level] ?? colors[4];
+const info  = palette[level]  ?? palette[4];
 const label = labels[l]?.[level] ?? `Level ${level}`;
 ---
 
 <span
-  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold"
   style={`background-color: ${info.bg}; color: ${info.color};`}
 >
+  <!-- Color dot indicator -->
+  <span
+    class="inline-block w-2 h-2 rounded-full flex-shrink-0"
+    style={`background-color: ${info.dot};`}
+    aria-hidden="true"
+  ></span>
   {label}
 </span>

@@ -4,23 +4,72 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Softmeal brand
-        primary: '#2B7A4B',
-        accent: '#F5A623',
+        // Softmeal brand — expanded palette
+        primary: {
+          50:  '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#2B7A4B',  // brand default
+          800: '#166534',
+          900: '#14532d',
+          DEFAULT: '#2B7A4B',
+        },
+        accent: {
+          DEFAULT: '#F5A623',
+          light: '#FEF3C7',
+        },
+        // Surface levels for layered cards/sections
+        surface: {
+          1: '#ffffff',
+          2: '#f9fafb',
+          3: '#f3f4f6',
+          4: '#e5e7eb',
+        },
+        muted: '#6b7280',
+        border: '#e5e7eb',
         // IDDSI level colours (official Pantone-derived)
         iddsi: {
-          0: '#FFFFFF',  // Level 0 Thin — white
-          1: '#9B9B9B',  // Level 1 Slightly Thick — grey
-          2: '#FF69B4',  // Level 2 Mildly Thick — pink (PANTONE 212 PC)
-          3: '#FFD700',  // Level 3 Moderately Thick — yellow (PANTONE DS 2-4C)
-          4: '#4CAF50',  // Level 4 Puréed — green (PANTONE 368 PC)
-          5: '#FF8C00',  // Level 5 Minced & Moist — orange (PANTONE 172 PC)
-          6: '#1565C0',  // Level 6 Soft & Bite-Sized — blue (PANTONE 2935 PC)
-          7: '#FF8C00',  // Level 7EC Easy Chew — orange (same as 5, with EC tag)
+          0: '#FFFFFF',
+          1: '#9B9B9B',
+          2: '#E91E8C',
+          3: '#FFD700',
+          4: '#2E7D32',
+          5: '#E65100',
+          6: '#1565C0',
+          7: '#E65100',
         },
       },
       fontFamily: {
-        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        // CJK-aware font stack: Traditional Chinese → Simplified → Japanese → Latin
+        sans: [
+          '"PingFang TC"',
+          '"Hiragino Sans"',
+          '"Noto Sans CJK TC"',
+          '"Microsoft JhengHei"',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'sans-serif',
+        ],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            lineHeight: '1.8',
+            color: '#374151',
+            a: { color: '#2B7A4B' },
+            'h1, h2, h3': { fontWeight: '700' },
+          },
+        },
+      },
+      boxShadow: {
+        card: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        'card-hover': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
       },
     },
   },
