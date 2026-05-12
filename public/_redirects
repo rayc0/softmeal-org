@@ -1,0 +1,4 @@
+# softmeal.org Cloudflare Pages _redirects
+# Root geo routing is handled by functions/index.ts (Pages Function).
+# This static fallback fires only if the Function is not available.
+/ /zh-hk/ 302
