@@ -23,12 +23,15 @@ const {
   ogImage,
 } = Astro.props;
 
-const htmlLang = lang === 'zh-hk' ? 'zh-HK' : 'en';
+const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const htmlLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 const canonical = canonicalUrl || Astro.url.href;
 
 const hreflangMap: Record<string, string> = {
   'zh-hk': 'zh-HK',
+  'zh-cn': 'zh-CN',
+  'ja': 'ja',
   'en': 'en',
 };
 
@@ -38,7 +41,7 @@ const orgSchema = {
   "@type": "Organization",
   "@id": `${siteUrl}/#org`,
   "name": "softmeal.org",
-  "alternateName": "愛聯社有限公司",
+  "alternateName": "香港照護食知識中心",
   "url": `${siteUrl}/`,
   "sameAs": [
     "https://seniordeli.com/",

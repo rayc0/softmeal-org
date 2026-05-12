@@ -32,12 +32,22 @@ const {
 
 const difficultyLabels: Record<string, Record<string, string>> = {
   'zh-hk': { easy: '簡單', medium: '中等', hard: '困難' },
-  'en': { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
+  'zh-cn': { easy: '简单', medium: '中等', hard: '困难' },
+  'ja':    { easy: '簡単', medium: '普通', hard: '難しい' },
+  'en':    { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
+};
+const prepLabels: Record<string, string> = { 'zh-hk': '準備時間', 'zh-cn': '准备时间', 'ja': '調理時間', 'en': 'Prep time' };
+const diffLabels2: Record<string, string> = { 'zh-hk': '難度', 'zh-cn': '难度', 'ja': '難易度', 'en': 'Difficulty' };
+const timeUnits: Record<string, string> = { 'zh-hk': '分鐘', 'zh-cn': '分钟', 'ja': '分', 'en': ' min' };
+const warningTexts: Record<string, string> = {
+  'zh-hk': '⚠️ 本食譜僅供參考。食物質感因廚師技術及食材而異。請由言語治療師評估後確認適合的 IDDSI 級別。',
+  'zh-cn': '⚠️ 本食谱仅供参考。食物质感因厨师技术及食材而异。请由言语治疗师评估后确认适合的 IDDSI 级别。',
+  'ja':    '⚠️ このレシピは参考情報です。食感は調理技術・食材により異なります。言語聴覚士によるIDDSIレベルの確認を受けてください。',
+  'en':    '⚠️ This recipe is for reference only. Texture varies by technique and ingredients. A speech therapist should confirm the appropriate IDDSI level.',
 };
 
-const isZh = lang === 'zh-hk';
 const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
-const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
+const timeLabel = `${prepTimeMinutes}${timeUnits[lang] ?? ' min'}`;
 ---
 
 <PageLayout
@@ -51,10 +61,10 @@ const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
   <div class="mb-4 flex flex-wrap gap-2 items-center">
     <IddsiLevelBadge level={iddsiLevel} />
     <span class="text-sm text-gray-600">
-      {isZh ? '準備時間' : 'Prep time'}: {timeLabel}
+      {prepLabels[lang] ?? 'Prep time'}: {timeLabel}
     </span>
     <span class="text-sm text-gray-600">
-      {isZh ? '難度' : 'Difficulty'}: {diffLabel}
+      {diffLabels2[lang] ?? 'Difficulty'}: {diffLabel}
     </span>
   </div>
 
@@ -68,9 +78,7 @@ const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
 
   <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded">
     <p class="text-sm text-yellow-800">
-      {isZh
-        ? '⚠️ 本食譜僅供參考。食物質感因廚師技術及食材而異。請由言語治療師評估後確認適合的 IDDSI 級別。'
-        : '⚠️ This recipe is for reference only. Texture varies by technique and ingredients. A speech therapist should confirm the appropriate IDDSI level for each individual.'}
+      {warningTexts[lang] ?? warningTexts['en']}
     </p>
   </div>
 </PageLayout>

@@ -19,7 +19,10 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 const { lang, title, description, hreflang_pair, schema_type, last_modified } = page.data;
 
-const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const hreflangPairLangMap: Record<string, string> = { 'zh-hk': 'en', 'zh-cn': 'zh-hk', 'ja': 'zh-hk', 'en': 'zh-hk' };
+const hreflangPairLang = hreflangPairLangMap[lang] ?? 'zh-hk';
+const schemaLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 const currentUrl = Astro.url.href;
 
@@ -29,7 +32,7 @@ const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ?
   "@id": `${currentUrl}#article`,
   "headline": title,
   "description": description,
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },

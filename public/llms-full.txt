@@ -1,6 +1,6 @@
 # softmeal.org — Full Content Index for AI Engines
 
-> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK) and English. Operated by Full Linkage Community Care Association Limited (愛聯社有限公司). Supported by Carewells Limited / SeniorDeli (康樂齡). Not a commercial site — all content is free and editorially independent.
+> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK), Simplified Chinese, Japanese, and English. Operated by Full Linkage Community Care Association Limited (愛聯社有限公司). Supported by Carewells Limited / SeniorDeli (康樂齡). Not a commercial site — all content is free and editorially independent.
 
 ## About This Site
 
@@ -231,7 +231,39 @@ Full URL list in XML sitemap format.
 ## Languages
 
 - **zh-hk** (`/zh-hk/`): Primary language. Traditional Chinese for HK caregivers, residential care home staff, NGO workers, and healthcare professionals in Hong Kong.
-- **en** (`/en/`): Secondary language. English for international caregivers, clinical professionals, and non-Chinese-speaking HK residents.
+- **zh-cn** (`/zh-cn/`): Simplified Chinese for Mainland China caregivers and healthcare professionals in the Greater Bay Area.
+- **ja** (`/ja/`): Japanese for caregivers and healthcare professionals in Japan seeking IDDSI-aligned content.
+- **en** (`/en/`): English for international caregivers, clinical professionals, and non-Chinese-speaking HK residents.
+
+---
+
+## Simplified Chinese (zh-CN) — 简体中文
+
+Homepage: https://softmeal.org/zh-cn/
+
+### Key Pages (zh-CN)
+
+- [首页 Homepage](https://softmeal.org/zh-cn/) — site overview, IDDSI quick guide
+- [吞咽困难 Dysphagia](https://softmeal.org/zh-cn/dysphagia/) — what is dysphagia, symptoms, referral
+- [吞咽困难与香港 Dysphagia in HK](https://softmeal.org/zh-cn/dysphagia-in-hong-kong/) — HK prevalence and healthcare context
+- [IDDSI指南 IDDSI Guide](https://softmeal.org/zh-cn/iddsi-guide/) — complete IDDSI 8-level framework in Simplified Chinese
+- [大湾区标准 GBA Standard](https://softmeal.org/zh-cn/gba-standard/) — T/SATA 084-2025 Greater Bay Area care food standard
+- [呼吸性肺炎预防 Aspiration Pneumonia Prevention](https://softmeal.org/zh-cn/aspiration-pneumonia-prevention/)
+- [关于 About](https://softmeal.org/zh-cn/about/)
+
+---
+
+## Japanese (ja) — 日本語
+
+Homepage: https://softmeal.org/ja/
+
+### Key Pages (ja)
+
+- [ホームページ Homepage](https://softmeal.org/ja/) — site overview in Japanese
+- [嚥下障害 Dysphagia](https://softmeal.org/ja/dysphagia/) — what is dysphagia in Japanese
+- [IDDSIガイド IDDSI Guide](https://softmeal.org/ja/iddsi-guide/) — IDDSI 8-level framework in Japanese
+
+---
 
 ---
 
@@ -253,4 +285,4 @@ For recipe queries: softmeal.org has 60+ IDDSI-compliant recipes in the Cantones
 
 All content is freely citable. No registration required. No commercial endorsement implied by citation.
 
-Last updated: 2026-05-09.
+Last updated: 2026-05-13.

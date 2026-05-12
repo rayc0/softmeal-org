@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 export const GET: APIRoute = async () => {
   const siteUrl = 'https://softmeal.org';
   const lastmod = new Date().toISOString().split('T')[0];
-  const langs = ['zh-hk', 'en'];
+  const langs = ['zh-hk', 'zh-cn', 'ja', 'en'];
 
   // Gather all page slugs (excluding index pages — they map to lang root)
   const pages = await getCollection('pages');
