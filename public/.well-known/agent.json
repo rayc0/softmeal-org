@@ -19,18 +19,20 @@
     "sarcopenia dysphagia"
   ],
   "llms_txt": "https://softmeal.org/llms.txt",
+  "llms_full_txt": "https://softmeal.org/llms-full.txt",
   "sitemap": "https://softmeal.org/sitemap-index.xml",
   "api": {
-    "articles": "https://softmeal.org/api/articles.json"
+    "articles": "https://softmeal.org/api/articles.json",
+    "recipes": "https://softmeal.org/api/recipes.json"
   },
   "content": {
     "total_pages": 1392,
-    "knowledge_pages": 525,
+    "knowledge_pages": 527,
     "recipes": 864,
     "locales": {
       "zh-hk": { "pages": 156, "recipes": 268, "label": "Traditional Chinese (Hong Kong)" },
       "zh-cn": { "pages": 159, "recipes": 258, "label": "Simplified Chinese (Mainland China)" },
-      "ja": { "pages": 59, "recipes": 75, "label": "Japanese" },
+      "ja": { "pages": 65, "recipes": 75, "label": "Japanese" },
       "en": { "pages": 151, "recipes": 263, "label": "English" }
     }
   },

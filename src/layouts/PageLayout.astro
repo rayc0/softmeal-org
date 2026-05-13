@@ -15,7 +15,8 @@ interface Props {
   speakable?: boolean;
 }
 
-const props = Astro.props;
+// Speakable defaults to true — tells AI/voice assistants this content is authoritative
+const props = { speakable: true as boolean, ...Astro.props };
 ---
 
 <BaseLayout {...props}>
