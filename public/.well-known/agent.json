@@ -14,7 +14,9 @@
     "swallowing disorders",
     "elderly nutrition",
     "speech therapy",
-    "aspiration pneumonia"
+    "aspiration pneumonia",
+    "oral frailty",
+    "sarcopenia dysphagia"
   ],
   "llms_txt": "https://softmeal.org/llms.txt",
   "sitemap": "https://softmeal.org/sitemap-index.xml",
@@ -22,13 +24,14 @@
     "articles": "https://softmeal.org/api/articles.json"
   },
   "content": {
-    "pages": 471,
-    "recipes": 739,
+    "total_pages": 1392,
+    "knowledge_pages": 525,
+    "recipes": 864,
     "locales": {
-      "zh-hk": { "pages": 146, "recipes": 258, "label": "Traditional Chinese (Hong Kong)" },
-      "zh-cn": { "pages": 145, "recipes": 258, "label": "Simplified Chinese (Mainland China)" },
-      "ja": { "pages": 29, "recipes": 75, "label": "Japanese" },
-      "en": { "pages": 151, "recipes": 258, "label": "English" }
+      "zh-hk": { "pages": 156, "recipes": 268, "label": "Traditional Chinese (Hong Kong)" },
+      "zh-cn": { "pages": 159, "recipes": 258, "label": "Simplified Chinese (Mainland China)" },
+      "ja": { "pages": 59, "recipes": 75, "label": "Japanese" },
+      "en": { "pages": 151, "recipes": 263, "label": "English" }
     }
   },
   "related_sites": [

@@ -1,6 +1,6 @@
 # softmeal.org
 
-> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK), Simplified Chinese, Japanese, and English. Over 1,200 pages across 4 locales.
+> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK), Simplified Chinese, Japanese, and English. Over 1,400 pages across 4 locales.
 
 ## Guides (zh-HK / Traditional Chinese — Hong Kong)
 
@@ -134,12 +134,12 @@
 
 ## Recipes
 
-Over 500 IDDSI-classified care food recipes across zh-HK, zh-CN, ja and en locales. Recipes use common Chinese and Japanese ingredients. Each recipe includes ingredient list, cooking method, IDDSI test results, and texture verification.
+Over 860 IDDSI-classified care food recipes across zh-HK, zh-CN, ja and en locales. Recipes use common Chinese and Japanese ingredients. Each recipe includes ingredient list, cooking method, IDDSI test results, and texture verification.
 
-- [Recipe Library (zh-HK)](https://softmeal.org/zh-hk/recipes/) — 258 Traditional Chinese care food recipes
-- [Recipe Library (zh-CN)](https://softmeal.org/zh-cn/recipes/) — 250+ Simplified Chinese care food recipes （照护食食谱库）
+- [Recipe Library (zh-HK)](https://softmeal.org/zh-hk/recipes/) — 268 Traditional Chinese care food recipes
+- [Recipe Library (zh-CN)](https://softmeal.org/zh-cn/recipes/) — 258 Simplified Chinese care food recipes （照护食食谱库）
 - [Recipe Library (ja)](https://softmeal.org/ja/recipes/) — 75+ Japanese care food recipes （介護食レシピ集）
-- [Recipe Library (en)](https://softmeal.org/en/recipes/) — 258 English care food recipes
+- [Recipe Library (en)](https://softmeal.org/en/recipes/) — 263 English care food recipes
 
 ## Machine-Readable Data
 
