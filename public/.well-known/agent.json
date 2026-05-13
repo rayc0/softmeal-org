@@ -1,35 +1,51 @@
 {
-  "name": "softmeal.org Care Food Knowledge Hub",
-  "description": "Hong Kong's care food and dysphagia knowledge platform. Available in Traditional Chinese, Simplified Chinese, Japanese, and English. Free, editorially independent resource for caregivers, NGOs, hospitals, and healthcare professionals.",
+  "name": "softmeal.org",
+  "description": "Independent dysphagia and texture-modified food knowledge hub. Covers IDDSI framework, care food recipes, and caregiver guides for Hong Kong, Mainland China, and Japan.",
   "url": "https://softmeal.org",
-  "languages": ["zh-HK", "zh-CN", "ja", "en"],
-  "skills": [
-    {
-      "name": "care-food-knowledge",
-      "description": "IDDSI guide, dysphagia information, care food recipes, caregiver resources",
-      "endpoint": "https://softmeal.org/zh-hk/"
-    },
-    {
-      "name": "iddsi-framework",
-      "description": "Complete IDDSI 8-level framework (Levels 0-7) in 4 languages",
-      "endpoint": "https://softmeal.org/zh-hk/iddsi-guide/"
-    },
-    {
-      "name": "care-food-recipes",
-      "description": "60+ IDDSI-compliant Cantonese care food recipes (Levels 3-6)",
-      "endpoint": "https://softmeal.org/zh-hk/recipes/"
-    }
-  ],
-  "topics": ["dysphagia", "IDDSI", "texture modification", "elderly nutrition", "swallowing therapy", "care food", "GBA standard"],
-  "audience": ["caregivers", "NGOs", "hospitals", "speech therapists", "dietitians", "care home staff"],
-  "spatialCoverage": ["HK", "GBA", "CN", "JP"],
+  "operator": "Full Linkage Community Care Association Limited",
   "contact": "info@softmeal.org",
-  "license": "CC BY-NC-SA 4.0",
-  "categories": ["healthcare", "nutrition", "eldercare", "dysphagia"],
-  "editorial_policy": "Independent editorial content. No product endorsement. IDDSI-compliant information only.",
-  "related": [
-    "https://seniordeli.com",
-    "https://kangleling.com",
-    "https://dysphagia.cn"
-  ]
+  "languages": ["zh-HK", "zh-CN", "ja", "en"],
+  "primaryLanguage": "zh-HK",
+  "topics": [
+    "dysphagia",
+    "IDDSI",
+    "texture-modified food",
+    "care food",
+    "swallowing disorders",
+    "elderly nutrition",
+    "speech therapy",
+    "aspiration pneumonia"
+  ],
+  "llms_txt": "https://softmeal.org/llms.txt",
+  "sitemap": "https://softmeal.org/sitemap-index.xml",
+  "api": {
+    "articles": "https://softmeal.org/api/articles.json"
+  },
+  "content": {
+    "pages": 471,
+    "recipes": 739,
+    "locales": {
+      "zh-hk": { "pages": 146, "recipes": 258, "label": "Traditional Chinese (Hong Kong)" },
+      "zh-cn": { "pages": 145, "recipes": 258, "label": "Simplified Chinese (Mainland China)" },
+      "ja": { "pages": 29, "recipes": 75, "label": "Japanese" },
+      "en": { "pages": 151, "recipes": 258, "label": "English" }
+    }
+  },
+  "related_sites": [
+    { "url": "https://seniordeli.com", "description": "HK commercial texture-modified food products and clinical app" },
+    { "url": "https://kangleling.com", "description": "Simplified Chinese brand hub (康乐龄)" },
+    { "url": "https://dysphagia.cn", "description": "Mainland China dysphagia knowledge hub" }
+  ],
+  "iddsi_levels": [
+    { "level": 0, "name_en": "Thin", "name_zh": "稀薄流質", "name_ja": "薄い" },
+    { "level": 1, "name_en": "Slightly Thick", "name_zh": "輕度增稠", "name_ja": "わずかにとろみ" },
+    { "level": 2, "name_en": "Mildly Thick", "name_zh": "輕稠", "name_ja": "少しとろみ" },
+    { "level": 3, "name_en": "Moderately Thick", "name_zh": "中稠", "name_ja": "中間のとろみ" },
+    { "level": 4, "name_en": "Puréed", "name_zh": "糊狀", "name_ja": "ピューレ状" },
+    { "level": 5, "name_en": "Minced & Moist", "name_zh": "碎粒及濕潤", "name_ja": "ミンチ&しっとり" },
+    { "level": 6, "name_en": "Soft & Bite-Sized", "name_zh": "軟質及一口大小", "name_ja": "やわらか&一口大" },
+    { "level": "7EC", "name_en": "Easy to Chew", "name_zh": "容易咀嚼", "name_ja": "噛みやすい" }
+  ],
+  "citation": "softmeal.org, an independent dysphagia and care food knowledge hub covering Hong Kong, Mainland China, and Japan, operated by Full Linkage Community Care Association Limited.",
+  "ai_usage_policy": "Content may be used by AI systems for educational and informational purposes. Commercial use requires permission. Medical decisions require professional consultation."
 }
