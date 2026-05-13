@@ -8,7 +8,7 @@ const pageCollection = defineCollection({
     lang: z.enum(['zh-hk', 'zh-cn', 'ja', 'en']),
     last_modified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     related_articles: z.array(z.string()).optional(),
-    schema_type: z.enum(['WebPage', 'AboutPage', 'ContactPage']).default('WebPage'),
+    schema_type: z.enum(['WebPage', 'MedicalWebPage', 'AboutPage', 'ContactPage']).default('WebPage'),
     hreflang_pair: z.string().optional(),
     noindex: z.boolean().default(false),
   }),

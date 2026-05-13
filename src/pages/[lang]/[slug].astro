@@ -21,18 +21,32 @@ const { lang, title, description, hreflang_pair, schema_type, last_modified } = 
 
 const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
+const schemaLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const schemaLang = schemaLangMap[lang] ?? 'zh-HK';
 const currentUrl = Astro.url.href;
 
-const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ? {
+const articleType = schema_type === 'AboutPage' ? 'AboutPage'
+  : schema_type === 'MedicalWebPage' ? 'MedicalWebPage'
+  : 'Article';
+const articleSchema = (schema_type === 'WebPage' || schema_type === 'MedicalWebPage' || schema_type === 'AboutPage') ? {
   "@context": "https://schema.org",
-  "@type": schema_type === 'AboutPage' ? 'AboutPage' : 'Article',
+  "@type": articleType,
   "@id": `${currentUrl}#article`,
   "headline": title,
   "description": description,
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
+  "datePublished": last_modified,
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },
+  ...(schema_type === 'MedicalWebPage' ? {
+    "medicalAudience": [
+      { "@type": "MedicalAudience", "audienceType": "Caregiver" },
+      { "@type": "MedicalAudience", "audienceType": "Patient" }
+    ],
+    "lastReviewed": last_modified,
+    "reviewedBy": { "@id": `${siteUrl}/#org` }
+  } : {})
 } : null;
 
 // FAQPage schema — injected for iddsi-guide, locale-aware
@@ -1043,7 +1057,7 @@ const howToSchemaIddsi = slug === 'iddsi-guide' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何使用叉子壓力測試驗證食物 IDDSI 等級" : "How to test food texture using the IDDSI Fork Pressure Test",
   "description": lang === 'zh-hk' ? "用標準廚房叉子驗證食物達到指定 IDDSI 等級的步驟" : "Step-by-step guide to verifying IDDSI food texture levels using a fork",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "tool": [{"@type": "HowToTool", "name": lang === 'zh-hk' ? "叉子" : "Fork"}],
   "step": [
     {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "準備食物樣本" : "Prepare food sample", "text": lang === 'zh-hk' ? "取一小份食物，確保已冷卻至室溫" : "Take a small portion of food, cooled to room temperature"},
@@ -1057,7 +1071,7 @@ const howToSchemaDischarge = slug === 'hospital-discharge-planning' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "吞嚥困難患者出院後的過渡步驟" : "Steps for Transitioning a Dysphagia Patient from Hospital to Home",
   "description": lang === 'zh-hk' ? "從出院前準備、家居佈置到社區跟進的完整步驟指引" : "Complete step-by-step guide from pre-discharge preparation to community follow-up",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "出院前確認 IDDSI 等級及書面飲食建議書" : "Confirm IDDSI level and obtain written diet prescription before discharge", "text": lang === 'zh-hk' ? "向言語治療師確認食物及液體的 IDDSI 等級，並取得書面的吞嚥困難飲食建議書，包括增稠劑類型及份量指引。" : "Confirm food texture and drink thickness IDDSI levels with the SLP. Obtain a written Dysphagia Diet Prescription including thickener type and dosing instructions."},
     {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "安排出院後言語治療跟進預約" : "Arrange post-discharge speech therapy follow-up appointment", "text": lang === 'zh-hk' ? "在出院前確保已獲得門診言語治療或老人科日間醫院的跟進預約單，並確認預約日期。" : "Before leaving hospital, confirm an outpatient speech therapy or Geriatric Day Hospital follow-up appointment and obtain the appointment slip."},
@@ -1071,7 +1085,7 @@ const howToSchemaProfessionals = slug === 'for-professionals' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何為吞嚥困難患者進行 IDDSI 等級評估及制定照護計劃" : "How to assess IDDSI level and develop a dysphagia care plan for a patient",
   "description": lang === 'zh-hk' ? "從初步篩查到訂定 IDDSI 飲食等級及跨專業照護計劃的完整步驟" : "Complete steps from initial screening to IDDSI diet level prescription and interdisciplinary care planning",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     {
       "@type": "HowToStep",
@@ -1111,7 +1125,7 @@ const howToSchemaTubeTransition = slug === 'enteral-tube-oral-transition' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "由鼻胃喉過渡至口腔進食的分階段協議" : "Step-by-step Protocol for Transitioning from Nasogastric Tube to Oral Feeding",
   "description": lang === 'zh-hk' ? "言語治療師指導下，從口腔刺激到全口腔進食的完整過渡步驟" : "Complete staged transition from oral stimulation to full oral feeding under SLP guidance",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "第一階段：口腔刺激（不涉及吞嚥）" : "Phase 1: Oral Stimulation (Without Swallowing)", "text": lang === 'zh-hk' ? "用棉棒或紗布蘸取少量涼水輕拭口腔黏膜，讓患者嗅聞食物香氣但不進食。鼻胃喉維持全量管飼。" : "Use a cotton swab or damp gauze to moisturise the oral mucosa; allow the patient to smell food without eating. Maintain full NG tube feeding." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "第二階段：少量口腔試食（言語治療師在場）" : "Phase 2: Small Oral Trial (with SLP Present)", "text": lang === 'zh-hk' ? "言語治療師在場下，讓患者吞嚥少量（1–3ml）適合 IDDSI 質地的食物或液體，觀察嗆咳反應及進食後聲音質量。" : "With the SLP present, the patient swallows small amounts (1–3 ml) of IDDSI-appropriate food or liquid. Observe coughing response and voice quality after swallowing." },
@@ -1125,7 +1139,7 @@ const howToSchemaCareHome = slug === 'iddsi-for-care-homes' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何在香港院舍推行 IDDSI 標準：試點計劃步驟" : "How to Implement IDDSI Standards in a Hong Kong Care Home: Pilot Programme Steps",
   "description": lang === 'zh-hk' ? "從員工培訓到試點執行的院舍 IDDSI 推行完整步驟指引" : "Complete step-by-step guide from staff training to pilot execution for care home IDDSI implementation",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "選取 10 名試點居民並採購設備" : "Select 10 pilot residents and procure equipment", "text": lang === 'zh-hk' ? "選取已有言語治療師評估的居民，涵蓋不同 IDDSI 等級。採購攪拌機、電子磅、針筒及所需增稠劑庫存，設計個人飲食記錄表格。" : "Select residents with existing SLP assessments spanning a range of IDDSI levels. Procure a blender, digital scale, syringes and thickener stock; design individual dietary record forms." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "完成廚師及護理員基礎 IDDSI 培訓" : "Complete foundational IDDSI training for chefs and care workers", "text": lang === 'zh-hk' ? "培訓內容涵蓋 IDDSI 8 個等級定義、叉子壓力測試及針筒流量測試操作，以及各等級食物的製備標準和增稠劑量度方法。" : "Training covers the definitions of all 8 IDDSI levels, fork pressure test and syringe flow test procedures, preparation standards for each level, and thickener measurement." },
@@ -1139,7 +1153,7 @@ const howToSchemaSpeechReferral = slug === 'hospital-allied-health-hk' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何在香港公立醫療系統獲得言語治療轉介" : "How to Get a Speech Therapy Referral in Hong Kong's Public Healthcare System",
   "description": lang === 'zh-hk' ? "從首次察覺吞嚥困難到獲得言語治療師評估的完整步驟指引" : "Step-by-step guide from identifying dysphagia symptoms to obtaining a speech-language pathologist assessment",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "由家庭醫生或普通科門診初步評估" : "Initial assessment by GP or General Outpatient Clinic (GOPC)", "text": lang === 'zh-hk' ? "若察覺吞嚥困難症狀（進食時咳嗽、食物或液體嗆入鼻腔、體重下降），首先前往家庭醫生或普通科門診（GOPC）進行初步評估，並要求轉介至言語治療或相關專科。" : "If you notice dysphagia symptoms (coughing during meals, food or liquid entering the nose, unexplained weight loss), begin with your family doctor or a GOPC. Ask for a referral to speech therapy or to a relevant specialist clinic." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "如為急性症狀，直接前往急症室" : "Go directly to A&E if symptoms are acute", "text": lang === 'zh-hk' ? "若吞嚥困難突然出現或迅速惡化（如中風後、誤吸後），應直接前往最近急症室。急症入院後可由住院醫生直接轉介病房言語治療師，通常在數日內可獲評估。" : "If dysphagia is sudden or rapidly worsening (e.g., after a stroke or aspiration event), go directly to the nearest Accident and Emergency department. An inpatient admission allows the attending doctor to refer directly to the ward SLP — typically assessed within days." },
@@ -1154,7 +1168,7 @@ const howToSchemaPostStroke = slug === 'post-stroke-dysphagia-hk' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "中風後吞嚥困難患者由出院到穩定家居飲食的步驟指引" : "Steps from Hospital Discharge to Stable Home Diet for Post-Stroke Dysphagia",
   "description": lang === 'zh-hk' ? "從出院前準備到建立穩定家居改良質感飲食的完整步驟" : "Complete step-by-step guide from pre-discharge preparation to establishing a stable home modified texture diet",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "出院前確認 IDDSI 等級及書面飲食建議書" : "Confirm IDDSI levels and obtain written diet prescription before discharge", "text": lang === 'zh-hk' ? "向言語治療師確認食物及液體的 IDDSI 等級，取得書面吞嚥困難飲食建議書，包括增稠劑類型、份量及進食姿勢要求。" : "Confirm food texture and drink thickness IDDSI levels with the SLP. Obtain a written Dysphagia Diet Prescription including thickener type, dose and posture requirements." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "確認出院後言語治療跟進預約" : "Confirm post-discharge speech therapy follow-up appointment", "text": lang === 'zh-hk' ? "在離開醫院前確保已獲得門診言語治療或老人科日間醫院的跟進預約單，並確認預約日期及地點。" : "Before leaving hospital, confirm an outpatient speech therapy or Geriatric Day Hospital follow-up appointment and obtain the appointment slip with date and location." },
@@ -1168,7 +1182,7 @@ const howToSchemaCancerDysphagia = slug === 'cancer-treatment-dysphagia' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "頭頸癌治療後飲食康復的分階段步驟" : "Staged Diet Recovery After Head and Neck Cancer Treatment",
   "description": lang === 'zh-hk' ? "從急性毒性期到長期康復的飲食管理步驟指引" : "Step-by-step guide from acute toxicity phase dietary management to long-term swallowing rehabilitation",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "治療前取得吞嚥功能基線評估" : "Obtain baseline swallowing assessment before treatment", "text": lang === 'zh-hk' ? "在放射治療開始前，由腫瘤科轉介言語治療師進行基線吞嚥功能評估，記錄目前的吞嚥功能及 IDDSI 等級，並開始預防性吞嚥運動訓練。" : "Before radiotherapy begins, request SLP referral from the oncologist for a baseline swallowing assessment. Document current swallowing function and IDDSI level, and begin prophylactic swallowing exercises." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "急性毒性期（治療期間）：選用冷軟流質及糊狀食物" : "Acute toxicity phase (during treatment): use cold soft liquids and purées", "text": lang === 'zh-hk' ? "口腔黏膜炎及吞嚥疼痛高峰期，以冷或室溫的流質及 IDDSI Level 4 糊狀食物為主，在止痛藥效時段進食，少食多餐，必要時暫時使用鼻胃管補充營養。" : "During peak mucositis and odynophagia, prioritise cold or room-temperature liquids and IDDSI Level 4 puréed foods. Time meals to coincide with analgesic effect; eat small, frequent meals; use nasogastric tube supplementation if oral intake is inadequate." },
@@ -1183,7 +1197,7 @@ const howToSchemaSltReports = slug === 'understanding-slt-reports' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "收到言語治療師吞嚥評估報告後的跟進步驟" : "Steps to Take After Receiving a Speech Therapy Swallowing Assessment Report",
   "description": lang === 'zh-hk' ? "從閱讀報告到正確執行飲食建議及安排覆查的完整步驟" : "From reading the report to implementing dietary recommendations and arranging follow-up assessment",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "閱讀報告並識別關鍵發現" : "Read the report and identify key findings", "text": lang === 'zh-hk' ? "仔細閱讀報告，找出以下關鍵資訊：IDDSI 食物等級及飲品等級（兩者可能不同）；是否有穿透或誤吸記錄；是否確認沉默式誤吸；建議使用哪些代償策略；復康潛能評估結果。" : "Read the report carefully and identify: the recommended IDDSI food level and drink level (these may differ); whether penetration or aspiration is documented; whether silent aspiration is confirmed; which compensatory strategies are recommended; and the rehabilitation potential assessment." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "按照 IDDSI 等級調整患者的所有食物和飲品" : "Adjust all food and drinks to the recommended IDDSI level", "text": lang === 'zh-hk' ? "立即按照報告中的 IDDSI 等級調整患者的所有飲食，包括正餐、點心及所有液體。如不清楚如何製作某個等級的食物，可向言語治療師或護士索取食物製備指引。不應等到下次覆診才開始執行。" : "Immediately adjust all food and drinks to the IDDSI levels specified in the report — this applies to all meals, snacks and liquids. If you are unsure how to prepare food at a particular level, ask the SLP or nurse for food preparation guidance. Do not wait until the next appointment to begin." },
@@ -1198,7 +1212,7 @@ const howToSchemaTextureMod = slug === 'food-texture-modification-basics' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "按 IDDSI 等級在家製備改良食物的步驟" : "Step-by-Step Home Food Texture Modification by IDDSI Level",
   "description": lang === 'zh-hk' ? "從確認 IDDSI 等級到製備、測試及安全上桌的完整步驟" : "Complete process from confirming IDDSI level to preparation, testing and safe serving",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     { "@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "確認言語治療師指定的 IDDSI 食物等級及飲品等級" : "Confirm the SLP-prescribed IDDSI food level and drink level", "text": lang === 'zh-hk' ? "從言語治療師的評估報告或書面飲食建議書中確認食物等級（Level 3–7）及飲品等級（Level 0–4）。兩者可能不同。如有疑問，在開始製備前聯絡言語治療師確認。" : "From the SLP's assessment report or written Dysphagia Diet Prescription, confirm the food level (Level 3–7) and drink level (Level 0–4). These may differ. If in doubt, contact the SLP to confirm before beginning preparation." },
     { "@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "選擇合適的食材並烹煮至足夠軟熟" : "Select appropriate ingredients and cook until sufficiently soft", "text": lang === 'zh-hk' ? "選用天然質地較軟的食材（豆腐、南瓜、魚類、蛋）；避免纖維粗韌、黏韌或圓形細小的食材。烹煮時間要比一般標準延長，確保食材徹底熟透且可用叉子輕易壓碎。" : "Choose naturally softer ingredients (tofu, pumpkin, fish, eggs); avoid fibrous, sticky or small round foods. Cook for longer than standard to ensure ingredients are thoroughly soft and can be easily mashed with a fork." },
@@ -1213,7 +1227,7 @@ const howToSchemaKitchenSetup = slug === 'home-kitchen-setup-hk' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何為吞嚥困難患者設置家居廚房" : "How to Set Up a Dysphagia-Friendly Kitchen at Home",
   "description": lang === 'zh-hk' ? "從選購攪拌機到適應性餐具及廚房安全的完整設置步驟" : "Complete steps from blender selection to adaptive utensils and kitchen safety",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "tool": [
     {"@type": "HowToTool", "name": lang === 'zh-hk' ? "攪拌機（1000W+，濕式刀頭）" : "Blender (1000W+, wet blade)"},
     {"@type": "HowToTool", "name": lang === 'zh-hk' ? "電子磅（精確至 1g）" : "Digital kitchen scale (1g precision)"},
@@ -1232,7 +1246,7 @@ const howToSchemaSwallowingExercises = slug === 'swallowing-exercises-hk' ? {
   "@type": "HowTo",
   "name": lang === 'zh-hk' ? "如何進行 Shaker 頭部提升運動（吞嚥訓練）" : "How to Perform the Shaker Head Lift Exercise for Swallowing Rehabilitation",
   "description": lang === 'zh-hk' ? "在言語治療師指導下進行 Shaker 運動的分步指引" : "Step-by-step guide to the Shaker head lift exercise under speech therapist guidance",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "step": [
     {"@type": "HowToStep", "position": 1, "name": lang === 'zh-hk' ? "確認適合性（必須先諮詢言語治療師）" : "Confirm suitability (SLP assessment required first)", "text": lang === 'zh-hk' ? "Shaker 運動並非適合所有患者。頸椎問題患者禁止進行。必須先由言語治療師評估確認適合後才開始。" : "The Shaker exercise is not appropriate for all patients. Patients with cervical spine problems must not perform this exercise. Suitability must be confirmed by an SLP assessment before starting."},
     {"@type": "HowToStep", "position": 2, "name": lang === 'zh-hk' ? "採取正確起始姿勢" : "Adopt the correct starting position", "text": lang === 'zh-hk' ? "患者平躺在床上或地板上（仰臥位），雙肩平放，不離開床面。頸部放鬆，不緊繃。" : "Lie flat on a bed or floor (supine position), both shoulders flat and not raised. Neck should be relaxed, not tense."},
@@ -1248,7 +1262,7 @@ const howToSchema = howToSchemaIddsi ?? howToSchemaDischarge ?? howToSchemaProfe
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": schemaLang,
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": lang === 'zh-hk' ? "主頁" : "Home", "item": `https://softmeal.org/${lang}/`},
     {"@type": "ListItem", "position": 2, "name": title, "item": `https://softmeal.org/${lang}/${slug}/`}
