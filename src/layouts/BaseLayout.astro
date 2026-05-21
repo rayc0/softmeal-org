@@ -36,6 +36,19 @@ const htmlLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 const canonical = canonicalUrl || Astro.url.href;
 
+// OG locale codes use underscores — map from internal lang key
+const ogLocaleMap: Record<string, string> = {
+  'zh-hk': 'zh_HK',
+  'zh-cn': 'zh_CN',
+  'ja': 'ja_JP',
+  'en': 'en_US',
+};
+const ogLocale = ogLocaleMap[lang] ?? 'zh_HK';
+// All other locales become og:locale:alternate
+const ogLocaleAlternates = Object.entries(ogLocaleMap)
+  .filter(([k]) => k !== lang)
+  .map(([, v]) => v);
+
 // Organization (NGO) JSON-LD — emitted on all pages
 const orgSchema = {
   "@context": "https://schema.org",
@@ -121,7 +134,10 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="softmeal.org" />
-    <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternates.map((alt) => (
+      <meta property="og:locale:alternate" content={alt} />
+    ))}
 
     <!-- og:image — default fallback (pages with custom ogImage prop override this) -->
     {ogImage ? (
