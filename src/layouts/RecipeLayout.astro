@@ -64,12 +64,6 @@ type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
 const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
 const l: LangKey = validLangs.has(lang) ? (lang as LangKey) : 'zh-hk';
 
-// IDDSI level accent colours (matches IddsiLevelBadge palette)
-const levelAccentColors: Record<number, string> = {
-  0: '#93c5fd', 1: '#60a5fa', 2: '#a78bfa', 3: '#f59e0b',
-  4: '#f97316', 5: '#ef4444', 6: '#8b5cf6', 7: '#6b7280',
-};
-const accentColor = levelAccentColors[iddsiLevel] ?? '#10b981';
 
 const isZh = lang === 'zh-hk';
 const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
