@@ -52,3 +52,4 @@ Allow: /
 
 Sitemap: https://softmeal.org/sitemap-index.xml
 Sitemap: https://softmeal.org/sitemap.xml
+Sitemap: https://softmeal.org/sitemap-images.xml
