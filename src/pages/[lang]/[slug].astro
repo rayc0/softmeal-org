@@ -17,36 +17,68 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await page.render();
-const { lang, title, description, hreflang_pair, schema_type, last_modified } = page.data;
+const { lang, title, description, schema_type, last_modified, related_articles } = page.data;
 
-const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+// Resolve related_articles slugs to titles
+const allPages = await getCollection('pages');
+const resolvedRelated = (related_articles ?? []).map((raSlug: string) => {
+  const match = allPages.find((p) => {
+    const parts = p.id.split('/');
+    const s = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return s === raSlug && parts[0] === lang;
+  });
+  return { slug: raSlug, title: match?.data.title ?? raSlug };
+});
+
 const siteUrl = 'https://softmeal.org';
 const schemaLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
 const schemaLang = schemaLangMap[lang] ?? 'zh-HK';
 const currentUrl = Astro.url.href;
+const pageSlug = Astro.params.slug;
+
+// Build collection-driven hreflang: emit only locales where the same slug exists.
+const LOCALE_BCP47_PAGES: Record<string, string> = {
+  'zh-hk': 'zh-HK',
+  'en': 'en',
+};
+const hreflangLinks: { hreflang: string; href: string }[] = [];
+let xDefaultHref: string | null = null;
+
+for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_PAGES)) {
+  const exists = allPages.some((p) => {
+    const parts = p.id.split('/');
+    return parts[0] === locale && parts[parts.length - 1].replace(/\.mdx?$/, '') === pageSlug;
+  });
+  if (exists) {
+    const href = `${siteUrl}/${locale}/${pageSlug}/`;
+    hreflangLinks.push({ hreflang: bcp47, href });
+    if (locale === 'zh-hk') xDefaultHref = href;
+  }
+}
+hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? hreflangLinks[0]?.href ?? `${siteUrl}/zh-hk/` });
 
 const articleType = schema_type === 'AboutPage' ? 'AboutPage'
   : schema_type === 'MedicalWebPage' ? 'MedicalWebPage'
   : 'Article';
 const articleSchema = (schema_type === 'WebPage' || schema_type === 'MedicalWebPage' || schema_type === 'AboutPage') ? {
   "@context": "https://schema.org",
-  "@type": articleType,
+  "@type": schema_type === 'AboutPage' ? 'AboutPage' : ['Article', 'MedicalWebPage'],
   "@id": `${currentUrl}#article`,
   "headline": title,
+  "name": title,
   "description": description,
-  "inLanguage": schemaLang,
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
   "datePublished": last_modified,
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },
-  ...(schema_type === 'MedicalWebPage' ? {
-    "medicalAudience": [
-      { "@type": "MedicalAudience", "audienceType": "Caregiver" },
-      { "@type": "MedicalAudience", "audienceType": "Patient" }
-    ],
-    "lastReviewed": last_modified,
-    "reviewedBy": { "@id": `${siteUrl}/#org` }
-  } : {})
+  "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "caregivers, care home staff, speech and language therapists, dietitians"
+  }
 } : null;
 
 // FAQPage schema — injected for iddsi-guide, locale-aware
@@ -1281,9 +1313,31 @@ const schemas = [
   title={title}
   description={description}
   lang={lang}
-  hreflangPair={hreflang_pair}
-  hreflangPairLang={hreflangPairLang}
+  hreflangLinks={hreflangLinks}
   schemaJson={schemas}
 >
   <Content />
+
+  {resolvedRelated.length > 0 && (
+    <nav
+      aria-label={lang === 'zh-hk' ? '相關文章' : 'Related articles'}
+      class="mt-10 pt-6 border-t border-gray-200"
+    >
+      <h2 class="text-lg font-semibold text-gray-800 mb-3">
+        {lang === 'zh-hk' ? '相關文章' : 'Related articles'}
+      </h2>
+      <ul class="space-y-1 list-disc list-inside">
+        {resolvedRelated.map(({ slug: raSlug, title: raTitle }) => (
+          <li>
+            <a
+              href={`/${lang}/${raSlug}/`}
+              class="text-primary hover:underline"
+            >
+              {raTitle}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
 </PageLayout>

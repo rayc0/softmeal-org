@@ -78,9 +78,26 @@ const langOptions: { code: LangKey; label: string; href: string }[] = [
   { code: 'en',    label: 'English',  href: '/en/' },
 ];
 
-const links = navLinks[l] ?? navLinks['zh-hk'];
-const tagline = taglines[l];
-const appLabel = appLabels[l];
+const enLinks = [
+  { href: `/en/`, label: 'Home' },
+  { href: `/en/dysphagia/`, label: 'Dysphagia' },
+  { href: `/en/iddsi-guide/`, label: 'IDDSI Guide' },
+  { href: `/en/gba-standard/`, label: 'GBA Standard' },
+  { href: `/en/recipes/`, label: 'Recipes' },
+  { href: `/en/resources/`, label: 'Resources' },
+  { href: `/en/tools/`, label: 'Tools' },
+  { href: `/en/for-professionals/`, label: 'Professionals' },
+  { href: `/en/supplier-directory/`, label: 'Suppliers' },
+  { href: `/en/about/`, label: 'About' },
+];
+
+const appLabel = lang === 'zh-hk' ? '免費應用程式 ↗' : 'Free App ↗';
+const careEZLabel = lang === 'zh-hk' ? 'CareEZ 臨床AI ↗' : 'CareEZ ↗';
+
+const links = lang === 'zh-hk' ? zhLinks : enLinks;
+const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const altLabel = lang === 'zh-hk' ? 'English' : '繁體中文';
+const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
 ---
 
 <!-- CSS-only hamburger toggle -->
@@ -187,6 +204,12 @@ const appLabel = appLabels[l];
           <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
              class="block text-primary-200 hover:text-white no-underline px-3 py-2 text-sm">
             {appLabel} ↗
+          </a>
+        </li>
+        <li class="pl-2 border-l border-green-700">
+          <a href="https://careez.org" target="_blank" rel="noopener"
+             class="text-yellow-300 hover:text-white no-underline text-xs font-semibold">
+            {careEZLabel}
           </a>
         </li>
       </ul>

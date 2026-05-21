@@ -1,0 +1,198 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+
+const lang = 'en';
+const title = 'OpenClaw — HK Care Food Standard as Multilingual AI Agent Skills | softmeal.org';
+const description = 'The Hong Kong Council of Social Service (HKCSS) Care Food Standard is now published as multilingual AI agent skills on OpenClaw, ready to integrate into any Claude Agent SDK application.';
+const siteUrl = 'https://softmeal.org';
+const canonicalUrl = `${siteUrl}/en/openclaw/`;
+
+const skills = [
+  {
+    id: 'hkcss-care-food-level-classify',
+    desc: 'Classify food texture against the HKCSS 4-level care food scale; returns a level label and evidence-based rationale.',
+    lang: 'Traditional Chinese / English',
+  },
+  {
+    id: 'hkcss-care-food-prep-guide',
+    desc: 'Generate preparation guidelines for a given ingredient and target texture level, covering cutting technique, cooking method, and plating.',
+    lang: 'Traditional Chinese / English',
+  },
+  {
+    id: 'hkcss-care-food-menu-check',
+    desc: 'Audit a care-home menu, flag dishes that do not meet the target care food level, and suggest modifications.',
+    lang: 'Traditional Chinese',
+  },
+  {
+    id: 'hkcss-care-food-thickener-calc',
+    desc: 'Calculate thickener dosage for a given liquid type, volume, and target consistency level.',
+    lang: 'Traditional Chinese / English',
+  },
+  {
+    id: 'hkcss-care-food-caregiver-tips',
+    desc: 'Generate mealtime safety tips for caregivers at a specified texture level, in Cantonese, Mandarin, or English.',
+    lang: 'Traditional Chinese (Cantonese + Mandarin) / English',
+  },
+  {
+    id: 'hkcss-care-food-iddsi-crosswalk',
+    desc: 'Cross-reference HKCSS care food levels with the IDDSI international framework (Levels 0–7), with notes on differences and applicable contexts.',
+    lang: 'Traditional Chinese / English',
+  },
+];
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  lang={lang}
+  hreflangLinks={[
+    { hreflang: 'zh-HK', href: `${siteUrl}/zh-hk/openclaw/` },
+    { hreflang: 'en', href: `${siteUrl}/en/openclaw/` },
+    { hreflang: 'x-default', href: `${siteUrl}/zh-hk/openclaw/` },
+  ]}
+  canonicalUrl={canonicalUrl}
+>
+  <!-- Hero -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 12px; padding: 48px 40px; margin-bottom: 40px; color: white;">
+    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+      <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; font-size: 36px; line-height: 1;">🐾</div>
+      <div>
+        <h1 style="margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">OpenClaw</h1>
+        <p style="margin: 4px 0 0; color: #93c5fd; font-size: 0.9rem; font-weight: 500;">AI Agent Skills Marketplace</p>
+      </div>
+    </div>
+    <p style="font-size: 1.2rem; line-height: 1.6; color: #bfdbfe; max-width: 640px; margin: 0 0 24px;">
+      The <strong style="color: white;">Hong Kong Council of Social Service (HKCSS) Care Food Standard</strong> is now published as multilingual AI agent skills on <strong style="color: white;">OpenClaw</strong> — ready to drop into any application built on the Claude Agent SDK.
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+      <a href="https://openclaw.ai" target="_blank" rel="noopener"
+         style="background: #3b82f6; color: white; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.95rem;">
+        OpenClaw Skills Marketplace →
+      </a>
+      <a href="https://www.seniordeli.com/openclaw" target="_blank" rel="noopener"
+         style="background: rgba(255,255,255,0.12); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);">
+        SeniorDeli Primary Docs
+      </a>
+    </div>
+  </div>
+
+  <!-- Standards attribution -->
+  <div style="background: #f0f9ff; border-left: 4px solid #0284c7; border-radius: 6px; padding: 20px 24px; margin-bottom: 40px;">
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: #0c4a6e;">
+      <strong>Standards attribution:</strong> These skills are grounded in the Hong Kong Council of Social Service (HKCSS) Care Food Standard. The HKCSS Care Food Guide copyright belongs to HKCSS. This skill set was developed by
+      <a href="https://seniordeli.com/" target="_blank" rel="noopener" style="color: #0284c7;">SeniorDeli (康樂齡)</a>
+      under the HKCSS Care Food Guide licence terms, for academic, non-commercial, and social-service use.
+    </p>
+  </div>
+
+  <!-- Skills table -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 20px;">6 Published Skills</h2>
+  <div style="overflow-x: auto; margin-bottom: 48px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">Skill ID</th>
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">Description</th>
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        {skills.map((skill, i) => (
+          <tr style={i % 2 === 0 ? 'background: white;' : 'background: #f8fafc;'}>
+            <td style="padding: 12px 16px; font-family: monospace; font-size: 0.82rem; color: #1d4ed8; border-bottom: 1px solid #e2e8f0; white-space: nowrap;">
+              {skill.id}
+            </td>
+            <td style="padding: 12px 16px; color: #374151; border-bottom: 1px solid #e2e8f0; line-height: 1.5;">{skill.desc}</td>
+            <td style="padding: 12px 16px; color: #6b7280; border-bottom: 1px solid #e2e8f0; white-space: nowrap; font-size: 0.82rem;">{skill.lang}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Code examples -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Quick Start</h2>
+  <p style="color: #64748b; margin-bottom: 24px; font-size: 0.95rem;">Install via npm or reference directly in the Claude Agent SDK.</p>
+
+  <!-- npm install -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">Install</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.88rem; line-height: 1.6;"><code>npm install @openclaw/hkcss-care-food-skills</code></pre>
+  </div>
+
+  <!-- JSON usage -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">JSON Reference</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.6;"><code>{`{
+  "skills": [
+    {
+      "source": "openclaw",
+      "id": "hkcss-care-food-level-classify",
+      "version": "1.0.0",
+      "lang": "en"
+    }
+  ]
+}`}</code></pre>
+  </div>
+
+  <!-- TypeScript usage -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">TypeScript Example</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.6;"><code>{`import { loadSkill } from '@openclaw/hkcss-care-food-skills';
+
+const classify = await loadSkill('hkcss-care-food-level-classify', {
+  lang: 'en',
+});
+
+const result = await classify.run({
+  food: 'Steamed egg',
+  context: 'elderly care',
+});
+
+console.log(result.level);    // e.g. "Level 2 — Minced & Moist"
+console.log(result.rationale); // detailed evidence`}</code></pre>
+  </div>
+
+  <!-- Links -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 20px;">Links & Resources</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px;">
+    {[
+      { label: 'OpenClaw Marketplace', href: 'https://openclaw.ai', icon: '🐾', desc: 'Browse all published skills' },
+      { label: 'npm Package', href: 'https://www.npmjs.com/package/@openclaw/hkcss-care-food-skills', icon: '📦', desc: '@openclaw/hkcss-care-food-skills' },
+      { label: 'GitHub Source', href: 'https://github.com/seniordeli/openclaw-hkcss-care-food', icon: '🐙', desc: 'Apache-2.0 licensed' },
+      { label: 'ClawHub Docs', href: 'https://clawhub.openclaw.ai/hkcss-care-food', icon: '📖', desc: 'Full skill docs & examples' },
+      { label: 'SeniorDeli Primary Docs', href: 'https://seniordeli.com/openclaw', icon: '🏠', desc: 'Primary technical docs & updates' },
+    ].map(link => (
+      <a href={link.href} target="_blank" rel="noopener"
+         style="display: block; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; text-decoration: none; background: white;">
+        <div style="font-size: 1.5rem; margin-bottom: 8px;">{link.icon}</div>
+        <div style="font-weight: 600; color: #1d4ed8; margin-bottom: 4px; font-size: 0.9rem;">{link.label}</div>
+        <div style="color: #64748b; font-size: 0.8rem;">{link.desc}</div>
+      </a>
+    ))}
+  </div>
+
+  <!-- License -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 40px;">
+    <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin: 0 0 12px;">Licences</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+      <span style="background: #dcfce7; color: #166534; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;">Code: Apache-2.0</span>
+      <span style="background: #dbeafe; color: #1e40af; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;">Skill content: CC-BY-SA 4.0</span>
+    </div>
+    <p style="margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.6;">
+      Skill code is open-sourced under Apache-2.0. The HKCSS care food knowledge embedded in the skills is licensed under CC-BY-SA 4.0 —
+      attribution required (HKCSS Care Food Guide, developed by SeniorDeli).
+      See <a href="https://github.com/seniordeli/openclaw-hkcss-care-food/blob/main/LICENSE" target="_blank" rel="noopener" style="color: #1d4ed8;">LICENSE</a> and
+      <a href="https://github.com/seniordeli/openclaw-hkcss-care-food/blob/main/CONTENT_LICENSE.md" target="_blank" rel="noopener" style="color: #1d4ed8;">CONTENT_LICENSE.md</a>.
+    </p>
+  </div>
+
+  <!-- Mirror note -->
+  <div style="background: #fffbeb; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px 20px; margin-bottom: 8px;">
+    <p style="margin: 0; font-size: 0.85rem; color: #78350f; line-height: 1.6;">
+      This page is a mirror of <a href="https://seniordeli.com/openclaw" target="_blank" rel="noopener" style="color: #92400e; font-weight: 600;">seniordeli.com/openclaw</a>.
+      For primary technical documentation, changelogs, and updates, refer to the SeniorDeli page.
+      OpenClaw canonical URL: <a href="https://openclaw.ai" target="_blank" rel="noopener" style="color: #92400e; font-weight: 600;">openclaw.ai</a>
+    </p>
+  </div>
+</PageLayout>

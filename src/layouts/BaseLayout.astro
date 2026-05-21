@@ -1,28 +1,34 @@
 ---
 import '../styles/global.css';
 
+interface HreflangEntry {
+  /** BCP-47 language tag, e.g. "zh-HK", "en", "x-default" */
+  hreflang: string;
+  href: string;
+}
+
 interface Props {
   title: string;
   description: string;
   lang?: string;
-  hreflangPair?: string;
-  hreflangPairLang?: string;
+  /** Full list of hreflang alternates (including self + x-default).
+   *  When provided, replaces the old hreflangPair/hreflangPairLang props. */
+  hreflangLinks?: HreflangEntry[];
   canonicalUrl?: string;
   schemaJson?: object[];
   ogImage?: string;
-  speakable?: boolean;
+  ogType?: string;
 }
 
 const {
   title,
   description,
   lang = 'zh-hk',
-  hreflangPair,
-  hreflangPairLang,
+  hreflangLinks,
   canonicalUrl,
   schemaJson = [],
   ogImage,
-  speakable = false,
+  ogType = 'website',
 } = Astro.props;
 
 const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
@@ -30,21 +36,26 @@ const htmlLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 const canonical = canonicalUrl || Astro.url.href;
 
-const hreflangMap: Record<string, string> = {
-  'zh-hk': 'zh-HK',
-  'zh-cn': 'zh-CN',
-  'ja': 'ja',
-  'en': 'en',
-};
-
-// Organization JSON-LD — emitted on all pages
+// Organization (NGO) JSON-LD — emitted on all pages
 const orgSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "NGO"],
   "@id": `${siteUrl}/#org`,
   "name": "softmeal.org",
-  "alternateName": "香港照護食知識中心",
   "url": `${siteUrl}/`,
+  "logo": `${siteUrl}/og-default.png`,
+  "description": htmlLang === 'zh-HK'
+    ? "香港首個免費照護食知識中心，為照顧者、院舍及醫療專業人員提供 IDDSI 指南、食譜及資源。獨立編輯，非商業。"
+    : "Hong Kong's first free dysphagia and texture-modified food knowledge hub — IDDSI framework guides, recipes, and resources for caregivers, care homes, and healthcare professionals. Editorially independent, non-commercial.",
+  "knowsAbout": [
+    "Dysphagia", "IDDSI Framework", "Texture-modified diet", "Thickened fluids",
+    "Aspiration pneumonia prevention", "Elderly nutrition", "Care home dietetics",
+    "Speech and language therapy", "EAT-10 screening", "GUSS screening"
+  ],
+  "areaServed": [
+    {"@type": "AdministrativeArea", "name": "Hong Kong"},
+    {"@type": "AdministrativeArea", "name": "Greater Bay Area"}
+  ],
   "sameAs": [
     "https://seniordeli.com/",
     "https://kangleling.com/",
@@ -52,33 +63,37 @@ const orgSchema = {
   ]
 };
 
-// WebSite JSON-LD — emitted on all pages
+// WebSite JSON-LD — emitted on all pages, with SearchAction in current locale
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${siteUrl}/#website`,
   "name": "softmeal.org",
+  "alternateName": htmlLang === 'zh-HK' ? "香港照護食知識中心" : "Soft Meal Hong Kong",
   "url": siteUrl,
+  "inLanguage": ["zh-HK", "en"],
+  "publisher": {"@id": `${siteUrl}/#org`},
   "potentialAction": {
     "@type": "SearchAction",
-    "target": {"@type": "EntryPoint", "urlTemplate": `${siteUrl}/zh-hk/?q={search_term_string}`},
+    "target": {"@type": "EntryPoint", "urlTemplate": `${siteUrl}/${lang}/?q={search_term_string}`},
     "query-input": "required name=search_term_string"
   }
 };
 
-// Speakable schema — emitted on article pages when speakable=true
-const speakableSchema = speakable ? {
+// Speakable — for voice assistants + AI engines. Targets common content selectors.
+const speakableSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": canonical,
+  "@id": `${canonical}#speakable`,
   "speakable": {
     "@type": "SpeakableSpecification",
-    "cssSelector": ["h1", "h2", ".article-summary", "article p:first-of-type"]
+    "cssSelector": ["h1", "h2", ".description", "main p:first-of-type"]
   },
-  "url": canonical
-} : null;
+  "url": canonical,
+  "inLanguage": htmlLang
+};
 
-const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema ? [speakableSchema] : [])];
+const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
 ---
 
 <!DOCTYPE html>
@@ -94,24 +109,16 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema
 
     <link rel="canonical" href={canonical} />
 
-    <!-- hreflang — all 4 locales + x-default -->
-    <link rel="alternate" hreflang="zh-HK" href={lang === 'zh-hk' ? canonical : `${siteUrl}/zh-hk/`} />
-    <link rel="alternate" hreflang="zh-CN" href={lang === 'zh-cn' ? canonical : `${siteUrl}/zh-cn/`} />
-    <link rel="alternate" hreflang="ja" href={lang === 'ja' ? canonical : `${siteUrl}/ja/`} />
-    <link rel="alternate" hreflang="en" href={lang === 'en' ? canonical : `${siteUrl}/en/`} />
-    {hreflangPair && hreflangPairLang && (() => {
-      // Normalise: "en/index" → "en/", "en/dysphagia" → "en/dysphagia/"
-      const normalised = hreflangPair.replace(/\/index$/, '');
-      const href = normalised.endsWith('/') ? `${siteUrl}/${normalised}` : `${siteUrl}/${normalised}/`;
-      return <link rel="alternate" hreflang={hreflangMap[hreflangPairLang]} href={href} />;
-    })()}
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/zh-hk/`} />
+    <!-- hreflang: collection-driven, emits only locales that actually exist -->
+    {hreflangLinks && hreflangLinks.map((entry) => (
+      <link rel="alternate" hreflang={entry.hreflang} href={entry.href} />
+    ))}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="softmeal.org" />
     <meta property="og:locale" content={htmlLang.replace('-', '_')} />
 
