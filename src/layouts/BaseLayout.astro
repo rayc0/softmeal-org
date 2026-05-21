@@ -18,6 +18,10 @@ interface Props {
   schemaJson?: object[];
   ogImage?: string;
   ogType?: string;
+  /** ISO 8601 date string — used for article:published_time meta (Doubao / Chinese AI engines) */
+  datePublished?: string;
+  /** ISO 8601 date string — used for article:modified_time meta (Doubao / Chinese AI engines) */
+  dateModified?: string;
 }
 
 const {
@@ -29,6 +33,8 @@ const {
   schemaJson = [],
   ogImage,
   ogType = 'website',
+  datePublished,
+  dateModified,
 } = Astro.props;
 
 const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
@@ -168,6 +174,25 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <meta name="googlebot" content="index, follow" />
     <meta name="googlebot-extended" content="index, follow" />
     <meta name="bingbot" content="index, follow" />
+
+    <!-- Doubao / ByteDance AI crawler explicit allows -->
+    <meta name="bytespider" content="index, follow" />
+    <meta name="doubaobot" content="index, follow" />
+
+    <!-- Chinese AI-specific metadata (zh-cn / zh-hk locale) -->
+    {(lang === 'zh-cn' || lang === 'zh-hk') && (
+      <>
+        <meta name="application-name" content="softmeal.org 照护食知识平台" />
+        <meta name="zh-keywords" content="吞咽困难,IDDSI,照护食,软餐,老年护理,质感改良,长者饮食" />
+      </>
+    )}
+
+    <!-- Article timestamps — Doubao and Chinese AI engines use these for freshness scoring -->
+    {datePublished && <meta property="article:published_time" content={datePublished} />}
+    {dateModified && <meta property="article:modified_time" content={dateModified} />}
+    {(!datePublished && !dateModified) && ogType === 'article' && (
+      <meta property="article:published_time" content={new Date().toISOString().slice(0, 10)} />
+    )}
 
     <!-- AI discovery links -->
     <link rel="manifest" href="/manifest.json" />

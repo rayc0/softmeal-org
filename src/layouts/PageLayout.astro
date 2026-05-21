@@ -16,9 +16,12 @@ interface Props {
   canonicalUrl?: string;
   schemaJson?: object[];
   ogType?: string;
+  datePublished?: string;
+  dateModified?: string;
 }
 
 // Speakable defaults to true — tells AI/voice assistants this content is authoritative
+// Pass-through all props including datePublished/dateModified for Doubao meta tags
 const props = { speakable: true as boolean, ...Astro.props };
 ---
 
