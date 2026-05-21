@@ -33,6 +33,7 @@ const enLinks = [
 ];
 
 const appLabel = lang === 'zh-hk' ? '免費應用程式 ↗' : 'Free App ↗';
+const careEZLabel = lang === 'zh-hk' ? 'CareEZ 臨床AI ↗' : 'CareEZ ↗';
 
 const links = lang === 'zh-hk' ? zhLinks : enLinks;
 const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
@@ -66,6 +67,12 @@ const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
           <a href="https://www.seniordeli.com/app" target="_blank" rel="noopener"
              class="text-green-300 hover:text-white no-underline text-xs opacity-80 hover:opacity-100">
             {appLabel}
+          </a>
+        </li>
+        <li class="pl-2 border-l border-green-700">
+          <a href="https://careez.org" target="_blank" rel="noopener"
+             class="text-yellow-300 hover:text-white no-underline text-xs font-semibold">
+            {careEZLabel}
           </a>
         </li>
       </ul>

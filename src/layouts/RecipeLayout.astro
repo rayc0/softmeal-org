@@ -31,6 +31,9 @@ const {
   schemaJson = [],
 } = Astro.props;
 
+// All recipe pages use og:type="article" (not "website")
+const ogType = 'article';
+
 const difficultyLabels: Record<string, Record<string, string>> = {
   'zh-hk': { easy: '簡單', medium: '中等', hard: '困難' },
   'en': { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
@@ -67,6 +70,7 @@ const moreSectionLabel = isZh
   hreflangPair={hreflangPair}
   hreflangPairLang={hreflangPairLang}
   schemaJson={schemaJson}
+  ogType={ogType}
 >
   <div class="mb-4 flex flex-wrap gap-2 items-center">
     <IddsiLevelBadge level={iddsiLevel} />
