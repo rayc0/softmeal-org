@@ -1,6 +1,7 @@
 ---
 import PageLayout from './PageLayout.astro';
 import IddsiLevelBadge from '../components/IddsiLevelBadge.astro';
+import { getCollection } from 'astro:content';
 
 interface Props {
   title: string;
@@ -38,6 +39,25 @@ const difficultyLabels: Record<string, Record<string, string>> = {
 const isZh = lang === 'zh-hk';
 const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
 const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
+
+// Resolve same-level recipes for "More recipes" section
+const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() ?? '';
+const sameLevelRecipes = await getCollection(
+  'recipes',
+  (r) => r.data.lang === lang && r.data.iddsi_level === iddsiLevel
+);
+const relatedRecipes = sameLevelRecipes
+  .filter((r) => {
+    const parts = r.id.split('/');
+    const s = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return s !== currentSlug;
+  })
+  .slice(0, 3);
+
+const backLabel = isZh ? '← 返回食譜庫' : '← Back to Recipe Library';
+const moreSectionLabel = isZh
+  ? `更多 IDDSI ${iddsiLevel} 級食譜`
+  : `More IDDSI Level ${iddsiLevel} Recipes`;
 ---
 
 <PageLayout
@@ -73,4 +93,34 @@ const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
         : '⚠️ This recipe is for reference only. Texture varies by technique and ingredients. A speech therapist should confirm the appropriate IDDSI level for each individual.'}
     </p>
   </div>
+
+  <div class="mt-8 pt-6 border-t border-gray-200">
+    <a href={`/${lang}/recipes/`} class="text-primary hover:underline text-sm font-medium">
+      {backLabel}
+    </a>
+  </div>
+
+  {relatedRecipes.length > 0 && (
+    <nav
+      aria-label={moreSectionLabel}
+      class="mt-6 pt-4 border-t border-gray-100"
+    >
+      <h2 class="text-base font-semibold text-gray-800 mb-2">
+        {moreSectionLabel}
+      </h2>
+      <ul class="space-y-1 list-disc list-inside">
+        {relatedRecipes.map((r) => {
+          const parts = r.id.split('/');
+          const rSlug = parts[parts.length - 1].replace(/\.mdx?$/, '');
+          return (
+            <li>
+              <a href={`/${lang}/recipes/${rSlug}/`} class="text-primary hover:underline">
+                {r.data.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  )}
 </PageLayout>

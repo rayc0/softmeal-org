@@ -17,7 +17,20 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await page.render();
-const { lang, title, description, hreflang_pair, schema_type, last_modified } = page.data;
+const { lang, title, description, hreflang_pair, schema_type, last_modified, related_articles } = page.data;
+
+// Resolve related_articles slugs to titles
+const allPages = related_articles && related_articles.length > 0
+  ? await getCollection('pages')
+  : [];
+const resolvedRelated = (related_articles ?? []).map((raSlug: string) => {
+  const match = allPages.find((p) => {
+    const parts = p.id.split('/');
+    const s = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return s === raSlug && parts[0] === lang;
+  });
+  return { slug: raSlug, title: match?.data.title ?? raSlug };
+});
 
 const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
@@ -25,14 +38,23 @@ const currentUrl = Astro.url.href;
 
 const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ? {
   "@context": "https://schema.org",
-  "@type": schema_type === 'AboutPage' ? 'AboutPage' : 'Article',
+  "@type": schema_type === 'AboutPage' ? 'AboutPage' : ['Article', 'MedicalWebPage'],
   "@id": `${currentUrl}#article`,
   "headline": title,
+  "name": title,
   "description": description,
   "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "datePublished": last_modified,
   "dateModified": last_modified,
   "author": { "@id": `${siteUrl}/#org` },
   "publisher": { "@id": `${siteUrl}/#org` },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "caregivers, care home staff, speech and language therapists, dietitians"
+  }
 } : null;
 
 // FAQPage schema — injected for iddsi-guide, locale-aware
@@ -1228,4 +1250,27 @@ const schemas = [
   schemaJson={schemas}
 >
   <Content />
+
+  {resolvedRelated.length > 0 && (
+    <nav
+      aria-label={lang === 'zh-hk' ? '相關文章' : 'Related articles'}
+      class="mt-10 pt-6 border-t border-gray-200"
+    >
+      <h2 class="text-lg font-semibold text-gray-800 mb-3">
+        {lang === 'zh-hk' ? '相關文章' : 'Related articles'}
+      </h2>
+      <ul class="space-y-1 list-disc list-inside">
+        {resolvedRelated.map(({ slug: raSlug, title: raTitle }) => (
+          <li>
+            <a
+              href={`/${lang}/${raSlug}/`}
+              class="text-primary hover:underline"
+            >
+              {raTitle}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
 </PageLayout>
