@@ -61,6 +61,23 @@ for (const [locale, bcp47] of Object.entries(LOCALE_BCP47)) {
 // x-default → zh-HK variant if it exists, otherwise first available
 hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? hreflangLinks[0]?.href ?? `${siteUrl}/zh-hk/` });
 
+// E-E-A-T: Karen Chan Person schema — clinical reviewer for all recipe pages
+const karenChanPerson = {
+  "@type": "Person",
+  "name": "Karen Chan",
+  "jobTitle": lang === 'zh-hk' ? "吞嚥研究實驗室總監" : lang === 'zh-cn' ? "吞咽研究实验室主任" : lang === 'ja' ? "嚥下研究室ディレクター" : "Director, Swallowing Research Laboratory",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "The University of Hong Kong",
+    "url": "https://www.hku.hk/"
+  },
+  "sameAs": [
+    "https://sph.hku.hk/en/about-us/faculty-and-staff/academic-staff/chan,-karen-man-leung",
+    "https://www.linkedin.com/in/karen-chan-hku/"
+  ],
+  "knowsAbout": ["Dysphagia", "Swallowing rehabilitation", "Speech-language pathology", "IDDSI", "Aspiration pneumonia prevention"]
+};
+
 const recipeSchema = {
   "@context": "https://schema.org",
   "@type": "Recipe",
@@ -72,9 +89,91 @@ const recipeSchema = {
   "inLanguage": schemaLang,
   "dateModified": last_modified,
   "image": `${siteUrl}/og-default.png`,
-  "author": { "@id": `${siteUrl}/#org` },
+  "author": {
+    "@type": "Organization",
+    "name": "softmeal.org Editorial Team",
+    "@id": `${siteUrl}/#org`
+  },
   "publisher": { "@id": `${siteUrl}/#org` },
+  "reviewedBy": karenChanPerson,
   "accessibilityFeature": `iddsi-level-${iddsi_level}`,
+};
+
+// HowTo schema — maps IDDSI recipe preparation stages to structured steps
+const howToStepsZhHk = [
+  { "@type": "HowToStep", "position": 1, "name": "準備食材", "text": `按食譜所需份量準備食材。確保所有食材新鮮，肉類或魚類去骨、去皮。主要食材：${main_ingredient}。` },
+  { "@type": "HowToStep", "position": 2, "name": "前處理食材（關鍵步驟）", "text": `將食材切碎、剁細或研磨，確保顆粒大小符合 IDDSI Level ${iddsi_level} 要求。Level 4 需完全打滑；Level 5 顆粒不超過 4mm；Level 6 塊徑不超過 15mm。` },
+  { "@type": "HowToStep", "position": 3, "name": "烹調", "text": `按食譜指示烹調。烹調時間約 ${prep_time_minutes} 分鐘。確保食物完全熟透，核心溫度達到安全水平。` },
+  { "@type": "HowToStep", "position": 4, "name": "質地測試（IDDSI 合規確認）", "text": `進行叉子壓力測試確認 IDDSI Level ${iddsi_level}：用叉背以約 140g 力量壓下食物。Level 4 完全攤平不回彈；Level 5 壓縮但不壓平；Level 6 抵抗壓力。` },
+  { "@type": "HowToStep", "position": 5, "name": "擺盤及安全核查", "text": "確認食物溫度適合進食（避免過燙燙傷）。移除所有骨頭及難以入口的硬質部分。按語言治療師建議配合適當稠度的液體。" },
+];
+const howToStepsZhCn = [
+  { "@type": "HowToStep", "position": 1, "name": "准备食材", "text": `按食谱所需份量准备食材。确保所有食材新鲜，肉类或鱼类去骨、去皮。主要食材：${main_ingredient}。` },
+  { "@type": "HowToStep", "position": 2, "name": "前处理食材（关键步骤）", "text": `将食材切碎、剁细或研磨，确保颗粒大小符合 IDDSI Level ${iddsi_level} 要求。Level 4 需完全打滑；Level 5 颗粒不超过 4mm；Level 6 块径不超过 15mm。` },
+  { "@type": "HowToStep", "position": 3, "name": "烹调", "text": `按食谱指示烹调。烹调时间约 ${prep_time_minutes} 分钟。确保食物完全熟透，核心温度达到安全水平。` },
+  { "@type": "HowToStep", "position": 4, "name": "质地测试（IDDSI 合规确认）", "text": `进行叉子压力测试确认 IDDSI Level ${iddsi_level}：用叉背以约 140g 力量压下食物。Level 4 完全摊平不回弹；Level 5 压缩但不压平；Level 6 抵抗压力。` },
+  { "@type": "HowToStep", "position": 5, "name": "摆盘及安全核查", "text": "确认食物温度适合进食（避免过烫）。移除所有骨头及难以入口的硬质部分。按语言治疗师建议配合适当稠度的液体。" },
+];
+const howToStepsJa = [
+  { "@type": "HowToStep", "position": 1, "name": "食材の準備", "text": `レシピに必要な量の食材を準備します。すべての食材が新鮮であることを確認し、肉や魚は骨と皮を除去します。主な食材：${main_ingredient}。` },
+  { "@type": "HowToStep", "position": 2, "name": "食材の前処理（重要なステップ）", "text": `食材を細かく刻むか、ミンチにするか、すりつぶして、IDDSIレベル${iddsi_level}の粒径要件を満たしていることを確認します。レベル4は完全に滑らかにする必要があります；レベル5は粒径4mm以下；レベル6は塊の大きさ15mm以下。` },
+  { "@type": "HowToStep", "position": 3, "name": "調理", "text": `レシピの指示に従って調理します。調理時間は約${prep_time_minutes}分です。食材が完全に火が通り、安全な中心温度に達していることを確認します。` },
+  { "@type": "HowToStep", "position": 4, "name": "テクスチャーテスト（IDDSI適合確認）", "text": `フォーク圧力テストでIDDSIレベル${iddsi_level}を確認します：フォークの背で約140gの力を加えて食材を押します。レベル4は完全に平らになり戻らない；レベル5は圧縮されるが平らにならない；レベル6は抵抗します。` },
+  { "@type": "HowToStep", "position": 5, "name": "盛り付けと安全確認", "text": "食事に適した温度であることを確認します（やけどを防ぐため熱すぎないように）。すべての骨や硬い部分を取り除きます。言語聴覚士の指示に従い、適切なとろみの液体と合わせます。" },
+];
+const howToStepsEn = [
+  { "@type": "HowToStep", "position": 1, "name": "Prepare ingredients", "text": `Gather ingredients in the quantities specified by the recipe. Ensure all items are fresh; debone and deskin meat or fish. Main ingredient: ${main_ingredient}.` },
+  { "@type": "HowToStep", "position": 2, "name": "Pre-process ingredients (critical step)", "text": `Chop, mince or blend ingredients until particle size meets IDDSI Level ${iddsi_level} requirements: Level 4 requires a completely smooth purée; Level 5 particles must not exceed 4 mm; Level 6 pieces must not exceed 15 mm.` },
+  { "@type": "HowToStep", "position": 3, "name": "Cook", "text": `Cook according to recipe instructions. Total preparation time is approximately ${prep_time_minutes} minutes. Ensure food is cooked through to a safe core temperature.` },
+  { "@type": "HowToStep", "position": 4, "name": "Texture test (IDDSI compliance check)", "text": `Perform the fork pressure test to confirm IDDSI Level ${iddsi_level}: apply approximately 140 g of pressure with the back of a fork. Level 4 flattens completely and does not spring back; Level 5 compresses but does not flatten; Level 6 resists the fork.` },
+  { "@type": "HowToStep", "position": 5, "name": "Plate and safety check", "text": "Confirm the food is at a safe eating temperature (not too hot). Remove all bones and hard pieces. Serve with thickened fluids at the consistency prescribed by the patient's speech therapist." },
+];
+
+const howToSteps = lang === 'zh-hk' ? howToStepsZhHk : lang === 'zh-cn' ? howToStepsZhCn : lang === 'ja' ? howToStepsJa : howToStepsEn;
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": title,
+  "description": lang === 'zh-hk'
+    ? `製作 IDDSI Level ${iddsi_level} 照護食的步驟指引，適合有吞嚥困難的長者。`
+    : lang === 'zh-cn'
+    ? `制作 IDDSI Level ${iddsi_level} 照护食的步骤指引，适合有吞咽困难的老人。`
+    : lang === 'ja'
+    ? `嚥下障害のある高齢者向けのIDDSIレベル${iddsi_level}介護食の調理手順。`
+    : `Step-by-step guide to preparing an IDDSI Level ${iddsi_level} texture-modified recipe for people with dysphagia.`,
+  "totalTime": `PT${prep_time_minutes}M`,
+  "inLanguage": schemaLang,
+  "supply": [{ "@type": "HowToSupply", "name": main_ingredient }],
+  "tool": [
+    { "@type": "HowToTool", "name": lang === 'zh-hk' ? "食物溫度計" : lang === 'zh-cn' ? "食物温度计" : lang === 'ja' ? "食品用温度計" : "Food thermometer" },
+    { "@type": "HowToTool", "name": lang === 'zh-hk' ? "叉子（IDDSI 壓力測試用）" : lang === 'zh-cn' ? "叉子（IDDSI 压力测试用）" : lang === 'ja' ? "フォーク（IDDSIテスト用）" : "Fork (IDDSI pressure test)" }
+  ],
+  "step": howToSteps
+};
+
+// FAQPage schema for recipe pages — general IDDSI cooking safety Q&A
+const recipeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": schemaLang,
+  "mainEntity": lang === 'zh-hk' ? [
+    { "@type": "Question", "name": `IDDSI Level ${iddsi_level} 食物應如何測試質地？`, "acceptedAnswer": { "@type": "Answer", "text": `用叉背以約 140g 力量壓下食物。Level 4 完全攤平不回彈；Level 5 壓縮但不壓平；Level 6 抵抗壓力。每次烹調後均需重新測試，因食材批次及烹調溫度可能影響最終質地。` } },
+    { "@type": "Question", "name": "這個食譜適合哪些吞嚥困難患者？", "acceptedAnswer": { "@type": "Answer", "text": `此食譜針對 IDDSI Level ${iddsi_level} 設計。每位患者所需的 IDDSI 等級必須由言語治療師評估後確認。請勿自行決定適合的等級——沉默式誤吸可在無咳嗽的情況下發生。` } },
+    { "@type": "Question", "name": "改良質感食物如何保存？", "acceptedAnswer": { "@type": "Answer", "text": "糊狀食物冷藏可保存 24–48 小時，冷凍可保存 1–2 個月。再加熱後必須重新進行質地測試，因冷凍/冷藏可改變食物稠度。請勿在食物仍冷的狀態下給患者進食。" } }
+  ] : lang === 'zh-cn' ? [
+    { "@type": "Question", "name": `IDDSI Level ${iddsi_level} 食物应如何测试质地？`, "acceptedAnswer": { "@type": "Answer", "text": `用叉背以约 140g 力量压下食物。Level 4 完全摊平不回弹；Level 5 压缩但不压平；Level 6 抵抗压力。每次烹调后均需重新测试。` } },
+    { "@type": "Question", "name": "这个食谱适合哪些吞咽困难患者？", "acceptedAnswer": { "@type": "Answer", "text": `此食谱针对 IDDSI Level ${iddsi_level} 设计。每位患者所需的 IDDSI 等级必须由言语治疗师评估后确认。` } },
+    { "@type": "Question", "name": "改良质感食物如何保存？", "acceptedAnswer": { "@type": "Answer", "text": "糊状食物冷藏可保存 24–48 小时，冷冻可保存 1–2 个月。再加热后必须重新进行质地测试。" } }
+  ] : lang === 'ja' ? [
+    { "@type": "Question", "name": `IDDSIレベル${iddsi_level}の食べ物のテクスチャーをテストするにはどうすればよいですか？`, "acceptedAnswer": { "@type": "Answer", "text": `フォークの背で約140gの力を加えます。レベル4は完全に平らになり戻らない；レベル5は圧縮されるが平らにならない；レベル6は抵抗します。毎回の調理後に必ず再テストしてください。` } },
+    { "@type": "Question", "name": "このレシピはどのような方に適していますか？", "acceptedAnswer": { "@type": "Answer", "text": `このレシピはIDDSIレベル${iddsi_level}向けに設計されています。各患者に必要なIDDSIレベルは言語聴覚士の評価後に確認する必要があります。` } },
+    { "@type": "Question", "name": "テクスチャーを変えた食べ物はどのように保存しますか？", "acceptedAnswer": { "@type": "Answer", "text": "ピューレ状の食べ物は冷蔵で24〜48時間、冷凍で1〜2ヶ月保存できます。再加熱後は必ずテクスチャーを再テストしてください。" } }
+  ] : [
+    { "@type": "Question", "name": `How do I test the texture for IDDSI Level ${iddsi_level}?`, "acceptedAnswer": { "@type": "Answer", "text": `Apply approximately 140 g of pressure with the back of a fork. Level 4 flattens completely and does not spring back; Level 5 compresses but does not flatten; Level 6 resists the fork. Retest after every preparation batch.` } },
+    { "@type": "Question", "name": "Who is this recipe suitable for?", "acceptedAnswer": { "@type": "Answer", "text": `This recipe is designed for IDDSI Level ${iddsi_level}. Each patient's required IDDSI level must be confirmed by a speech-language pathologist. Do not self-assign a diet level — silent aspiration can occur without coughing.` } },
+    { "@type": "Question", "name": "How should texture-modified food be stored?", "acceptedAnswer": { "@type": "Answer", "text": "Puréed food can be refrigerated for 24–48 hours or frozen for 1–2 months. After reheating, always retest texture — freezing and refrigeration can alter consistency." } }
+  ]
 };
 
 // BreadcrumbList schema — 3-level: Home > Recipes > Recipe Title
@@ -100,7 +199,7 @@ const breadcrumbSchema = {
   difficulty={difficulty}
   mainIngredient={main_ingredient}
   tags={tags}
-  schemaJson={[recipeSchema, breadcrumbSchema]}
+  schemaJson={[recipeSchema, howToSchema, recipeFaqSchema, breadcrumbSchema]}
 >
   <h1>{title}</h1>
   <Content />

@@ -59,6 +59,26 @@ for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_PAGES)) {
 }
 hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? hreflangLinks[0]?.href ?? `${siteUrl}/zh-hk/` });
 
+// E-E-A-T: Karen Chan Person schema — clinical reviewer for dysphagia/IDDSI pages
+const karenChanPerson = {
+  "@type": "Person",
+  "name": "Karen Chan",
+  "jobTitle": lang === 'zh-hk' ? "吞嚥研究實驗室總監" : lang === 'zh-cn' ? "吞咽研究实验室主任" : lang === 'ja' ? "嚥下研究室ディレクター" : "Director, Swallowing Research Laboratory",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "The University of Hong Kong",
+    "url": "https://www.hku.hk/"
+  },
+  "sameAs": [
+    "https://sph.hku.hk/en/about-us/faculty-and-staff/academic-staff/chan,-karen-man-leung",
+    "https://www.linkedin.com/in/karen-chan-hku/"
+  ],
+  "knowsAbout": ["Dysphagia", "Swallowing rehabilitation", "Speech-language pathology", "IDDSI", "Aspiration pneumonia prevention"]
+};
+
+// Detect clinical/dysphagia pages for Karen Chan reviewedBy attribution
+const isClinicalPage = Boolean((pageSlug ?? '').match(/dysphagia|iddsi|aspiration|swallowing|stroke|parkinson|als|mnd|dementia|cancer|palliative|tube|peg|slt|speech|texture|thickener|nutrition|hydration|caregiver|care-home|hospital/i));
+
 const articleType = schema_type === 'AboutPage' ? 'AboutPage'
   : schema_type === 'MedicalWebPage' ? 'MedicalWebPage'
   : 'Article';
@@ -69,18 +89,36 @@ const articleSchema = (schema_type === 'WebPage' || schema_type === 'MedicalWebP
   "headline": title,
   "name": title,
   "description": description,
-  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : 'en',
+  "inLanguage": lang === 'zh-hk' ? 'zh-HK' : lang === 'zh-cn' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en',
   "isAccessibleForFree": true,
   "license": "https://creativecommons.org/licenses/by-nc/4.0/",
   "datePublished": last_modified,
   "dateModified": last_modified,
-  "author": { "@id": `${siteUrl}/#org` },
+  "author": {
+    "@type": "Organization",
+    "name": "softmeal.org Editorial Team",
+    "@id": `${siteUrl}/#org`
+  },
   "publisher": { "@id": `${siteUrl}/#org` },
   "mainEntityOfPage": { "@type": "WebPage", "@id": currentUrl },
   "audience": {
     "@type": "Audience",
     "audienceType": "caregivers, care home staff, speech and language therapists, dietitians"
-  }
+  },
+  ...(schema_type === 'MedicalWebPage' ? {
+    "medicalAudience": [
+      { "@type": "MedicalAudience", "audienceType": "Caregiver" },
+      { "@type": "MedicalAudience", "audienceType": "Patient" },
+      { "@type": "MedicalAudience", "audienceType": "MedicalResearcher" }
+    ],
+    "lastReviewed": last_modified,
+    "reviewedBy": {
+      "@type": "Organization",
+      "name": "Hong Kong Speech and Hearing Therapy Society",
+      "url": "https://www.hksha.org"
+    }
+  } : {}),
+  ...(isClinicalPage ? { "reviewedBy": karenChanPerson } : {})
 } : null;
 
 // FAQPage schema — injected for iddsi-guide, locale-aware

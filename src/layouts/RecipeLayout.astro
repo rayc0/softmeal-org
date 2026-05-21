@@ -37,6 +37,8 @@ const {
 // All recipe pages use og:type="article" (not "website")
 const ogType = 'article';
 
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+
 const difficultyLabels: Record<string, Record<string, string>> = {
   'zh-hk': { easy: '簡單', medium: '中等', hard: '困難' },
   'zh-cn': { easy: '简单', medium: '中等', hard: '困难' },
@@ -72,6 +74,13 @@ const relatedRecipes = sameLevelRecipes
   })
   .slice(0, 3);
 
+// Official IDDSI accent colors (Pantone-derived) — used for recipe header border
+const IDDSI_COLORS: Record<number, string> = {
+  0: '#d1d5db', 1: '#9B9B9B', 2: '#E91E8C', 3: '#FFD700',
+  4: '#2E7D32', 5: '#E65100', 6: '#1565C0', 7: '#E65100',
+};
+const accentColor = IDDSI_COLORS[iddsiLevel] ?? '#2E7D32';
+
 const backLabel = isZh ? '← 返回食譜庫' : '← Back to Recipe Library';
 const moreSectionLabel = isZh
   ? `更多 IDDSI ${iddsiLevel} 級食譜`
@@ -97,13 +106,13 @@ const moreSectionLabel = isZh
         <IddsiLevelBadge level={iddsiLevel} lang={lang} />
         <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
           <span>
-            <span class="font-medium text-gray-700">{prepLabels[l]}:</span> {timeLabel}
+            <span class="font-medium text-gray-700">{prepLabels[lang as LangKey]}:</span> {timeLabel}
           </span>
           <span>
-            <span class="font-medium text-gray-700">{diffLabels[l]}:</span> {diffLabel}
+            <span class="font-medium text-gray-700">{diffLabels[lang as LangKey]}:</span> {diffLabel}
           </span>
           <span>
-            <span class="font-medium text-gray-700">{ingredientLabels[l]}:</span> {mainIngredient}
+            <span class="font-medium text-gray-700">{ingredientLabels[lang as LangKey]}:</span> {mainIngredient}
           </span>
         </div>
       </div>
@@ -126,7 +135,7 @@ const moreSectionLabel = isZh
 
   <!-- Warning -->
   <div class="callout-warning mt-8">
-    {warningTexts[l]}
+    {warningTexts[lang as LangKey]}
   </div>
 
   <div class="mt-8 pt-6 border-t border-gray-200">
