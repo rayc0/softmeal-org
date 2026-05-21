@@ -91,13 +91,18 @@ const enLinks = [
   { href: `/en/about/`, label: 'About' },
 ];
 
-const appLabel = lang === 'zh-hk' ? '免費應用程式 ↗' : 'Free App ↗';
-const careEZLabel = lang === 'zh-hk' ? 'CareEZ 臨床AI ↗' : 'CareEZ ↗';
+const tagline = taglines[l] ?? taglines['en'];
+const appLabel = appLabels[l] ?? appLabels['en'];
 
-const links = lang === 'zh-hk' ? zhLinks : enLinks;
-const altLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
-const altLabel = lang === 'zh-hk' ? 'English' : '繁體中文';
-const altHref = lang === 'zh-hk' ? '/en/' : '/zh-hk/';
+const careEZLabels: Record<LangKey, string> = {
+  'zh-hk': 'CareEZ 臨床AI ↗',
+  'zh-cn': 'CareEZ 临床AI ↗',
+  'ja':    'CareEZ ↗',
+  'en':    'CareEZ ↗',
+};
+const careEZLabel = careEZLabels[l] ?? careEZLabels['en'];
+
+const links = navLinks[l] ?? navLinks['en'];
 ---
 
 <!-- CSS-only hamburger toggle -->

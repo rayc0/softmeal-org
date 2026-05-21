@@ -17,11 +17,13 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 const { lang, title, description, schema_type } = page.data;
 
+const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const schemaLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 
 // Homepage hreflang: link to each locale's homepage that exists in the collection.
 const allPages = await getCollection('pages', ({ id }) => id.includes('/index'));
-const LOCALE_BCP47_HOME: Record<string, string> = { 'zh-hk': 'zh-HK', 'en': 'en' };
+const LOCALE_BCP47_HOME: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
 const hreflangLinks: { hreflang: string; href: string }[] = [];
 let xDefaultHref: string | null = null;
 for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_HOME)) {
