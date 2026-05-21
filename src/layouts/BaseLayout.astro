@@ -37,6 +37,19 @@ const hreflangMap: Record<string, string> = {
   'en': 'en',
 };
 
+// OG locale codes use underscores — map from internal lang key
+const ogLocaleMap: Record<string, string> = {
+  'zh-hk': 'zh_HK',
+  'zh-cn': 'zh_CN',
+  'ja': 'ja_JP',
+  'en': 'en_US',
+};
+const ogLocale = ogLocaleMap[lang] ?? 'zh_HK';
+// All other locales become og:locale:alternate
+const ogLocaleAlternates = Object.entries(ogLocaleMap)
+  .filter(([k]) => k !== lang)
+  .map(([, v]) => v);
+
 // Organization JSON-LD — emitted on all pages
 const orgSchema = {
   "@context": "https://schema.org",
@@ -95,10 +108,20 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema
     <link rel="canonical" href={canonical} />
 
     <!-- hreflang — all 4 locales + x-default -->
-    <link rel="alternate" hreflang="zh-HK" href={lang === 'zh-hk' ? canonical : `${siteUrl}/zh-hk/`} />
-    <link rel="alternate" hreflang="zh-CN" href={lang === 'zh-cn' ? canonical : `${siteUrl}/zh-cn/`} />
-    <link rel="alternate" hreflang="ja" href={lang === 'ja' ? canonical : `${siteUrl}/ja/`} />
-    <link rel="alternate" hreflang="en" href={lang === 'en' ? canonical : `${siteUrl}/en/`} />
+    <!-- When hreflangPair provides a precise URL for a locale, it overrides the
+         generic root-only fallback below to avoid duplicate hreflang entries. -->
+    {(!hreflangPair || hreflangPairLang !== 'zh-hk') && (
+      <link rel="alternate" hreflang="zh-HK" href={lang === 'zh-hk' ? canonical : `${siteUrl}/zh-hk/`} />
+    )}
+    {(!hreflangPair || hreflangPairLang !== 'zh-cn') && (
+      <link rel="alternate" hreflang="zh-CN" href={lang === 'zh-cn' ? canonical : `${siteUrl}/zh-cn/`} />
+    )}
+    {(!hreflangPair || hreflangPairLang !== 'ja') && (
+      <link rel="alternate" hreflang="ja" href={lang === 'ja' ? canonical : `${siteUrl}/ja/`} />
+    )}
+    {(!hreflangPair || hreflangPairLang !== 'en') && (
+      <link rel="alternate" hreflang="en" href={lang === 'en' ? canonical : `${siteUrl}/en/`} />
+    )}
     {hreflangPair && hreflangPairLang && (() => {
       // Normalise: "en/index" → "en/", "en/dysphagia" → "en/dysphagia/"
       const normalised = hreflangPair.replace(/\/index$/, '');
@@ -113,7 +136,10 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="softmeal.org" />
-    <meta property="og:locale" content={htmlLang.replace('-', '_')} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternates.map((alt) => (
+      <meta property="og:locale:alternate" content={alt} />
+    ))}
 
     <!-- og:image — default fallback (pages with custom ogImage prop override this) -->
     {ogImage ? (
