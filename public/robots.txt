@@ -29,6 +29,15 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+User-agent: Doubaobot
+Allow: /
+
+User-agent: TikTokSpider
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
 User-agent: CCBot
 Allow: /
 
