@@ -17,7 +17,7 @@ interface Props {
   canonicalUrl?: string;
   schemaJson?: object[];
   ogImage?: string;
-  speakable?: boolean;
+  ogType?: string;
 }
 
 const {
@@ -28,7 +28,7 @@ const {
   canonicalUrl,
   schemaJson = [],
   ogImage,
-  speakable = false,
+  ogType = 'website',
 } = Astro.props;
 
 const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
@@ -118,7 +118,7 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="softmeal.org" />
     <meta property="og:locale" content={htmlLang.replace('-', '_')} />
 

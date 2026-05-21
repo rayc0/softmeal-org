@@ -34,10 +34,10 @@ const {
   schemaJson = [],
 } = Astro.props;
 
-type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
-const l = lang as LangKey;
+// All recipe pages use og:type="article" (not "website")
+const ogType = 'article';
 
-const difficultyLabels: Record<LangKey, Record<string, string>> = {
+const difficultyLabels: Record<string, Record<string, string>> = {
   'zh-hk': { easy: '簡單', medium: '中等', hard: '困難' },
   'zh-cn': { easy: '简单', medium: '中等', hard: '困难' },
   'ja':    { easy: '簡単', medium: '普通', hard: '難しい' },
@@ -84,7 +84,7 @@ const moreSectionLabel = isZh
   lang={lang}
   hreflangLinks={hreflangLinks}
   schemaJson={schemaJson}
-  speakable={true}
+  ogType={ogType}
 >
   <!-- Recipe header card with IDDSI accent border -->
   <div
