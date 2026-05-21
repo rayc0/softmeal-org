@@ -21,7 +21,6 @@ const {
   lang,
   title,
   description,
-  hreflang_pair,
   iddsi_level,
   prep_time_minutes,
   difficulty,
@@ -31,9 +30,32 @@ const {
   fork_test_pass,
 } = recipe.data;
 
-const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
 const recipeSlug = Astro.params.slug;
+
+// Build collection-driven hreflang: query every locale for the same slug.
+// Only emit entries for locales where the file actually exists.
+const LOCALE_BCP47: Record<string, string> = {
+  'zh-hk': 'zh-HK',
+  'en': 'en',
+};
+const allRecipes = await getCollection('recipes');
+const hreflangLinks: { hreflang: string; href: string }[] = [];
+let xDefaultHref: string | null = null;
+
+for (const [locale, bcp47] of Object.entries(LOCALE_BCP47)) {
+  const exists = allRecipes.some((r) => {
+    const parts = r.id.split('/');
+    return parts[0] === locale && parts[parts.length - 1].replace(/\.mdx?$/, '') === recipeSlug;
+  });
+  if (exists) {
+    const href = `${siteUrl}/${locale}/recipes/${recipeSlug}/`;
+    hreflangLinks.push({ hreflang: bcp47, href });
+    if (locale === 'zh-hk') xDefaultHref = href;
+  }
+}
+// x-default → zh-HK variant if it exists, otherwise first available
+hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? hreflangLinks[0]?.href ?? `${siteUrl}/zh-hk/` });
 
 const recipeSchema = {
   "@context": "https://schema.org",
@@ -66,8 +88,7 @@ const breadcrumbSchema = {
   title={title}
   description={description}
   lang={lang}
-  hreflangPair={hreflang_pair}
-  hreflangPairLang={hreflangPairLang}
+  hreflangLinks={hreflangLinks}
   iddsiLevel={iddsi_level}
   prepTimeMinutes={prep_time_minutes}
   difficulty={difficulty}

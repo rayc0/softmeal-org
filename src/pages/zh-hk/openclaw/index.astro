@@ -1,0 +1,204 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+
+const lang = 'zh-hk';
+const title = 'OpenClaw — 香港照護食標準 AI 技能發佈平台 | softmeal.org';
+const description = '香港社會服務聯會照護食標準已以多語言 AI agent 技能形式在 OpenClaw 發佈，供開發者整合至 AI 應用程式。';
+const siteUrl = 'https://softmeal.org';
+const canonicalUrl = `${siteUrl}/zh-hk/openclaw/`;
+
+const skills = [
+  {
+    id: 'hkcss-care-food-level-classify',
+    name: 'hkcss-care-food-level-classify',
+    desc: '按 HKCSS 照護食四級分類食物質感，回傳等級標籤及依據。',
+    lang: '繁體中文 / English',
+  },
+  {
+    id: 'hkcss-care-food-prep-guide',
+    name: 'hkcss-care-food-prep-guide',
+    desc: '為指定食材及質感等級生成製備指引，涵蓋刀工、煮法及呈現方式。',
+    lang: '繁體中文 / English',
+  },
+  {
+    id: 'hkcss-care-food-menu-check',
+    name: 'hkcss-care-food-menu-check',
+    desc: '審核院舍菜單，標記不符合目標照護食等級的菜式並提供修改建議。',
+    lang: '繁體中文',
+  },
+  {
+    id: 'hkcss-care-food-thickener-calc',
+    name: 'hkcss-care-food-thickener-calc',
+    desc: '按飲品種類、體積及目標稠度等級計算增稠劑用量。',
+    lang: '繁體中文 / English',
+  },
+  {
+    id: 'hkcss-care-food-caregiver-tips',
+    name: 'hkcss-care-food-caregiver-tips',
+    desc: '為照顧者生成針對指定質感等級的用餐安全提示（普通話、粵語、英語）。',
+    lang: '繁體中文（粵語＋普通話）/ English',
+  },
+  {
+    id: 'hkcss-care-food-iddsi-crosswalk',
+    name: 'hkcss-care-food-iddsi-crosswalk',
+    desc: '對照 HKCSS 照護食等級與 IDDSI 國際框架（0–7 級），說明差異及適用場景。',
+    lang: '繁體中文 / English',
+  },
+];
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  lang={lang}
+  hreflangLinks={[
+    { hreflang: 'zh-HK', href: `${siteUrl}/zh-hk/openclaw/` },
+    { hreflang: 'en', href: `${siteUrl}/en/openclaw/` },
+    { hreflang: 'x-default', href: `${siteUrl}/zh-hk/openclaw/` },
+  ]}
+  canonicalUrl={canonicalUrl}
+>
+  <!-- Hero -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 12px; padding: 48px 40px; margin-bottom: 40px; color: white;">
+    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+      <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; font-size: 36px; line-height: 1;">🐾</div>
+      <div>
+        <h1 style="margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">OpenClaw</h1>
+        <p style="margin: 4px 0 0; color: #93c5fd; font-size: 0.9rem; font-weight: 500;">AI Agent 技能市場</p>
+      </div>
+    </div>
+    <p style="font-size: 1.2rem; line-height: 1.6; color: #bfdbfe; max-width: 640px; margin: 0 0 24px;">
+      香港社會服務聯會（HKCSS）照護食標準已以多語言 AI agent 技能形式在 <strong style="color: white;">OpenClaw</strong> 發佈，供開發者整合至任何支援 Claude Agent SDK 的 AI 應用程式。
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+      <a href="https://openclaw.ai" target="_blank" rel="noopener"
+         style="background: #3b82f6; color: white; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.95rem;">
+        OpenClaw 技能市場 →
+      </a>
+      <a href="https://www.seniordeli.com/openclaw" target="_blank" rel="noopener"
+         style="background: rgba(255,255,255,0.12); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);">
+        SeniorDeli 主頁（主要文件）
+      </a>
+    </div>
+  </div>
+
+  <!-- Standards attribution -->
+  <div style="background: #f0f9ff; border-left: 4px solid #0284c7; border-radius: 6px; padding: 20px 24px; margin-bottom: 40px;">
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7; color: #0c4a6e;">
+      <strong>標準來源：</strong>以下技能以香港社會服務聯會（HKCSS）照護食標準為知識基礎。HKCSS 標準版權歸香港社會服務聯會所有。本技能集由
+      <a href="https://seniordeli.com/" target="_blank" rel="noopener" style="color: #0284c7;">SeniorDeli（康樂齡）</a>
+      根據 HKCSS Care Food Guide 授權條款開發，供學術、非商業及社會服務用途。
+    </p>
+  </div>
+
+  <!-- Skills table -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 20px;">6 個已發佈技能</h2>
+  <div style="overflow-x: auto; margin-bottom: 48px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">技能 ID</th>
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">功能說明</th>
+          <th style="padding: 12px 16px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #e2e8f0;">語言</th>
+        </tr>
+      </thead>
+      <tbody>
+        {skills.map((skill, i) => (
+          <tr style={i % 2 === 0 ? 'background: white;' : 'background: #f8fafc;'}>
+            <td style="padding: 12px 16px; font-family: monospace; font-size: 0.82rem; color: #1d4ed8; border-bottom: 1px solid #e2e8f0; white-space: nowrap;">
+              {skill.id}
+            </td>
+            <td style="padding: 12px 16px; color: #374151; border-bottom: 1px solid #e2e8f0; line-height: 1.5;">{skill.desc}</td>
+            <td style="padding: 12px 16px; color: #6b7280; border-bottom: 1px solid #e2e8f0; white-space: nowrap; font-size: 0.82rem;">{skill.lang}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Code examples -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">快速開始</h2>
+  <p style="color: #64748b; margin-bottom: 24px; font-size: 0.95rem;">透過 npm 安裝，或直接在 Claude Agent SDK 中引用。</p>
+
+  <!-- npm install -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">安裝</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.88rem; line-height: 1.6;"><code>npm install @openclaw/hkcss-care-food-skills</code></pre>
+  </div>
+
+  <!-- JSON usage -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">JSON 引用方式</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.6;"><code>{`{
+  "skills": [
+    {
+      "source": "openclaw",
+      "id": "hkcss-care-food-level-classify",
+      "version": "1.0.0",
+      "lang": "zh-hk"
+    }
+  ]
+}`}</code></pre>
+  </div>
+
+  <!-- TypeScript usage -->
+  <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 8px;">TypeScript 使用範例</h3>
+  <div style="background: #0f172a; border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; overflow-x: auto;">
+    <pre style="margin: 0; color: #e2e8f0; font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.85rem; line-height: 1.6;"><code>{`import { loadSkill } from '@openclaw/hkcss-care-food-skills';
+
+const classify = await loadSkill('hkcss-care-food-level-classify', {
+  lang: 'zh-hk',
+});
+
+const result = await classify.run({
+  food: '蒸水蛋',
+  context: '長者照護',
+});
+
+console.log(result.level);   // e.g. "Level 2 — 軟碎"
+console.log(result.rationale); // 詳細依據`}</code></pre>
+  </div>
+
+  <!-- Links -->
+  <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 20px;">連結及資源</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px;">
+    {[
+      { label: 'OpenClaw 技能市場', href: 'https://openclaw.ai', icon: '🐾', desc: '瀏覽全部已發佈技能' },
+      { label: 'npm 套件', href: 'https://www.npmjs.com/package/@openclaw/hkcss-care-food-skills', icon: '📦', desc: '@openclaw/hkcss-care-food-skills' },
+      { label: 'GitHub 原始碼', href: 'https://github.com/seniordeli/openclaw-hkcss-care-food', icon: '🐙', desc: '授權：Apache-2.0' },
+      { label: 'ClawHub 文件', href: 'https://clawhub.openclaw.ai/hkcss-care-food', icon: '📖', desc: '完整技能文件及範例' },
+      { label: 'SeniorDeli 主頁', href: 'https://seniordeli.com/openclaw', icon: '🏠', desc: '主要技術文件及更新' },
+    ].map(link => (
+      <a href={link.href} target="_blank" rel="noopener"
+         style="display: block; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; text-decoration: none; transition: border-color 0.15s; background: white;">
+        <div style="font-size: 1.5rem; margin-bottom: 8px;">{link.icon}</div>
+        <div style="font-weight: 600; color: #1d4ed8; margin-bottom: 4px; font-size: 0.9rem;">{link.label}</div>
+        <div style="color: #64748b; font-size: 0.8rem;">{link.desc}</div>
+      </a>
+    ))}
+  </div>
+
+  <!-- License -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 40px;">
+    <h3 style="font-size: 1rem; font-weight: 700; color: #374151; margin: 0 0 12px;">授權條款</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+      <span style="background: #dcfce7; color: #166534; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;">程式碼：Apache-2.0</span>
+      <span style="background: #dbeafe; color: #1e40af; font-size: 0.8rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;">技能內容：CC-BY-SA 4.0</span>
+    </div>
+    <p style="margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.6;">
+      技能程式碼以 Apache-2.0 授權開放。技能所包含的 HKCSS 照護食知識內容以 CC-BY-SA 4.0 授權，
+      使用時須保留來源標註（HKCSS Care Food Guide，SeniorDeli 開發）。
+      詳情見 <a href="https://github.com/seniordeli/openclaw-hkcss-care-food/blob/main/LICENSE" target="_blank" rel="noopener" style="color: #1d4ed8;">LICENSE</a> 及
+      <a href="https://github.com/seniordeli/openclaw-hkcss-care-food/blob/main/CONTENT_LICENSE.md" target="_blank" rel="noopener" style="color: #1d4ed8;">CONTENT_LICENSE.md</a>。
+    </p>
+  </div>
+
+  <!-- Mirror note -->
+  <div style="background: #fffbeb; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px 20px; margin-bottom: 8px;">
+    <p style="margin: 0; font-size: 0.85rem; color: #78350f; line-height: 1.6;">
+      本頁為 <a href="https://seniordeli.com/openclaw" target="_blank" rel="noopener" style="color: #92400e; font-weight: 600;">seniordeli.com/openclaw</a> 的鏡像頁面。
+      技能的主要技術文件、更新紀錄及 changelog 請以 SeniorDeli 主頁為準。
+      OpenClaw 正式網址：<a href="https://openclaw.ai" target="_blank" rel="noopener" style="color: #92400e; font-weight: 600;">openclaw.ai</a>
+    </p>
+  </div>
+</PageLayout>

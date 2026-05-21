@@ -3,12 +3,16 @@ import PageLayout from './PageLayout.astro';
 import IddsiLevelBadge from '../components/IddsiLevelBadge.astro';
 import { getCollection } from 'astro:content';
 
+interface HreflangEntry {
+  hreflang: string;
+  href: string;
+}
+
 interface Props {
   title: string;
   description: string;
   lang: string;
-  hreflangPair?: string;
-  hreflangPairLang?: string;
+  hreflangLinks?: HreflangEntry[];
   iddsiLevel: number;
   prepTimeMinutes: number;
   difficulty: string;
@@ -21,8 +25,7 @@ const {
   title,
   description,
   lang,
-  hreflangPair,
-  hreflangPairLang,
+  hreflangLinks,
   iddsiLevel,
   prepTimeMinutes,
   difficulty,
@@ -64,8 +67,7 @@ const moreSectionLabel = isZh
   title={title}
   description={description}
   lang={lang}
-  hreflangPair={hreflangPair}
-  hreflangPairLang={hreflangPairLang}
+  hreflangLinks={hreflangLinks}
   schemaJson={schemaJson}
 >
   <div class="mb-4 flex flex-wrap gap-2 items-center">

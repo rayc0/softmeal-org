@@ -15,11 +15,24 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await page.render();
-const { lang, title, description, hreflang_pair, schema_type } = page.data;
-
-const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
+const { lang, title, description, schema_type } = page.data;
 
 const siteUrl = 'https://softmeal.org';
+
+// Homepage hreflang: link to each locale's homepage that exists in the collection.
+const allPages = await getCollection('pages', ({ id }) => id.includes('/index'));
+const LOCALE_BCP47_HOME: Record<string, string> = { 'zh-hk': 'zh-HK', 'en': 'en' };
+const hreflangLinks: { hreflang: string; href: string }[] = [];
+let xDefaultHref: string | null = null;
+for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_HOME)) {
+  const exists = allPages.some((p) => p.data.lang === locale);
+  if (exists) {
+    const href = `${siteUrl}/${locale}/`;
+    hreflangLinks.push({ hreflang: bcp47, href });
+    if (locale === 'zh-hk') xDefaultHref = href;
+  }
+}
+hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? `${siteUrl}/zh-hk/` });
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -47,8 +60,7 @@ const webPageSchema = {
   title={title}
   description={description}
   lang={lang}
-  hreflangPair={hreflang_pair}
-  hreflangPairLang={hreflangPairLang}
+  hreflangLinks={hreflangLinks}
   schemaJson={[websiteSchema, webPageSchema]}
 >
   <Content />

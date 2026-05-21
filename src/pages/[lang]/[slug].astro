@@ -17,12 +17,10 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await page.render();
-const { lang, title, description, hreflang_pair, schema_type, last_modified, related_articles } = page.data;
+const { lang, title, description, schema_type, last_modified, related_articles } = page.data;
 
 // Resolve related_articles slugs to titles
-const allPages = related_articles && related_articles.length > 0
-  ? await getCollection('pages')
-  : [];
+const allPages = await getCollection('pages');
 const resolvedRelated = (related_articles ?? []).map((raSlug: string) => {
   const match = allPages.find((p) => {
     const parts = p.id.split('/');
@@ -32,9 +30,30 @@ const resolvedRelated = (related_articles ?? []).map((raSlug: string) => {
   return { slug: raSlug, title: match?.data.title ?? raSlug };
 });
 
-const hreflangPairLang = lang === 'zh-hk' ? 'en' : 'zh-hk';
 const siteUrl = 'https://softmeal.org';
 const currentUrl = Astro.url.href;
+const pageSlug = Astro.params.slug;
+
+// Build collection-driven hreflang: emit only locales where the same slug exists.
+const LOCALE_BCP47_PAGES: Record<string, string> = {
+  'zh-hk': 'zh-HK',
+  'en': 'en',
+};
+const hreflangLinks: { hreflang: string; href: string }[] = [];
+let xDefaultHref: string | null = null;
+
+for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_PAGES)) {
+  const exists = allPages.some((p) => {
+    const parts = p.id.split('/');
+    return parts[0] === locale && parts[parts.length - 1].replace(/\.mdx?$/, '') === pageSlug;
+  });
+  if (exists) {
+    const href = `${siteUrl}/${locale}/${pageSlug}/`;
+    hreflangLinks.push({ hreflang: bcp47, href });
+    if (locale === 'zh-hk') xDefaultHref = href;
+  }
+}
+hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? hreflangLinks[0]?.href ?? `${siteUrl}/zh-hk/` });
 
 const articleSchema = schema_type === 'WebPage' || schema_type === 'AboutPage' ? {
   "@context": "https://schema.org",
@@ -1245,8 +1264,7 @@ const schemas = [
   title={title}
   description={description}
   lang={lang}
-  hreflangPair={hreflang_pair}
-  hreflangPairLang={hreflangPairLang}
+  hreflangLinks={hreflangLinks}
   schemaJson={schemas}
 >
   <Content />
