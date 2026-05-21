@@ -50,6 +50,38 @@ const warningTexts: Record<LangKey, string> = {
   'en':    '⚠️ All recipes require a speech therapist to confirm the appropriate IDDSI level for each individual. Texture varies by technique and ingredients.',
 };
 const nextLabels: Record<LangKey, string> = { 'zh-hk': '下一頁 →', 'zh-cn': '下一页 →', 'ja': '次へ →', 'en': 'Next →' };
+const faqHeadings: Record<LangKey, string> = {
+  'zh-hk': '常見問題',
+  'zh-cn': '常见问题',
+  'ja': 'よくある質問',
+  'en': 'Frequently Asked Questions',
+};
+const faqItems: Record<LangKey, { q: string; a: string }[]> = {
+  'zh-hk': [
+    { q: '這些食譜對所有吞嚥困難患者都安全嗎？', a: '食譜按 IDDSI 等級分類，但每位患者的適合等級必須由言語治療師個別評估確定。請勿根據食譜自行決定患者的飲食等級。' },
+    { q: '如何找到 IDDSI Level 4 的食譜？', a: '在食譜庫中，每個食譜均標有 IDDSI 等級徽章。向下瀏覽或使用等級篩選器找到 Level 4（糊狀）食譜。每個食譜均包含叉壓測試結果，確認質感達標。' },
+    { q: '食譜中的增稠劑用量可以更改嗎？', a: '不建議自行更改增稠劑用量。飲品的增稠程度必須符合言語治療師指定的 IDDSI 等級。不同品牌的增稠劑效果可能不同，應根據品牌說明書及言語治療師的指引使用。' },
+    { q: 'softmeal.org 的食譜是否適合糖尿病患者？', a: '食譜主要針對質感調整，未必考慮血糖控制需求。有糖尿病的吞嚥困難患者應諮詢營養師，選擇適合的食譜並調整份量。' },
+  ],
+  'zh-cn': [
+    { q: '这些食谱对所有吞咽困难患者都安全吗？', a: '食谱按 IDDSI 等级分类，但每位患者适合的等级必须由言语治疗师个别评估确定。请勿根据食谱自行决定患者的饮食等级。' },
+    { q: '如何找到 IDDSI Level 4 的食谱？', a: '在食谱库中，每个食谱均标有 IDDSI 等级徽章。浏览或使用等级筛选器找到 Level 4（糊状）食谱。每个食谱包含叉压测试结果，确认质感达标。' },
+    { q: '食谱中的增稠剂用量可以更改吗？', a: '不建议自行更改增稠剂用量。饮品的增稠程度必须符合言语治疗师指定的 IDDSI 等级。不同品牌效果可能不同，应参考品牌说明书及言语治疗师指引。' },
+    { q: 'softmeal.org 的食谱是否适合糖尿病患者？', a: '食谱主要针对质感调整，未必考虑血糖控制需求。有糖尿病的吞咽困难患者应咨询营养师。' },
+  ],
+  'ja': [
+    { q: 'これらのレシピはすべての嚥下困難患者に安全ですか？', a: 'レシピはIDDSIレベル別に分類されていますが、各患者に適したレベルは言語聴覚士による個別評価が必要です。レシピだけで食事レベルを自己判断しないでください。' },
+    { q: 'IDDSIレベル4のレシピはどこで見つけられますか？', a: 'レシピ一覧では各レシピにIDDSIレベルバッジが表示されています。レベル4（ピューレ）のレシピを探してください。各レシピにはフォーク圧力テスト結果が含まれています。' },
+    { q: 'とろみ剤の量は変更できますか？', a: '自己判断での変更はお勧めしません。飲み物のとろみは言語聴覚士が指定するIDDSIレベルに合わせる必要があります。ブランドによって効果が異なる場合があります。' },
+    { q: 'softmeal.orgのレシピは糖尿病患者に適していますか？', a: 'レシピは主に食感調整を目的としており、血糖管理は考慮されていない場合があります。糖尿病をお持ちの方は栄養士にご相談ください。' },
+  ],
+  'en': [
+    { q: 'Are these recipes safe for all dysphagia patients?', a: 'Recipes are categorised by IDDSI level, but each patient\'s appropriate level must be determined by a speech-language therapist. Do not use a recipe to self-assign an IDDSI level for a patient.' },
+    { q: 'How do I find a recipe for IDDSI Level 4?', a: 'Each recipe in the library displays an IDDSI level badge. Look for Level 4 (Puréed) recipes — each includes a fork pressure test result confirming the texture meets IDDSI requirements.' },
+    { q: 'Can I change the thickener quantity in a recipe?', a: 'It is not recommended to change thickener amounts without clinical guidance. The target IDDSI level for each drink must match the patient\'s prescription. Different thickener brands may require different amounts — follow product instructions and the SLP\'s guidance.' },
+    { q: 'Are softmeal.org recipes suitable for patients with diabetes?', a: 'These recipes focus on texture modification and may not account for blood sugar management. Dysphagia patients who also have diabetes should consult a dietitian to select and adapt recipes accordingly.' },
+  ],
+};
 const pageLabels: Record<LangKey, string> = { 'zh-hk': '第', 'zh-cn': '第', 'ja': '第', 'en': 'Page' };
 const ofLabels: Record<LangKey, string> = { 'zh-hk': '頁，共', 'zh-cn': '页，共', 'ja': 'ページ、全', 'en': 'of' };
 const totalLabels: Record<LangKey, string> = { 'zh-hk': '頁', 'zh-cn': '页', 'ja': 'ページ', 'en': 'pages' };
@@ -168,4 +200,16 @@ const itemListSchema = {
   <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
     {warningTexts[l]}
   </div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold mb-4">{faqHeadings[l]}</h2>
+    <dl class="space-y-4">
+      {faqItems[l].map(item => (
+        <div>
+          <dt class="font-medium text-gray-800">{item.q}</dt>
+          <dd class="mt-1 text-gray-600 text-sm">{item.a}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
 </PageLayout>
