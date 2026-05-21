@@ -39,6 +39,8 @@ const pageSlug = Astro.params.slug;
 // Build collection-driven hreflang: emit only locales where the same slug exists.
 const LOCALE_BCP47_PAGES: Record<string, string> = {
   'zh-hk': 'zh-HK',
+  'zh-cn': 'zh-CN',
+  'ja': 'ja',
   'en': 'en',
 };
 const hreflangLinks: { hreflang: string; href: string }[] = [];

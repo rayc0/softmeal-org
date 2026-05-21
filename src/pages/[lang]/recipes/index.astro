@@ -46,22 +46,12 @@ const warningTexts: Record<LangKey, string> = {
   'en':    '⚠️ All recipes require a speech therapist to confirm the appropriate IDDSI level for each individual. Texture varies by technique and ingredients.',
 };
 
-const hreflangPartnerMap: Record<LangKey, LangKey> = { 'zh-hk': 'en', 'zh-cn': 'zh-hk', 'ja': 'zh-hk', 'en': 'zh-hk' };
-const altLang = hreflangPartnerMap[l];
-
 const allRecipes = await getCollection('recipes', ({ data }) => data.lang === l);
 allRecipes.sort((a, b) => a.data.iddsi_level - b.data.iddsi_level);
 
-const title = isZh
-  ? '照護食食譜庫 | IDDSI Level 4-6 食譜 — softmeal.org'
-  : 'Care Food Recipe Library | IDDSI Level 4-6 Recipes — softmeal.org';
-const description = isZh
-  ? '超過10個按 IDDSI 級別分類的照護食食譜，用香港常見食材，適合吞嚥困難長者。免費閱覽。'
-  : 'Over 10 care food recipes categorised by IDDSI level, using common ingredients. Free to read. Suitable for elderly with dysphagia.';
-
 const siteUrl = 'https://softmeal.org';
-// Both zh-hk and en recipes index exist (see getStaticPaths above).
-const LOCALE_BCP47_REC: Record<string, string> = { 'zh-hk': 'zh-HK', 'en': 'en' };
+// All 4 locales have a recipes index page (driven by getStaticPaths above).
+const LOCALE_BCP47_REC: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
 const hreflangLinks = [
   ...Object.entries(LOCALE_BCP47_REC).map(([locale, bcp47]) => ({
     hreflang: bcp47,

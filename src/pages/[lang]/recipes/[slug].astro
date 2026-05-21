@@ -32,11 +32,15 @@ const {
 
 const siteUrl = 'https://softmeal.org';
 const recipeSlug = Astro.params.slug;
+const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const schemaLang = htmlLangMap[lang] ?? 'zh-HK';
 
 // Build collection-driven hreflang: query every locale for the same slug.
 // Only emit entries for locales where the file actually exists.
 const LOCALE_BCP47: Record<string, string> = {
   'zh-hk': 'zh-HK',
+  'zh-cn': 'zh-CN',
+  'ja': 'ja',
   'en': 'en',
 };
 const allRecipes = await getCollection('recipes');
