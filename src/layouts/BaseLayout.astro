@@ -79,6 +79,26 @@ const speakableSchema = speakable ? {
 } : null;
 
 const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema ? [speakableSchema] : [])];
+
+// Build deduplicated hreflang entries — one tag per locale code, no duplicates.
+// Start with root-level fallbacks, then override with page-specific URLs.
+const hreflangEntries: { lc: string; href: string }[] = (() => {
+  const roots: Record<string, string> = {
+    'zh-hk': `${siteUrl}/zh-hk/`,
+    'zh-cn': `${siteUrl}/zh-cn/`,
+    'ja':    `${siteUrl}/ja/`,
+    'en':    `${siteUrl}/en/`,
+  };
+  // Current page's locale points to its own canonical.
+  roots[lang] = canonical;
+  // Specific cross-locale pair (e.g. /zh-hk/dysphagia/ ↔ /en/dysphagia/).
+  if (hreflangPair && hreflangPairLang) {
+    const normalised = hreflangPair.replace(/\/index$/, '');
+    const pairHref = normalised.endsWith('/') ? `${siteUrl}/${normalised}` : `${siteUrl}/${normalised}/`;
+    roots[hreflangPairLang] = pairHref;
+  }
+  return Object.entries(roots).map(([lc, href]) => ({ lc, href }));
+})();
 ---
 
 <!DOCTYPE html>
@@ -94,17 +114,10 @@ const allSchemas = [orgSchema, websiteSchema, ...schemaJson, ...(speakableSchema
 
     <link rel="canonical" href={canonical} />
 
-    <!-- hreflang — all 4 locales + x-default -->
-    <link rel="alternate" hreflang="zh-HK" href={lang === 'zh-hk' ? canonical : `${siteUrl}/zh-hk/`} />
-    <link rel="alternate" hreflang="zh-CN" href={lang === 'zh-cn' ? canonical : `${siteUrl}/zh-cn/`} />
-    <link rel="alternate" hreflang="ja" href={lang === 'ja' ? canonical : `${siteUrl}/ja/`} />
-    <link rel="alternate" hreflang="en" href={lang === 'en' ? canonical : `${siteUrl}/en/`} />
-    {hreflangPair && hreflangPairLang && (() => {
-      // Normalise: "en/index" → "en/", "en/dysphagia" → "en/dysphagia/"
-      const normalised = hreflangPair.replace(/\/index$/, '');
-      const href = normalised.endsWith('/') ? `${siteUrl}/${normalised}` : `${siteUrl}/${normalised}/`;
-      return <link rel="alternate" hreflang={hreflangMap[hreflangPairLang]} href={href} />;
-    })()}
+    <!-- hreflang — all 4 locales + x-default (deduplicated) -->
+    {hreflangEntries.map(({ lc, href }) => (
+      <link rel="alternate" hreflang={hreflangMap[lc] ?? lc} href={href} />
+    ))}
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}/zh-hk/`} />
 
     <!-- Open Graph -->
