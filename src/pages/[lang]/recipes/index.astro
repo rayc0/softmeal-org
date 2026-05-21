@@ -71,6 +71,41 @@ const hreflangLinks = [
 const totalPages = Math.ceil(allRecipes.length / PAGE_SIZE);
 const pageRecipes = allRecipes.slice(0, PAGE_SIZE);
 const nextUrl = totalPages > 1 ? `/${lang}/recipes/2/` : undefined;
+
+const htmlLangMap: Record<LangKey, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const schemaLang = htmlLangMap[l] ?? 'zh-HK';
+
+// BreadcrumbList: Home → Recipes (2-level, locale-aware)
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": schemaLang,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": l === 'zh-hk' ? "主頁" : l === 'zh-cn' ? "首页" : l === 'ja' ? "ホーム" : "Home", "item": `${siteUrl}/${lang}/` },
+    { "@type": "ListItem", "position": 2, "name": l === 'zh-hk' ? "食譜" : l === 'zh-cn' ? "食谱" : l === 'ja' ? "レシピ" : "Recipes", "item": `${siteUrl}/${lang}/recipes/` }
+  ]
+};
+
+// ItemList: enumerate all recipes on this page sorted by IDDSI level
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "inLanguage": schemaLang,
+  "name": l === 'zh-hk' ? "照護食食譜庫" : l === 'zh-cn' ? "照护食食谱库" : l === 'ja' ? "介護食レシピ集" : "Care Food Recipe Library",
+  "description": descriptions[l],
+  "numberOfItems": allRecipes.length,
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "itemListElement": allRecipes.map((recipe, index) => {
+    const parts = recipe.id.split('/');
+    const recipeSlug = parts[parts.length - 1].replace(/\.mdx?$/, '');
+    return {
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": recipe.data.title,
+      "url": `${siteUrl}/${lang}/recipes/${recipeSlug}/`
+    };
+  })
+};
 ---
 
 <PageLayout
@@ -79,6 +114,7 @@ const nextUrl = totalPages > 1 ? `/${lang}/recipes/2/` : undefined;
   lang={lang}
   hreflangLinks={hreflangLinks}
   canonicalUrl={`https://softmeal.org/${lang}/recipes/`}
+  schemaJson={[breadcrumbSchema, itemListSchema]}
 >
   <h1>{headings[l]}</h1>
   <p>{subtexts[l]}</p>
