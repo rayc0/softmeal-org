@@ -200,6 +200,8 @@ const breadcrumbSchema = {
   mainIngredient={main_ingredient}
   tags={tags}
   schemaJson={[recipeSchema, howToSchema, recipeFaqSchema, breadcrumbSchema]}
+  ogImageType={lang === 'zh-hk' ? 'recipes' : undefined}
+  ogImageSlug={lang === 'zh-hk' ? recipeSlug : undefined}
 >
   <h1>{title}</h1>
   <Content />

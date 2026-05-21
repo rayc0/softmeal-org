@@ -3,13 +3,14 @@ import { getCollection } from 'astro:content';
 
 /**
  * Image sitemap — lists every page URL with its representative OG image.
- * All pages use /og-default.png as the canonical page image (1200×630 branded card).
+ * zh-hk pages/recipes use per-page generated OG images (/og/<type>/<slug>.png).
+ * Other locales fall back to /og-default.png.
  * Registered in sitemap-index.xml and robots.txt.
  * Spec: https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps
  */
 export const GET: APIRoute = async () => {
   const siteUrl = 'https://softmeal.org';
-  const ogImage = `${siteUrl}/og-default.png`;
+  const defaultOgImage = `${siteUrl}/og-default.png`;
   const langs = ['zh-hk', 'zh-cn', 'ja', 'en'] as const;
 
   const pages = await getCollection('pages');
@@ -22,7 +23,7 @@ export const GET: APIRoute = async () => {
     // Language root (index page)
     entries.push({
       pageUrl: `${siteUrl}/${lang}/`,
-      imageUrl: ogImage,
+      imageUrl: defaultOgImage,
       imageTitle: 'softmeal.org — Care Food Knowledge Hub',
     });
 
@@ -32,9 +33,13 @@ export const GET: APIRoute = async () => {
     );
     for (const page of langPages) {
       const slug = page.id.split('/').pop()!.replace(/\.mdx?$/, '');
+      // zh-hk gets per-page generated OG image; other locales use default
+      const imageUrl = lang === 'zh-hk'
+        ? `${siteUrl}/og/pages/${slug}.png`
+        : defaultOgImage;
       entries.push({
         pageUrl: `${siteUrl}/${lang}/${slug}/`,
-        imageUrl: ogImage,
+        imageUrl,
         imageTitle: page.data.title,
       });
     }
@@ -42,7 +47,7 @@ export const GET: APIRoute = async () => {
     // Recipes index
     entries.push({
       pageUrl: `${siteUrl}/${lang}/recipes/`,
-      imageUrl: ogImage,
+      imageUrl: defaultOgImage,
       imageTitle: 'softmeal.org Recipes',
     });
 
@@ -50,9 +55,13 @@ export const GET: APIRoute = async () => {
     const langRecipes = recipes.filter((r) => r.id.startsWith(`${lang}/`));
     for (const recipe of langRecipes) {
       const slug = recipe.id.split('/').pop()!.replace(/\.mdx?$/, '');
+      // zh-hk gets per-page generated OG image; other locales use default
+      const imageUrl = lang === 'zh-hk'
+        ? `${siteUrl}/og/recipes/${slug}.png`
+        : defaultOgImage;
       entries.push({
         pageUrl: `${siteUrl}/${lang}/recipes/${slug}/`,
-        imageUrl: ogImage,
+        imageUrl,
         imageTitle: recipe.data.title,
       });
     }
