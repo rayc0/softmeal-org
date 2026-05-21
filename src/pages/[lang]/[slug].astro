@@ -1317,6 +1317,8 @@ const schemas = [
   lang={lang}
   hreflangLinks={hreflangLinks}
   schemaJson={schemas}
+  ogImageType={lang === 'zh-hk' ? 'pages' : undefined}
+  ogImageSlug={lang === 'zh-hk' ? pageSlug : undefined}
 >
   <Content />
 

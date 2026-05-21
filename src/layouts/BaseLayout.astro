@@ -18,6 +18,9 @@ interface Props {
   schemaJson?: object[];
   ogImage?: string;
   ogType?: string;
+  /** Per-page OG image: type = 'recipes' | 'pages', slug = content slug (zh-hk only) */
+  ogImageType?: 'recipes' | 'pages';
+  ogImageSlug?: string;
 }
 
 const {
@@ -29,11 +32,18 @@ const {
   schemaJson = [],
   ogImage,
   ogType = 'website',
+  ogImageType,
+  ogImageSlug,
 } = Astro.props;
+
+// Resolve per-page OG image URL. Priority: explicit ogImage > per-page generated > default.
+const siteUrl = 'https://softmeal.org';
+const resolvedOgImage = ogImage
+  ?? (ogImageType && ogImageSlug ? `${siteUrl}/og/${ogImageType}/${ogImageSlug}.png` : null)
+  ?? `${siteUrl}/og-default.png`;
 
 const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
 const htmlLang = htmlLangMap[lang] ?? 'zh-HK';
-const siteUrl = 'https://softmeal.org';
 const canonical = canonicalUrl || Astro.url.href;
 
 // OG locale codes use underscores — map from internal lang key
@@ -139,26 +149,16 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
       <meta property="og:locale:alternate" content={alt} />
     ))}
 
-    <!-- og:image — default fallback (pages with custom ogImage prop override this) -->
-    {ogImage ? (
-      <>
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-      </>
-    ) : (
-      <>
-        <meta property="og:image" content={`${siteUrl}/og-default.png`} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={title} />
-      </>
-    )}
+    <!-- og:image — per-page generated or default fallback -->
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage || `${siteUrl}/og-default.png`} />
+    <meta name="twitter:image" content={resolvedOgImage} />
 
     <!-- Google Search Console verification — replace [GOOGLE_VERIFICATION_TOKEN] with token from GSC -->
     <!-- <meta name="google-site-verification" content="[GOOGLE_VERIFICATION_TOKEN]" /> -->
@@ -177,10 +177,40 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <!-- Favicon placeholder -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- ===== Critical resource hints ===== -->
+    <!-- Preload favicon (renders immediately on all pages) -->
+    <link rel="preload" as="image" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Preload default OG image on homepage/root pages (social crawlers + LCP candidate) -->
+    {(!ogImageType || !ogImageSlug) && (
+      <link rel="preload" as="image" href="/og-default.png" />
+    )}
+    <!-- NOTE: No Google Fonts or external CDN — site uses system font stack only.
+         Preconnect hints for Google Fonts / GA intentionally omitted to avoid
+         wasting connections to origins that are never loaded. -->
+
     <!-- JSON-LD structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
   </head>
   <body>
     <slot />
+
+    <!-- ===== Web Vitals reporter ===== -->
+    <!-- Reports LCP, CLS, INP to console. Zero render-blocking: defer + module.
+         Uses official web-vitals CDN (1 KB gzipped). Replace console.log with
+         a beacon call (e.g. navigator.sendBeacon('/api/vitals', ...)) to collect. -->
+    <script type="module">
+      import { onLCP, onCLS, onINP, onFCP, onTTFB } from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js?module';
+      const report = (metric) => {
+        // Log to console for local dev / staging review
+        console.info(`[Web Vitals] ${metric.name}: ${Math.round(metric.value)}${metric.name === 'CLS' ? '' : 'ms'} (rating: ${metric.rating})`);
+        // Uncomment to beacon to an analytics endpoint:
+        // navigator.sendBeacon('/api/vitals', JSON.stringify(metric));
+      };
+      onLCP(report);
+      onCLS(report);
+      onINP(report);
+      onFCP(report);
+      onTTFB(report);
+    </script>
   </body>
 </html>
