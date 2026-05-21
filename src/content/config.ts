@@ -4,7 +4,7 @@ const pageCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string().min(60, "Meta description should be at least 60 chars for full SERP snippet").max(200),
+    description: z.string().min(40, "Description should be 40+ chars (60+ recommended for full SERP width)").max(200),
     lang: z.enum(['zh-hk', 'zh-cn', 'ja', 'en']),
     last_modified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     related_articles: z.array(z.string()).optional(),
@@ -18,7 +18,7 @@ const recipeCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string().min(60, "Meta description should be at least 60 chars for full SERP snippet").max(200),
+    description: z.string().min(40, "Description should be 40+ chars (60+ recommended for full SERP width)").max(200),
     lang: z.enum(['zh-hk', 'zh-cn', 'ja', 'en']),
     last_modified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     iddsi_level: z.number().int().min(0).max(7),
