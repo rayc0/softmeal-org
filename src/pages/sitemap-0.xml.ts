@@ -25,11 +25,18 @@ export const GET: APIRoute = async () => {
       urls.push(`${siteUrl}/${lang}/${slug}/`);
     }
 
-    // Recipes index
+    // Recipes index (page 1 = canonical /recipes/)
     urls.push(`${siteUrl}/${lang}/recipes/`);
 
-    // Individual recipes
+    // Paginated recipe index pages (page 2+)
     const langRecipes = recipes.filter((r) => r.id.startsWith(`${lang}/`));
+    const PAGE_SIZE = 24;
+    const totalPages = Math.ceil(langRecipes.length / PAGE_SIZE);
+    for (let p = 2; p <= totalPages; p++) {
+      urls.push(`${siteUrl}/${lang}/recipes/${p}/`);
+    }
+
+    // Individual recipes
     for (const recipe of langRecipes) {
       const slug = recipe.id.split('/').pop()!.replace(/\.mdx?$/, '');
       urls.push(`${siteUrl}/${lang}/recipes/${slug}/`);

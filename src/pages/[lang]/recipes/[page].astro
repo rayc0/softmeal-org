@@ -1,22 +1,37 @@
 ---
-// /[lang]/recipes/ — always page 1 of the paginated recipe index.
-// Subsequent pages live at /[lang]/recipes/2/, /3/, etc. ([page].astro).
 import { getCollection } from 'astro:content';
 import PageLayout from '../../../layouts/PageLayout.astro';
 import IddsiLevelBadge from '../../../components/IddsiLevelBadge.astro';
 
-export async function getStaticPaths() {
-  const allRecipes = await getCollection('recipes');
-  const langs = [...new Set(allRecipes.map((r: { data: { lang: string } }) => r.data.lang))];
-  return langs.map(lang => ({ params: { lang } }));
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const langs = ['zh-hk', 'zh-cn', 'en', 'ja'] as const;
+  let paths: unknown[] = [];
+
+  for (const lang of langs) {
+    const recipes = await getCollection('recipes', (r: { data: { lang: string } }) => r.data.lang === lang);
+    recipes.sort((a: { data: { iddsi_level: number } }, b: { data: { iddsi_level: number } }) => a.data.iddsi_level - b.data.iddsi_level);
+
+    const paginated = paginate(recipes, {
+      params: { lang },
+      pageSize: 24,
+    });
+    paths = paths.concat(paginated);
+  }
+
+  return paths;
 }
 
-const { lang } = Astro.params;
+const { page } = Astro.props as { page: {
+  data: Array<{ id: string; data: { lang: string; iddsi_level: number; title: string; description: string; prep_time_minutes: number } }>;
+  url: { prev?: string; next?: string; current: string };
+  currentPage: number;
+  lastPage: number;
+  total: number;
+}};
+const { lang } = Astro.params as { lang: 'zh-hk' | 'zh-cn' | 'ja' | 'en' };
 
 type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
 const l = lang as LangKey;
-
-const PAGE_SIZE = 24;
 
 const titles: Record<LangKey, string> = {
   'zh-hk': '照護食食譜庫 | IDDSI Level 4-6 食譜 — softmeal.org',
@@ -49,42 +64,34 @@ const warningTexts: Record<LangKey, string> = {
   'ja':    '⚠️ 全てのレシピは言語聴覚士による評価で適切な IDDSI レベルを確認してください。食感は調理技術や食材により異なります。',
   'en':    '⚠️ All recipes require a speech therapist to confirm the appropriate IDDSI level for each individual. Texture varies by technique and ingredients.',
 };
+const prevLabels: Record<LangKey, string> = { 'zh-hk': '← 上一頁', 'zh-cn': '← 上一页', 'ja': '← 前へ', 'en': '← Previous' };
 const nextLabels: Record<LangKey, string> = { 'zh-hk': '下一頁 →', 'zh-cn': '下一页 →', 'ja': '次へ →', 'en': 'Next →' };
 const pageLabels: Record<LangKey, string> = { 'zh-hk': '第', 'zh-cn': '第', 'ja': '第', 'en': 'Page' };
 const ofLabels: Record<LangKey, string> = { 'zh-hk': '頁，共', 'zh-cn': '页，共', 'ja': 'ページ、全', 'en': 'of' };
 const totalLabels: Record<LangKey, string> = { 'zh-hk': '頁', 'zh-cn': '页', 'ja': 'ページ', 'en': 'pages' };
 
-const allRecipes = await getCollection('recipes', ({ data }) => data.lang === l);
-allRecipes.sort((a, b) => a.data.iddsi_level - b.data.iddsi_level);
+const hreflangPartnerMap: Record<LangKey, LangKey> = { 'zh-hk': 'en', 'zh-cn': 'zh-hk', 'ja': 'zh-hk', 'en': 'zh-hk' };
+const altLang = hreflangPartnerMap[l];
 
-const siteUrl = 'https://softmeal.org';
-// All 4 locales have a recipes index page (driven by getStaticPaths above).
-const LOCALE_BCP47_REC: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
-const hreflangLinks = [
-  ...Object.entries(LOCALE_BCP47_REC).map(([locale, bcp47]) => ({
-    hreflang: bcp47,
-    href: `${siteUrl}/${locale}/recipes/`,
-  })),
-  { hreflang: 'x-default', href: `${siteUrl}/zh-hk/recipes/` },
-];
-
-const totalPages = Math.ceil(allRecipes.length / PAGE_SIZE);
-const pageRecipes = allRecipes.slice(0, PAGE_SIZE);
-const nextUrl = totalPages > 1 ? `/${lang}/recipes/2/` : undefined;
+// Canonical: page 1 points to /recipes/ (index), subsequent pages point to /recipes/N/
+const canonicalUrl = page.currentPage === 1
+  ? `https://softmeal.org/${lang}/recipes/`
+  : `https://softmeal.org/${lang}/recipes/${page.currentPage}/`;
 ---
 
 <PageLayout
-  title={titles[l]}
+  title={`${titles[l]}${page.lastPage > 1 ? ` — Page ${page.currentPage}` : ''}`}
   description={descriptions[l]}
   lang={lang}
-  hreflangLinks={hreflangLinks}
-  canonicalUrl={`https://softmeal.org/${lang}/recipes/`}
+  hreflangPair={`${altLang}/recipes`}
+  hreflangPairLang={altLang}
+  canonicalUrl={canonicalUrl}
 >
   <h1>{headings[l]}</h1>
   <p>{subtexts[l]}</p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-    {pageRecipes.map((recipe: { id: string; data: { iddsi_level: number; title: string; description: string; prep_time_minutes: number } }) => {
+    {page.data.map((recipe: { id: string; data: { iddsi_level: number; title: string; description: string; prep_time_minutes: number } }) => {
       const parts = recipe.id.split('/');
       const slug = parts[parts.length - 1].replace(/\.mdx?$/, '');
       return (
@@ -105,21 +112,28 @@ const nextUrl = totalPages > 1 ? `/${lang}/recipes/2/` : undefined;
     })}
   </div>
 
-  <!-- Pagination nav (only shown when there are multiple pages) -->
-  {totalPages > 1 && (
+  <!-- Pagination nav -->
+  {page.lastPage > 1 && (
     <nav aria-label="pagination" class="mt-8 flex items-center justify-between gap-4">
       <div>
-        {/* No prev on page 1 */}
+        {page.url.prev && (
+          <a
+            href={page.url.prev}
+            class="inline-block px-4 py-2 border border-gray-300 rounded-lg text-sm hover:border-primary hover:text-primary transition-colors no-underline"
+          >
+            {prevLabels[l]}
+          </a>
+        )}
       </div>
 
       <span class="text-sm text-gray-500">
-        {pageLabels[l]} 1 {ofLabels[l]} {totalPages} {totalLabels[l]}
+        {pageLabels[l]} {page.currentPage} {ofLabels[l]} {page.lastPage} {totalLabels[l]}
       </span>
 
       <div>
-        {nextUrl && (
+        {page.url.next && (
           <a
-            href={nextUrl}
+            href={page.url.next}
             class="inline-block px-4 py-2 border border-gray-300 rounded-lg text-sm hover:border-primary hover:text-primary transition-colors no-underline"
           >
             {nextLabels[l]}
