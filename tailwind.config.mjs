@@ -62,7 +62,12 @@ export default {
           css: {
             lineHeight: '1.8',
             color: '#374151',
-            a: { color: '#2B7A4B' },
+            a: {
+              color: '#2B7A4B',
+              textDecoration: 'underline',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '2px',
+            },
             'h1, h2, h3': { fontWeight: '700' },
           },
         },

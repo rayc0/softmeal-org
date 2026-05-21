@@ -139,7 +139,7 @@ const disclaimer = disclaimers[l];
         <h3 class="text-white font-bold text-base mb-3">{h.brand}</h3>
         <p class="text-sm leading-relaxed mb-3">{taglines[l]}</p>
         <p class="text-sm">
-          📧 <a href="mailto:info@softmeal.org" class="text-gray-400 hover:text-white transition-colors">info@softmeal.org</a>
+          📧 <a href="mailto:info@softmeal.org" class="text-gray-300 hover:text-white transition-colors inline-flex items-center min-h-[44px] min-w-[44px]">info@softmeal.org</a>
         </p>
       </div>
 
@@ -149,7 +149,7 @@ const disclaimer = disclaimers[l];
         <ul class="space-y-1.5 text-sm">
           {knowledgeLinks[l].map(link => (
             <li>
-              <a href={link.href} class="text-gray-400 hover:text-white transition-colors no-underline">
+              <a href={link.href} class="text-gray-300 hover:text-white transition-colors no-underline inline-flex items-center min-h-[44px] min-w-[44px]">
                 {link.label}
               </a>
             </li>
@@ -163,7 +163,7 @@ const disclaimer = disclaimers[l];
         <ul class="space-y-1.5 text-sm">
           {toolLinks[l].map(link => (
             <li>
-              <a href={link.href} class="text-gray-400 hover:text-white transition-colors no-underline">
+              <a href={link.href} class="text-gray-300 hover:text-white transition-colors no-underline inline-flex items-center min-h-[44px] min-w-[44px]">
                 {link.label}
               </a>
             </li>
@@ -177,20 +177,20 @@ const disclaimer = disclaimers[l];
         <ul class="space-y-2 text-sm">
           <li>
             <a href="https://seniordeli.com/" target="_blank" rel="noopener"
-               class="text-gray-400 hover:text-white transition-colors no-underline">
-              seniordeli.com <span class="text-gray-600">— HK</span>
+               class="text-gray-300 hover:text-white transition-colors no-underline inline-flex items-center min-h-[44px] min-w-[44px]">
+              seniordeli.com <span class="text-gray-500">— HK</span>
             </a>
           </li>
           <li>
             <a href="https://kangleling.com/" target="_blank" rel="noopener"
-               class="text-gray-400 hover:text-white transition-colors no-underline">
-              kangleling.com <span class="text-gray-600">— CN</span>
+               class="text-gray-300 hover:text-white transition-colors no-underline inline-flex items-center min-h-[44px] min-w-[44px]">
+              kangleling.com <span class="text-gray-500">— CN</span>
             </a>
           </li>
           <li>
             <a href="https://dysphagia.cn/" target="_blank" rel="noopener"
-               class="text-gray-400 hover:text-white transition-colors no-underline">
-              dysphagia.cn <span class="text-gray-600">— CN</span>
+               class="text-gray-300 hover:text-white transition-colors no-underline inline-flex items-center min-h-[44px] min-w-[44px]">
+              dysphagia.cn <span class="text-gray-500">— CN</span>
             </a>
           </li>
         </ul>
@@ -221,7 +221,7 @@ const disclaimer = disclaimers[l];
     <div class="mt-8 pt-6 border-t border-gray-800 flex flex-wrap gap-4 items-center justify-between text-xs text-gray-600">
       <p>© 2026 softmeal.org</p>
       <p class="text-center flex-1 min-w-0 leading-relaxed">{disclaimer}</p>
-      <a href={`/${l}/about/`} class="text-gray-600 hover:text-gray-400 transition-colors no-underline flex-shrink-0">
+      <a href={`/${l}/about/`} class="text-gray-400 hover:text-gray-200 transition-colors no-underline flex-shrink-0 inline-flex items-center min-h-[44px] min-w-[44px]">
         {l === 'zh-hk' ? '免責聲明' : l === 'zh-cn' ? '免责声明' : l === 'ja' ? '免責事項' : 'Disclaimer'}
       </a>
     </div>

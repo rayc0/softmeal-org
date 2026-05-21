@@ -38,9 +38,10 @@
     @apply border-l-4 border-primary pl-4 my-4 bg-primary-50 py-3 pr-4 rounded-r text-gray-700 italic;
   }
 
-  /* Links */
+  /* Links — underline always visible for WCAG 1.4.1 (color not sole indicator) */
   a {
-    @apply text-primary-700 hover:text-primary-800 hover:underline underline-offset-2;
+    @apply text-primary-700 hover:text-primary-800 underline underline-offset-2;
+    text-decoration-thickness: 1px;
     transition: color 0.15s;
   }
 
@@ -98,6 +99,12 @@
   }
   .prose-softmeal h2 {
     @apply border-b border-border pb-2;
+  }
+  /* Prose links: always underlined per WCAG 1.4.1 */
+  .prose-softmeal a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
   }
 
   /* Reading progress bar */

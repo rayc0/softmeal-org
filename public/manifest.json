@@ -1,0 +1,19 @@
+{
+  "name": "softmeal.org",
+  "short_name": "softmeal",
+  "description": "Hong Kong's first public dysphagia and care food knowledge platform",
+  "start_url": "/zh-hk/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "lang": "zh-HK",
+  "categories": ["health", "medical", "education"]
+}
