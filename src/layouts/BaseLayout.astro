@@ -109,10 +109,11 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
 
     <link rel="canonical" href={canonical} />
 
-    <!-- hreflang: collection-driven, emits only locales that actually exist -->
+    <!-- hreflang: collection-driven, emits only locales that actually exist + x-default -->
     {hreflangLinks && hreflangLinks.map((entry) => (
       <link rel="alternate" hreflang={entry.hreflang} href={entry.href} />
     ))}
+    {!hreflangLinks && <link rel="alternate" hreflang="x-default" href={`${siteUrl}/zh-hk/`} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
