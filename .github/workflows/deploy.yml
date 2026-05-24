@@ -20,11 +20,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - run: npm ci
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - run: npm run build
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
