@@ -107,6 +107,28 @@ Under NICE CG162, effective dysphagia management is explicitly a multidisciplina
 
 The [care home audit checklist](/en/operations/audit-checklist-care-home) includes fields for verifying SLT-dietitian collaboration. Completing this audit monthly provides the governance evidence that inspectors and commissioners expect.
 
+## Clinical Screening Tool Resources
+
+The following peer-reviewed clinical guides on dysphagia.cn support dietitian–SLT collaboration in care homes:
+
+**Screening tools**:
+- [EAT-10: Eating Assessment Tool — full guide](https://dysphagia.cn/en/clinical/eat-10-eating-assessment-tool/) — 10-item self-report screen; cut-off ≥3
+- [GUSS: Gugging Swallowing Screen — bedside protocol](https://dysphagia.cn/en/clinical/guss-gugging-swallowing-screen/) — validated in acute stroke; 0–20 severity scale
+- [Water Swallow Test](https://dysphagia.cn/en/clinical/water-swallow-test/) — Kubota 50 mL and Daniels 3-oz variants
+
+**Nutritional assessment**:
+- [MNA-SF: Mini Nutritional Assessment for elderly patients with dysphagia](https://dysphagia.cn/en/clinical/mna-sf-mini-nutritional-assessment/) — 6-item screen; cut-off ≤11
+
+**Outcome measurement**:
+- [FOIS: Functional Oral Intake Scale](https://dysphagia.cn/en/clinical/fois-functional-oral-intake-scale/) — 7-level oral intake tracking
+- [Penetration-Aspiration Scale](https://dysphagia.cn/en/clinical/penetration-aspiration-scale/) — 8-level VFSS/FEES reporting standard
+
+**Clinical reasoning and case-based learning**:
+- [Silent Aspiration: why it's missed and how to detect it](https://dysphagia.cn/en/clinical/silent-aspiration/)
+- [Aspiration Pneumonia: clinical features and prevention](https://dysphagia.cn/en/clinical/aspiration-pneumonia-clinical-features/)
+- [Dysphagia in Dementia: staging guide](https://dysphagia.cn/en/clinical/dysphagia-dementia-staging/)
+- [End-of-life dysphagia care decisions](https://dysphagia.cn/en/clinical/end-of-life-dysphagia-care/)
+
 ## References
 
 - ASHA Adult Dysphagia Practice Portal: https://www.asha.org/practice-portal/clinical-topics/adult-dysphagia/
