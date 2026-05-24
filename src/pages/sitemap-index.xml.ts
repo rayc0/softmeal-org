@@ -7,7 +7,7 @@ export const GET: APIRoute = async () => {
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>${siteUrl}/sitemap-0.xml</loc>
-    <lastmod>2026-05-07</lastmod>
+    <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
     <loc>${siteUrl}/sitemap-images.xml</loc>
