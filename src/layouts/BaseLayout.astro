@@ -215,6 +215,10 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
 
     <!-- JSON-LD structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(allSchemas)} />
+
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </head>
   <body>
     <slot />
