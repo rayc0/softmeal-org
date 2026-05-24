@@ -196,6 +196,16 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
       <meta property="article:published_time" content={new Date().toISOString().slice(0, 10)} />
     )}
 
+    <!-- RSS / Atom feed auto-discovery -->
+    <link rel="alternate" type="application/rss+xml" title="softmeal.org — English" href="/en/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="softmeal.org — 繁體中文" href="/zh-hk/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="softmeal.org — 简体中文" href="/zh-cn/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="softmeal.org — 日本語" href="/ja/rss.xml" />
+    <link rel="alternate" type="application/atom+xml" title="softmeal.org — English (Atom)" href="/en/atom.xml" />
+    <link rel="alternate" type="application/atom+xml" title="softmeal.org — 繁體中文 (Atom)" href="/zh-hk/atom.xml" />
+    <link rel="alternate" type="application/atom+xml" title="softmeal.org — 简体中文 (Atom)" href="/zh-cn/atom.xml" />
+    <link rel="alternate" type="application/atom+xml" title="softmeal.org — 日本語 (Atom)" href="/ja/atom.xml" />
+
     <!-- AI discovery links -->
     <link rel="manifest" href="/manifest.json" />
     <link rel="alternate" type="text/plain" title="LLM-readable summary" href="/llms.txt" />
