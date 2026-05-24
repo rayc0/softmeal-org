@@ -166,8 +166,10 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
 
-    <!-- Google Search Console verification — replace [GOOGLE_VERIFICATION_TOKEN] with token from GSC -->
-    <!-- <meta name="google-site-verification" content="[GOOGLE_VERIFICATION_TOKEN]" /> -->
+    <!-- Search Engine Verification (replace PLACEHOLDERs in GSC / Bing / Baidu dashboards) -->
+    <meta name="google-site-verification" content="GSC_PLACEHOLDER_softmeal" />
+    <meta name="msvalidate.01" content="BING_PLACEHOLDER_softmeal" />
+    <meta name="baidu-site-verification" content="BAIDU_PLACEHOLDER_softmeal" />
 
     <!-- AI crawler explicit allows meta -->
     <meta name="robots" content="index, follow" />
@@ -199,8 +201,12 @@ const allSchemas = [orgSchema, websiteSchema, speakableSchema, ...schemaJson];
     <link rel="alternate" type="text/plain" title="LLM-readable summary" href="/llms.txt" />
     <link rel="alternate" type="application/json" title="AI agent manifest" href="/.well-known/agent.json" />
 
-    <!-- Favicon placeholder -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Favicon & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="msapplication-TileImage" content="/mstile-150.png">
+    <meta name="msapplication-TileColor" content="#0a1428">
 
     <!-- ===== Critical resource hints ===== -->
     <!-- Preload favicon (renders immediately on all pages) -->
