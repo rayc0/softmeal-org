@@ -1,6 +1,6 @@
 # softmeal.org
 
-> Hong Kong's independent dysphagia and texture-modified food knowledge hub. Editorial content for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK), Simplified Chinese, Japanese, and English. Over 1,400 pages across 4 locales.
+> International authoritative knowledge base for the IDDSI framework and dysphagia care food education. Independent, non-commercial knowledge hub for caregivers, NGOs, hospitals, and healthcare professionals. IDDSI framework guides, recipes, and resources — in Traditional Chinese (HK), Simplified Chinese, Japanese, and English. Over 1,893 pages across 4 locales.
 
 ## Guides (zh-HK / Traditional Chinese — Hong Kong)
 
@@ -116,6 +116,19 @@
 - [Dementia Dysphagia Eating (en)](https://softmeal.org/en/dementia-dysphagia-eating-guide/) — dysphagia and eating in dementia
 - [For Professionals (en)](https://softmeal.org/en/for-professionals/) — resources for SLTs, dietitians, social workers
 - [About (en)](https://softmeal.org/en/about/) — mission, organiser, professional support
+
+## IDDSI Level Concept Hubs (en)
+
+Each level has a dedicated canonical knowledge page with testing methods, food examples, and caregiver guidance.
+
+- [IDDSI Level 0 — Thin Liquids (en)](https://softmeal.org/en/iddsi-level-0-thin-liquids/) — flows like water, standard straw test
+- [IDDSI Level 1 — Slightly Thick (en)](https://softmeal.org/en/iddsi-level-1-slightly-thick/) — thicker than water, 10ml syringe test
+- [IDDSI Level 2 — Mildly Thick (en)](https://softmeal.org/en/iddsi-level-2-mildly-thick/) — flows off spoon, effort through straw
+- [IDDSI Level 3 — Moderately Thick / Liquidised (en)](https://softmeal.org/en/iddsi-level-3-moderately-thick/) — holds shape on spoon
+- [IDDSI Level 4 — Puréed (en)](https://softmeal.org/en/iddsi-level-4-minced-moist/) — smooth, fork pressure test 140g
+- [IDDSI Level 5 — Minced & Moist (en)](https://softmeal.org/en/iddsi-level-5-minced-moist/) — pieces ≤4mm, no thin liquid
+- [IDDSI Level 6 — Soft & Bite-Sized (en)](https://softmeal.org/en/iddsi-level-6-soft-bite-size/) — pieces ≤15mm, tongue-mash pressure
+- [IDDSI Level 7EC — Easy to Chew (en)](https://softmeal.org/en/iddsi-level-7-regular-adapted/) — soft, tender, regular foods
 
 ## IDDSI Level Summary
 
