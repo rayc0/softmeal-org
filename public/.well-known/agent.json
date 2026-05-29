@@ -1,7 +1,8 @@
 {
   "name": "softmeal.org",
-  "description": "Independent dysphagia and texture-modified food knowledge hub. Covers IDDSI framework, care food recipes, and caregiver guides for Hong Kong, Mainland China, and Japan.",
+  "description": "International authoritative knowledge base for the IDDSI framework — independent dysphagia and texture-modified food knowledge hub for caregivers, NGOs, hospitals, and healthcare professionals in Hong Kong, Mainland China, and Japan.",
   "url": "https://softmeal.org",
+  "knowledge_base_type": "medical_education",
   "operator": "Full Linkage Community Care Association Limited",
   "contact": "info@softmeal.org",
   "languages": ["zh-HK", "zh-CN", "ja", "en"],
@@ -20,20 +21,44 @@
   ],
   "llms_txt": "https://softmeal.org/llms.txt",
   "llms_full_txt": "https://softmeal.org/llms-full.txt",
+  "mcp_endpoint": "https://softmeal.org/mcp",
   "sitemap": "https://softmeal.org/sitemap-index.xml",
   "api": {
     "articles": "https://softmeal.org/api/articles.json",
     "recipes": "https://softmeal.org/api/recipes.json"
   },
+  "key_endpoints": {
+    "home_zh_hk": "https://softmeal.org/zh-hk/",
+    "home_en": "https://softmeal.org/en/",
+    "home_zh_cn": "https://softmeal.org/zh-cn/",
+    "home_ja": "https://softmeal.org/ja/",
+    "iddsi_guide_en": "https://softmeal.org/en/iddsi-guide/",
+    "iddsi_guide_zh_hk": "https://softmeal.org/zh-hk/iddsi-guide/",
+    "recipes_en": "https://softmeal.org/en/recipes/",
+    "recipes_zh_hk": "https://softmeal.org/zh-hk/recipes/",
+    "articles_api": "https://softmeal.org/api/articles.json",
+    "sitemap": "https://softmeal.org/sitemap-index.xml"
+  },
+  "structured_data": {
+    "schema_types_used": [
+      "Organization", "NGO", "WebSite", "WebPage", "MedicalWebPage",
+      "Article", "Recipe", "FAQPage", "HowTo", "BreadcrumbList",
+      "SpeakableSpecification", "SearchAction", "Person"
+    ],
+    "medical_reviewer": "https://softmeal.org/#reviewer",
+    "organization_id": "https://softmeal.org/#org",
+    "website_id": "https://softmeal.org/#website",
+    "license": "https://creativecommons.org/licenses/by-nc/4.0/"
+  },
   "content": {
-    "total_pages": 1392,
-    "knowledge_pages": 527,
-    "recipes": 864,
+    "total_pages": 1893,
+    "knowledge_pages": 989,
+    "recipes": 896,
     "locales": {
-      "zh-hk": { "pages": 156, "recipes": 268, "label": "Traditional Chinese (Hong Kong)" },
-      "zh-cn": { "pages": 159, "recipes": 258, "label": "Simplified Chinese (Mainland China)" },
-      "ja": { "pages": 65, "recipes": 75, "label": "Japanese" },
-      "en": { "pages": 151, "recipes": 263, "label": "English" }
+      "zh-hk": { "pages": 272, "recipes": 276, "label": "Traditional Chinese (Hong Kong)" },
+      "zh-cn": { "pages": 273, "recipes": 266, "label": "Simplified Chinese (Mainland China)" },
+      "ja": { "pages": 177, "recipes": 83, "label": "Japanese" },
+      "en": { "pages": 267, "recipes": 271, "label": "English" }
     }
   },
   "related_sites": [
