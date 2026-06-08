@@ -62,12 +62,14 @@ const citationUrl = props.canonicalUrl ?? Astro.url.href;
         />
       )}
       <slot />
-      <CitationBlock
-        title={props.title}
-        url={citationUrl}
-        dateModified={citationDateModified ?? props.dateModified ?? props.datePublished ?? ''}
-        lang={props.lang}
-      />
+      {(citationDateModified ?? props.dateModified ?? props.datePublished) && (
+        <CitationBlock
+          title={props.title}
+          url={citationUrl}
+          dateModified={citationDateModified ?? props.dateModified ?? props.datePublished ?? ''}
+          lang={props.lang}
+        />
+      )}
     </div>
     {articleLastReviewed && (
       <ReviewedByRail lang={props.lang} reviewerSlug={articleReviewerSlug} />
