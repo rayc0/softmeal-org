@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 240" width="200" height="240"
+     role="img" aria-label="IDDSI Level 2 – Mildly Thick">
+  <title>IDDSI Level 2 – Mildly Thick</title>
+
+  <!-- card background (congee cream) -->
+  <rect width="200" height="240" rx="14" fill="#FFF8ED"/>
+
+  <!-- colour header band -->
+  <clipPath id="top-clip-2-zh-cn">
+    <rect width="200" height="240" rx="14"/>
+  </clipPath>
+  <rect width="200" height="68" fill="#F8A4C8"
+        clip-path="url(#top-clip-2-zh-cn)"/>
+
+  <!-- IDDSI wordmark -->
+  <text x="100" y="18" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial,sans-serif" font-size="10" font-weight="700"
+        letter-spacing="3" fill="#1A1A1A">IDDSI</text>
+
+  <!-- level number -->
+  <text x="100" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial,sans-serif" font-size="38" font-weight="900"
+        fill="#1A1A1A">2</text>
+
+  <!-- visual motif -->
+  
+  <!-- liquid-flow motif -->
+  <path d="M50,90 Q75,80 100,90 Q125,100 150,90" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M50,107 Q75,97 100,107 Q125,117 150,107" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M50,124 Q75,114 100,124 Q125,134 150,124" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- drip drop -->
+  <path d="M100,138 Q106,148 100,155 Q94,148 100,138Z" fill="#F8A4C833" stroke="#1A1A1A" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- locale label -->
+  <text x="100" y="198" text-anchor="middle" dominant-baseline="middle"
+      font-family="'Noto Sans CJK SC','Noto Sans',Arial,sans-serif"
+      font-size="18" font-weight="600" fill="#1A1A1A">轻度稠</text>
+
+  <!-- English subtitle (non-English locales) -->
+  <text x="100" y="220" text-anchor="middle" dominant-baseline="middle"
+    font-family="Arial,sans-serif" font-size="10" fill="#888888">Mildly Thick</text>
+
+  <!-- card outline — 1.5px ink stroke -->
+  <rect x="0.75" y="0.75" width="198.5" height="238.5" rx="13.5"
+        fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+</svg>

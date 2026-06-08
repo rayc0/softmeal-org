@@ -1,0 +1,18 @@
+---
+interface HreflangEntry {
+  hreflang: string;
+  href: string;
+}
+
+interface Props {
+  hreflangLinks?: HreflangEntry[];
+  fallbackUrl?: string;
+}
+
+const { hreflangLinks, fallbackUrl = 'https://softmeal.org/zh-hk/' } = Astro.props;
+---
+
+{hreflangLinks && hreflangLinks.map((entry) => (
+  <link rel="alternate" hreflang={entry.hreflang} href={entry.href} />
+))}
+{!hreflangLinks && <link rel="alternate" hreflang="x-default" href={fallbackUrl} />}

@@ -1,0 +1,138 @@
+---
+interface Props {
+  slug: string;
+  lang?: string;
+}
+
+const { slug, lang = 'zh-hk' } = Astro.props;
+
+const saveLabels: Record<string, string> = {
+  'zh-hk': '儲存食譜',
+  'zh-cn': '保存食谱',
+  'ja': 'レシピを保存',
+  'en': 'Save recipe',
+};
+const savedLabels: Record<string, string> = {
+  'zh-hk': '已儲存',
+  'zh-cn': '已保存',
+  'ja': '保存済み',
+  'en': 'Saved',
+};
+
+const saveLabel = saveLabels[lang] ?? saveLabels['en'];
+const savedLabel = savedLabels[lang] ?? savedLabels['en'];
+---
+
+<button
+  id="save-recipe-btn"
+  class="btn-save-recipe btn-outline"
+  data-slug={slug}
+  data-save-label={saveLabel}
+  data-saved-label={savedLabel}
+  aria-pressed="false"
+  type="button"
+>
+  <span class="save-icon" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+    </svg>
+  </span>
+  <span class="save-text">{saveLabel}</span>
+</button>
+
+<script>
+  function initSaveButton() {
+    const btn = document.getElementById('save-recipe-btn') as HTMLButtonElement | null;
+    if (!btn) return;
+
+    const slug = btn.dataset.slug ?? '';
+    const saveLabel = btn.dataset.saveLabel ?? 'Save recipe';
+    const savedLabel = btn.dataset.savedLabel ?? 'Saved';
+
+    const STORAGE_KEY = 'softmeal_saved_recipes';
+
+    function getSaved(): string[] {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function setSaved(slugs: string[]) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(slugs));
+    }
+
+    function isSaved(): boolean {
+      return getSaved().includes(slug);
+    }
+
+    function updateUI(saved: boolean) {
+      const textEl = btn!.querySelector('.save-text');
+      const iconEl = btn!.querySelector('.save-icon svg');
+      if (textEl) textEl.textContent = saved ? savedLabel : saveLabel;
+      btn!.setAttribute('aria-pressed', String(saved));
+      btn!.classList.toggle('is-saved', saved);
+      if (iconEl) {
+        (iconEl as SVGElement).setAttribute('fill', saved ? 'currentColor' : 'none');
+      }
+    }
+
+    updateUI(isSaved());
+
+    btn.addEventListener('click', () => {
+      const saved = isSaved();
+      const slugs = getSaved();
+      if (saved) {
+        setSaved(slugs.filter((s) => s !== slug));
+      } else {
+        setSaved([...slugs, slug]);
+      }
+      updateUI(!saved);
+    });
+  }
+
+  // Run on initial load and after Astro view transitions
+  initSaveButton();
+  document.addEventListener('astro:page-load', initSaveButton);
+</script>
+
+<style>
+  .btn-save-recipe {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: 1.5px solid #3B7A6B;
+    color: #3B7A6B;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .btn-save-recipe:hover {
+    background: #eef6f4;
+  }
+
+  .btn-save-recipe.is-saved {
+    background: #3B7A6B;
+    color: #ffffff;
+    border-color: #3B7A6B;
+  }
+
+  .btn-save-recipe.is-saved:hover {
+    background: #2d6355;
+    border-color: #2d6355;
+  }
+
+  .save-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+</style>

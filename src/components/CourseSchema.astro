@@ -1,0 +1,75 @@
+---
+interface Props {
+  lang: string;
+  title: string;
+  description: string;
+  url: string;
+  lastModified: string;
+}
+
+const { lang, title, description, url, lastModified } = Astro.props;
+
+const siteUrl = 'https://softmeal.org';
+
+const langMap: Record<string, string> = {
+  'zh-hk': 'zh-HK',
+  'zh-cn': 'zh-CN',
+  'ja': 'ja',
+  'en': 'en',
+};
+const inLanguage = langMap[lang] ?? lang;
+
+const credentialMap: Record<string, string> = {
+  'zh-hk': 'IDDSI 院舍員工能力培訓證書',
+  'zh-cn': 'IDDSI 院舍员工能力培训证书',
+  'ja': 'IDDSI介護施設スタッフ能力認定証',
+  'en': 'IDDSI Care Home Staff Competency Certificate',
+};
+
+const modeMap: Record<string, string> = {
+  'zh-hk': '自學',
+  'zh-cn': '自学',
+  'ja': '自己学習',
+  'en': 'self-paced online',
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": `${url}#course`,
+  "name": title,
+  "description": description,
+  "url": url,
+  "inLanguage": inLanguage,
+  "dateModified": lastModified,
+  "isAccessibleForFree": true,
+  "provider": {
+    "@type": "Organization",
+    "@id": `${siteUrl}/#org`,
+    "name": "softmeal.org",
+    "url": siteUrl,
+  },
+  "educationalCredentialAwarded": credentialMap[lang] ?? credentialMap['en'],
+  "teaches": lang === 'en'
+    ? ["IDDSI framework levels 0–7", "food texture testing methods", "dysphagia management in care homes", "staff competency documentation"]
+    : lang === 'zh-cn'
+    ? ["IDDSI 框架 0–7 级", "食物质感测试方法", "院舍吞咽困难管理", "员工能力记录要求"]
+    : lang === 'ja'
+    ? ["IDDSIフレームワーク0–7レベル", "食品テクスチャーテスト方法", "介護施設での嚥下障害管理", "スタッフ能力文書化"]
+    : ["IDDSI 框架 0–7 級", "食物質感測試方法", "院舍吞嚥困難管理", "員工能力記錄要求"],
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": modeMap[lang] ?? "self-paced online",
+    "inLanguage": inLanguage,
+    "courseWorkload": "PT2H",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "HKD",
+      "availability": "https://schema.org/InStock",
+    },
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../../layouts/PageLayout.astro';
-import IddsiLevelBadge from '../../../components/IddsiLevelBadge.astro';
+import CategoryListItem from '../../../components/CategoryListItem.astro';
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const langs = ['zh-hk', 'zh-cn', 'en', 'ja'] as const;
@@ -77,6 +77,20 @@ const altLang = hreflangPartnerMap[l];
 const canonicalUrl = page.currentPage === 1
   ? `https://softmeal.org/${lang}/recipes/`
   : `https://softmeal.org/${lang}/recipes/${page.currentPage}/`;
+
+const htmlLangMap: Record<LangKey, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const schemaLang = htmlLangMap[l] ?? 'zh-HK';
+const siteUrl = 'https://softmeal.org';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": schemaLang,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": l === 'zh-hk' ? "主頁" : l === 'zh-cn' ? "首页" : l === 'ja' ? "ホーム" : "Home", "item": `${siteUrl}/${lang}/` },
+    { "@type": "ListItem", "position": 2, "name": l === 'zh-hk' ? "食譜" : l === 'zh-cn' ? "食谱" : l === 'ja' ? "レシピ" : "Recipes", "item": `${siteUrl}/${lang}/recipes/` }
+  ]
+};
 ---
 
 <PageLayout
@@ -86,28 +100,24 @@ const canonicalUrl = page.currentPage === 1
   hreflangPair={`${altLang}/recipes`}
   hreflangPairLang={altLang}
   canonicalUrl={canonicalUrl}
+  schemaJson={[breadcrumbSchema]}
 >
   <h1>{headings[l]}</h1>
   <p>{subtexts[l]}</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <div class="mt-6">
     {page.data.map((recipe: { id: string; data: { iddsi_level: number; title: string; description: string; prep_time_minutes: number } }) => {
       const parts = recipe.id.split('/');
       const slug = parts[parts.length - 1].replace(/\.mdx?$/, '');
       return (
-        <a
+        <CategoryListItem
+          title={recipe.data.title}
           href={`/${lang}/recipes/${slug}/`}
-          class="block border border-gray-200 rounded-lg p-4 hover:border-primary hover:shadow-md transition-all no-underline"
-        >
-          <div class="flex items-start justify-between mb-2">
-            <IddsiLevelBadge level={recipe.data.iddsi_level} />
-            <span class="text-xs text-gray-500">
-              {recipe.data.prep_time_minutes}{minLabels[l]}
-            </span>
-          </div>
-          <h2 class="text-base font-semibold text-gray-800 mt-2 mb-1">{recipe.data.title}</h2>
-          <p class="text-sm text-gray-600 line-clamp-2">{recipe.data.description}</p>
-        </a>
+          description={recipe.data.description}
+          iddsiLevel={recipe.data.iddsi_level}
+          prepTimeMinutes={recipe.data.prep_time_minutes}
+          lang={lang}
+        />
       );
     })}
   </div>

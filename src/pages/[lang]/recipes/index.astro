@@ -3,7 +3,7 @@
 // Subsequent pages live at /[lang]/recipes/2/, /3/, etc. ([page].astro).
 import { getCollection } from 'astro:content';
 import PageLayout from '../../../layouts/PageLayout.astro';
-import IddsiLevelBadge from '../../../components/IddsiLevelBadge.astro';
+import CategoryListItem from '../../../components/CategoryListItem.astro';
 
 export async function getStaticPaths() {
   const allRecipes = await getCollection('recipes');
@@ -151,24 +151,19 @@ const itemListSchema = {
   <h1>{headings[l]}</h1>
   <p>{subtexts[l]}</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <div class="mt-6">
     {pageRecipes.map((recipe: { id: string; data: { iddsi_level: number; title: string; description: string; prep_time_minutes: number } }) => {
       const parts = recipe.id.split('/');
       const slug = parts[parts.length - 1].replace(/\.mdx?$/, '');
       return (
-        <a
+        <CategoryListItem
+          title={recipe.data.title}
           href={`/${lang}/recipes/${slug}/`}
-          class="block border border-gray-200 rounded-lg p-4 hover:border-primary hover:shadow-md transition-all no-underline"
-        >
-          <div class="flex items-start justify-between mb-2">
-            <IddsiLevelBadge level={recipe.data.iddsi_level} />
-            <span class="text-xs text-gray-500">
-              {recipe.data.prep_time_minutes}{minLabels[l]}
-            </span>
-          </div>
-          <h2 class="text-base font-semibold text-gray-800 mt-2 mb-1">{recipe.data.title}</h2>
-          <p class="text-sm text-gray-600 line-clamp-2">{recipe.data.description}</p>
-        </a>
+          description={recipe.data.description}
+          iddsiLevel={recipe.data.iddsi_level}
+          prepTimeMinutes={recipe.data.prep_time_minutes}
+          lang={lang}
+        />
       );
     })}
   </div>

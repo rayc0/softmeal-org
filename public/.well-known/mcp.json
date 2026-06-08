@@ -1,0 +1,38 @@
+{
+  "name": "softmeal.org MCP Server",
+  "description": "IDDSI care food recipes (884 recipes) and dysphagia knowledge articles from softmeal.org — Traditional Chinese, Simplified Chinese, Japanese, and English.",
+  "version": "1.0.0",
+  "protocolVersion": "2024-11-05",
+  "endpoint": "https://softmeal.org/mcp",
+  "transport": "Streamable HTTP",
+  "operator": "Full Linkage Community Care Association Limited",
+  "contact": "info@softmeal.org",
+  "license": "CC BY-SA 4.0",
+  "tools": [
+    {
+      "name": "search_recipes",
+      "description": "Search IDDSI-compliant care food recipes by texture level, locale, dietary tags, or free-text query."
+    },
+    {
+      "name": "get_recipe",
+      "description": "Get a specific recipe by slug. Returns full metadata including IDDSI level, prep time, difficulty, and tags."
+    },
+    {
+      "name": "search_articles",
+      "description": "Search dysphagia knowledge articles and caregiver guides (IDDSI, stroke, Parkinson's, dementia, texture modification)."
+    },
+    {
+      "name": "get_article",
+      "description": "Get a specific article by slug. Returns metadata and canonical URL."
+    },
+    {
+      "name": "iddsi_classify",
+      "description": "Heuristically classify a food or drink into an IDDSI texture level (0–7) based on a texture description."
+    }
+  ],
+  "locales": ["zh-hk", "zh-cn", "ja", "en"],
+  "content": {
+    "recipes": 884,
+    "knowledge_pages": 527
+  }
+}

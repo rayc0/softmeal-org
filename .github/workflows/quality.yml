@@ -1,0 +1,508 @@
+name: Quality Gates
+
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'   # daily at 02:00 UTC
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SITE_URL: https://softmeal.org
+
+# ---------------------------------------------------------------------------
+# Re-usable build step (only once per run, cached by pnpm store)
+# ---------------------------------------------------------------------------
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Restore pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-${{ runner.os }}-
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  # ---------------------------------------------------------------------------
+  # BLOCKING — hreflang consistency (blocks deploy on failure)
+  # ---------------------------------------------------------------------------
+  hreflang:
+    name: "[BLOCK] hreflang audit"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Run hreflang audit
+        run: python3 scripts/audit_hreflang.py --dist dist
+
+  # ---------------------------------------------------------------------------
+  # BLOCKING — robots.txt sanity (blocks deploy on failure)
+  # ---------------------------------------------------------------------------
+  robots:
+    name: "[BLOCK] robots.txt sanity"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Check robots.txt structure
+        run: |
+          set -e
+          ROBOTS="dist/robots.txt"
+          [ -f "$ROBOTS" ] || { echo "❌ robots.txt missing from dist/"; exit 1; }
+
+          # Must have at least one User-agent line
+          grep -qi "^User-agent:" "$ROBOTS" || \
+            { echo "❌ No User-agent directive found in robots.txt"; exit 1; }
+
+          # Must have a Sitemap directive
+          grep -qi "^Sitemap:" "$ROBOTS" || \
+            { echo "❌ No Sitemap directive found in robots.txt"; exit 1; }
+
+          # Must NOT block all crawlers (Disallow: / under User-agent: *)
+          if grep -qiP "^User-agent: \*" "$ROBOTS"; then
+            if grep -A5 -i "^User-agent: \*" "$ROBOTS" | grep -q "^Disallow: /$"; then
+              echo "❌ robots.txt blocks all crawlers (Disallow: / under User-agent: *)"
+              exit 1
+            fi
+          fi
+
+          echo "✅ robots.txt looks sane"
+          cat "$ROBOTS"
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING — broken links (lychee)
+  # ---------------------------------------------------------------------------
+  lychee:
+    name: Broken links (lychee)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Lychee link check
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Check built HTML output; skip external anchors to avoid flakiness
+          args: >
+            --verbose
+            --no-progress
+            --exclude-loopback
+            --exclude-mail
+            --timeout 20
+            --max-retries 3
+            --accept 200,206,301,302,429
+            --skip-missing
+            ./dist/**/*.html
+          fail: false
+          jobSummary: true
+
+      - name: Telegram alert on broken links
+        if: steps.lychee.outputs.exit_code != '0'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ⚠️ *softmeal.org — Broken Links Detected*
+            Branch: `${{ github.ref_name }}`
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING — JSON-LD schema validation (30 sampled URLs)
+  # ---------------------------------------------------------------------------
+  schema:
+    name: Schema validation (30 URLs)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install deps
+        run: pip install --quiet lxml
+
+      - name: Validate JSON-LD on 30 sampled pages
+        id: schema
+        run: |
+          python3 - <<'PYEOF'
+          import json, sys, random
+          from pathlib import Path
+          from html.parser import HTMLParser
+
+          class JSONLDParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.in_ld = False
+                  self.chunks = []
+                  self.scripts = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag == "script" and ("type", "application/ld+json") in attrs:
+                      self.in_ld = True
+                      self.chunks = []
+
+              def handle_endtag(self, tag):
+                  if tag == "script" and self.in_ld:
+                      self.in_ld = False
+                      self.scripts.append("".join(self.chunks))
+                      self.chunks = []
+
+              def handle_data(self, data):
+                  if self.in_ld:
+                      self.chunks.append(data)
+
+          dist = Path("dist")
+          pages = list(dist.rglob("index.html"))
+          sample = random.sample(pages, min(30, len(pages)))
+
+          errors = []
+          warn_no_schema = []
+
+          for p in sample:
+              parser = JSONLDParser()
+              parser.feed(p.read_text(encoding="utf-8", errors="replace"))
+              if not parser.scripts:
+                  warn_no_schema.append(str(p.relative_to(dist)))
+                  continue
+              for raw in parser.scripts:
+                  try:
+                      data = json.loads(raw)
+                  except json.JSONDecodeError as e:
+                      errors.append(f"{p.relative_to(dist)}: invalid JSON-LD — {e}")
+                      continue
+                  # Basic checks
+                  objs = [data] if isinstance(data, dict) else (data if isinstance(data, list) else [])
+                  for obj in objs:
+                      if "@context" not in obj:
+                          errors.append(f"{p.relative_to(dist)}: JSON-LD missing @context")
+                      if "@type" not in obj:
+                          errors.append(f"{p.relative_to(dist)}: JSON-LD missing @type")
+
+          if warn_no_schema:
+              print(f"ℹ️  {len(warn_no_schema)} pages had no JSON-LD schema (may be intentional)")
+
+          if errors:
+              print(f"\n❌ Schema validation failed — {len(errors)} issue(s):")
+              for e in errors:
+                  print(f"  • {e}")
+              sys.exit(1)
+          else:
+              print(f"✅ Schema OK — {len(sample)} pages sampled, all JSON-LD valid")
+          PYEOF
+
+      - name: Telegram alert on schema errors
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ⚠️ *softmeal.org — Schema Validation Errors*
+            Branch: `${{ github.ref_name }}`
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING — Lighthouse CI per locale
+  # ---------------------------------------------------------------------------
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install serve + lhci
+        run: npm install -g @lhci/cli serve --silent
+
+      - name: Write lhci config
+        run: |
+          cat > .lighthouserc.json << 'EOF'
+          {
+            "ci": {
+              "collect": {
+                "staticDistDir": "dist",
+                "url": [
+                  "http://localhost/zh-hk/",
+                  "http://localhost/zh-cn/",
+                  "http://localhost/ja/",
+                  "http://localhost/en/"
+                ],
+                "numberOfRuns": 1,
+                "settings": {
+                  "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
+                }
+              },
+              "assert": {
+                "assertions": {
+                  "categories:performance": ["warn", {"minScore": 0.7}],
+                  "categories:accessibility": ["warn", {"minScore": 0.9}],
+                  "categories:best-practices": ["warn", {"minScore": 0.9}],
+                  "categories:seo": ["warn", {"minScore": 0.9}]
+                }
+              },
+              "upload": {
+                "target": "temporary-public-storage"
+              }
+            }
+          }
+          EOF
+
+      - name: Run Lighthouse CI
+        id: lhci
+        run: lhci autorun
+        continue-on-error: true
+
+      - name: Telegram alert on Lighthouse regression
+        if: steps.lhci.outcome == 'failure'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ⚠️ *softmeal.org — Lighthouse Score Regression*
+            Branch: `${{ github.ref_name }}`
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING — Accessibility (pa11y-ci)
+  # ---------------------------------------------------------------------------
+  pa11y:
+    name: Accessibility (pa11y-ci)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install pa11y-ci + serve
+        run: npm install -g pa11y-ci serve --silent
+
+      - name: Write pa11y config
+        run: |
+          cat > .pa11yci.json << 'EOF'
+          {
+            "defaults": {
+              "standard": "WCAG2AA",
+              "timeout": 30000,
+              "chromeLaunchConfig": {
+                "args": ["--no-sandbox", "--disable-dev-shm-usage"]
+              }
+            },
+            "urls": [
+              "http://localhost:4173/zh-hk/",
+              "http://localhost:4173/zh-cn/",
+              "http://localhost:4173/ja/",
+              "http://localhost:4173/en/"
+            ]
+          }
+          EOF
+
+      - name: Serve dist and run pa11y
+        id: pa11y
+        run: |
+          serve dist -l 4173 &
+          SERVE_PID=$!
+          sleep 3
+          pa11y-ci --config .pa11yci.json || EXIT_CODE=$?
+          kill $SERVE_PID 2>/dev/null || true
+          exit ${EXIT_CODE:-0}
+        continue-on-error: true
+
+      - name: Telegram alert on a11y failures
+        if: steps.pa11y.outcome == 'failure'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ⚠️ *softmeal.org — Accessibility (WCAG 2AA) Failures*
+            Branch: `${{ github.ref_name }}`
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  # ---------------------------------------------------------------------------
+  # NON-BLOCKING — Sitemap lastmod freshness
+  # ---------------------------------------------------------------------------
+  sitemap-freshness:
+    name: Sitemap lastmod freshness
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Check sitemap lastmod dates
+        id: sitemap
+        run: |
+          python3 - <<'PYEOF'
+          import sys
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          from datetime import datetime, timezone, timedelta
+
+          NS = {
+              "sm": "http://www.sitemaps.org/schemas/sitemap/0.9",
+              "xhtml": "http://www.w3.org/1999/xhtml",
+          }
+          STALE_DAYS = 180  # flag URLs with lastmod older than 6 months
+          now = datetime.now(timezone.utc)
+
+          dist = Path("dist")
+          sitemaps = list(dist.glob("sitemap*.xml"))
+          if not sitemaps:
+              print("❌ No sitemap*.xml found in dist/")
+              sys.exit(1)
+
+          stale = []
+          missing_lastmod = []
+          total = 0
+
+          for sm_path in sitemaps:
+              try:
+                  tree = ET.parse(sm_path)
+              except ET.ParseError as e:
+                  print(f"❌ Cannot parse {sm_path.name}: {e}")
+                  sys.exit(1)
+              root = tree.getroot()
+
+              # Handle sitemap index (points to child sitemaps)
+              if root.tag in ("{http://www.sitemaps.org/schemas/sitemap/0.9}sitemapindex", "sitemapindex"):
+                  continue  # child sitemaps are also in dist/, covered below
+
+              for url in root.findall("sm:url", NS):
+                  total += 1
+                  loc_el = url.find("sm:loc", NS)
+                  lastmod_el = url.find("sm:lastmod", NS)
+                  loc = loc_el.text.strip() if loc_el is not None else "unknown"
+                  if lastmod_el is None or not lastmod_el.text:
+                      missing_lastmod.append(loc)
+                      continue
+                  try:
+                      dt = datetime.fromisoformat(lastmod_el.text.strip().replace("Z", "+00:00"))
+                  except ValueError:
+                      missing_lastmod.append(f"{loc} (unparseable date: {lastmod_el.text!r})")
+                      continue
+                  if (now - dt) > timedelta(days=STALE_DAYS):
+                      stale.append(f"{loc} (lastmod: {dt.date()})")
+
+          print(f"Checked {total} URLs across {len(sitemaps)} sitemap file(s)")
+
+          warnings = []
+          if missing_lastmod:
+              warnings.append(f"{len(missing_lastmod)} URLs have no lastmod date")
+              for u in missing_lastmod[:10]:
+                  print(f"  ⚠️  no lastmod: {u}")
+
+          if stale:
+              warnings.append(f"{len(stale)} URLs have lastmod older than {STALE_DAYS} days")
+              for u in stale[:10]:
+                  print(f"  ⚠️  stale: {u}")
+
+          if warnings:
+              print("\n⚠️  " + "; ".join(warnings))
+              sys.exit(1)
+          else:
+              print(f"✅ Sitemap freshness OK — all {total} URLs have recent lastmod")
+          PYEOF
+
+      - name: Telegram alert on stale sitemap
+        if: steps.sitemap.outcome == 'failure'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ⚠️ *softmeal.org — Sitemap lastmod Staleness*
+            Branch: `${{ github.ref_name }}`
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+  # ---------------------------------------------------------------------------
+  # Gate: deploy blocked unless hreflang + robots both pass
+  # ---------------------------------------------------------------------------
+  deploy-gate:
+    name: Deploy gate (hreflang + robots must pass)
+    runs-on: ubuntu-latest
+    needs: [hreflang, robots]
+    steps:
+      - name: Gate passed
+        run: echo "✅ All blocking quality gates passed — deploy may proceed."

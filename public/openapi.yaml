@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: SoftMeal.org API
+  description: >
+    Public JSON endpoints for softmeal.org — a multilingual resource for
+    IDDSI-compliant soft-food recipes and dysphagia care articles.
+  version: 1.0.0
+  contact:
+    url: https://softmeal.org
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+
+servers:
+  - url: https://softmeal.org
+    description: Production
+
+paths:
+  /api/recipes.json:
+    get:
+      operationId: listRecipes
+      summary: List all soft-food recipes
+      description: >
+        Returns every recipe in the content collection, sorted by IDDSI level
+        then locale. Includes metadata about total count and distribution
+        across IDDSI levels.
+      tags:
+        - Recipes
+      responses:
+        "200":
+          description: Recipe catalogue
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              example: public, max-age=3600
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+              example: "*"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecipesResponse"
+
+  /api/articles.json:
+    get:
+      operationId: listArticles
+      summary: List all articles and recipe pages
+      description: >
+        Returns a unified list of every content page (pages + recipes)
+        indexed by the site, suitable for building site maps or AI agent
+        content discovery.
+      tags:
+        - Articles
+      responses:
+        "200":
+          description: Article index
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              example: public, max-age=3600
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticlesResponse"
+
+components:
+  schemas:
+    RecipeMeta:
+      type: object
+      required:
+        - total
+        - by_level
+        - locales
+        - site
+        - generated
+      properties:
+        total:
+          type: integer
+          description: Total number of recipes across all locales
+          example: 48
+        by_level:
+          type: object
+          description: Count of recipes keyed by IDDSI level (0–7)
+          additionalProperties:
+            type: integer
+          example:
+            "3": 6
+            "4": 12
+            "5": 18
+        locales:
+          type: array
+          items:
+            type: string
+          description: Locales present in this dataset
+          example: ["zh-hk", "en", "zh-cn", "ja"]
+        site:
+          type: string
+          format: uri
+          example: https://softmeal.org
+        generated:
+          type: string
+          format: date
+          description: ISO 8601 date this response was generated
+          example: "2026-05-25"
+
+    Recipe:
+      type: object
+      required:
+        - slug
+        - url
+        - lang
+        - title
+        - iddsi_level
+        - iddsi_label
+      properties:
+        slug:
+          type: string
+          description: URL slug (without leading slash)
+          example: en/recipes/steamed-egg
+        url:
+          type: string
+          format: uri
+          example: https://softmeal.org/en/recipes/steamed-egg/
+        lang:
+          type: string
+          description: BCP 47 locale code
+          example: en
+          enum: ["en", "zh-hk", "zh-cn", "ja"]
+        title:
+          type: string
+          example: Steamed Egg
+        description:
+          type: string
+          nullable: true
+          example: A silky, protein-rich dish suitable for IDDSI level 4.
+        iddsi_level:
+          type: integer
+          minimum: 0
+          maximum: 7
+          description: IDDSI texture level (0 = Thin, 7 = Easy to Chew)
+          example: 4
+        iddsi_label:
+          type: string
+          description: Human-readable IDDSI level name in the recipe's locale
+          example: "Puréed / Extremely Thick"
+        prep_time_minutes:
+          type: integer
+          nullable: true
+          example: 15
+        difficulty:
+          type: string
+          nullable: true
+          example: easy
+        main_ingredient:
+          type: string
+          nullable: true
+          example: egg
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          example: ["egg", "protein", "quick"]
+        fork_test_pass:
+          type: boolean
+          nullable: true
+          description: Whether the recipe passes the IDDSI fork-drip / fork-pressure test
+        last_modified:
+          type: string
+          format: date
+          nullable: true
+          example: "2026-03-10"
+
+    RecipesResponse:
+      type: object
+      required:
+        - meta
+        - recipes
+      properties:
+        meta:
+          $ref: "#/components/schemas/RecipeMeta"
+        recipes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Recipe"
+
+    Article:
+      type: object
+      required:
+        - slug
+        - type
+        - title
+        - lang
+        - url
+      properties:
+        slug:
+          type: string
+          description: URL slug (without leading slash)
+          example: en/about
+        type:
+          type: string
+          enum: ["page", "recipe"]
+          description: Content type
+          example: page
+        title:
+          type: string
+          example: About SoftMeal
+        description:
+          type: string
+          nullable: true
+          example: Learn about our mission to make soft-food cooking accessible.
+        lang:
+          type: string
+          description: BCP 47 locale code
+          example: en
+        last_modified:
+          type: string
+          format: date
+          nullable: true
+          example: "2026-04-01"
+        schema_type:
+          type: string
+          nullable: true
+          description: schema.org type (pages only)
+          example: WebPage
+        iddsi_level:
+          type: integer
+          nullable: true
+          minimum: 0
+          maximum: 7
+          description: IDDSI level (recipe entries only)
+          example: 5
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Content tags (recipe entries only)
+          example: ["fish", "omega-3"]
+        url:
+          type: string
+          format: uri
+          example: https://softmeal.org/en/about/
+
+    ArticlesResponse:
+      type: object
+      required:
+        - articles
+      properties:
+        articles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Article"

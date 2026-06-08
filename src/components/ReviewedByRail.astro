@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang?: string;
+  reviewerSlug?: string;
+}
+
+const { lang = 'en', reviewerSlug } = Astro.props;
+
+type Advisor = {
+  name: string;
+  role: string;
+  credentials?: string;
+  specialty?: string;
+  reviewedCount: number;
+  portrait?: string;
+  isFallback: boolean;
+};
+
+const fallback: Advisor = {
+  name: 'Softmeal Clinical Editorial Board',
+  role: 'Clinical Editorial Reviewer',
+  specialty: 'Speech-Language Pathology',
+  reviewedCount: 0,
+  isFallback: true,
+};
+
+let advisor = fallback;
+
+try {
+  const entries = await getCollection('advisors');
+  const active = entries.filter((e) => e.data.active !== false);
+  const match = reviewerSlug
+    ? active.find((e) => e.id === reviewerSlug)
+    : active[0];
+
+  if (match) {
+    advisor = {
+      name: match.data.name,
+      role: match.data.role,
+      credentials: match.data.credentials,
+      specialty: match.data.specialty,
+      reviewedCount: match.data.reviewedCount ?? 0,
+      portrait: match.data.portrait,
+      isFallback: false,
+    };
+  }
+} catch {
+  // collection empty or not yet populated — use editorial board fallback
+}
+
+const labels: Record<string, { reviewedBy: string; articles: string; pending: string }> = {
+  'zh-hk': { reviewedBy: '已審閱', articles: '篇文章', pending: '待命名審閱者批准' },
+  'zh-cn': { reviewedBy: '已审阅', articles: '篇文章', pending: '待命名审阅者批准' },
+  'ja':    { reviewedBy: '監修済', articles: '件の記事', pending: '指名レビュアー承認待ち' },
+  'en':    { reviewedBy: 'Reviewed by', articles: 'articles reviewed', pending: 'Pending named reviewer approval' },
+};
+
+const t = labels[lang] ?? labels['en'];
+
+const initials = advisor.name
+  .split(/\s+/)
+  .filter((w) => /^\p{Lu}|\p{Script=Han}/u.test(w))
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('') || advisor.name[0]?.toUpperCase() || '?';
+---
+
+<!--
+  ReviewedByRail — 240px sticky right rail on clinical articles (lg+).
+  Populated from src/content/advisors/; falls back to editorial board entity
+  (https://softmeal.org/#reviewer) until a named clinician is Raymond-approved.
+-->
+<aside
+  class="hidden lg:block sticky top-6 self-start w-60 flex-shrink-0"
+  aria-label={t.reviewedBy}
+>
+  <div class="rounded-xl border border-jade/20 bg-jade/5 p-4 group transition-shadow duration-200 hover:shadow-sm">
+
+    <p class="text-[10px] font-semibold uppercase tracking-wider text-jade/70 mb-3">
+      {t.reviewedBy}
+    </p>
+
+    <div class="flex items-start gap-3">
+      {advisor.portrait ? (
+        <img
+          src={advisor.portrait}
+          alt={advisor.name}
+          width="44"
+          height="44"
+          class="w-11 h-11 rounded-full object-cover flex-shrink-0 ring-2 ring-jade/20"
+          loading="lazy"
+        />
+      ) : (
+        <div
+          class="w-11 h-11 rounded-full bg-jade/15 flex items-center justify-center
+                 text-jade font-bold text-sm flex-shrink-0 ring-2 ring-jade/20 select-none"
+          aria-hidden="true"
+        >
+          {initials}
+        </div>
+      )}
+
+      <div class="min-w-0">
+        <p class="font-semibold text-sm text-ink leading-snug break-words">{advisor.name}</p>
+        <p class="text-xs text-ink/60 mt-0.5 leading-snug">{advisor.role}</p>
+        {advisor.credentials && (
+          <p class="text-[11px] text-ink/50 mt-1 font-medium">{advisor.credentials}</p>
+        )}
+      </div>
+    </div>
+
+    {advisor.specialty && (
+      <div class="mt-3">
+        <span class="inline-block text-[10px] font-medium px-2 py-0.5 rounded-full
+                     bg-jade/10 text-jade border border-jade/20">
+          {advisor.specialty}
+        </span>
+      </div>
+    )}
+
+    {advisor.reviewedCount > 0 && (
+      <p class="mt-3 text-[11px] text-ink/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        {advisor.reviewedCount} {t.articles}
+      </p>
+    )}
+
+    {advisor.isFallback && (
+      <p class="mt-3 text-[10px] text-ink/30 italic leading-snug">
+        {t.pending}
+      </p>
+    )}
+
+  </div>
+</aside>

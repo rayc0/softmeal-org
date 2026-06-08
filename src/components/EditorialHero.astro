@@ -1,0 +1,258 @@
+---
+/**
+ * EditorialHero — full-bleed 16:7 magazine hero for one rotating featured clinical article.
+ * CDO §3: editorial-magazine hero pattern, headline bottom-left over congee gradient scrim.
+ *
+ * Accepts explicit props OR falls back to featured.json for the given lang.
+ */
+import featuredData from '../data/featured.json';
+
+interface FeaturedArticle {
+  title: string;
+  href: string;
+  image: string;
+  imageAlt: string;
+  category?: string;
+  reviewedBy?: string;
+  readMins?: number;
+}
+
+interface Props {
+  lang: string;
+  /** Override any field sourced from featured.json */
+  article?: Partial<FeaturedArticle>;
+}
+
+const { lang, article: override = {} } = Astro.props;
+
+const localeMap: Record<string, string> = {
+  'zh-hk': 'zh-hk',
+  'zh-cn': 'zh-cn',
+  ja:      'ja',
+  en:      'en',
+};
+
+const key = localeMap[lang] ?? 'en';
+const base = (featuredData as Record<string, FeaturedArticle>)[key] ?? featuredData['en'];
+const article: FeaturedArticle = { ...base, ...override };
+
+const labels: Record<string, { reviewedBy: string; readMins: string; readMore: string }> = {
+  'zh-hk': { reviewedBy: '審閱機構',    readMins: '分鐘閱讀', readMore: '閱讀全文' },
+  'zh-cn': { reviewedBy: '审阅机构',    readMins: '分钟阅读', readMore: '阅读全文' },
+  ja:      { reviewedBy: '監修',         readMins: '分で読了', readMore: '続きを読む' },
+  en:      { reviewedBy: 'Reviewed by', readMins: 'min read', readMore: 'Read article' },
+};
+const t = labels[lang] ?? labels['en'];
+---
+
+<section
+  class="editorial-hero"
+  aria-label={article.title}
+>
+  <a
+    href={article.href}
+    class="editorial-hero__link"
+    tabindex="0"
+    aria-label={article.title}
+  >
+    <!-- Background image -->
+    <div class="editorial-hero__img-wrap" aria-hidden="true">
+      <img
+        src={article.image}
+        alt={article.imageAlt}
+        class="editorial-hero__img"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+
+    <!-- Congee gradient scrim (ink → transparent, bottom-weighted) -->
+    <div class="editorial-hero__scrim" aria-hidden="true"></div>
+
+    <!-- Text content — bottom-left -->
+    <div class="editorial-hero__body">
+      {article.category && (
+        <span class="editorial-hero__category">
+          {article.category}
+        </span>
+      )}
+
+      <h2 class="editorial-hero__headline">
+        {article.title}
+      </h2>
+
+      <p class="editorial-hero__meta">
+        {article.reviewedBy && (
+          <span>{t.reviewedBy}: {article.reviewedBy}</span>
+        )}
+        {article.reviewedBy && article.readMins && (
+          <span class="editorial-hero__meta-sep" aria-hidden="true">·</span>
+        )}
+        {article.readMins && (
+          <span>{article.readMins} {t.readMins}</span>
+        )}
+      </p>
+
+      <span class="editorial-hero__cta" aria-hidden="true">
+        {t.readMore} →
+      </span>
+    </div>
+  </a>
+</section>
+
+<style>
+  /* ── Container: full-bleed, 16:7 aspect ratio ─────────────────────────── */
+  .editorial-hero {
+    position: relative;
+    width: 100%;
+    /* 16:7 = 43.75% padding-top trick for full-bleed aspect lock */
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background-color: #0F2A2E; /* ink: fallback while image loads */
+  }
+
+  .editorial-hero__link {
+    display: block;
+    position: absolute;
+    inset: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .editorial-hero__link:focus-visible {
+    outline: 3px solid #E8DCC4;
+    outline-offset: -3px;
+  }
+
+  /* ── Background image ──────────────────────────────────────────────────── */
+  .editorial-hero__img-wrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  .editorial-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    /* Subtle zoom on hover for editorial feel */
+    transition: transform 0.6s ease;
+  }
+
+  .editorial-hero__link:hover .editorial-hero__img {
+    transform: scale(1.03);
+  }
+
+  /* ── Congee gradient scrim ─────────────────────────────────────────────── */
+  /*
+   * Three-stop gradient: ink (#0F2A2E) fully opaque at bottom,
+   * fading through congee-tinted mid-point, transparent at top.
+   * This gives a "warm magazine" feel rather than a cold black scrim.
+   */
+  .editorial-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(15, 42, 46, 0.92) 0%,    /* ink-800 near-opaque */
+      rgba(15, 42, 46, 0.72) 30%,   /* ink mid */
+      rgba(35, 28, 20, 0.30) 60%,   /* warm congee-ink blend */
+      transparent 100%
+    );
+  }
+
+  /* ── Text body — absolutely positioned bottom-left ─────────────────────── */
+  .editorial-hero__body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Category chip */
+  .editorial-hero__category {
+    display: inline-block;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E8DCC4;           /* congee */
+    background-color: rgba(59, 122, 107, 0.75); /* jade semi-transparent */
+    padding: 0.25rem 0.625rem;
+    border-radius: 2px;
+  }
+
+  /* Headline: 44px → 55px serif (CDO §3 spec: major-third scale-5/6) */
+  .editorial-hero__headline {
+    font-family: var(--font-head, Georgia, serif);
+    font-size: clamp(2rem, 4.5vw, 3.4375rem); /* 32px → 55px responsive */
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    margin: 0;
+    /* Max 2 lines on small screens; 3 lines on large */
+    max-width: min(22ch, 80%);
+    /* Soft text shadow for legibility over any image */
+    text-shadow: 0 2px 12px rgba(7, 26, 29, 0.6);
+  }
+
+  /* Meta line: reviewed-by + read time */
+  .editorial-hero__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.8125rem; /* 13px */
+    color: rgba(232, 220, 196, 0.85); /* congee/80 */
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .editorial-hero__meta-sep {
+    opacity: 0.6;
+  }
+
+  /* CTA arrow link */
+  .editorial-hero__cta {
+    display: inline-block;
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #E8DCC4; /* congee */
+    margin-top: 0.25rem;
+    transition: gap 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .editorial-hero__link:hover .editorial-hero__cta {
+    color: #FFFFFF;
+  }
+
+  /* ── Responsive adjustments ────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    /* On mobile, relax the 16:7 lock to ensure readability */
+    .editorial-hero {
+      aspect-ratio: 16 / 9;
+    }
+
+    .editorial-hero__headline {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    /* At wide viewports, cap headline at scale-6 (55px) */
+    .editorial-hero__headline {
+      font-size: 3.4375rem; /* 55px */
+    }
+  }
+</style>

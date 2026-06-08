@@ -1,0 +1,80 @@
+/*
+ * Font package imports live in BaseLayout.astro frontmatter (Vite resolves
+ * bare package specifiers in JS imports but not in CSS @import).
+ *
+ * Audit (2026-05-26): all @fontsource packages already ship font-display:swap.
+ * The explicit overrides below act as a safety net — if a future package update
+ * drops swap, this file reasserts it. BaseLayout preloads 2 woff2 files per
+ * active locale; no Google Fonts CDN is used anywhere in the build.
+ *
+ * Waterfall check: swap means text renders in fallback immediately, woff2 swaps
+ * in when ready — no invisible-text block window in the network waterfall.
+ */
+
+/* ── English ───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Fraunces');
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter Tight');
+}
+
+/* ── zh-HK ─────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Noto Serif HK Variable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Noto Serif HK');
+}
+
+@font-face {
+  font-family: 'Noto Sans HK';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans HK');
+}
+
+/* ── zh-CN ─────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Noto Serif SC Variable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Noto Serif SC');
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans SC');
+}
+
+/* ── Japanese ───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Noto Serif JP Variable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: local('Noto Serif JP');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans JP');
+}

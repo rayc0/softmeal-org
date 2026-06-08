@@ -1,0 +1,67 @@
+---
+/**
+ * OptimizedImage — astro:assets wrapper with AVIF/WebP sources, responsive widths,
+ * and lazy loading. Use this for all content images (hero, recipe photos, etc.).
+ *
+ * For external / dynamic URLs (e.g. advisor photos from a CMS), use a plain <img>
+ * with loading="lazy" directly, since Astro cannot optimize remote images at build time
+ * without configuring image.domains.
+ *
+ * Aspect ratio presets:
+ *   hero   → 3:2  (landscape feature images)
+ *   mobile → 4:5  (portrait card thumbnails)
+ *   square → 1:1
+ *   (omit) → preserves original ratio
+ */
+import { Picture } from 'astro:assets';
+
+type AspectPreset = 'hero' | 'mobile' | 'square';
+
+interface Props {
+  src: Parameters<typeof Picture>[0]['src'];
+  alt: string;
+  /** Preset controls width/height ratio used for CLS prevention */
+  preset?: AspectPreset;
+  /** Override computed display width (CSS px) */
+  width?: number;
+  /** Override computed display height (CSS px) */
+  height?: number;
+  /** lazy (default, below fold) | eager (LCP hero above fold) */
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  preset,
+  width,
+  height,
+  loading = 'lazy',
+  class: className,
+} = Astro.props;
+
+// Compute width/height from preset if not explicitly provided
+const presetDimensions: Record<AspectPreset, { w: number; h: number }> = {
+  hero:   { w: 960, h: 640 },   // 3:2
+  mobile: { w: 640, h: 800 },   // 4:5
+  square: { w: 640, h: 640 },   // 1:1
+};
+
+const dims = preset ? presetDimensions[preset] : null;
+const resolvedWidth  = width  ?? dims?.w ?? 960;
+const resolvedHeight = height ?? dims?.h ?? 640;
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  width={resolvedWidth}
+  height={resolvedHeight}
+  formats={['avif', 'webp']}
+  widths={[320, 640, 960, 1280]}
+  sizes="(max-width: 640px) 100vw, (max-width: 960px) 80vw, 960px"
+  loading={loading}
+  decoding={loading === 'eager' ? 'sync' : 'async'}
+  class={className}
+/>

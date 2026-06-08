@@ -23,42 +23,28 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Googlebot-Extended
-Allow: /
-
 User-agent: Bytespider
-Allow: /
-
-User-agent: Doubaobot
-Allow: /
-
-User-agent: TikTokSpider
-Allow: /
-
-User-agent: PetalBot
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: YouBot
 Allow: /
 
 User-agent: Baiduspider
 Allow: /
 
-User-agent: Applebot
+User-agent: Sogou web spider
 Allow: /
 
-User-agent: Gemini-Extended
+User-agent: Yisouspider
 Allow: /
 
-User-agent: Meta-ExternalAgent
+User-agent: 360Spider
+Allow: /
+
+User-agent: Naverbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Doubaobot
 Allow: /
 
 Sitemap: https://softmeal.org/sitemap-index.xml
-Sitemap: https://softmeal.org/sitemap.xml
-Sitemap: https://softmeal.org/sitemap-images.xml

@@ -1,0 +1,62 @@
+---
+interface Props {
+  title: string;
+  lastReviewed: string; // ISO date string YYYY-MM-DD
+  reviewedBy?: string;  // entity name, not a named scholar unless approved
+  readMins?: number;
+  lang: string;
+}
+
+const { title, lastReviewed, reviewedBy, readMins, lang } = Astro.props;
+
+// Format date locale-appropriately
+function formatDate(iso: string, locale: string): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+  const localeMap: Record<string, string> = {
+    'zh-hk': 'zh-HK',
+    'zh-cn': 'zh-CN',
+    'ja': 'ja',
+    'en': 'en-GB',
+  };
+  return date.toLocaleDateString(localeMap[locale] ?? 'en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+const labels: Record<string, { lastReviewed: string; reviewedBy: string; readMins: string }> = {
+  'zh-hk': { lastReviewed: '最後審閱', reviewedBy: '審閱機構', readMins: '分鐘閱讀' },
+  'zh-cn': { lastReviewed: '最后审阅', reviewedBy: '审阅机构', readMins: '分钟阅读' },
+  'ja':    { lastReviewed: '最終更新',   reviewedBy: '監修',     readMins: '分で読了' },
+  'en':    { lastReviewed: 'Last reviewed', reviewedBy: 'Reviewed by', readMins: 'min read' },
+};
+
+const t = labels[lang] ?? labels['en'];
+const formattedDate = formatDate(lastReviewed, lang);
+const defaultReviewer = lang === 'en'
+  ? 'softmeal.org Editorial Team'
+  : lang === 'zh-cn'
+    ? 'softmeal.org 编辑团队'
+    : lang === 'ja'
+      ? 'softmeal.org 編集チーム'
+      : 'softmeal.org 編輯團隊';
+const reviewer = reviewedBy ?? defaultReviewer;
+---
+
+<header class="mb-6">
+  <h1>{title}</h1>
+  <p
+    class="text-[13px] text-ink/70 mt-1 leading-snug"
+    aria-label={`${t.lastReviewed}: ${formattedDate}${reviewer ? ` · ${t.reviewedBy}: ${reviewer}` : ''}${readMins ? ` · ${readMins} ${t.readMins}` : ''}`}
+  >
+    <time datetime={lastReviewed}>{t.lastReviewed}: {formattedDate}</time>
+    {reviewer && (
+      <> · {t.reviewedBy}: <span>{reviewer}</span></>
+    )}
+    {readMins && (
+      <> · {readMins} {t.readMins}</>
+    )}
+  </p>
+</header>

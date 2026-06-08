@@ -7,6 +7,16 @@ const description = 'The Hong Kong Council of Social Service (HKCSS) Care Food S
 const siteUrl = 'https://softmeal.org';
 const canonicalUrl = `${siteUrl}/en/openclaw/`;
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": "en",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
+    { "@type": "ListItem", "position": 2, "name": "OpenClaw", "item": `${siteUrl}/en/openclaw/` }
+  ]
+};
+
 const skills = [
   {
     id: 'hkcss-care-food-level-classify',
@@ -51,6 +61,7 @@ const skills = [
     { hreflang: 'x-default', href: `${siteUrl}/zh-hk/openclaw/` },
   ]}
   canonicalUrl={canonicalUrl}
+  schemaJson={[breadcrumbSchema]}
 >
   <!-- Hero -->
   <div style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 12px; padding: 48px 40px; margin-bottom: 40px; color: white;">

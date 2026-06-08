@@ -1,0 +1,4 @@
+Contact: mailto:security@softmeal.org
+Expires: 2027-05-17T00:00:00Z
+Preferred-Languages: en, zh, ja
+Canonical: https://softmeal.org/.well-known/security.txt

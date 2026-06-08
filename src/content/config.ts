@@ -11,6 +11,21 @@ const pageCollection = defineCollection({
     schema_type: z.enum(['WebPage', 'MedicalWebPage', 'AboutPage', 'ContactPage']).default('WebPage'),
     hreflang_pair: z.string().optional(),
     noindex: z.boolean().default(false),
+    schema_faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
+    course: z.boolean().optional(),
+    medical_condition: z.object({
+      name: z.string(),
+      alternate_name: z.union([z.string(), z.array(z.string())]).optional(),
+      anatomy: z.string(),
+      anatomy_system: z.string().optional(),
+      treatments: z.array(z.object({
+        type: z.enum(['MedicalTherapy', 'Drug']).default('MedicalTherapy'),
+        name: z.string(),
+      })),
+    }).optional(),
   }),
 });
 
@@ -29,10 +44,27 @@ const recipeCollection = defineCollection({
     fork_test_pass: z.boolean(),
     schema_type: z.literal('Recipe').default('Recipe'),
     hreflang_pair: z.string().optional(),
+    calories: z.string().optional(),
+    protein_content: z.string().optional(),
+    sodium_content: z.string().optional(),
+  }),
+});
+
+const advisorCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    credentials: z.string().optional(),
+    specialty: z.string().optional(),
+    portrait: z.string().optional(),
+    reviewedCount: z.number().int().min(0).default(0),
+    active: z.boolean().default(true),
   }),
 });
 
 export const collections = {
   'pages': pageCollection,
   'recipes': recipeCollection,
+  'advisors': advisorCollection,
 };

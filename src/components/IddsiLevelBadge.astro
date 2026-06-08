@@ -2,9 +2,10 @@
 interface Props {
   level: number;
   lang?: string;
+  variant?: 'pill' | 'medallion';
 }
 
-const { level, lang = 'zh-hk' } = Astro.props;
+const { level, lang = 'zh-hk', variant = 'pill' } = Astro.props;
 
 type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
 const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
@@ -67,17 +68,45 @@ const palette: Record<number, { bg: string; color: string; dot: string }> = {
 
 const info  = palette[level]  ?? palette[4];
 const label = labels[l]?.[level] ?? `Level ${level}`;
+
+// Split label into "Level N" and the descriptor for medallion layout
+const labelParts = label.match(/^(Level \d+(?:EC)?)\s+(.+)$/);
+const levelNum = labelParts?.[1] ?? `Level ${level}`;
+const levelDesc = labelParts?.[2] ?? label;
 ---
 
-<span
-  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold"
-  style={`background-color: ${info.bg}; color: ${info.color};`}
->
-  <!-- Color dot indicator -->
+{variant === 'medallion' ? (
+  <div
+    class="medallion flex flex-col items-center justify-center rounded-full shadow-lg select-none"
+    style={`background-color: ${info.bg}; color: ${info.color}; width: 80px; height: 80px; border: 3px solid ${info.dot};`}
+    aria-label={label}
+    title={label}
+  >
+    <span
+      class="font-black leading-none tabular-nums"
+      style="font-size: 32px; line-height: 1;"
+    >
+      {level === 7 ? '7' : String(level)}
+    </span>
+    <span
+      class="font-semibold text-center px-1 opacity-90 leading-snug"
+      style="font-size: 11px; letter-spacing: 0.055em;"
+      aria-hidden="true"
+    >
+      {levelDesc.length > 6 ? levelDesc.slice(0, 5) + '…' : levelDesc}
+    </span>
+    <span class="sr-only">{label}</span>
+  </div>
+) : (
   <span
-    class="inline-block w-2 h-2 rounded-full flex-shrink-0"
-    style={`background-color: ${info.dot};`}
-    aria-hidden="true"
-  ></span>
-  {label}
-</span>
+    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold"
+    style={`background-color: ${info.bg}; color: ${info.color};`}
+  >
+    <span
+      class="inline-block w-2 h-2 rounded-full flex-shrink-0"
+      style={`background-color: ${info.dot};`}
+      aria-hidden="true"
+    ></span>
+    {label}
+  </span>
+)}

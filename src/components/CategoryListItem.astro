@@ -1,0 +1,85 @@
+---
+import IddsiLevelBadge from './IddsiLevelBadge.astro';
+
+interface Props {
+  title: string;
+  href: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  iddsiLevel?: number;
+  prepTimeMinutes?: number;
+  lang?: string;
+}
+
+const {
+  title,
+  href,
+  description,
+  image,
+  imageAlt = '',
+  iddsiLevel,
+  prepTimeMinutes,
+  lang = 'zh-hk',
+} = Astro.props;
+
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
+const l: LangKey = validLangs.has(lang) ? lang as LangKey : 'zh-hk';
+
+const minLabels: Record<LangKey, string> = {
+  'zh-hk': '分鐘',
+  'zh-cn': '分钟',
+  'ja': '分',
+  'en': 'min',
+};
+---
+
+<article class="border-b border-border last:border-b-0">
+  <a
+    href={href}
+    class="flex gap-4 py-4 no-underline hover:bg-surface-2 transition-colors rounded-lg -mx-2 px-2 group"
+  >
+    <!-- Image (left) -->
+    <div class="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28 rounded-lg overflow-hidden bg-surface-3">
+      {image ? (
+        <img
+          src={image}
+          alt={imageAlt}
+          width="112"
+          height="112"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      ) : (
+        <div
+          class="w-full h-full flex items-center justify-center text-surface-4"
+          aria-hidden="true"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11l19-9-9 19-2-8-8-2z" />
+          </svg>
+        </div>
+      )}
+    </div>
+
+    <!-- Text (right) -->
+    <div class="flex-1 min-w-0 flex flex-col justify-center gap-1.5">
+      {iddsiLevel !== undefined && (
+        <div>
+          <IddsiLevelBadge level={iddsiLevel} lang={lang} variant="pill" />
+        </div>
+      )}
+      <h2 class="text-base font-semibold text-ink leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+        {title}
+      </h2>
+      {description && (
+        <p class="text-sm text-muted line-clamp-2 leading-relaxed">{description}</p>
+      )}
+      {prepTimeMinutes !== undefined && (
+        <span class="text-xs text-muted mt-0.5">{prepTimeMinutes}{minLabels[l]}</span>
+      )}
+    </div>
+  </a>
+</article>

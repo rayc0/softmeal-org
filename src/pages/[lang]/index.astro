@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import PageLayout from '../../layouts/PageLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import EditorialHero from '../../components/EditorialHero.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ id }) => id.includes('/index'));
@@ -14,7 +17,6 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { Content } = await page.render();
 const { lang, title, description, schema_type } = page.data;
 
 const htmlLangMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
@@ -22,12 +24,12 @@ const schemaLang = htmlLangMap[lang] ?? 'zh-HK';
 const siteUrl = 'https://softmeal.org';
 
 // Homepage hreflang: link to each locale's homepage that exists in the collection.
-const allPages = await getCollection('pages', ({ id }) => id.includes('/index'));
+const allIndexPages = await getCollection('pages', ({ id }) => id.includes('/index'));
 const LOCALE_BCP47_HOME: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
 const hreflangLinks: { hreflang: string; href: string }[] = [];
 let xDefaultHref: string | null = null;
 for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_HOME)) {
-  const exists = allPages.some((p) => p.data.lang === locale);
+  const exists = allIndexPages.some((p) => p.data.lang === locale);
   if (exists) {
     const href = `${siteUrl}/${locale}/`;
     hreflangLinks.push({ hreflang: bcp47, href });
@@ -35,6 +37,7 @@ for (const [locale, bcp47] of Object.entries(LOCALE_BCP47_HOME)) {
   }
 }
 hreflangLinks.push({ hreflang: 'x-default', href: xDefaultHref ?? `${siteUrl}/zh-hk/` });
+
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -56,14 +59,371 @@ const webPageSchema = {
   "inLanguage": schemaLang,
   "isPartOf": { "@id": `${siteUrl}/#website` },
 };
+
+// ── Category strip: pull content from collections ─────────────────────────
+
+// Column 1 — "Updated this week": most recently modified pages for this locale
+const allLocalePages = await getCollection('pages', (p) => p.data.lang === lang && !p.id.includes('/index'));
+const recentPages = allLocalePages
+  .sort((a, b) => b.data.last_modified.localeCompare(a.data.last_modified))
+  .slice(0, 3)
+  .map((p) => {
+    const slug = p.id.replace(`${lang}/`, '').replace(/\.(md|mdx)$/, '');
+    return {
+      title: p.data.title,
+      href: `/${lang}/${slug}/`,
+      description: p.data.description,
+      tag: schemaLang,
+    };
+  });
+
+// Column 2 — "Most cited by clinicians": pages with clinical keywords in their ID
+const clinicalKeywords = ['dysphagia', 'aspiration', 'assessment', 'clinical', 'iddsi', 'screening',
+  '嚥下', '誤嚥', '評估', '臨床', 'enteral', 'enge', 'swallow'];
+const clinicalPages = allLocalePages
+  .filter((p) => clinicalKeywords.some((kw) => p.id.toLowerCase().includes(kw)))
+  .sort((a, b) => b.data.last_modified.localeCompare(a.data.last_modified))
+  .slice(0, 3)
+  .map((p) => {
+    const slug = p.id.replace(`${lang}/`, '').replace(/\.(md|mdx)$/, '');
+    return {
+      title: p.data.title,
+      href: `/${lang}/${slug}/`,
+      description: p.data.description,
+    };
+  });
+
+// Column 3 — "Family caregiver picks": easy recipes at mid-range IDDSI levels
+const allRecipes = await getCollection('recipes', (r) => r.data.lang === lang);
+const caregiverRecipes = allRecipes
+  .filter((r) => r.data.difficulty === 'easy' && r.data.iddsi_level >= 3 && r.data.iddsi_level <= 5)
+  .sort((a, b) => b.data.last_modified.localeCompare(a.data.last_modified))
+  .slice(0, 3)
+  .map((r) => {
+    const slug = r.id.replace(`${lang}/`, '').replace(/\.(md|mdx)$/, '');
+    return {
+      title: r.data.title,
+      href: `/${lang}/recipes/${slug}/`,
+      description: r.data.description,
+      meta: `IDDSI ${r.data.iddsi_level} · ${r.data.prep_time_minutes} min`,
+    };
+  });
+
+// Fallback: if any column is empty, fill from recentPages
+const safeRecent = recentPages.length > 0 ? recentPages : [];
+const safeClinical = clinicalPages.length > 0 ? clinicalPages : safeRecent;
+const safeCaregiverRecipes = caregiverRecipes.length > 0 ? caregiverRecipes : safeRecent;
+
+// ── i18n labels ────────────────────────────────────────────────────────────
+type StripLabels = {
+  recentLabel: string;
+  clinicalLabel: string;
+  caregiverLabel: string;
+  readMore: string;
+  recipesLabel: string;
+};
+
+const stripI18n: Record<string, StripLabels> = {
+  'zh-hk': {
+    recentLabel: '本週更新',
+    clinicalLabel: '臨床必讀',
+    caregiverLabel: '照顧者精選',
+    readMore: '閱讀全文 →',
+    recipesLabel: '查看食譜 →',
+  },
+  'zh-cn': {
+    recentLabel: '本周更新',
+    clinicalLabel: '临床必读',
+    caregiverLabel: '照顾者精选',
+    readMore: '阅读全文 →',
+    recipesLabel: '查看食谱 →',
+  },
+  'ja': {
+    recentLabel: '今週の更新',
+    clinicalLabel: '臨床家必読',
+    caregiverLabel: '家族介護者が選ぶ',
+    readMore: '続きを読む →',
+    recipesLabel: 'レシピを見る →',
+  },
+  'en': {
+    recentLabel: 'Updated this week',
+    clinicalLabel: 'Most cited by clinicians',
+    caregiverLabel: 'Family caregiver picks',
+    readMore: 'Read article →',
+    recipesLabel: 'View recipe →',
+  },
+};
+const t = stripI18n[lang] ?? stripI18n['en'];
 ---
 
-<PageLayout
+<BaseLayout
   title={title}
   description={description}
   lang={lang}
   hreflangLinks={hreflangLinks}
   schemaJson={[websiteSchema, webPageSchema]}
 >
-  <Content />
-</PageLayout>
+  <Nav lang={lang} />
+
+  <main id="main-content">
+    <!-- Full-bleed editorial hero -->
+    <EditorialHero lang={lang} />
+
+    <!-- 3-column category strip -->
+    <section class="category-strip" aria-label={t.recentLabel}>
+      <div class="category-strip__grid">
+
+        <!-- Column 1: Updated this week -->
+        <div class="strip-col">
+          <h2 class="strip-col__heading">{t.recentLabel}</h2>
+          <ul class="strip-col__list">
+            {safeRecent.map((item) => (
+              <li class="strip-card">
+                <a href={item.href} class="strip-card__link">
+                  <p class="strip-card__title">{item.title}</p>
+                  {item.description && (
+                    <p class="strip-card__desc">{item.description}</p>
+                  )}
+                  <span class="strip-card__cta" aria-hidden="true">{t.readMore}</span>
+                </a>
+              </li>
+            ))}
+            {safeRecent.length === 0 && (
+              <li class="strip-card strip-card--empty">
+                <a href={`/${lang}/`} class="strip-card__link">
+                  <p class="strip-card__title">{title}</p>
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+
+        <!-- Column 2: Most cited by clinicians -->
+        <div class="strip-col">
+          <h2 class="strip-col__heading">{t.clinicalLabel}</h2>
+          <ul class="strip-col__list">
+            {safeClinical.map((item) => (
+              <li class="strip-card">
+                <a href={item.href} class="strip-card__link">
+                  <p class="strip-card__title">{item.title}</p>
+                  {item.description && (
+                    <p class="strip-card__desc">{item.description}</p>
+                  )}
+                  <span class="strip-card__cta" aria-hidden="true">{t.readMore}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Column 3: Family caregiver picks -->
+        <div class="strip-col">
+          <h2 class="strip-col__heading">{t.caregiverLabel}</h2>
+          <ul class="strip-col__list">
+            {safeCaregiverRecipes.map((item) => (
+              <li class="strip-card">
+                <a href={item.href} class="strip-card__link">
+                  <p class="strip-card__title">{item.title}</p>
+                  {'meta' in item && item.meta && (
+                    <p class="strip-card__meta">{item.meta}</p>
+                  )}
+                  {item.description && (
+                    <p class="strip-card__desc">{item.description}</p>
+                  )}
+                  <span class="strip-card__cta" aria-hidden="true">
+                    {'meta' in item && item.meta ? t.recipesLabel : t.readMore}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  /* ── Category strip container ──────────────────────────────────────────── */
+  .category-strip {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2rem);
+  }
+
+  /* 3-column responsive grid: stacks on mobile, side-by-side on ≥768px */
+  .category-strip__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .category-strip__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+  }
+
+  /* ── Strip column ──────────────────────────────────────────────────────── */
+  .strip-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Column heading — small-caps editorial label */
+  .strip-col__heading {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-jade, #3B7A6B);
+    border-bottom: 2px solid var(--color-jade, #3B7A6B);
+    padding-bottom: 0.5rem;
+    margin: 0;
+  }
+
+  .strip-col__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* ── Strip card ────────────────────────────────────────────────────────── */
+  .strip-card {
+    border-bottom: 1px solid var(--color-border, rgba(15,42,46,0.1));
+    padding-bottom: 1rem;
+  }
+
+  .strip-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .strip-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .strip-card__link:hover .strip-card__title {
+    color: var(--color-jade, #3B7A6B);
+  }
+
+  .strip-card__link:focus-visible {
+    outline: 2px solid var(--color-jade, #3B7A6B);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .strip-card__title {
+    font-family: var(--font-head, Georgia, serif);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-ink, #0F2A2E);
+    margin: 0;
+    transition: color 0.15s ease;
+    /* Clamp to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .strip-card__meta {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-jade, #3B7A6B);
+    margin: 0;
+    letter-spacing: 0.03em;
+  }
+
+  .strip-card__desc {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1.5;
+    color: var(--color-ink-light, rgba(15,42,46,0.65));
+    margin: 0;
+    /* Clamp to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .strip-card__cta {
+    font-family: var(--font-body, system-ui, sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-jade, #3B7A6B);
+    margin-top: 0.125rem;
+  }
+
+  /* Dark mode adjustments */
+  @media (prefers-color-scheme: dark) {
+    .strip-col__heading {
+      color: #5FA897;
+      border-bottom-color: #5FA897;
+    }
+
+    .strip-card__title {
+      color: #E8DCC4;
+    }
+
+    .strip-card__desc {
+      color: rgba(232,220,196,0.6);
+    }
+
+    .strip-card__meta,
+    .strip-card__cta {
+      color: #5FA897;
+    }
+
+    .strip-card__link:hover .strip-card__title {
+      color: #5FA897;
+    }
+
+    .strip-card {
+      border-bottom-color: rgba(232,220,196,0.12);
+    }
+  }
+
+  [data-theme="dark"] .strip-col__heading {
+    color: #5FA897;
+    border-bottom-color: #5FA897;
+  }
+
+  [data-theme="dark"] .strip-card__title {
+    color: #E8DCC4;
+  }
+
+  [data-theme="dark"] .strip-card__desc {
+    color: rgba(232,220,196,0.6);
+  }
+
+  [data-theme="dark"] .strip-card__meta,
+  [data-theme="dark"] .strip-card__cta {
+    color: #5FA897;
+  }
+
+  [data-theme="dark"] .strip-card__link:hover .strip-card__title {
+    color: #5FA897;
+  }
+
+  [data-theme="dark"] .strip-card {
+    border-bottom-color: rgba(232,220,196,0.12);
+  }
+</style>

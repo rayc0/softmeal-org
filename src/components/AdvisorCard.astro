@@ -1,0 +1,64 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  credentials?: string;
+  portrait?: string | null;
+  reviewedCount?: number;
+  lang?: string;
+}
+
+const { name, role, credentials, portrait, reviewedCount = 0, lang = 'en' } = Astro.props;
+
+const labels: Record<string, string> = {
+  'zh-hk': '篇文章已審閱',
+  'zh-cn': '篇文章已审阅',
+  'ja':    '件の記事を監修',
+  'en':    'articles reviewed',
+};
+const reviewedLabel = labels[lang] ?? labels['en'];
+
+const initials = name
+  .split(/\s+/)
+  .filter((w) => /^\p{Lu}|\p{Script=Han}/u.test(w))
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('') || name[0]?.toUpperCase() || '?';
+---
+
+<div class="group flex flex-col items-center text-center gap-3 p-4 rounded-2xl border border-jade/15 bg-white hover:shadow-md transition-shadow duration-200">
+
+  {portrait ? (
+    <img
+      src={portrait}
+      alt={name}
+      width="96"
+      height="96"
+      class="w-24 h-24 rounded-full object-cover ring-2 ring-jade/25 flex-shrink-0"
+      loading="lazy"
+    />
+  ) : (
+    <div
+      class="w-24 h-24 rounded-full bg-jade/10 ring-2 ring-jade/25 flex items-center justify-center
+             text-jade font-bold text-2xl select-none flex-shrink-0"
+      aria-hidden="true"
+    >
+      {initials}
+    </div>
+  )}
+
+  <div class="space-y-1">
+    <p class="font-serif text-base font-semibold text-ink leading-snug">{name}</p>
+    <p class="text-xs text-ink/60 leading-snug">{role}</p>
+    {credentials && (
+      <p class="text-[13px] text-ink/50 font-medium leading-snug">{credentials}</p>
+    )}
+  </div>
+
+  {reviewedCount > 0 && (
+    <p class="text-[11px] text-ink/35 opacity-0 group-hover:opacity-100 transition-opacity duration-200 mt-1">
+      {reviewedCount} {reviewedLabel}
+    </p>
+  )}
+
+</div>

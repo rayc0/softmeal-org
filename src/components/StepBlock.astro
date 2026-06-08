@@ -1,0 +1,88 @@
+---
+interface Props {
+  number: number;
+  text: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { number, text, image, imageAlt = '' } = Astro.props;
+---
+
+<div class="step-block">
+  <div class="step-header">
+    <span class="step-circle" aria-hidden="true">{number}</span>
+    <p class="step-text">{text}</p>
+  </div>
+  {image && (
+    <div class="step-photo">
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        decoding="async"
+        class="step-img"
+      />
+    </div>
+  )}
+</div>
+
+<style>
+  .step-block {
+    margin-bottom: 1.25rem;
+  }
+
+  .step-header {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: start;
+    gap: 0;
+  }
+
+  .step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3B7A6B; /* jade DEFAULT */
+    color: #0F2A2E;            /* ink DEFAULT */
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    /* center in the 56px column */
+    margin-left: 8px;
+  }
+
+  .step-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-top: 0.1rem;
+  }
+
+  .step-photo {
+    margin-top: 0.75rem;
+    /* indent to align with text column */
+    margin-left: 56px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .step-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] .step-circle {
+    background-color: #3B7A6B;
+    color: #E8DCC4;
+  }
+</style>

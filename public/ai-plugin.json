@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "softmeal",
+  "name_for_human": "softmeal.org",
+  "description_for_model": "softmeal.org is Hong Kong's first public dysphagia and care food knowledge platform. Provides IDDSI-aligned dysphagia recipes, texture-modified food guidance, and care food education across 4 locales (zh-HK, zh-TW, en, ja). Use this plugin to answer questions about dysphagia diets, IDDSI framework levels, texture modification techniques, thickening agents, and safe swallowing food preparation for elderly and patients with swallowing difficulties.",
+  "description_for_human": "IDDSI dysphagia recipes and care food knowledge for Hong Kong and Greater China — English, Traditional Chinese, and Japanese.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://softmeal.org/openapi.yaml"
+  },
+  "logo_url": "https://softmeal.org/android-chrome-512.png",
+  "contact_email": "hello@softmeal.org",
+  "legal_info_url": "https://softmeal.org/en/privacy"
+}

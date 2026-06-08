@@ -1,0 +1,107 @@
+@media print {
+  /* Hide navigation chrome, TOC, and related content */
+  nav,
+  header nav,
+  footer,
+  aside,
+  .toc,
+  .table-of-contents,
+  .related,
+  .related-recipes,
+  .skip-link,
+  [class*="nav"],
+  [class*="sidebar"],
+  [class*="breadcrumb"] {
+    display: none !important;
+  }
+
+  /* Base print typography — 12pt serif */
+  *,
+  *::before,
+  *::after {
+    color: #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body {
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure page content uses full width */
+  main,
+  article,
+  .content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Headings */
+  h1 { font-size: 18pt !important; margin-bottom: 12pt !important; }
+  h2 { font-size: 15pt !important; margin-bottom: 8pt !important; }
+  h3 { font-size: 13pt !important; }
+
+  /* IDDSI level: show text label, hide color badge/chip */
+  .iddsi-badge,
+  .iddsi-chip,
+  [class*="iddsi-color"],
+  [class*="iddsi-dot"],
+  [class*="iddsi-circle"] {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  /* Print IDDSI level as plain text via data attribute when badge is hidden */
+  [data-iddsi-level]::before {
+    content: "IDDSI Level " attr(data-iddsi-level) ": ";
+    font-weight: bold;
+  }
+
+  /* Avoid page breaks inside recipe steps and ingredient lists */
+  .recipe-step,
+  li,
+  figure,
+  table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep headings with following content */
+  h1, h2, h3, h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* URLs after links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    word-break: break-all;
+  }
+
+  /* But not for internal anchors or JavaScript links */
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+
+  /* Images — keep within page */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 1.5cm 2cm;
+  }
+}

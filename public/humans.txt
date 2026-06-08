@@ -1,0 +1,14 @@
+/* TEAM */
+Operator: Full Linkage Limited
+Site: softmeal.org
+Location: Hong Kong
+
+/* THANKS */
+Clinical Advisory: Editorial Board, Full Linkage Limited
+Note: Clinical content reviewed by qualified advisory panel.
+
+/* SITE */
+Last update: 2026-05-25
+Language: en / zh-HK / zh-CN / ja
+Standards: HTML5, CSS3
+Components: Astro, Tailwind CSS

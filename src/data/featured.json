@@ -1,0 +1,38 @@
+{
+  "zh-hk": {
+    "title": "誤吸性肺炎預防：香港臨床指引",
+    "href": "/zh-hk/aspiration-pneumonia-prevention-clinical/",
+    "image": "/og-default.png",
+    "imageAlt": "吞嚥困難護理臨床指引",
+    "category": "臨床專欄",
+    "reviewedBy": "softmeal.org 編輯團隊",
+    "readMins": 8
+  },
+  "zh-cn": {
+    "title": "吞咽困难患者的口腔护理：循证实践指南",
+    "href": "/zh-cn/oral-care-dysphagia/",
+    "image": "/og-default.png",
+    "imageAlt": "吞咽困难护理循证实践",
+    "category": "临床专栏",
+    "reviewedBy": "softmeal.org 编辑团队",
+    "readMins": 7
+  },
+  "ja": {
+    "title": "誤嚥性肺炎の予防：香港の臨床ガイドライン",
+    "href": "/ja/aspiration-pneumonia-prevention-clinical/",
+    "image": "/og-default.png",
+    "imageAlt": "嚥下障害ケアの臨床ガイドライン",
+    "category": "臨床コラム",
+    "reviewedBy": "softmeal.org 編集チーム",
+    "readMins": 8
+  },
+  "en": {
+    "title": "Aspiration Pneumonia Prevention: Hong Kong Clinical Guidelines",
+    "href": "/en/aspiration-pneumonia-prevention-clinical/",
+    "image": "/og-default.png",
+    "imageAlt": "Clinical guidelines for dysphagia care",
+    "category": "Clinical Feature",
+    "reviewedBy": "softmeal.org Editorial Team",
+    "readMins": 8
+  }
+}

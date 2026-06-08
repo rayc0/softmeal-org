@@ -1,0 +1,58 @@
+---
+interface HreflangEntry {
+  hreflang: string;
+  href: string;
+}
+
+interface Props {
+  lang: string;
+  hreflangLinks?: HreflangEntry[];
+}
+
+const { lang, hreflangLinks } = Astro.props;
+
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+
+const locales: { code: LangKey; label: string; hreflang: string }[] = [
+  { code: 'zh-hk', label: '繁中', hreflang: 'zh-HK' },
+  { code: 'zh-cn', label: '简中', hreflang: 'zh-CN' },
+  { code: 'en',    label: 'English', hreflang: 'en' },
+  { code: 'ja',    label: '日本語', hreflang: 'ja' },
+];
+
+// Build href for each locale: use hreflang alternate if available, else locale home
+function hrefFor(code: LangKey, hreflang: string): string {
+  if (hreflangLinks) {
+    const match = hreflangLinks.find(
+      (e) => e.hreflang === hreflang || e.hreflang === hreflang.toLowerCase()
+    );
+    if (match) return match.href;
+  }
+  return `/${code}/`;
+}
+---
+
+<div class="flex items-center gap-1" role="navigation" aria-label="Language switcher">
+  {locales.map((locale, i) => {
+    const isActive = locale.code === lang;
+    const href = hrefFor(locale.code, locale.hreflang);
+    return (
+      <>
+        {i > 0 && <span class="text-primary-500 text-xs select-none">·</span>}
+        <a
+          href={href}
+          hreflang={locale.hreflang}
+          aria-current={isActive ? 'page' : undefined}
+          class={[
+            'text-xs px-2 py-0.5 rounded-full no-underline transition-colors',
+            isActive
+              ? 'bg-white text-primary-800 font-semibold'
+              : 'text-primary-200 hover:text-white hover:bg-primary-600',
+          ].join(' ')}
+        >
+          {locale.label}
+        </a>
+      </>
+    );
+  })}
+</div>

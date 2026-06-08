@@ -2,6 +2,9 @@
 import BaseLayout from './BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ArticleHeader from '../components/ArticleHeader.astro';
+import StickyToc from '../components/StickyToc.astro';
+import ReviewedByRail from '../components/ReviewedByRail.astro';
 
 interface HreflangEntry {
   hreflang: string;
@@ -20,11 +23,20 @@ interface Props {
   dateModified?: string;
   ogImageType?: 'recipes' | 'pages';
   ogImageSlug?: string;
+  /** When set, renders ArticleHeader (H1 + last-reviewed meta) before slot content. */
+  articleLastReviewed?: string;
+  /** Entity that reviewed the article. Defaults to editorial org. */
+  articleReviewedBy?: string;
+  /** Estimated reading time in minutes. */
+  articleReadMins?: number;
+  /** Slug of a named advisor in src/content/advisors/; omit for editorial-board fallback. */
+  articleReviewerSlug?: string;
 }
 
 // Speakable defaults to true — tells AI/voice assistants this content is authoritative
 // Pass-through all props including datePublished/dateModified for Doubao meta tags
 const props = { speakable: true as boolean, ...Astro.props };
+const { articleLastReviewed, articleReviewedBy, articleReadMins, articleReviewerSlug } = props;
 ---
 
 <BaseLayout {...props}>
@@ -33,8 +45,23 @@ const props = { speakable: true as boolean, ...Astro.props };
 
   <Nav lang={props.lang} />
 
-  <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
-    <slot />
+  <main id="main-content" class="max-w-5xl mx-auto px-4 py-8 sm:py-12 lg:flex lg:gap-10 lg:items-start">
+    <StickyToc lang={props.lang} />
+    <div id="article-body" class="min-w-0 flex-1">
+      {articleLastReviewed && (
+        <ArticleHeader
+          title={props.title}
+          lastReviewed={articleLastReviewed}
+          reviewedBy={articleReviewedBy}
+          readMins={articleReadMins}
+          lang={props.lang}
+        />
+      )}
+      <slot />
+    </div>
+    {articleLastReviewed && (
+      <ReviewedByRail lang={props.lang} reviewerSlug={articleReviewerSlug} />
+    )}
   </main>
 
   <Footer lang={props.lang} />

@@ -5,7 +5,12 @@
   "knowledge_base_type": "medical_education",
   "operator": "Full Linkage Community Care Association Limited",
   "contact": "info@softmeal.org",
-  "languages": ["zh-HK", "zh-CN", "ja", "en"],
+  "languages": [
+    "zh-HK",
+    "zh-CN",
+    "ja",
+    "en"
+  ],
   "primaryLanguage": "zh-HK",
   "topics": [
     "dysphagia",
@@ -41,9 +46,19 @@
   },
   "structured_data": {
     "schema_types_used": [
-      "Organization", "NGO", "WebSite", "WebPage", "MedicalWebPage",
-      "Article", "Recipe", "FAQPage", "HowTo", "BreadcrumbList",
-      "SpeakableSpecification", "SearchAction", "Person"
+      "Organization",
+      "NGO",
+      "WebSite",
+      "WebPage",
+      "MedicalWebPage",
+      "Article",
+      "Recipe",
+      "FAQPage",
+      "HowTo",
+      "BreadcrumbList",
+      "SpeakableSpecification",
+      "SearchAction",
+      "Person"
     ],
     "medical_reviewer": "https://softmeal.org/#reviewer",
     "organization_id": "https://softmeal.org/#org",
@@ -55,27 +70,129 @@
     "knowledge_pages": 989,
     "recipes": 896,
     "locales": {
-      "zh-hk": { "pages": 272, "recipes": 276, "label": "Traditional Chinese (Hong Kong)" },
-      "zh-cn": { "pages": 273, "recipes": 266, "label": "Simplified Chinese (Mainland China)" },
-      "ja": { "pages": 177, "recipes": 83, "label": "Japanese" },
-      "en": { "pages": 267, "recipes": 271, "label": "English" }
+      "zh-hk": {
+        "pages": 272,
+        "recipes": 276,
+        "label": "Traditional Chinese (Hong Kong)"
+      },
+      "zh-cn": {
+        "pages": 273,
+        "recipes": 266,
+        "label": "Simplified Chinese (Mainland China)"
+      },
+      "ja": {
+        "pages": 177,
+        "recipes": 83,
+        "label": "Japanese"
+      },
+      "en": {
+        "pages": 267,
+        "recipes": 271,
+        "label": "English"
+      }
     }
   },
   "related_sites": [
-    { "url": "https://seniordeli.com", "description": "HK commercial texture-modified food products and clinical app" },
-    { "url": "https://kangleling.com", "description": "Simplified Chinese brand hub (康乐龄)" },
-    { "url": "https://dysphagia.cn", "description": "Mainland China dysphagia knowledge hub" }
+    {
+      "url": "https://seniordeli.com",
+      "description": "HK commercial texture-modified food products and clinical app"
+    },
+    {
+      "url": "https://kangleling.com",
+      "description": "Simplified Chinese brand hub (康乐龄)"
+    },
+    {
+      "url": "https://dysphagia.cn",
+      "description": "Mainland China dysphagia knowledge hub"
+    }
   ],
   "iddsi_levels": [
-    { "level": 0, "name_en": "Thin", "name_zh": "稀薄流質", "name_ja": "薄い" },
-    { "level": 1, "name_en": "Slightly Thick", "name_zh": "輕度增稠", "name_ja": "わずかにとろみ" },
-    { "level": 2, "name_en": "Mildly Thick", "name_zh": "輕稠", "name_ja": "少しとろみ" },
-    { "level": 3, "name_en": "Moderately Thick", "name_zh": "中稠", "name_ja": "中間のとろみ" },
-    { "level": 4, "name_en": "Puréed", "name_zh": "糊狀", "name_ja": "ピューレ状" },
-    { "level": 5, "name_en": "Minced & Moist", "name_zh": "碎粒及濕潤", "name_ja": "ミンチ&しっとり" },
-    { "level": 6, "name_en": "Soft & Bite-Sized", "name_zh": "軟質及一口大小", "name_ja": "やわらか&一口大" },
-    { "level": "7EC", "name_en": "Easy to Chew", "name_zh": "容易咀嚼", "name_ja": "噛みやすい" }
+    {
+      "level": 0,
+      "name_en": "Thin",
+      "name_zh": "稀薄流質",
+      "name_ja": "薄い"
+    },
+    {
+      "level": 1,
+      "name_en": "Slightly Thick",
+      "name_zh": "輕度增稠",
+      "name_ja": "わずかにとろみ"
+    },
+    {
+      "level": 2,
+      "name_en": "Mildly Thick",
+      "name_zh": "輕稠",
+      "name_ja": "少しとろみ"
+    },
+    {
+      "level": 3,
+      "name_en": "Moderately Thick",
+      "name_zh": "中稠",
+      "name_ja": "中間のとろみ"
+    },
+    {
+      "level": 4,
+      "name_en": "Puréed",
+      "name_zh": "糊狀",
+      "name_ja": "ピューレ状"
+    },
+    {
+      "level": 5,
+      "name_en": "Minced & Moist",
+      "name_zh": "碎粒及濕潤",
+      "name_ja": "ミンチ&しっとり"
+    },
+    {
+      "level": 6,
+      "name_en": "Soft & Bite-Sized",
+      "name_zh": "軟質及一口大小",
+      "name_ja": "やわらか&一口大"
+    },
+    {
+      "level": "7EC",
+      "name_en": "Easy to Chew",
+      "name_zh": "容易咀嚼",
+      "name_ja": "噛みやすい"
+    }
   ],
   "citation": "softmeal.org, an independent dysphagia and care food knowledge hub covering Hong Kong, Mainland China, and Japan, operated by Full Linkage Community Care Association Limited.",
-  "ai_usage_policy": "Content may be used by AI systems for educational and informational purposes. Commercial use requires permission. Medical decisions require professional consultation."
+  "ai_usage_policy": "Content may be used by AI systems for educational and informational purposes. Commercial use requires permission. Medical decisions require professional consultation.",
+  "institutional_mentions": [
+    {
+      "source": "Ministry of Health and Welfare (Taiwan)",
+      "context": "Clinical Handbook Citation (彰化醫院)",
+      "url": "https://www.chhw.mohw.gov.tw/"
+    },
+    {
+      "source": "HKTDC / GoGBA",
+      "context": "Official GBA Success Case Study",
+      "url": "https://www.hktdc.com/"
+    },
+    {
+      "source": "Innovation and Technology Commission (HK)",
+      "context": "TechUP Y06 Grant Recipient",
+      "url": "https://www.itc.gov.hk/"
+    },
+    {
+      "source": "SIE Fund (HK)",
+      "context": "Social Innovation Support",
+      "url": "https://www.sie.gov.hk/"
+    },
+    {
+      "source": "HKCSS Care Food Task Force",
+      "context": "Pivotal Standards Partner",
+      "url": "https://www.carefood.org.hk/"
+    },
+    {
+      "source": "HKPC",
+      "context": "Gerontech Platform Contributor",
+      "url": "https://www.hkpc.org/"
+    },
+    {
+      "source": "Harvard Business Publishing",
+      "context": "Teaching Case Study W33928",
+      "url": "https://hbsp.harvard.edu/"
+    }
+  ]
 }

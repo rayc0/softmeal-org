@@ -1,6 +1,8 @@
 ---
 import PageLayout from './PageLayout.astro';
 import IddsiLevelBadge from '../components/IddsiLevelBadge.astro';
+import IngredientTable from '../components/IngredientTable.astro';
+import SaveRecipeButton from '../components/SaveRecipeButton.astro';
 import { getCollection } from 'astro:content';
 
 interface HreflangEntry {
@@ -21,6 +23,10 @@ interface Props {
   schemaJson?: object[];
   ogImageType?: 'recipes' | 'pages';
   ogImageSlug?: string;
+  heroImage?: string;
+  calories?: string;
+  proteinContent?: string;
+  sodiumContent?: string;
 }
 
 const {
@@ -36,9 +42,12 @@ const {
   schemaJson = [],
   ogImageType,
   ogImageSlug,
+  heroImage,
+  calories,
+  proteinContent,
+  sodiumContent,
 } = Astro.props;
 
-// All recipe pages use og:type="article" (not "website")
 const ogType = 'article';
 
 type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
@@ -59,15 +68,16 @@ const warningTexts: Record<LangKey, string> = {
   'ja':    '⚠️ このレシピは参考情報です。食感は調理技術・食材により異なります。言語聴覚士によるIDDSIレベルの確認を受けてください。',
   'en':    '⚠️ This recipe is for reference only. Texture varies by technique and ingredients. A speech therapist should confirm the appropriate IDDSI level.',
 };
+const caloriesLabel: Record<LangKey, string>  = { 'zh-hk': '熱量', 'zh-cn': '热量', 'ja': 'カロリー', 'en': 'Calories' };
+const proteinLabel: Record<LangKey, string>   = { 'zh-hk': '蛋白質', 'zh-cn': '蛋白质', 'ja': 'たんぱく質', 'en': 'Protein' };
+const sodiumLabel: Record<LangKey, string>    = { 'zh-hk': '鈉', 'zh-cn': '钠', 'ja': 'ナトリウム', 'en': 'Sodium' };
 
-type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
 const validLangs = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
 const l: LangKey = validLangs.has(lang) ? (lang as LangKey) : 'zh-hk';
 
-
 const isZh = lang === 'zh-hk';
 const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
-const timeLabel = isZh ? `${prepTimeMinutes}分鐘` : `${prepTimeMinutes} min`;
+const timeLabel = `${prepTimeMinutes}${timeUnits[l]}`;
 
 // Resolve same-level recipes for "More recipes" section
 const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() ?? '';
@@ -83,17 +93,26 @@ const relatedRecipes = sameLevelRecipes
   })
   .slice(0, 3);
 
-// Official IDDSI accent colors (Pantone-derived) — used for recipe header border
+// Official IDDSI accent colors (Pantone-derived)
 const IDDSI_COLORS: Record<number, string> = {
   0: '#d1d5db', 1: '#9B9B9B', 2: '#E91E8C', 3: '#FFD700',
   4: '#2E7D32', 5: '#E65100', 6: '#1565C0', 7: '#E65100',
 };
+const IDDSI_COLORS_LIGHT: Record<number, string> = {
+  0: '#f5f5f5', 1: '#e5e7eb', 2: '#fce7f3', 3: '#fef9c3',
+  4: '#dcfce7', 5: '#ffedd5', 6: '#dbeafe', 7: '#ffedd5',
+};
 const accentColor = IDDSI_COLORS[iddsiLevel] ?? '#2E7D32';
+const accentLight = IDDSI_COLORS_LIGHT[iddsiLevel] ?? '#dcfce7';
 
-const backLabel = isZh ? '← 返回食譜庫' : '← Back to Recipe Library';
+const backLabel = isZh ? '← 返回食譜庫' : (lang === 'zh-cn' ? '← 返回食谱库' : lang === 'ja' ? '← レシピ一覧へ' : '← Back to Recipe Library');
 const moreSectionLabel = isZh
   ? `更多 IDDSI ${iddsiLevel} 級食譜`
+  : lang === 'zh-cn' ? `更多 IDDSI ${iddsiLevel} 级食谱`
+  : lang === 'ja' ? `IDDSIレベル ${iddsiLevel} の他のレシピ`
   : `More IDDSI Level ${iddsiLevel} Recipes`;
+
+const hasNutrition = calories || proteinContent || sodiumContent;
 ---
 
 <PageLayout
@@ -106,50 +125,116 @@ const moreSectionLabel = isZh
   ogImageType={ogImageType}
   ogImageSlug={ogImageSlug}
 >
-  <!-- Recipe header card with IDDSI accent border -->
-  <div
-    class="mb-8 rounded-xl bg-surface-2 border border-border shadow-card overflow-hidden"
-    style={`border-left: 4px solid ${accentColor};`}
+  <!-- Photo-first hero: 4:3 ratio with IDDSI gradient, badge medallion top-right -->
+  <div class="recipe-hero relative w-full overflow-hidden rounded-2xl mb-6 shadow-card"
+    style={`aspect-ratio: 4/3; max-height: 480px;`}
   >
-    <div class="p-5 sm:p-6">
-      <!-- IDDSI badge + meta row -->
-      <div class="flex flex-wrap items-center gap-3 mb-4">
-        <IddsiLevelBadge level={iddsiLevel} lang={lang} />
-        <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500">
-          <span>
-            <span class="font-medium text-gray-700">{prepLabels[lang as LangKey]}:</span> {timeLabel}
-          </span>
-          <span>
-            <span class="font-medium text-gray-700">{diffLabels[lang as LangKey]}:</span> {diffLabel}
-          </span>
-          <span>
-            <span class="font-medium text-gray-700">{ingredientLabels[lang as LangKey]}:</span> {mainIngredient}
-          </span>
-        </div>
+    {heroImage ? (
+      <img
+        src={heroImage}
+        alt={title}
+        loading="eager"
+        decoding="sync"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    ) : (
+      <!-- Gradient fallback using IDDSI accent color -->
+      <div
+        class="absolute inset-0 flex items-end"
+        style={`background: linear-gradient(135deg, ${accentLight} 0%, ${accentColor}22 60%, ${accentColor}44 100%);`}
+      >
+        <!-- Decorative food pattern dots -->
+        <div class="absolute inset-0 opacity-10" aria-hidden="true"
+          style={`background-image: radial-gradient(circle, ${accentColor} 1px, transparent 1px); background-size: 28px 28px;`}
+        ></div>
       </div>
+    )}
 
-      <!-- Tags -->
-      {tags.length > 0 && (
-        <div class="flex flex-wrap gap-1.5">
-          {tags.map(tag => (
-            <span class="tag">#{tag}</span>
-          ))}
-        </div>
-      )}
+    <!-- Bottom gradient overlay for title legibility -->
+    <div class="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none"
+      style="background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);"
+    ></div>
+
+    <!-- Title text in hero -->
+    <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+      <h1 class="recipe-hero-title text-white font-bold leading-snug drop-shadow"
+        style="font-family: var(--font-head); text-shadow: 0 1px 4px rgba(0,0,0,0.5);"
+      >
+        {title}
+      </h1>
+    </div>
+
+    <!-- IDDSI medallion badge — top-right -->
+    <div class="absolute top-4 right-4">
+      <IddsiLevelBadge level={iddsiLevel} lang={lang} variant="medallion" />
     </div>
   </div>
 
-  <!-- Recipe body (MDX content) -->
-  <div class="prose-softmeal">
+  <!-- Recipe meta strip -->
+  <div class="recipe-meta flex flex-wrap gap-x-6 gap-y-2 text-sm mb-5 px-1">
+    <span class="flex items-center gap-1.5">
+      <span class="text-muted">{prepLabels[l]}:</span>
+      <strong class="text-gray-800">{timeLabel}</strong>
+    </span>
+    <span class="flex items-center gap-1.5">
+      <span class="text-muted">{diffLabels[l]}:</span>
+      <strong class="text-gray-800">{diffLabel}</strong>
+    </span>
+    <span class="flex items-center gap-1.5">
+      <span class="text-muted">{ingredientLabels[l]}:</span>
+      <strong class="text-gray-800">{mainIngredient}</strong>
+    </span>
+  </div>
+
+  <!-- Tags -->
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mb-6 px-1">
+      {tags.map(tag => (
+        <span class="tag">#{tag}</span>
+      ))}
+    </div>
+  )}
+
+  <!-- Save to my list -->
+  <div class="mb-5 px-1">
+    <SaveRecipeButton slug={currentSlug} lang={lang} />
+  </div>
+
+  <!-- Nutrition quick-facts (tabular-nums) -->
+  {hasNutrition && (
+    <div class="nutrition-table mb-6 rounded-xl border border-border overflow-hidden text-sm"
+      style={`border-top: 3px solid ${accentColor};`}
+    >
+      <table class="w-full" style="font-variant-numeric: tabular-nums;">
+        <thead>
+          <tr>
+            {calories && <th class="px-4 py-2 text-center font-semibold bg-surface-2 text-gray-600 border-b border-border border-r border-border last:border-r-0">{caloriesLabel[l]}</th>}
+            {proteinContent && <th class="px-4 py-2 text-center font-semibold bg-surface-2 text-gray-600 border-b border-border border-r border-border last:border-r-0">{proteinLabel[l]}</th>}
+            {sodiumContent && <th class="px-4 py-2 text-center font-semibold bg-surface-2 text-gray-600 border-b border-border">{sodiumLabel[l]}</th>}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {calories && <td class="px-4 py-2.5 text-center font-bold text-gray-800 border-r border-border last:border-r-0">{calories}</td>}
+            {proteinContent && <td class="px-4 py-2.5 text-center font-bold text-gray-800 border-r border-border last:border-r-0">{proteinContent}</td>}
+            {sodiumContent && <td class="px-4 py-2.5 text-center font-bold text-gray-800">{sodiumContent}</td>}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <!-- Recipe body (MDX content) — styled step blocks & ingredient list inside -->
+  <div class="prose-softmeal recipe-body">
     <slot />
   </div>
 
-  <!-- Warning -->
+  <!-- Warning callout -->
   <div class="callout-warning mt-8">
-    {warningTexts[lang as LangKey]}
+    {warningTexts[l]}
   </div>
 
-  <div class="mt-8 pt-6 border-t border-gray-200">
+  <div class="mt-8 pt-6 border-t border-border">
     <a href={`/${lang}/recipes/`} class="text-primary hover:underline text-sm font-medium">
       {backLabel}
     </a>
@@ -160,7 +245,7 @@ const moreSectionLabel = isZh
       aria-label={moreSectionLabel}
       class="mt-6 pt-4 border-t border-gray-100"
     >
-      <h2 class="text-base font-semibold text-gray-800 mb-2">
+      <h2 class="text-base font-semibold text-gray-800 mb-3">
         {moreSectionLabel}
       </h2>
       <ul class="space-y-1 list-disc list-inside">
@@ -179,3 +264,104 @@ const moreSectionLabel = isZh
     </nav>
   )}
 </PageLayout>
+
+<style>
+  /* Hero title responsive size */
+  .recipe-hero-title {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  /* ── Ingredient list → tabular hairline rows ────────────────────────── */
+  .recipe-body :global(h2 + ul),
+  .recipe-body :global(h3 + ul) {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .recipe-body :global(h2 + ul li),
+  .recipe-body :global(h3 + ul li) {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.45rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .recipe-body :global(h2 + ul li:last-child),
+  .recipe-body :global(h3 + ul li:last-child) {
+    border-bottom: none;
+  }
+
+  .recipe-body :global(h2 + ul li:nth-child(even)),
+  .recipe-body :global(h3 + ul li:nth-child(even)) {
+    background-color: #f9fafb;
+  }
+
+  /* ── Numbered step blocks ────────────────────────────────────────────── */
+  .recipe-body :global(ol) {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1.5rem;
+    counter-reset: step-counter;
+  }
+
+  .recipe-body :global(ol li) {
+    counter-increment: step-counter;
+    position: relative;
+    padding: 0.875rem 1rem 0.875rem 3.5rem;
+    margin-bottom: 0.75rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .recipe-body :global(ol li::before) {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background-color: #0F2A2E;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  /* Dark mode adjustments */
+  [data-theme="dark"] .recipe-body :global(h2 + ul),
+  [data-theme="dark"] .recipe-body :global(h3 + ul) {
+    border-color: #2d6b78;
+  }
+  [data-theme="dark"] .recipe-body :global(h2 + ul li),
+  [data-theme="dark"] .recipe-body :global(h3 + ul li) {
+    border-color: #2d6b78;
+  }
+  [data-theme="dark"] .recipe-body :global(h2 + ul li:nth-child(even)),
+  [data-theme="dark"] .recipe-body :global(h3 + ul li:nth-child(even)) {
+    background-color: #163c46;
+  }
+  [data-theme="dark"] .recipe-body :global(ol li) {
+    background-color: #163c46;
+    border-color: #2d6b78;
+  }
+  [data-theme="dark"] .recipe-body :global(ol li::before) {
+    background-color: #3B7A6B;
+  }
+</style>

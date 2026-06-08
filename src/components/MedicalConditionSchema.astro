@@ -1,0 +1,54 @@
+---
+interface Treatment {
+  type?: 'MedicalTherapy' | 'Drug';
+  name: string;
+}
+
+interface Props {
+  name: string;
+  alternate_name?: string | string[];
+  anatomy: string;
+  anatomy_system?: string;
+  treatments: Treatment[];
+  lang?: string;
+  url?: string;
+}
+
+const {
+  name,
+  alternate_name,
+  anatomy,
+  anatomy_system,
+  treatments,
+  lang = 'zh-hk',
+  url,
+} = Astro.props;
+
+const siteUrl = 'https://softmeal.org';
+const langMap: Record<string, string> = { 'zh-hk': 'zh-HK', 'zh-cn': 'zh-CN', 'ja': 'ja', 'en': 'en' };
+const inLanguage = langMap[lang] ?? lang;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalCondition",
+  ...(url ? { "@id": `${url}#condition` } : {}),
+  "name": name,
+  ...(alternate_name ? { "alternateName": alternate_name } : {}),
+  "inLanguage": inLanguage,
+  "associatedAnatomy": {
+    "@type": "AnatomicalStructure",
+    "name": anatomy,
+    ...(anatomy_system ? { "partOfSystem": { "@type": "AnatomicalSystem", "name": anatomy_system } } : {}),
+  },
+  "possibleTreatment": treatments.map((t) => ({
+    "@type": t.type ?? "MedicalTherapy",
+    "name": t.name,
+  })),
+  "relevantSpecialty": {
+    "@type": "MedicalSpecialty",
+    "name": "SpeechPathology"
+  },
+  "publisher": { "@id": `${siteUrl}/#org` },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

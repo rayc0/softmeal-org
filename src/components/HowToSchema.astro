@@ -1,0 +1,34 @@
+---
+interface HowToStep {
+  name: string;
+  text: string;
+}
+
+interface Props {
+  name: string;
+  description?: string;
+  totalTime?: string;
+  steps: HowToStep[];
+  tools?: string[];
+  lang?: string;
+}
+
+const { name, description, totalTime, steps, tools, lang = 'zh-HK' } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": name,
+  ...(description && { "description": description }),
+  ...(totalTime && { "totalTime": totalTime }),
+  "inLanguage": lang,
+  ...(tools?.length ? { "tool": tools.map(t => ({ "@type": "HowToTool", "name": t })) } : {}),
+  "step": steps.map((step, i) => ({
+    "@type": "HowToStep",
+    "position": i + 1,
+    "name": step.name,
+    "text": step.text,
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

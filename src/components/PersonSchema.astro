@@ -1,0 +1,33 @@
+---
+/**
+ * Emits the site-wide clinical reviewer Person entity.
+ * @id https://softmeal.org/#reviewer is the stable reference target for all
+ * MedicalWebPage reviewedBy properties across the site.
+ *
+ * PENDING RAYMOND APPROVAL: name is placeholder until a named clinician is cleared.
+ * When approved, update `name`, `sameAs`, and the locale-keyed `jobTitle` below.
+ */
+const siteUrl = 'https://softmeal.org';
+
+const reviewerSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#reviewer`,
+  "name": "Softmeal Clinical Editorial Board",
+  "jobTitle": "Clinical Editorial Reviewer",
+  "medicalSpecialty": {
+    "@type": "MedicalSpecialty",
+    "name": "Speech-Language Pathology"
+  },
+  "worksFor": { "@id": `${siteUrl}/#org` },
+  "knowsAbout": [
+    "Dysphagia",
+    "IDDSI Framework",
+    "Texture-modified diet",
+    "Thickened fluids",
+    "Swallowing rehabilitation",
+    "Aspiration pneumonia prevention"
+  ]
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(reviewerSchema)} />

@@ -3,16 +3,97 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Locale-aware font tokens ───────────────────────────────────────── */
+
+  /* English default */
+  :root,
+  :lang(en) {
+    --font-head: "Fraunces", Georgia, serif;
+    --font-body: "Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+    --font-size-base: 18px;
+    --line-height-base: 1.65;
+  }
+
+  :lang(zh-HK) {
+    --font-head: "Noto Serif HK Variable", "Noto Serif CJK TC", "PingFang TC", serif;
+    --font-body: "Noto Sans HK", "Noto Sans CJK TC", "PingFang TC", sans-serif;
+    --font-size-base: 18px;
+    --line-height-base: 1.8;
+  }
+
+  :lang(zh-CN) {
+    --font-head: "Noto Serif SC Variable", "Noto Serif CJK SC", "SimSun", serif;
+    --font-body: "Noto Sans SC", "Noto Sans CJK SC", "PingFang SC", sans-serif;
+    --font-size-base: 18px;
+    --line-height-base: 1.85;
+  }
+
+  :lang(ja) {
+    --font-head: "Noto Serif JP Variable", "Hiragino Mincho ProN", serif;
+    --font-body: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --font-size-base: 17px;
+    --line-height-base: 1.9;
+  }
+
+  /* ── Locale-aware density tokens (CDO §10) ──────────────────────────── */
+  /* --card-pad: inner padding of card components                          */
+  /* --grid-cols: default content grid column count                        */
+  /* --content-margin: horizontal margin around the main content column    */
+
+  /* en default: 680px Mayo editorial feel */
+  :root,
+  :lang(en) {
+    --card-pad: 1.25rem;
+    --grid-cols: 12;
+    --content-margin: 2rem;
+  }
+
+  /* zh-HK: default density (same as en baseline) */
+  :lang(zh-HK) {
+    --card-pad: 1.25rem;
+    --grid-cols: 12;
+    --content-margin: 2rem;
+  }
+
+  /* zh-CN: denser 36kr-style grid — tighter padding, 16-col feel */
+  :lang(zh-CN) {
+    --card-pad: 0.875rem;
+    --grid-cols: 16;
+    --content-margin: 1rem;
+  }
+
+  /* ja: most editorial — widest margins, airiest card padding */
+  :lang(ja) {
+    --card-pad: 1.75rem;
+    --grid-cols: 10;
+    --content-margin: 3.5rem;
+  }
+
   html {
-    font-family: "PingFang TC", "Hiragino Sans", "Noto Sans CJK TC",
-      "Microsoft JhengHei", system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
   }
 
   body {
     @apply text-gray-800 bg-surface-1;
+  }
+
+  /* Headline elements use --font-head */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-head);
+  }
+
+  /* Japanese headlines: proportional metrics for mixed-width glyphs */
+  :lang(ja) h1,
+  :lang(ja) h2,
+  :lang(ja) h3,
+  :lang(ja) h4,
+  :lang(ja) h5,
+  :lang(ja) h6 {
+    font-feature-settings: "palt" 1;
   }
 
   /* Reading typography */
@@ -57,9 +138,10 @@
 }
 
 @layer components {
-  /* Card */
+  /* Card — padding driven by --card-pad density token (CDO §10) */
   .card {
-    @apply bg-surface-1 border border-border rounded-xl shadow-card p-5;
+    @apply bg-surface-1 border border-border rounded-xl shadow-card;
+    padding: var(--card-pad);
     transition: box-shadow 0.2s, border-color 0.2s;
   }
   .card:hover {
@@ -93,9 +175,17 @@
     @apply p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800;
   }
 
-  /* Article content wrapper */
+  /* Article content wrapper — 680px measure (66 char Latin / ~38 CJK, CDO §1c) */
   .prose-softmeal {
     @apply max-w-none;
+  }
+  /* Article body column: max 680px, paragraph spacing 1.5rem */
+  .prose-measure {
+    max-width: 680px;
+  }
+  .prose-measure p,
+  .prose-softmeal.prose-measure p {
+    margin-bottom: 1.5rem;
   }
   .prose-softmeal h2 {
     @apply border-b border-border pb-2;
@@ -114,8 +204,121 @@
   }
 }
 
+/* ── Dark mode (CDO §4): ink bg #0F2A2E / congee text #E8DCC4 ─────────── */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body {
+  background-color: #0F2A2E;
+  color: #E8DCC4;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #E8DCC4;
+}
+
+[data-theme="dark"] a {
+  color: #9bbdc3; /* ink-200: accessible on ink-800 bg, ~4.5:1 */
+}
+
+[data-theme="dark"] .card {
+  background-color: #163c46;
+  border-color: #2d6b78;
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: #70a2ab;
+}
+
+[data-theme="dark"] th {
+  background-color: #163c46;
+  border-color: #2d6b78;
+  color: #E8DCC4;
+}
+
+[data-theme="dark"] td {
+  border-color: #2d6b78;
+}
+
+[data-theme="dark"] tr:nth-child(even) td {
+  background-color: #1d505c;
+}
+
+[data-theme="dark"] blockquote {
+  background-color: #163c46;
+  color: #E8DCC4;
+  border-left-color: #3B7A6B;
+}
+
+[data-theme="dark"] code {
+  background-color: #163c46;
+  color: #E8DCC4;
+}
+
+[data-theme="dark"] hr {
+  border-color: #2d6b78;
+}
+
+[data-theme="dark"] .tag {
+  background-color: #1d505c;
+  color: #c5d8dc;
+}
+
+[data-theme="dark"] .btn-ghost {
+  color: #c5d8dc;
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  background-color: #163c46;
+  color: #E8DCC4;
+}
+
+[data-theme="dark"] .prose-softmeal h2 {
+  border-color: #2d6b78;
+}
+
 @layer utilities {
   .no-underline { text-decoration: none !important; }
+
+  /* ── Accessibility: high-visibility focus rings (CDO §7) ── */
+  :focus-visible {
+    outline: 3px solid #3B7A6B; /* jade DEFAULT */
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Skip-to-content link: visually hidden until focused */
+  .skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 0;
+    z-index: 9999;
+    padding: 0.75rem 1.25rem;
+    background: #3B7A6B;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus-visible {
+    top: 0;
+    outline: 3px solid #193831; /* jade-800 for contrast on jade bg */
+    outline-offset: 2px;
+  }
+
+  /* Minimum 48×48px tap target for elderly accessibility (CDO §7) */
+  .tap-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;

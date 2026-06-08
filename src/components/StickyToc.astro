@@ -1,0 +1,170 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const labels: Record<string, string> = {
+  'zh-hk': '目錄',
+  'zh-cn': '目录',
+  'ja':    '目次',
+  'en':    'Contents',
+};
+
+const label = labels[lang] ?? labels['en'];
+---
+
+<!--
+  Sticky TOC — left rail on ≥1024px, <details> on mobile.
+  JS populates both nav lists and drives IntersectionObserver highlights.
+-->
+<aside
+  id="sticky-toc"
+  class="hidden"
+  aria-label={label}
+>
+  <!-- Mobile: collapsible at top (shown when JS finds headings) -->
+  <details
+    id="toc-mobile"
+    class="lg:hidden mb-6 border border-border rounded-lg overflow-hidden"
+  >
+    <summary
+      class="flex items-center justify-between px-4 py-3 cursor-pointer
+             font-semibold text-sm text-ink-700 select-none list-none
+             bg-surface-2 hover:bg-surface-3 transition-colors"
+    >
+      <span>{label}</span>
+      <svg
+        class="toc-chevron w-4 h-4 text-ink/50 transition-transform duration-200"
+        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+      >
+        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+      </svg>
+    </summary>
+    <nav id="toc-list-mobile" class="px-4 py-3 text-sm"></nav>
+  </details>
+
+  <!-- Desktop: sticky left rail (flex child in PageLayout) -->
+  <div
+    id="toc-desktop"
+    class="hidden lg:block sticky top-6 self-start w-52 flex-shrink-0"
+  >
+    <p class="text-[11px] font-semibold uppercase tracking-wider text-ink/50 mb-3 px-1">
+      {label}
+    </p>
+    <nav id="toc-list-desktop" aria-label={label} class="text-sm"></nav>
+  </div>
+</aside>
+
+<script>
+  (function () {
+    const aside = document.getElementById('sticky-toc');
+    const mobileNav = document.getElementById('toc-list-mobile');
+    const desktopNav = document.getElementById('toc-list-desktop');
+    if (!aside || !mobileNav || !desktopNav) return;
+
+    // Collect h2/h3 from main article content (sibling article-body div)
+    const article = document.getElementById('article-body');
+    const scope = article ?? document.querySelector('main');
+    if (!scope) return;
+
+    const headings = Array.from(
+      scope.querySelectorAll<HTMLElement>('h2, h3')
+    ).filter((h) => h.id || h.textContent?.trim());
+
+    if (headings.length < 2) return; // skip TOC for short pages
+
+    // Ensure every heading has an id
+    headings.forEach((h, i) => {
+      if (!h.id) {
+        h.id = `toc-heading-${i}`;
+      }
+    });
+
+    // Build a flat list of {id, text, level}
+    const items = headings.map((h) => ({
+      id: h.id,
+      text: h.textContent?.trim() ?? '',
+      level: parseInt(h.tagName[1], 10), // 2 or 3
+    }));
+
+    function buildList(container: HTMLElement) {
+      const ul = document.createElement('ul');
+      ul.className = 'space-y-0.5';
+      items.forEach(({ id, text, level }) => {
+        const li = document.createElement('li');
+        li.dataset.tocId = id;
+        const a = document.createElement('a');
+        a.href = `#${id}`;
+        a.textContent = text;
+        a.className = [
+          'toc-link block rounded py-1 px-2 leading-snug transition-colors duration-150',
+          'text-ink/60 hover:text-ink hover:bg-surface-3 no-underline',
+          level === 3 ? 'pl-4 text-[12.5px]' : 'font-medium text-[13px]',
+        ].join(' ');
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      container.appendChild(ul);
+    }
+
+    buildList(mobileNav);
+    buildList(desktopNav);
+
+    // Show the aside now that it's populated
+    aside.classList.remove('hidden');
+
+    // ── IntersectionObserver highlight ───────────────────────────────────
+    let activeId: string | null = null;
+
+    function setActive(id: string | null) {
+      if (id === activeId) return;
+      activeId = id;
+
+      [mobileNav, desktopNav].forEach((nav) => {
+        nav.querySelectorAll<HTMLElement>('[data-toc-id]').forEach((li) => {
+          const a = li.querySelector('a');
+          if (!a) return;
+          const isActive = li.dataset.tocId === id;
+          a.classList.toggle('text-jade', isActive);
+          a.classList.toggle('font-semibold', isActive);
+          a.classList.toggle('bg-jade/10', isActive);
+          a.classList.toggle('text-ink/60', !isActive);
+        });
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the topmost visible heading
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .map((e) => e.target as HTMLElement);
+
+        if (visible.length > 0) {
+          // Pick whichever is highest on screen
+          visible.sort(
+            (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top
+          );
+          setActive(visible[0].id);
+        }
+      },
+      {
+        rootMargin: '-10% 0px -75% 0px',
+        threshold: 0,
+      }
+    );
+
+    headings.forEach((h) => observer.observe(h));
+
+    // Rotate chevron when <details> opens/closes
+    const details = document.getElementById('toc-mobile') as HTMLDetailsElement | null;
+    const chevron = details?.querySelector<SVGElement>('.toc-chevron');
+    if (details && chevron) {
+      details.addEventListener('toggle', () => {
+        chevron.style.transform = details.open ? 'rotate(180deg)' : '';
+      });
+    }
+  })();
+</script>

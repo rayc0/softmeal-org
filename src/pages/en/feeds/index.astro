@@ -3,6 +3,16 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 const siteUrl = 'https://softmeal.org';
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "inLanguage": "en",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
+    { "@type": "ListItem", "position": 2, "name": "Feeds", "item": `${siteUrl}/en/feeds/` }
+  ]
+};
+
 const feeds = [
   {
     locale: 'en',
@@ -36,6 +46,7 @@ const feeds = [
   description="RSS and Atom feed directory for softmeal.org — subscribe in your preferred language and feed reader."
   lang="en"
   canonicalUrl={`${siteUrl}/en/feeds/`}
+  schemaJson={[breadcrumbSchema]}
 >
   <main style="max-width:680px;margin:3rem auto;padding:0 1.5rem;font-family:system-ui,sans-serif;color:#1a1a1a;">
     <h1 style="font-size:1.75rem;margin-bottom:0.25rem;">Feed Directory</h1>

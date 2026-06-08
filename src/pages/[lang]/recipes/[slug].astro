@@ -28,6 +28,9 @@ const {
   tags,
   last_modified,
   fork_test_pass,
+  calories,
+  protein_content,
+  sodium_content,
 } = recipe.data;
 
 const siteUrl = 'https://softmeal.org';
@@ -78,6 +81,15 @@ const karenChanPerson = {
   "knowsAbout": ["Dysphagia", "Swallowing rehabilitation", "Speech-language pathology", "IDDSI", "Aspiration pneumonia prevention"]
 };
 
+const nutritionInfo = (calories || protein_content || sodium_content)
+  ? {
+      "@type": "NutritionInformation",
+      ...(calories           && { "calories": calories }),
+      ...(protein_content    && { "proteinContent": protein_content }),
+      ...(sodium_content     && { "sodiumContent": sodium_content }),
+    }
+  : undefined;
+
 const recipeSchema = {
   "@context": "https://schema.org",
   "@type": "Recipe",
@@ -85,6 +97,7 @@ const recipeSchema = {
   "description": `${description} IDDSI Level ${iddsi_level} compliant.`,
   "recipeCategory": `IDDSI Level ${iddsi_level}`,
   "prepTime": `PT${prep_time_minutes}M`,
+  "cookTime": `PT${prep_time_minutes}M`,
   "recipeYield": "1 serving",
   "inLanguage": schemaLang,
   "dateModified": last_modified,
@@ -97,6 +110,7 @@ const recipeSchema = {
   "publisher": { "@id": `${siteUrl}/#org` },
   "reviewedBy": karenChanPerson,
   "accessibilityFeature": `iddsi-level-${iddsi_level}`,
+  ...(nutritionInfo && { "nutrition": nutritionInfo }),
 };
 
 // HowTo schema — maps IDDSI recipe preparation stages to structured steps
@@ -202,6 +216,9 @@ const breadcrumbSchema = {
   schemaJson={[recipeSchema, howToSchema, recipeFaqSchema, breadcrumbSchema]}
   ogImageType={lang === 'zh-hk' ? 'recipes' : undefined}
   ogImageSlug={lang === 'zh-hk' ? recipeSlug : undefined}
+  calories={calories}
+  proteinContent={protein_content}
+  sodiumContent={sodium_content}
 >
   <h1>{title}</h1>
   <Content />
