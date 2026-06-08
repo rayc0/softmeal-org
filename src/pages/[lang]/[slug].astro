@@ -495,6 +495,34 @@ const faqCancerDysphagiaEn = [
   { "@type": "Question", "name": "When should post-NPC treatment VFSS reassessment be arranged?", "acceptedAnswer": { "@type": "Answer", "text": "The first VFSS evaluation is recommended 3–6 months after treatment completion, then at minimum annual review. Immediate reassessment should be arranged if swallowing noticeably worsens, if swallowing becomes painful, if unexplained weight loss occurs, if recurrent fever suggests aspiration pneumonia, or if the patient subjectively notices a change. Late fibrosis can manifest years after treatment, making continued monitoring essential." } }
 ];
 
+// FAQPage schema for the core dysphagia page
+const faqDysphagiaZhHk = [
+  { "@type": "Question", "name": "什麼是吞嚥困難（Dysphagia）？", "acceptedAnswer": { "@type": "Answer", "text": "吞嚥困難是指在吞嚥食物或液體時出現困難或不適，成因包括中風、柏金遜症、認知症、頭頸癌症治療及正常老化。它涉及超過 50 條肌肉的協調，香港估計約 60 萬人受影響。診斷和飲食等級須由言語治療師評估訂定。" } },
+  { "@type": "Question", "name": "吞嚥困難有哪些警示症狀？", "acceptedAnswer": { "@type": "Answer", "text": "主要警示症狀包括：進食或飲水時咳嗽或嗆咳、進食後聲音變得沙啞或濕潤、進食費時（超過 30 分鐘）、食物或液體從口鼻漏出、不明原因體重下降，以及反覆發燒（可能是吸入性肺炎的跡象）。任何上述情況均應盡快轉介言語治療師評估。" } },
+  { "@type": "Question", "name": "吞嚥困難患者應避免哪些食物？", "acceptedAnswer": { "@type": "Answer", "text": "高風險食物包括：堅硬乾燥食物（堅果、餅乾）、纖維粗的蔬菜（西芹、通菜莖）、黏韌食物（糯米、麻糬、年糕）、圓形細小食物（整顆葡萄）、雙重質感食物（小籠包、西瓜）及帶骨肉類。具體禁忌食物應由言語治療師根據個別評估訂定。" } },
+  { "@type": "Question", "name": "香港如何轉介言語治療師？", "acceptedAnswer": { "@type": "Answer", "text": "可透過以下途徑：住院期間由主診醫生轉介病房言語治療師；出院後由醫生轉介門診言語治療；前往老人科日間醫院（65 歲以上長者，等候較短）；或自行聯絡香港言語治療師公會（HKSLTA，hkslta.org.hk）名冊的私家言語治療師。公立首次評估費用為醫管局標準收費。" } }
+];
+const faqDysphagiaEn = [
+  { "@type": "Question", "name": "What is dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "Dysphagia is difficulty or discomfort when swallowing food or liquids. Swallowing involves more than 50 muscles and multiple neurological systems. Common causes include stroke, Parkinson's disease, dementia, head and neck cancer treatment, and normal ageing. Over 600,000 people in Hong Kong are affected. Diet level and management must be prescribed by a speech-language pathologist (SLP) following clinical assessment." } },
+  { "@type": "Question", "name": "What are the warning signs of dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "Key warning signs include: coughing or choking during eating or drinking; a wet or hoarse voice after swallowing; meals taking more than 30 minutes; food or liquid leaking from the mouth or nose; unexplained weight loss; and recurrent low-grade fever (which may indicate aspiration pneumonia). Any of these signs warrants prompt SLP referral." } },
+  { "@type": "Question", "name": "What foods are dangerous for people with dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "High-risk foods include hard or dry items (nuts, biscuits), fibrous vegetables (celery, water spinach stems), sticky or chewy foods (mochi, glutinous rice, nian gao), small round foods (whole grapes), mixed-texture foods (xiao long bao, watermelon), and bone-in meats. The specific prohibited food list should be determined by the patient's SLP based on individual assessment." } },
+  { "@type": "Question", "name": "What is the IDDSI framework and why does it matter for dysphagia?", "acceptedAnswer": { "@type": "Answer", "text": "IDDSI (International Dysphagia Diet Standardisation Initiative) is the global standard for describing food textures and drink thicknesses, with 8 levels (0–7). It is adopted by Hong Kong Hospital Authority and care homes. IDDSI provides standardised testing methods so that 'Level 4' means the same purée consistency regardless of location, enabling safe communication between hospitals, care homes, and home caregivers." } }
+];
+
+// FAQPage schema for choosing-a-thickener
+const faqChoosingThickenerZhHk = [
+  { "@type": "Question", "name": "澱粉基增稠劑和黃原膠基增稠劑有何分別？", "acceptedAnswer": { "@type": "Answer", "text": "主要分別在於溫度穩定性和口感。黃原膠基在熱飲和冷飲中均保持穩定稠度，並具有剪切稀化特性；澱粉基在熱液體中不穩定，冷卻後繼續增稠。從 IDDSI 流量測試重複性而言，黃原膠基明顯更優。兩類在香港藥房均有售。" } },
+  { "@type": "Question", "name": "家用粟粉可以取代商業增稠劑嗎？", "acceptedAnswer": { "@type": "Answer", "text": "緊急情況下可短暫使用，但不建議長期依賴。家用粟粉在熱飲中稠度不穩定，靜置後繼續增稠，難以準確達到言語治療師指定的 IDDSI 等級，存在患者安全風險。" } },
+  { "@type": "Question", "name": "更換增稠劑品牌後需要重新驗證嗎？", "acceptedAnswer": { "@type": "Answer", "text": "需要。不同品牌在相同份量下稠度可能有差異。更換品牌後應使用 IDDSI 10ml 針筒流量測試重新驗證，確認所準備的飲品符合言語治療師指定的 IDDSI 等級。" } },
+  { "@type": "Question", "name": "增稠劑加入熱茶或熱湯後會失效嗎？", "acceptedAnswer": { "@type": "Answer", "text": "澱粉基增稠劑在熱液體中不穩定，稠度不均且難以預測。黃原膠基增稠劑在熱飲中保持穩定，適合用於中國茶、咖啡及熱湯。使用前應閱讀產品說明書，確認適用溫度範圍。" } }
+];
+const faqChoosingThickenerEn = [
+  { "@type": "Question", "name": "What is the difference between starch-based and xanthan gum-based thickeners?", "acceptedAnswer": { "@type": "Answer", "text": "The key differences are temperature stability and mouthfeel. Xanthan gum maintains consistent thickness in both hot and cold liquids and has shear-thinning properties (viscosity reduces briefly during swallowing, easing bolus transit). Starch-based thickeners are unreliable in hot liquids and continue to thicken as they cool. IDDSI flow-test repeatability is significantly better with xanthan gum." } },
+  { "@type": "Question", "name": "Can I use household cornstarch instead of a commercial thickener?", "acceptedAnswer": { "@type": "Answer", "text": "Household cornstarch can serve as a very short-term emergency substitute but is not safe for regular use. It is unstable in hot drinks and continues to thicken after preparation, making it very difficult to consistently achieve the IDDSI level prescribed by the speech therapist — a genuine patient safety risk." } },
+  { "@type": "Question", "name": "Do I need to re-verify consistency after switching thickener brands?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Different brands can produce different consistencies at the same dose. After any brand change, perform the IDDSI 10ml syringe flow test to confirm the prepared drink still meets the patient's prescribed IDDSI level." } },
+  { "@type": "Question", "name": "Are xanthan gum thickeners suitable for hot tea or soup?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — xanthan gum thickeners are temperature-stable and suitable for hot drinks including Chinese tea, coffee and hot soup. Starch-based thickeners are not recommended for hot liquids as consistency becomes unpredictable. Always check the product instructions for the recommended temperature range." } }
+];
+
 const newGuideSlugs = ['yum-cha-guide', 'hospital-discharge-planning', 'thickener-comparison-hk', 'elderly-nutrition-hk', 'for-professionals'];
 const newGuideSlugs2 = ['dementia-care-mealtimes', 'iddsi-for-care-homes', 'enteral-tube-oral-transition', 'modified-diet-cantonese-cuisine'];
 const newGuideSlugs3 = ['hk-ngos-and-support', 'hospital-allied-health-hk'];
@@ -1104,10 +1132,12 @@ const getFaqMainEntity = () => {
   if (slug === 'post-stroke-thickened-liquid-guide-hk') return lang === 'zh-hk' ? faqThickenedLiquidStrokeZhHk : faqThickenedLiquidStrokeEn;
   if (slug === 'advance-care-planning-dysphagia-hk') return lang === 'zh-hk' ? faqAcpDysphagiaZhHk : faqAcpDysphagiaEn;
   if (slug === 'comfort-feeding-end-of-life-hk') return lang === 'zh-hk' ? faqComfortFeedingEolZhHk : faqComfortFeedingEolEn;
+  if (slug === 'dysphagia') return lang === 'zh-hk' ? faqDysphagiaZhHk : faqDysphagiaEn;
+  if (slug === 'choosing-a-thickener') return lang === 'zh-hk' ? faqChoosingThickenerZhHk : faqChoosingThickenerEn;
   return lang === 'zh-hk' ? faqQuestionsZhHk : faqQuestionsEn;
 };
 
-const faqSlugs = ['iddsi-guide', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17b];
+const faqSlugs = ['iddsi-guide', 'dysphagia', 'choosing-a-thickener', ...newGuideSlugs, ...newGuideSlugs2, ...newGuideSlugs3, ...newGuideSlugs4, ...newGuideSlugs5, ...newGuideSlugs6, ...newGuideSlugs7, ...newGuideSlugs8, ...newGuideSlugs9, ...newGuideSlugs10, ...newGuideSlugs11, ...newGuideSlugs12, ...newGuideSlugs13, ...newGuideSlugs14, ...newGuideSlugs15, ...newGuideSlugs16, ...newGuideSlugs17b];
 const faqSchema = faqSlugs.includes(slug) ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -1481,6 +1511,7 @@ const schemas = [
       treatments={medical_condition.treatments}
       lang={lang}
       url={currentUrl}
+      icd_code={pageSlug === 'dysphagia' ? 'R13.10' : undefined}
     />
   )}
 
