@@ -1,0 +1,95 @@
+---
+/**
+ * FontSizeControl.astro
+ * A / A+ / A++ font-size buttons for the 65+ audience.
+ * Sets data-font-size on <html> (values: "normal" | "large" | "xlarge")
+ * and persists the choice to localStorage['font-size'].
+ *
+ * Spec: tasks/P1_040_font_size_control.md
+ * Sizes: 16px (normal) / 18px (large) / 22px (xlarge) — applied via CSS vars below.
+ */
+---
+
+<!-- Inject CSS custom-property mapping once per page (idempotent via class check) -->
+<style is:global>
+  :root,
+  [data-font-size="normal"]  { --base-font-size: 1rem;    /* 16px */ }
+  [data-font-size="large"]   { --base-font-size: 1.125rem; /* 18px */ }
+  [data-font-size="xlarge"]  { --base-font-size: 1.375rem; /* 22px */ }
+
+  /* Apply the custom property to prose content areas */
+  #article-body,
+  #article-body p,
+  #article-body li,
+  #article-body td,
+  #article-body th,
+  #article-body blockquote {
+    font-size: var(--base-font-size, 1rem);
+  }
+</style>
+
+<!-- Restore saved preference before first paint (inline, no flash) -->
+<script is:inline>
+  (function () {
+    var saved = localStorage.getItem('font-size');
+    if (saved === 'large' || saved === 'xlarge') {
+      document.documentElement.setAttribute('data-font-size', saved);
+    }
+  })();
+</script>
+
+<!-- Control buttons -->
+<div id="font-size-control"
+     role="group"
+     aria-label="Font size"
+     class="flex items-center gap-0.5">
+  <button
+    data-size="normal"
+    class="font-size-btn min-h-[44px] min-w-[36px] flex items-center justify-center rounded text-primary-200 hover:text-white hover:bg-primary-600 transition-colors text-sm font-medium leading-none px-1.5"
+    aria-pressed="true"
+    aria-label="Normal font size"
+  >A</button>
+  <button
+    data-size="large"
+    class="font-size-btn min-h-[44px] min-w-[36px] flex items-center justify-center rounded text-primary-200 hover:text-white hover:bg-primary-600 transition-colors font-medium leading-none px-1.5"
+    aria-pressed="false"
+    aria-label="Large font size"
+    style="font-size: 1.1em;"
+  >A<sup>+</sup></button>
+  <button
+    data-size="xlarge"
+    class="font-size-btn min-h-[44px] min-w-[36px] flex items-center justify-center rounded text-primary-200 hover:text-white hover:bg-primary-600 transition-colors font-medium leading-none px-1.5"
+    aria-pressed="false"
+    aria-label="Extra large font size"
+    style="font-size: 1.25em;"
+  >A<sup>++</sup></button>
+</div>
+
+<script>
+  // Sync button aria-pressed state to current html data-font-size
+  function syncButtons(current: string) {
+    document.querySelectorAll<HTMLButtonElement>('.font-size-btn').forEach((btn) => {
+      const active = btn.dataset.size === current;
+      btn.setAttribute('aria-pressed', String(active));
+      if (active) {
+        btn.classList.add('text-white', 'bg-primary-600');
+        btn.classList.remove('text-primary-200');
+      } else {
+        btn.classList.remove('text-white', 'bg-primary-600');
+        btn.classList.add('text-primary-200');
+      }
+    });
+  }
+
+  const current = document.documentElement.getAttribute('data-font-size') ?? 'normal';
+  syncButtons(current);
+
+  document.querySelectorAll<HTMLButtonElement>('.font-size-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const size = btn.dataset.size ?? 'normal';
+      document.documentElement.setAttribute('data-font-size', size);
+      localStorage.setItem('font-size', size);
+      syncButtons(size);
+    });
+  });
+</script>

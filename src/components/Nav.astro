@@ -1,5 +1,6 @@
 ---
 import LocaleSwitcher from './LocaleSwitcher.astro';
+import FontSizeControl from './FontSizeControl.astro';
 
 interface HreflangEntry {
   hreflang: string;
@@ -162,6 +163,9 @@ const links = navLinks[l] ?? navLinks['en'];
            class="hidden sm:inline-flex items-center gap-1 min-h-[48px] text-xs text-primary-200 hover:text-white border border-primary-600 hover:border-primary-400 px-2.5 py-1 rounded-md transition-colors no-underline">
           {appLabel} ↗
         </a>
+
+        <!-- Font size control (A / A+ / A++) — for 65+ audience -->
+        <FontSizeControl />
 
         <!-- Theme toggle -->
         <button id="theme-toggle"

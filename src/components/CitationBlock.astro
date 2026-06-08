@@ -1,0 +1,203 @@
+---
+/**
+ * CitationBlock.astro
+ * Renders a "Recommended Citation" aside with APA, BibTeX, and Markdown-link formats.
+ * Also injects a CreativeWork.citation JSON-LD node referencing this page.
+ *
+ * Spec: tasks/P2_050_per_page_citation_block.md
+ */
+
+interface Props {
+  title: string;
+  url: string;
+  /** ISO date string YYYY-MM-DD */
+  dateModified: string;
+  lang?: string;
+}
+
+const { title, url, dateModified, lang = 'zh-hk' } = Astro.props;
+
+// Derived values
+const siteOrg = 'softmeal.org Editorial Team';
+const year = dateModified ? dateModified.slice(0, 4) : new Date().getFullYear().toString();
+// Access date = build time (static site — accurate enough for citation)
+const accessDate = new Date().toISOString().slice(0, 10);
+
+// APA: Author/Org (Year, Month Day). Title. Site Name. URL
+const monthDay = dateModified
+  ? new Date(dateModified).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+  : '';
+const apa = `softmeal.org Editorial Team. (${year}, ${monthDay}). ${title}. softmeal.org. ${url}`;
+
+// BibTeX
+const bibKey = 'softmeal' + year + '_' + url.replace(/[^a-z0-9]/gi, '').slice(-12).toLowerCase();
+const bibtex = `@misc{${bibKey},
+  author    = {softmeal.org Editorial Team},
+  title     = {${title}},
+  year      = {${year}},
+  url       = {${url}},
+  note      = {Retrieved ${accessDate}}
+}`;
+
+// Markdown link
+const mdLink = `[${title}](${url}) — softmeal.org (${year})`;
+
+// i18n labels
+type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
+const l = (lang ?? 'zh-hk') as LangKey;
+
+const labels: Record<LangKey, {
+  heading: string;
+  apa: string;
+  bibtex: string;
+  markdown: string;
+  copy: string;
+  copied: string;
+}> = {
+  'zh-hk': {
+    heading: '建議引用格式',
+    apa: 'APA',
+    bibtex: 'BibTeX',
+    markdown: 'Markdown',
+    copy: '複製',
+    copied: '已複製',
+  },
+  'zh-cn': {
+    heading: '推荐引用格式',
+    apa: 'APA',
+    bibtex: 'BibTeX',
+    markdown: 'Markdown',
+    copy: '复制',
+    copied: '已复制',
+  },
+  'ja': {
+    heading: '推奨引用形式',
+    apa: 'APA',
+    bibtex: 'BibTeX',
+    markdown: 'Markdown',
+    copy: 'コピー',
+    copied: 'コピー済',
+  },
+  'en': {
+    heading: 'Recommended Citation',
+    apa: 'APA',
+    bibtex: 'BibTeX',
+    markdown: 'Markdown',
+    copy: 'Copy',
+    copied: 'Copied',
+  },
+};
+const t = labels[l] ?? labels['en'];
+
+// CreativeWork.citation JSON-LD
+const citationSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${url}#citation`,
+  "name": title,
+  "url": url,
+  "dateModified": dateModified,
+  "author": {
+    "@type": "Organization",
+    "name": siteOrg,
+    "url": "https://softmeal.org/"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "citation": {
+    "@type": "CreativeWork",
+    "name": apa,
+  }
+};
+---
+
+<aside id="citation" aria-label={t.heading}
+  class="mt-12 border border-gray-200 dark:border-gray-700 rounded-lg p-5 bg-gray-50 dark:bg-gray-800/50 text-sm">
+  <h2 class="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">{t.heading}</h2>
+
+  <!-- Tab buttons -->
+  <div class="flex gap-2 mb-3" role="tablist">
+    <button
+      role="tab"
+      aria-selected="true"
+      data-tab="apa"
+      class="citation-tab px-3 py-1 rounded text-xs font-medium bg-primary-700 text-white"
+    >{t.apa}</button>
+    <button
+      role="tab"
+      aria-selected="false"
+      data-tab="bibtex"
+      class="citation-tab px-3 py-1 rounded text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+    >{t.bibtex}</button>
+    <button
+      role="tab"
+      aria-selected="false"
+      data-tab="markdown"
+      class="citation-tab px-3 py-1 rounded text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+    >{t.markdown}</button>
+  </div>
+
+  <!-- Citation panels -->
+  <div class="citation-panels relative">
+    <pre data-panel="apa"
+      class="citation-panel whitespace-pre-wrap break-all font-mono text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded p-3 text-gray-700 dark:text-gray-300"
+    >{apa}</pre>
+    <pre data-panel="bibtex"
+      class="citation-panel hidden whitespace-pre-wrap font-mono text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded p-3 text-gray-700 dark:text-gray-300"
+    >{bibtex}</pre>
+    <pre data-panel="markdown"
+      class="citation-panel hidden whitespace-pre-wrap break-all font-mono text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded p-3 text-gray-700 dark:text-gray-300"
+    >{mdLink}</pre>
+  </div>
+
+  <!-- Copy button -->
+  <button
+    id="citation-copy-btn"
+    class="mt-2 px-3 py-1 text-xs rounded bg-primary-700 text-white hover:bg-primary-600 transition-colors"
+    data-copy-label={t.copy}
+    data-copied-label={t.copied}
+  >
+    {t.copy}
+  </button>
+</aside>
+
+<!-- CreativeWork.citation JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(citationSchema)} />
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.citation-tab');
+  const panels = document.querySelectorAll<HTMLPreElement>('.citation-panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach((t) => {
+        const active = t.dataset.tab === target;
+        t.setAttribute('aria-selected', String(active));
+        t.className = active
+          ? 'citation-tab px-3 py-1 rounded text-xs font-medium bg-primary-700 text-white'
+          : 'citation-tab px-3 py-1 rounded text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200';
+      });
+      panels.forEach((p) => {
+        p.classList.toggle('hidden', p.dataset.panel !== target);
+      });
+    });
+  });
+
+  // Copy button
+  const copyBtn = document.getElementById('citation-copy-btn') as HTMLButtonElement | null;
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const activePanel = document.querySelector<HTMLPreElement>('.citation-panel:not(.hidden)');
+      if (!activePanel) return;
+      try {
+        await navigator.clipboard.writeText(activePanel.textContent ?? '');
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = copyBtn.dataset.copiedLabel ?? 'Copied';
+        setTimeout(() => { copyBtn.textContent = orig; }, 1800);
+      } catch {
+        // clipboard API not available (unlikely in modern browsers, fail silently)
+      }
+    });
+  }
+</script>

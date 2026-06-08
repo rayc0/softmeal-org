@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
 import StickyToc from '../components/StickyToc.astro';
 import ReviewedByRail from '../components/ReviewedByRail.astro';
+import CitationBlock from '../components/CitationBlock.astro';
 
 interface HreflangEntry {
   hreflang: string;
@@ -31,12 +32,15 @@ interface Props {
   articleReadMins?: number;
   /** Slug of a named advisor in src/content/advisors/; omit for editorial-board fallback. */
   articleReviewerSlug?: string;
+  /** ISO date YYYY-MM-DD — drives CitationBlock. Falls back to dateModified if omitted. */
+  citationDateModified?: string;
 }
 
 // Speakable defaults to true — tells AI/voice assistants this content is authoritative
 // Pass-through all props including datePublished/dateModified for Doubao meta tags
 const props = { speakable: true as boolean, ...Astro.props };
-const { articleLastReviewed, articleReviewedBy, articleReadMins, articleReviewerSlug } = props;
+const { articleLastReviewed, articleReviewedBy, articleReadMins, articleReviewerSlug, citationDateModified } = props;
+const citationUrl = props.canonicalUrl ?? Astro.url.href;
 ---
 
 <BaseLayout {...props}>
@@ -58,6 +62,12 @@ const { articleLastReviewed, articleReviewedBy, articleReadMins, articleReviewer
         />
       )}
       <slot />
+      <CitationBlock
+        title={props.title}
+        url={citationUrl}
+        dateModified={citationDateModified ?? props.dateModified ?? props.datePublished ?? ''}
+        lang={props.lang}
+      />
     </div>
     {articleLastReviewed && (
       <ReviewedByRail lang={props.lang} reviewerSlug={articleReviewerSlug} />
