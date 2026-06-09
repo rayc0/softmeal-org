@@ -33,7 +33,12 @@ const localeMap: Record<string, string> = {
 };
 
 const key = localeMap[lang] ?? 'en';
-const base = (featuredData as Record<string, FeaturedArticle>)[key] ?? featuredData['en'];
+const dataMap = featuredData as Record<string, FeaturedArticle>;
+// Fall through: requested locale → 'en' → first available key → safe sentinel.
+const base: FeaturedArticle = dataMap[key]
+  ?? dataMap['en']
+  ?? (Object.values(dataMap)[0] as FeaturedArticle | undefined)
+  ?? { title: '', href: '/', image: '/og-default.png', imageAlt: '' };
 const article: FeaturedArticle = { ...base, ...override };
 
 const labels: Record<string, { reviewedBy: string; readMins: string; readMore: string }> = {

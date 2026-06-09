@@ -80,15 +80,28 @@ const citationUrl = props.canonicalUrl ?? Astro.url.href;
 </BaseLayout>
 
 <script>
-  const bar = document.getElementById('reading-progress');
-  if (bar) {
+  function initReadingProgress() {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
     function updateProgress() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
       bar.style.width = pct + '%';
     }
+
+    // Remove any previously registered listener (Astro SPA navigation re-runs this script;
+    // storing the handler on bar avoids stacking duplicate scroll listeners).
+    const win = window as Window & { _progressHandler?: () => void };
+    if (win._progressHandler) {
+      window.removeEventListener('scroll', win._progressHandler);
+    }
+    win._progressHandler = updateProgress;
     window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
   }
+
+  initReadingProgress();
+  document.addEventListener('astro:page-load', initReadingProgress);
 </script>

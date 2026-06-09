@@ -92,9 +92,13 @@ const savedLabel = savedLabels[lang] ?? savedLabels['en'];
     });
   }
 
-  // Run on initial load and after Astro view transitions
+  // Run on initial load. For Astro view transitions, register the page-load listener
+  // exactly once (guard against the script running multiple times on SPA navigation).
   initSaveButton();
-  document.addEventListener('astro:page-load', initSaveButton);
+  if (!(document as Document & { _saveRecipeBound?: boolean })._saveRecipeBound) {
+    (document as Document & { _saveRecipeBound?: boolean })._saveRecipeBound = true;
+    document.addEventListener('astro:page-load', initSaveButton);
+  }
 </script>
 
 <style>

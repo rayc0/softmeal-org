@@ -9,10 +9,16 @@ interface Props {
 
 const { title, lastReviewed, reviewedBy, readMins, lang } = Astro.props;
 
-// Format date locale-appropriately
+// Format date locale-appropriately.
+// Parses as local date (year/month/day) to avoid UTC-offset date shifts that occur
+// when feeding an ISO string directly to `new Date("YYYY-MM-DD")` (parsed as UTC midnight).
+// Falls back to the raw ISO string if the value is malformed or produces an invalid date.
 function formatDate(iso: string, locale: string): string {
-  const [year, month, day] = iso.split('-').map(Number);
+  const parts = iso.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return iso;
+  const [year, month, day] = parts;
   const date = new Date(year, month - 1, day);
+  if (isNaN(date.getTime())) return iso;
   const localeMap: Record<string, string> = {
     'zh-hk': 'zh-HK',
     'zh-cn': 'zh-CN',

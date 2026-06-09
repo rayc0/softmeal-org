@@ -16,7 +16,8 @@ interface Props {
 const { lang, hreflangLinks } = Astro.props;
 
 type LangKey = 'zh-hk' | 'zh-cn' | 'ja' | 'en';
-const l = lang as LangKey;
+const VALID_LANGS = new Set<string>(['zh-hk', 'zh-cn', 'ja', 'en']);
+const l: LangKey = VALID_LANGS.has(lang) ? (lang as LangKey) : 'zh-hk';
 
 // Nav links per language
 const navLinks: Record<LangKey, { href: string; label: string }[]> = {

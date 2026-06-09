@@ -79,12 +79,16 @@ const isZh = lang === 'zh-hk';
 const diffLabel = difficultyLabels[lang]?.[difficulty] ?? difficulty;
 const timeLabel = `${prepTimeMinutes}${timeUnits[l]}`;
 
-// Resolve same-level recipes for "More recipes" section
+// Resolve same-level recipes for "More recipes" section.
+// currentSlug may be '' on edge paths (e.g. root); in that case skip the related section
+// rather than accidentally excluding nothing and showing unrelated content.
 const currentSlug = Astro.url.pathname.split('/').filter(Boolean).pop() ?? '';
-const sameLevelRecipes = await getCollection(
-  'recipes',
-  (r) => r.data.lang === lang && r.data.iddsi_level === iddsiLevel
-);
+const sameLevelRecipes = currentSlug
+  ? await getCollection(
+      'recipes',
+      (r) => r.data.lang === lang && r.data.iddsi_level === iddsiLevel
+    )
+  : [];
 const relatedRecipes = sameLevelRecipes
   .filter((r) => {
     const parts = r.id.split('/');

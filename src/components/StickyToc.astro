@@ -58,11 +58,26 @@ const label = labels[lang] ?? labels['en'];
 </aside>
 
 <script>
-  (function () {
+  // Store the active IntersectionObserver so it can be disconnected on SPA navigation.
+  type TocWindow = Window & { _tocObserver?: IntersectionObserver };
+
+  function initToc() {
+    // Disconnect previous observer if navigating via Astro view transitions.
+    const win = window as TocWindow;
+    if (win._tocObserver) {
+      win._tocObserver.disconnect();
+      win._tocObserver = undefined;
+    }
+
     const aside = document.getElementById('sticky-toc');
     const mobileNav = document.getElementById('toc-list-mobile');
     const desktopNav = document.getElementById('toc-list-desktop');
     if (!aside || !mobileNav || !desktopNav) return;
+
+    // Clear any nav lists populated by a previous run on this DOM (SPA navigation).
+    mobileNav.innerHTML = '';
+    desktopNav.innerHTML = '';
+    aside.classList.add('hidden');
 
     // Collect h2/h3 from main article content (sibling article-body div)
     const article = document.getElementById('article-body');
@@ -157,14 +172,19 @@ const label = labels[lang] ?? labels['en'];
     );
 
     headings.forEach((h) => observer.observe(h));
+    win._tocObserver = observer;
 
     // Rotate chevron when <details> opens/closes
     const details = document.getElementById('toc-mobile') as HTMLDetailsElement | null;
     const chevron = details?.querySelector<SVGElement>('.toc-chevron');
     if (details && chevron) {
+      // Use { once: false } default; details element is re-created each navigation so no leak.
       details.addEventListener('toggle', () => {
         chevron.style.transform = details.open ? 'rotate(180deg)' : '';
       });
     }
-  })();
+  }
+
+  initToc();
+  document.addEventListener('astro:page-load', initToc);
 </script>

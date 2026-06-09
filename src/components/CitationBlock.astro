@@ -19,15 +19,28 @@ const { title, url, dateModified, lang = 'zh-hk' } = Astro.props;
 
 // Derived values
 const siteOrg = 'softmeal.org Editorial Team';
-const year = dateModified ? dateModified.slice(0, 4) : new Date().getFullYear().toString();
+
+// Parse ISO date string as local date (avoids UTC-midnight off-by-one in negative-offset zones).
+// Returns null if the string is absent or malformed.
+function parseLocalDate(iso: string | undefined): Date | null {
+  if (!iso) return null;
+  const parts = iso.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return null;
+  const [y, m, d] = parts;
+  const date = new Date(y, m - 1, d);
+  return isNaN(date.getTime()) ? null : date;
+}
+
+const parsedDate = parseLocalDate(dateModified);
+const year = parsedDate ? String(parsedDate.getFullYear()) : new Date().getFullYear().toString();
 // Access date = build time (static site — accurate enough for citation)
 const accessDate = new Date().toISOString().slice(0, 10);
 
 // APA: Author/Org (Year, Month Day). Title. Site Name. URL
-const monthDay = dateModified
-  ? new Date(dateModified).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+const monthDay = parsedDate
+  ? parsedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
   : '';
-const apa = `softmeal.org Editorial Team. (${year}, ${monthDay}). ${title}. softmeal.org. ${url}`;
+const apa = `softmeal.org Editorial Team. (${year}${monthDay ? `, ${monthDay}` : ''}). ${title}. softmeal.org. ${url}`;
 
 // BibTeX
 const bibKey = 'softmeal' + year + '_' + url.replace(/[^a-z0-9]/gi, '').slice(-12).toLowerCase();
@@ -187,16 +200,23 @@ const citationSchema = {
   // Copy button
   const copyBtn = document.getElementById('citation-copy-btn') as HTMLButtonElement | null;
   if (copyBtn) {
+    let resetTimer: ReturnType<typeof setTimeout> | null = null;
     copyBtn.addEventListener('click', async () => {
       const activePanel = document.querySelector<HTMLPreElement>('.citation-panel:not(.hidden)');
       if (!activePanel) return;
       try {
         await navigator.clipboard.writeText(activePanel.textContent ?? '');
-        const orig = copyBtn.textContent;
+        const orig = copyBtn.textContent ?? copyBtn.dataset.copyLabel ?? 'Copy';
+        // Cancel any in-flight reset before setting new state
+        if (resetTimer !== null) clearTimeout(resetTimer);
         copyBtn.textContent = copyBtn.dataset.copiedLabel ?? 'Copied';
-        setTimeout(() => { copyBtn.textContent = orig; }, 1800);
+        resetTimer = setTimeout(() => {
+          // Guard: button may be removed from DOM on SPA navigation
+          if (copyBtn.isConnected) copyBtn.textContent = orig;
+          resetTimer = null;
+        }, 1800);
       } catch {
-        // clipboard API not available (unlikely in modern browsers, fail silently)
+        // Clipboard API unavailable (e.g. non-secure context) — fail silently
       }
     });
   }
