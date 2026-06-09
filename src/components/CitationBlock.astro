@@ -206,9 +206,11 @@ const citationSchema = {
       if (!activePanel) return;
       try {
         await navigator.clipboard.writeText(activePanel.textContent ?? '');
-        const orig = copyBtn.textContent ?? copyBtn.dataset.copyLabel ?? 'Copy';
         // Cancel any in-flight reset before setting new state
         if (resetTimer !== null) clearTimeout(resetTimer);
+        // Read from dataset, not live textContent — a rapid second click would
+        // otherwise capture "Copied" as the "original" label to restore.
+        const orig = copyBtn.dataset.copyLabel ?? 'Copy';
         copyBtn.textContent = copyBtn.dataset.copiedLabel ?? 'Copied';
         resetTimer = setTimeout(() => {
           // Guard: button may be removed from DOM on SPA navigation
