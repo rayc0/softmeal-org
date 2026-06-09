@@ -15,7 +15,10 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       params: { lang },
       pageSize: 24,
     });
-    paths = paths.concat(paginated);
+    // Exclude page 1 — served by index.astro at /[lang]/recipes/; /[lang]/recipes/1/ would
+    // generate a duplicate with a non-self canonical, triggering GSC "Alternate page with
+    // proper canonical tag". A _redirects entry sends /1/ → /recipes/ for old bookmarks.
+    paths = paths.concat((paginated as Array<{ params: Record<string, string> }>).filter(p => p.params.page !== '1'));
   }
 
   return paths;

@@ -2,3 +2,11 @@
 # Root geo routing is handled by functions/index.ts (Pages Function).
 # This static fallback fires only if the Function is not available.
 / /zh-hk/ 302
+
+# Recipe pagination page 1: redirect /[lang]/recipes/1/ → /[lang]/recipes/
+# Prevents "Alternate page with proper canonical tag" — /1/ is no longer generated
+# as a static page (filtered from getStaticPaths), but _redirects handles old bookmarks.
+/zh-hk/recipes/1/ /zh-hk/recipes/ 301
+/zh-cn/recipes/1/ /zh-cn/recipes/ 301
+/ja/recipes/1/    /ja/recipes/    301
+/en/recipes/1/    /en/recipes/    301
