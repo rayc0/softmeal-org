@@ -73,7 +73,7 @@ export const GET: APIRoute = async () => {
   // Pages by locale
   for (const [lang, articles] of Object.entries(sections)) {
     if (!articles.length) continue;
-    out += `## Knowledge Articles — ${langLabels[lang]}\n\n`;
+    out += `\n[Locale: ${lang}]\n## Knowledge Articles — ${langLabels[lang]}\n\n`;
     for (const p of articles) {
       const slug = p.id.replace(/\.mdx?$/, '');
       const url = `${SITE}/${slug}/`;
