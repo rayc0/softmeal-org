@@ -5,3 +5,23 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+
+# --- operator/build artifacts: never publish (added 2026-07-24) ---
+CLAUDE.md
+PROGRESS.md
+PLAN_*.md
+*_NOTE.md
+*_LOCK.md
+*_LOG.md
+BLOCKER_STATUS*.md
+ESCALATION_LOG.md
+all_*_occurrences.txt
+_design_notes/
+scripts/
+.build/
+.githooks/
+.claude/
+.blockers/
+commit_wave*.sh
+deploy.sh
+
